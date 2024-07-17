@@ -1,0 +1,29 @@
+---
+interface Props {
+    title: string
+    uri: string | null | undefined
+}
+
+const { title = 'Unknown', uri = null } = Astro.props
+---
+
+<li class="relative mb-4 flex space-x-4 pb-8">
+    <div
+        class="grid h-10 w-8 flex-none justify-center bg-white pt-1 before:absolute before:left-[15px] before:-z-20 before:h-full before:w-[1px] before:bg-gray-400"
+    >
+        <slot name="icon" />
+    </div>
+    <div class="m-h-4 grow">
+        <h4 class="font-sans text-lg font-bold antialiased">
+            {
+                uri && (
+                    <a class="hover:underline" href={uri} target="_blank">
+                        {title}
+                    </a>
+                )
+            }
+            {!uri && title}
+        </h4>
+        <slot name="description" />
+    </div>
+</li>

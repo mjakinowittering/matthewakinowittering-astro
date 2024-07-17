@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Layout.astro'
+import Header from '../components/header/index.astro'
+// import Skills from '../components/skills/index.astro'
+import Employment from '../components/home/employment/index.astro'
+import Education from '../components/home/education/index.astro'
+import Courses from '../components/home/courses/index.astro'
+import Footer from '../components/footer/index.astro'
+---
+
+<Layout title="Home">
+    <Header />
+    <div class="flex-grow">
+        <div class="container mx-auto">
+            <div class="md:grid md:grid-cols-2 md:gap-4">
+                <div>
+                    <Employment />
+                </div>
+                <div>
+                    <Education />
+                    <Courses />
+                </div>
+            </div>
+        </div>
+    </div>
+    <Footer />
+</Layout>

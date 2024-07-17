@@ -1,0 +1,18 @@
+---
+import { getCollection } from 'astro:content'
+
+import Organisations from './organisation.astro'
+
+const companies = (
+    await getCollection('organisations', ({ data }) => {
+        return data.type === 'company'
+    })
+).sort(function (a, b) {
+    return b.data.dateFrom.getTime() - a.data.dateFrom.getTime()
+})
+---
+
+<div class="mx-4 my-8">
+    <h2 class="font-sans text-2xl font-bold antialiased">Experience</h2>
+    {companies.map((company) => <Organisations entry={company} />)}
+</div>
