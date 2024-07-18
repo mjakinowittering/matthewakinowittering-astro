@@ -1,10 +1,10 @@
 ---
 interface Props {
     title: string
-    uri: string | null | undefined
+    uri?: string | null | undefined
 }
 
-const { title = 'Unknown', uri = null } = Astro.props
+const { title, uri } = Astro.props
 ---
 
 <li class="relative mb-4 flex space-x-4 pb-8">

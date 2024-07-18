@@ -12,7 +12,11 @@ const events = (
         return data.type === 'training'
     })
 ).sort(function (a: CollectionEntry<'events'>, b: CollectionEntry<'events'>) {
-    return b.data.date.getTime() - a.data.date.getTime()
+    if (a.data.date && b.data.date) {
+        return b.data.date.getTime() - a.data.date.getTime()
+    } else {
+        return 0
+    }
 })
 ---
 

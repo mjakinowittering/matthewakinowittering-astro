@@ -17,7 +17,11 @@ const events = (
         return data.organisationId === entry.data.id
     })
 ).sort(function (a, b) {
-    return b.data.dateFrom.getTime() - a.data.dateFrom.getTime()
+    if (a.data.dateFrom && b.data.dateFrom) {
+        return b.data.dateFrom.getTime() - a.data.dateFrom.getTime()
+    } else {
+        return 0
+    }
 })
 ---
 
