@@ -1,4 +1,6 @@
 ---
+import { ExternalLink } from 'lucide-astro'
+
 interface Props {
     title: string
     uri?: string | null | undefined
@@ -14,16 +16,17 @@ const { title, uri } = Astro.props
         <slot name="icon" />
     </div>
     <div class="m-h-4 grow">
-        <h4 class="font-sans text-lg font-bold antialiased">
+        <h4 class="align-middle font-sans text-lg font-bold antialiased">
             {
                 uri && (
-                    <a class="hover:underline" href={uri} target="_blank">
-                        {title}
+                    <a class="space-x-1" href={uri} target="_blank">
+                        <span class="hover:underline">{title}</span>
+                        <ExternalLink class="inline h-4 w-4" />
                     </a>
                 )
             }
             {!uri && title}
         </h4>
-        <slot name="description" />
+        <small><slot name="description" /></small>
     </div>
 </li>
