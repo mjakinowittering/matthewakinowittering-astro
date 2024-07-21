@@ -1,7 +1,7 @@
 ---
 import { type CollectionEntry, getCollection } from 'astro:content'
 
-import { GraduationCap, School } from 'lucide-astro'
+import { ExternalLink, GraduationCap, School } from 'lucide-astro'
 import { format } from 'date-fns'
 
 import Event from '../event/index.astro'
@@ -30,7 +30,12 @@ const events = (
         <School class="h-8 w-8" />
     </div>
     <div class="m-h-8 grow">
-        <h3 class="font-sans text-xl font-semibold antialiased">{entry.data.name}</h3>
+        <h3 class="font-sans text-xl font-semibold antialiased">
+            <a class="space-x-1" href={entry.data.uri} target="_blank">
+                <span class="hover:underline">{entry.data.name}</span>
+                <ExternalLink class="inline h-4 w-4" />
+            </a>
+        </h3>
     </div>
 </div>
 <ul>
