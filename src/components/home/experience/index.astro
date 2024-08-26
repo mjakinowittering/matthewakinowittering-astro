@@ -1,0 +1,27 @@
+---
+import Employment from './employment/index.astro'
+import Education from './education/index.astro'
+import Courses from './courses/index.astro'
+---
+
+<div class="container mx-auto">
+    <div class="mx-4 my-8">
+        <h2 class="mb-3 font-sans text-5xl font-bold antialiased">Experience</h2>
+        <div class="prose">
+            <p>
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis doloremque
+                numquam nihil expedita eveniet harum beatae possimus, fugiat aspernatur, corrupti
+                vitae esse ipsa sapiente modi? Ex perspiciatis aut iusto eos!
+            </p>
+        </div>
+    </div>
+    <div class="mx-4 md:grid md:grid-cols-2 md:gap-4">
+        <div>
+            <Employment />
+        </div>
+        <div>
+            <Education />
+            <Courses />
+        </div>
+    </div>
+</div>
