@@ -10,5 +10,5 @@ const organisations = await getCollection('organisations', ({ data }) => {
 
 <div class="">
     <h2 class="text-3xl font-bold antialiased">Education</h2>
-    {organisations.map((organisation) => <Organisation entry={organisation} />)}
+    {organisations.map((organisation) => <Organisation organisation={organisation} />)}
 </div>

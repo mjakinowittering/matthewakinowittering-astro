@@ -9,14 +9,14 @@ import Event from '../event/index.astro'
 import { calcLengthOfService } from '../../../../lib/role/utils.ts'
 
 interface Props {
-    entry: CollectionEntry<'organisations'>
+    organisation: CollectionEntry<'organisations'>
 }
 
-const { entry } = Astro.props
+const { organisation } = Astro.props
 
 const events = (
     await getCollection('events', ({ data }) => {
-        return data.organisationId === entry.data.id
+        return data.organisationId === organisation.data.id
     })
 ).sort(function (a, b) {
     if (a.data.dateFrom && b.data.dateFrom) {
@@ -33,8 +33,8 @@ const events = (
     </div>
     <div class="m-h-8 grow">
         <h3 class="font-sans text-xl font-semibold antialiased">
-            <a class="space-x-1" href={entry.data.uri} target="_blank">
-                <span class="hover:underline">{entry.data.name}</span>
+            <a class="space-x-1" href={organisation.data.uri} target="_blank">
+                <span class="hover:underline">{organisation.data.name}</span>
                 <ExternalLink class="inline h-4 w-4" />
             </a>
         </h3>
@@ -46,9 +46,15 @@ const events = (
             <Event title={event.data.title}>
                 <CircleUserRound slot="icon" />
                 <p slot="description">
-                    {format(entry.data.dateFrom, 'MMM yyyy')} -{' '}
-                    {entry.data.dateTo ? format(entry.data.dateTo, 'MMM yyyy') : 'Present'} ·
-                    {calcLengthOfService(entry.data.dateFrom, entry.data.dateTo ?? new Date())}
+                    {format(organisation.data.dateFrom, 'MMM yyyy')} -{' '}
+                    {organisation.data.dateTo
+                        ? format(organisation.data.dateTo, 'MMM yyyy')
+                        : 'Present'}{' '}
+                    ·
+                    {calcLengthOfService(
+                        organisation.data.dateFrom,
+                        organisation.data.dateTo ?? new Date()
+                    )}
                 </p>
             </Event>
         ))

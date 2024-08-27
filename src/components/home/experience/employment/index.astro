@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content'
 
 import Organisations from './organisation.astro'
 
-const companies = (
+const organisations = (
     await getCollection('organisations', ({ data }) => {
         return data.type === 'company'
     })
@@ -14,5 +14,5 @@ const companies = (
 
 <div class="">
     <h2 class="text-3xl font-bold antialiased">Employment</h2>
-    {companies.map((company) => <Organisations entry={company} />)}
+    {organisations.map((organisation) => <Organisations organisation={organisation} />)}
 </div>
