@@ -3,7 +3,7 @@ import { defineCollection, reference, z } from 'astro:content'
 
 // Define a `type` and `schema` for each collection
 const events = defineCollection({
-    type: 'content',
+    type: 'data',
     schema: z.object({
         title: z.string(),
         organisationId: z.string(reference('organisation')),
@@ -28,11 +28,11 @@ const events = defineCollection({
 })
 
 const organisations = defineCollection({
-    type: 'content',
+    type: 'data',
     schema: z.object({
         id: z.string(),
         name: z.string(),
-        type: z.enum(['company', 'trainer', 'university']),
+        type: z.enum(['employer', 'trainer', 'university']),
         uri: z.string(),
         dateFrom: z
             .string()
