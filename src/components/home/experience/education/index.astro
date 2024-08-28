@@ -3,12 +3,12 @@ import { getCollection } from 'astro:content'
 
 import Organisation from './organisation.astro'
 
-const organisations = await getCollection('organisations', ({ data }) => {
+const universities = await getCollection('organisations', ({ data }) => {
     return data.type === 'university'
 })
 ---
 
 <div class="">
     <h2 class="text-3xl font-bold antialiased">Education</h2>
-    {organisations.map((organisation) => <Organisation organisation={organisation} />)}
+    {universities.map((universities) => <Organisation organisation={universities} />)}
 </div>

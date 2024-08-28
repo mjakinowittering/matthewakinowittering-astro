@@ -2,12 +2,11 @@
 import { getCollection } from 'astro:content'
 import { type CollectionEntry } from 'astro:content'
 
-import { Award, BookOpenText } from 'lucide-astro'
-import { format } from 'date-fns'
+import { BookOpenText } from 'lucide-astro'
 
-import Event from '../event/index.astro'
+import Course from './course.astro'
 
-const events = (
+const training = (
     await getCollection('events', ({ data }) => {
         return data.type === 'training'
     })
@@ -29,12 +28,5 @@ const events = (
             <h3 class="font-sans text-xl font-semibold antialiased">Training</h3>
         </div>
     </div>
-    {
-        events.map((event) => (
-            <Event title={event.data.title} uri={event.data.uri}>
-                <Award slot="icon" />
-                <p slot="description">{event.data.date && format(event.data.date, 'MMM yyyy')}</p>
-            </Event>
-        ))
-    }
+    {training.map((event) => <Course event={event} />)}
 </div>
