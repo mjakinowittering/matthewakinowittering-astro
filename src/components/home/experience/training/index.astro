@@ -1,32 +1,13 @@
 ---
 import { getCollection } from 'astro:content'
-import { type CollectionEntry } from 'astro:content'
 
-import { BookOpenText } from 'lucide-astro'
+import Organisation from './organisation.astro'
 
-import Course from './course.astro'
-
-const training = (
-    await getCollection('events', ({ data }) => {
-        return data.type === 'training'
-    })
-).sort(function (a: CollectionEntry<'events'>, b: CollectionEntry<'events'>) {
-    if (a.data.date && b.data.date) {
-        return b.data.date.getTime() - a.data.date.getTime()
-    } else {
-        return 0
-    }
+const trainers = await getCollection('organisations', ({ data }) => {
+    return data.type === 'trainer'
 })
 ---
 
 <div class="">
-    <div class="my-8 flex space-x-4">
-        <div class="grid h-8 w-8 flex-none justify-center">
-            <BookOpenText class="h-8 w-8" />
-        </div>
-        <div class="m-h-8 grow">
-            <h3 class="font-sans text-xl font-semibold antialiased">Training</h3>
-        </div>
-    </div>
-    {training.map((event) => <Course event={event} />)}
+    {trainers.map((trainers) => <Organisation organisation={trainers} />)}
 </div>
