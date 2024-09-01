@@ -8,6 +8,6 @@ const trainers = await getCollection('organisations', ({ data }) => {
 })
 ---
 
-<div class="">
+<div>
     {trainers.map((trainers) => <Organisation organisation={trainers} />)}
 </div>

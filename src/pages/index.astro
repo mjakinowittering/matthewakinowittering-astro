@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro'
 import Header from '../components/header/index.astro'
+import AboutMe from '../components/home/about-me/index.astro'
 import Experience from '../components/home/experience/index.astro'
 import Footer from '../components/footer/index.astro'
 ---
@@ -9,6 +10,7 @@ import Footer from '../components/footer/index.astro'
     <Header />
     <div class="my-16 flex-grow">
         <div class="container mx-auto max-w-6xl space-y-32">
+            <AboutMe />
             <Experience />
         </div>
     </div>

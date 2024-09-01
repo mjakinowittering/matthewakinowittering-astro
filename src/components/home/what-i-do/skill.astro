@@ -1,0 +1,26 @@
+---
+import { Image } from 'astro:assets'
+import type { CollectionEntry } from 'astro:content'
+
+interface Props {
+    entry: CollectionEntry<'skills'>
+}
+
+const { entry } = Astro.props
+
+const { Content } = await entry.render()
+---
+
+<div class="rounded border border-gray-200 bg-white px-6 pb-2 pt-6 dark:bg-gray-800">
+    <Image src={entry.data.img.src} alt={entry.data.img.alt} class="h-16 w-16" loading="eager" />
+    <h5
+        class="mt-5 font-sans text-xl font-semibold tracking-tight text-gray-900 antialiased dark:text-white"
+    >
+        <a href="#">
+            {entry.data.title}
+        </a>
+    </h5>
+    <div class="prose mb-3">
+        <Content />
+    </div>
+</div>

@@ -1,18 +1,20 @@
 ---
+import { getEntry } from 'astro:content'
+
 import Employment from './employment/index.astro'
 import Education from './education/index.astro'
 import Training from './training/index.astro'
+
+const blurb = await getEntry('blurbs', 'experience')
+
+const { Content } = await blurb.render()
 ---
 
-<div class="container mx-auto">
+<div id="experience" class="container mx-auto">
     <div class="mx-4 my-8">
         <h2 class="mb-3 font-sans text-5xl font-bold antialiased">Experience</h2>
         <div class="prose">
-            <p>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis doloremque
-                numquam nihil expedita eveniet harum beatae possimus, fugiat aspernatur, corrupti
-                vitae esse ipsa sapiente modi? Ex perspiciatis aut iusto eos!
-            </p>
+            <Content />
         </div>
     </div>
     <div class="mx-4 md:grid md:grid-cols-2 md:gap-4">
@@ -20,8 +22,15 @@ import Training from './training/index.astro'
             <Employment />
         </div>
         <div>
+            <h2 class="text-3xl font-bold antialiased">Education & Training</h2>
             <Education />
             <Training />
         </div>
     </div>
 </div>
+
+<style is:global>
+    #experience .prose a {
+        @apply font-sans font-semibold text-indigo-600 no-underline antialiased hover:underline;
+    }
+</style>

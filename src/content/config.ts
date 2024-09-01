@@ -2,6 +2,14 @@
 import { defineCollection, reference, z } from 'astro:content'
 
 // Define a `type` and `schema` for each collection
+const blurbs = defineCollection({
+    type: 'content',
+    schema: () =>
+        z.object({
+            title: z.string()
+        })
+})
+
 const events = defineCollection({
     type: 'data',
     schema: z.object({
@@ -9,16 +17,10 @@ const events = defineCollection({
         organisationId: z.string(reference('organisation')),
         type: z.enum(['education', 'employment', 'training']),
         uri: z.string().url().nullish(),
-        date: z
-            .string()
-            .datetime({ offset: true })
-            .transform((str) => new Date(str))
-            .nullish(),
         dateFrom: z
             .string()
             .datetime({ offset: true })
-            .transform((str) => new Date(str))
-            .nullish(),
+            .transform((str) => new Date(str)),
         dateTo: z
             .string()
             .datetime({ offset: true })
@@ -61,6 +63,7 @@ const skills = defineCollection({
 
 // Export a single `collections` object to register your collection(s)
 export const collections = {
+    blurbs,
     events,
     organisations,
     skills

@@ -1,0 +1,22 @@
+---
+import { getEntry } from 'astro:content'
+
+const blurb = await getEntry('blurbs', 'about-me')
+
+const { Content } = await blurb.render()
+---
+
+<div id="aboutme" class="container mx-auto">
+    <div class="mx-4 my-8">
+        <h2 class="mb-3 font-sans text-5xl font-bold antialiased">About me!</h2>
+        <div class="prose">
+            <Content />
+        </div>
+    </div>
+</div>
+
+<style is:global>
+    #aboutme .prose time {
+        @apply cursor-pointer underline decoration-dashed underline-offset-2;
+    }
+</style>
