@@ -16,11 +16,11 @@ const { title, uri } = Astro.props
         <slot name="icon" />
     </div>
     <div class="m-h-4 grow">
-        <h4 class="align-middle font-sans text-lg font-bold antialiased">
+        <h4 class="align-middle font-sans text-lg font-bold text-slate-900 antialiased">
             {
                 uri && (
                     <a class="space-x-1" href={uri} target="_blank">
-                        <span class="text-indigo-600 hover:underline">{title}</span>
+                        <span class="hover:underline">{title}</span>
                         <ExternalLink class="inline h-4 w-4" />
                     </a>
                 )
