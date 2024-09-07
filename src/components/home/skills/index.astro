@@ -1,0 +1,25 @@
+---
+import { getCollection } from 'astro:content'
+
+import Skill from './skill.astro'
+
+const skills = (await getCollection('skills')).sort(function (a, b) {
+    return a.data.index - b.data.index
+})
+---
+
+<div class="container mx-auto">
+    <div class="mx-4 my-16 text-slate-900">
+        <h2 class="my-8 font-sans text-5xl font-bold antialiased">What I do</h2>
+        <div class="prose prose-lg prose-slate my-8">
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto eos, beatae
+                doloremque nemo dicta error voluptatibus laudantium nostrum nihil pariatur
+                cupiditate consequatur esse provident accusamus perferendis dolore quos at ipsum!
+            </p>
+        </div>
+    </div>
+    <div class="my-16 grid grid-cols-3 gap-4">
+        {skills.map((skill) => <Skill entry={skill} />)}
+    </div>
+</div>

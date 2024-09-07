@@ -48,9 +48,21 @@ const organisations = defineCollection({
     })
 })
 
+const skills = defineCollection({
+    type: 'content',
+    schema: ({ image }) =>
+        z.object({
+            title: z.string(),
+            img: image(),
+            alt: z.string(),
+            index: z.number()
+        })
+})
+
 // Export a single `collections` object to register your collection(s)
 export const collections = {
     blurbs,
     events,
-    organisations
+    organisations,
+    skills
 }
