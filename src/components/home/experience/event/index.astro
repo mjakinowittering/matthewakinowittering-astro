@@ -16,7 +16,7 @@ const { title, uri } = Astro.props
         <slot name="icon" />
     </div>
     <div class="m-h-4 grow">
-        <h4 class="align-middle font-sans text-lg font-bold text-slate-900 antialiased">
+        <h5 class="align-middle font-sans text-lg font-bold text-slate-900 antialiased">
             {
                 uri && (
                     <a class="space-x-1" href={uri} target="_blank">
@@ -26,7 +26,7 @@ const { title, uri } = Astro.props
                 )
             }
             {!uri && title}
-        </h4>
+        </h5>
         <small><slot name="description" /></small>
     </div>
 </li>
