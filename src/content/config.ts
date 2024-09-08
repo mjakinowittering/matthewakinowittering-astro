@@ -48,6 +48,14 @@ const organisations = defineCollection({
     })
 })
 
+const posts = defineCollection({
+    type: 'content',
+    schema: z.object({
+        title: z.string(),
+        publishedAt: z.coerce.date()
+    })
+})
+
 const skills = defineCollection({
     type: 'content',
     schema: ({ image }) =>
@@ -64,5 +72,6 @@ export const collections = {
     blurbs,
     events,
     organisations,
+    posts,
     skills
 }
