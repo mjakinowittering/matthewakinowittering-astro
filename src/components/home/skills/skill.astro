@@ -12,7 +12,9 @@ const { Content } = await entry.render()
 ---
 
 <div class="rounded-md border border-gray-200 bg-white px-4 py-6 shadow-lg">
-    <Image src={entry.data.img} alt={entry.data.alt} class="h-16 w-16" loading="eager" />
+    <div class="flex h-16 w-16 items-center justify-center rounded-md bg-stone-100">
+        <Image src={entry.data.img} alt={entry.data.alt} class="h-12 w-12" loading="eager" />
+    </div>
     <h5 class="mt-5 font-sans text-xl font-semibold tracking-tight text-gray-900 antialiased">
         {entry.data.title}
     </h5>

@@ -4,5 +4,7 @@ import mdx from '@astrojs/mdx'
 
 // https://astro.build/config
 export default defineConfig({
-    integrations: [tailwind(), mdx()]
+    integrations: [tailwind(), mdx()],
+    site: 'https://mjakinowittering.github.io',
+    base: 'matthewakinowittering-astro'
 })
