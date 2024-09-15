@@ -1,5 +1,23 @@
 ---
 import { Github, Linkedin, Worm } from 'lucide-astro'
+
+const socials = [
+    {
+        site: 'Github',
+        icon: Github,
+        uri: 'https://github.com/mjakinowittering'
+    },
+    {
+        site: 'LinkedIn',
+        icon: Linkedin,
+        uri: 'https://www.linkedin.com/in/matthewwittering/'
+    },
+    {
+        site: 'PyPI',
+        icon: Worm,
+        uri: 'https://pypi.org/user/mjakinowittering/'
+    }
+]
 ---
 
 <div class="hidden flex-col md:flex">
@@ -7,27 +25,19 @@ import { Github, Linkedin, Worm } from 'lucide-astro'
         <div class="container mx-auto max-w-6xl">
             <nav class="px-4 py-8 text-slate-900">
                 <ol class="flex justify-end space-x-4">
-                    <li>
-                        <a
-                            href="https://github.com/mjakinowittering"
-                            aria-label="Profile page on Github"
-                            title="Profile page on Github"><Github /></a
-                        >
-                    </li>
-                    <li>
-                        <a
-                            href="https://www.linkedin.com/in/matthewwittering/"
-                            aria-label="Profile page on LinkedIn"
-                            title="Profile page on LinkedIn"><Linkedin /></a
-                        >
-                    </li>
-                    <li>
-                        <a
-                            href="https://pypi.org/user/mjakinowittering/"
-                            aria-label="Profile page on PyPI"
-                            title="Profile page on PyPI"><Worm /></a
-                        >
-                    </li>
+                    {
+                        socials.map((social) => (
+                            <li>
+                                <a
+                                    href={social.uri}
+                                    aria-label={`Profile page on ${social.site}`}
+                                    title={`Profile page on ${social.site}`}
+                                >
+                                    <social.icon />
+                                </a>
+                            </li>
+                        ))
+                    }
                 </ol>
             </nav>
         </div>
