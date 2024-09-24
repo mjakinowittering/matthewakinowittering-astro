@@ -1,0 +1,25 @@
+---
+import { getCollection, getEntry } from 'astro:content'
+
+import Skill from './skill.astro'
+
+const blurb = await getEntry('blurbs', 'what-do-i-do')
+
+const { Content } = await blurb.render()
+
+const skills = (await getCollection('skills')).sort(function (a, b) {
+    return a.data.index - b.data.index
+})
+---
+
+<div id="what-do-i-do" class="container mx-auto">
+    <div class="mx-4 my-8 text-slate-900 md:my-16">
+        <h2 class="font-sans text-4xl font-bold antialiased">{blurb.data.title}</h2>
+        <div class="prose prose-lg prose-slate mt-3">
+            <Content />
+        </div>
+    </div>
+    <div class="grid md:my-16 md:grid-cols-3 md:gap-4">
+        {skills.map((skill) => <Skill entry={skill} />)}
+    </div>
+</div>
