@@ -2,28 +2,12 @@
 import { Home, Rss } from 'lucide-astro'
 ---
 
-<div class="hidden flex-col md:flex">
-    <header class="border-b">
-        <div class="container mx-auto max-w-6xl">
-            <nav class="flex h-16 items-center justify-center px-4 text-slate-900">
-                <a href="/">Matthew Akino-Wittering</a>
-                <div class="items-right ml-auto flex justify-end space-x-4">
-                    <ol class="flex justify-end space-x-8">
-                        <li>
-                            <span class="flex justify-center space-x-2">
-                                <Home />
-                                <a href="/">Home</a>
-                            </span>
-                        </li>
-                        <li>
-                            <span class="flex justify-center space-x-2">
-                                <Rss />
-                                <a href="/blog">Blog</a>
-                            </span>
-                        </li>
-                    </ol>
-                </div>
-            </nav>
-        </div>
-    </header>
-</div>
+<nav class="border-gray-200 bg-stone-100 dark:border-gray-700 dark:bg-gray-800">
+    <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between p-4">
+        <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
+            <span class="self-center whitespace-nowrap text-2xl font-semibold dark:text-white"
+                >Matthew Akino-Wittering</span
+            >
+        </a>
+    </div>
+</nav>
