@@ -3,9 +3,21 @@ import Layout from '../layouts/Layout.astro'
 import AboutMe from '../components/home/about-me/index.astro'
 import Experience from '../components/home/experience/index.astro'
 import WhatDoIDo from '../components/home/what-do-i-do/index.astro'
+
+import { calcLengthInYears } from '../lib/utils.ts'
+
+const dateFrom = new Date('2010-01-01T00:00:00+0000')
+const dateTo = new Date()
+
+const metadata = {
+    description: `I am a Product Manager with over ${calcLengthInYears(
+        dateFrom,
+        dateTo
+    )} of experience, primarily in internal platforms and B2B SaaS applications.`
+}
 ---
 
-<Layout title="Home">
+<Layout metaData={metadata}>
     <div class="container mx-auto max-w-6xl space-y-32">
         <AboutMe />
         <WhatDoIDo />

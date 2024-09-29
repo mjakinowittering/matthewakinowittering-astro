@@ -1,29 +1,35 @@
 ---
+import { AstroSeo } from '@astrolib/seo'
+
 import Header from '../components/header/index.astro'
 import Footer from '../components/footer/index.astro'
 
-interface Props {
+interface metaData {
     title?: string
+    description?: string
 }
 
-const { title = null } = Astro.props
+interface Props {
+    metaData: metaData
+}
 
-const site = 'Matthew Akino-Wittering'
-
-function titleText(title: string | null) {
+function titleText(title: string | undefined) {
     return title ? `${title} - ${site}` : site
 }
+
+const { metaData } = Astro.props
+
+const site = 'Matthew Akino-Wittering'
 ---
 
 <!doctype html>
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <meta name="description" content="Astro description" />
         <meta name="viewport" content="width=device-width" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="generator" content={Astro.generator} />
-        <title>{titleText(title)}</title>
+        <AstroSeo title={`${titleText(metaData.title)}`} description={metaData.description} />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     </head>
     <body class="flex min-h-screen flex-col bg-white">
         <Header />
