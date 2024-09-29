@@ -4,9 +4,15 @@ import { AstroSeo } from '@astrolib/seo'
 import Header from '../components/header/index.astro'
 import Footer from '../components/footer/index.astro'
 
+interface metaTag {
+    name: string
+    content: string
+}
+
 interface metaData {
     title?: string
     description?: string
+    additionalMetaTags?: Array<metaTag>
 }
 
 interface Props {
@@ -28,7 +34,11 @@ const site = 'Matthew Akino-Wittering'
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width" />
         <meta name="generator" content={Astro.generator} />
-        <AstroSeo title={`${titleText(metaData.title)}`} description={metaData.description} />
+        <AstroSeo
+            title={`${titleText(metaData.title)}`}
+            description={metaData.description}
+            additionalMetaTags={metaData.additionalMetaTags}
+        />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     </head>
     <body class="flex min-h-screen flex-col bg-white">
