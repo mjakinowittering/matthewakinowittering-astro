@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /assets
 Disallow: /blog
 Disallow: /bookmarks
 Disallow: /resume
