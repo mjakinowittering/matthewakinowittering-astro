@@ -1,5 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro'
+
+import Header from '../components/header/index.astro'
+import Footer from '../components/footer/index.astro'
+
 import AboutMe from '../components/home/about-me/index.astro'
 import Experience from '../components/home/experience/index.astro'
 import WhatDoIDo from '../components/home/what-do-i-do/index.astro'
@@ -9,7 +13,7 @@ import { calcLengthInYears } from '../lib/utils.ts'
 const dateFrom = new Date('2010-01-01T00:00:00+0000')
 const dateTo = new Date()
 
-const metadata = {
+const metaData = {
     description: `I am a Product Manager with over ${calcLengthInYears(
         dateFrom,
         dateTo
@@ -23,10 +27,14 @@ const metadata = {
 }
 ---
 
-<Layout metaData={metadata}>
-    <div class="container mx-auto max-w-6xl space-y-32">
-        <AboutMe />
-        <WhatDoIDo />
-        <Experience />
+<Layout metaData={metaData}>
+    <Header />
+    <div class="mt-16 flex-grow">
+        <div class="container mx-auto max-w-6xl space-y-32">
+            <AboutMe />
+            <WhatDoIDo />
+            <Experience />
+        </div>
     </div>
+    <Footer />
 </Layout>

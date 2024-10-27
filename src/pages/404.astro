@@ -1,1 +1,28 @@
-Ooops!
+---
+import { Image } from 'astro:assets'
+
+import Layout from '../layouts/Layout.astro'
+
+import Alien from '../lib/img/alien.svg'
+
+const metaData = {
+    title: 'Page Not Found!',
+    description: `Oops! This is embarrassing. You weren't supposed to see me...`
+}
+---
+
+<Layout metaData={metaData}>
+    <div class="min-h-screen flex items-center justify-center text-center">
+        <div class="flex flex-col gap-5 items-center">
+            <Image src={Alien} alt="Alien with Spock hand" class="h-48 w-48" loading="eager" />
+            <div>
+                <h1 class="text-3xl font-extrabold">
+                    Page Not Found!
+                </h1>
+                <p class="text-gray-800 text-lg">
+                    Oops! This is embarrassing. You weren't supposed to see me...
+                </p>
+            </div>
+        </div>
+    </div>
+</Layout>
