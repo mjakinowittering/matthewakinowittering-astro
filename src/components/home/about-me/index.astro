@@ -1,5 +1,6 @@
 ---
 import { getEntry } from 'astro:content'
+import Footer from './footer.astro'
 
 const blurb = await getEntry('blurbs', 'about-me')
 
@@ -7,16 +8,16 @@ const { Content } = await blurb.render()
 ---
 
 <div id="aboutme" class="container mx-auto">
-    <div class="mx-4 my-8 text-slate-900">
-        <h2 class="text-3xl font-semibold">{blurb.data.title}</h2>
-        <div class="prose prose-lg prose-slate mt-3">
-            <Content />
-        </div>
+    <div class="flex flex-col space-y-8 bg-yellow-100 stroke-slate-900 px-4 text-slate-900">
+        <header>
+            <div class="h-16 w-16 rounded-full bg-stone-200"></div>
+        </header>
+        <section>
+            <h2 class="text-3xl font-semibold">{blurb.data.title}</h2>
+            <div class="prose prose-lg mt-3">
+                <Content />
+            </div>
+        </section>
+        <Footer />
     </div>
 </div>
-
-<style is:global>
-    #aboutme .prose time {
-        @apply cursor-pointer underline decoration-dashed underline-offset-2;
-    }
-</style>

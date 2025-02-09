@@ -1,0 +1,10 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
+.prose a {
+    @apply font-bold no-underline antialiased hover:underline;
+}
+
+.prose time {
+    @apply cursor-pointer underline decoration-dashed underline-offset-2;
+}

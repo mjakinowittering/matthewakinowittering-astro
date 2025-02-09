@@ -12,19 +12,20 @@ const metaData = {
 ---
 
 <Layout metaData={metaData}>
-    <div class="min-h-screen flex items-center justify-center text-center">
-        <div class="flex flex-col items-center m-5">
+    <div class="flex min-h-screen items-center justify-center text-center">
+        <div class="m-5 flex flex-col items-center">
             <Image src={Alien} alt="Alien with Spock hand" class="h-48 w-48" loading="eager" />
-            <div class="flex flex-col gap-3 w-full">
-                <h1 class="text-3xl font-extrabold">
-                    Page Not Found!
-                </h1>
-                <p class="text-gray-800 text-lg">
+            <div class="flex w-full flex-col gap-3">
+                <h1 class="text-3xl font-extrabold">Page Not Found!</h1>
+                <p class="text-lg text-gray-800">
                     Oops! This is embarrassing. You weren't supposed to see me...
                 </p>
             </div>
             <footer class="w-full py-5">
-                <a href="/" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
+                <a
+                    href="/"
+                    class="inline-flex items-center rounded bg-gray-300 px-4 py-2 font-bold hover:bg-gray-400"
+                >
                     Run Away...
                 </a>
             </footer>

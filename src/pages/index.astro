@@ -2,7 +2,6 @@
 import Layout from '../layouts/Layout.astro'
 
 import Header from '../components/header/index.astro'
-import Footer from '../components/footer/index.astro'
 
 import AboutMe from '../components/home/about-me/index.astro'
 import Experience from '../components/home/experience/index.astro'
@@ -29,12 +28,21 @@ const metaData = {
 
 <Layout metaData={metaData}>
     <Header />
-    <div class="mt-16 flex-grow">
-        <div class="container mx-auto max-w-6xl space-y-32">
+    <div class="flex-grow">
+        <div class="container mx-auto max-w-6xl space-y-8 py-8">
             <AboutMe />
+            <div
+                class="flex items-center py-3 text-sm before:me-6 before:flex-1 before:border-t before:border-gray-200 after:ms-6 after:flex-1 after:border-t after:border-gray-200 dark:text-white dark:before:border-neutral-600 dark:after:border-neutral-600"
+            >
+                Center aligned
+            </div>
             <WhatDoIDo />
+            <div
+                class="flex items-center py-3 text-sm before:me-6 before:flex-1 before:border-t before:border-gray-200 after:ms-6 after:flex-1 after:border-t after:border-gray-200 dark:text-white dark:before:border-neutral-600 dark:after:border-neutral-600"
+            >
+                Center aligned
+            </div>
             <Experience />
         </div>
     </div>
-    <Footer />
 </Layout>

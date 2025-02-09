@@ -10,29 +10,22 @@ const blurb = await getEntry('blurbs', 'experience')
 const { Content } = await blurb.render()
 ---
 
-<div id="experience" class="container mx-auto">
-    <div class="mx-4 my-16 text-slate-900">
-        <h2 class="text-3xl font-semibold">{blurb.data.title}</h2>
-        <div class="prose prose-lg prose-slate mt-3">
-            <Content />
+<div id="experience" class="container mx-auto bg-yellow-100 px-4">
+    <div class="flex flex-col space-y-8">
+        <div>
+            <h2 class="text-3xl font-semibold">{blurb.data.title}</h2>
+            <div class="prose prose-lg prose-slate mt-3">
+                <Content />
+            </div>
         </div>
-        <div class="my-16 md:grid md:grid-cols-2 md:gap-4">
+        <div class="md:grid md:grid-cols-2 md:gap-4">
             <div>
                 <Employment />
             </div>
             <div>
-                <h3 class="text-2xl font-semibold text-slate-900 antialiased">
-                    Education & Training
-                </h3>
                 <Education />
                 <Training />
             </div>
         </div>
     </div>
 </div>
-
-<style is:global>
-    #experience .prose a {
-        @apply font-sans font-semibold no-underline antialiased hover:underline;
-    }
-</style>

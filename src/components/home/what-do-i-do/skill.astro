@@ -11,14 +11,16 @@ const { entry } = Astro.props
 const { Content } = await entry.render()
 ---
 
-<div class="bg-stone-50 px-4 py-3 md:rounded-md">
+<div class="flex flex-col space-y-4 bg-stone-50 p-4 md:rounded-md">
     <div class="flex h-16 w-16 items-center justify-center rounded-md bg-stone-200">
         <Image src={entry.data.img} alt={entry.data.alt} class="h-12 w-12" loading="eager" />
     </div>
-    <h5 class="mt-5 font-sans text-xl font-semibold tracking-tight text-gray-900 antialiased">
-        {entry.data.title}
-    </h5>
-    <div class="prose prose-lg prose-slate">
-        <Content />
+    <div>
+        <h5 class="text-xl font-semibold tracking-tight antialiased">
+            {entry.data.title}
+        </h5>
+        <div class="prose prose-lg prose-slate">
+            <Content />
+        </div>
     </div>
 </div>

@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content'
 
-import Organisation from './organisation.astro'
+import Organisation from '../organisation/index.astro'
 
 const trainers = await getCollection('organisations', ({ data }) => {
     return data.type === 'trainer'
@@ -9,5 +9,6 @@ const trainers = await getCollection('organisations', ({ data }) => {
 ---
 
 <div>
+    <h2 class="text-2xl font-semibold antialiased">Training</h2>
     {trainers.map((trainers) => <Organisation organisation={trainers} />)}
 </div>

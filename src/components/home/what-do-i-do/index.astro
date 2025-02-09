@@ -12,14 +12,14 @@ const skills = (await getCollection('skills')).sort(function (a, b) {
 })
 ---
 
-<div id="what-do-i-do" class="container mx-auto">
-    <div class="mx-4 my-8 text-slate-900 md:my-16">
+<div id="what-do-i-do" class="container mx-auto flex flex-col space-y-4 bg-yellow-100">
+    <div class="px-4">
         <h2 class="text-3xl font-semibold">{blurb.data.title}</h2>
-        <div class="prose prose-lg prose-slate mt-3">
+        <div class="prose prose-lg mt-3">
             <Content />
         </div>
     </div>
-    <div class="grid gap-4 md:my-16 md:grid-cols-3">
+    <div class="grid gap-4 md:grid-cols-3">
         {skills.map((skill) => <Skill entry={skill} />)}
     </div>
 </div>
