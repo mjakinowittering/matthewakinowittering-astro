@@ -25,13 +25,13 @@ const socials = [
         <ol class="flex justify-start space-x-4">
             {
                 socials.map((social) => (
-                    <li>
+                    <li class="flex h-16 w-16 items-center justify-center rounded-md bg-stone-200">
                         <a
                             href={social.uri}
                             aria-label={`Profile page on ${social.site}`}
                             title={`Profile page on ${social.site}`}
                         >
-                            <social.icon />
+                            <social.icon class="h-8 w-8" />
                         </a>
                     </li>
                 ))
