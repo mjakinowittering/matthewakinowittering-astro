@@ -8,7 +8,9 @@ const universities = await getCollection('organisations', ({ data }) => {
 })
 ---
 
-<div>
+<div class="space-y-4">
     <h2 class="text-2xl font-semibold antialiased">Education</h2>
-    {universities.map((universities) => <Organisation organisation={universities} />)}
+    <div>
+        {universities.map((universities) => <Organisation organisation={universities} />)}
+    </div>
 </div>

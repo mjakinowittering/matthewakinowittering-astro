@@ -10,7 +10,7 @@ const blurb = await getEntry('blurbs', 'experience')
 const { Content } = await blurb.render()
 ---
 
-<div id="experience" class="container mx-auto bg-yellow-100 px-4">
+<div id="experience" class="container mx-auto px-4">
     <div class="flex flex-col space-y-8">
         <div>
             <h2 class="text-3xl font-semibold">{blurb.data.title}</h2>
