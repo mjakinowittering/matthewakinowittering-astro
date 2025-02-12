@@ -1,17 +1,15 @@
 import { defineConfig } from 'astro/config'
 
-import mdx from '@astrojs/mdx';
+import mdx from '@astrojs/mdx'
 
-import tailwindcss from '@tailwindcss/vite';
-
-import svelte from '@astrojs/svelte';
+import tailwindcss from '@tailwindcss/vite'
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [mdx(), svelte()],
-  site: 'https://mjakinowittering.github.io',
+    integrations: [mdx()],
+    site: 'https://mjakinowittering.github.io',
 
-  vite: {
-    plugins: [tailwindcss()]
-  }
+    vite: {
+        plugins: [tailwindcss()]
+    }
 })

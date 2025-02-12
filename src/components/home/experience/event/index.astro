@@ -67,7 +67,7 @@ const description = (
     </div>
 
     <div class="grow pt-0.5 pb-8">
-        <h5 class="flex text-lg font-semibold text-gray-800 dark:text-white">
+        <h5 class="flex text-lg font-semibold tracking-tight text-gray-900 dark:text-white">
             {
                 event.data.uri && (
                     <a class="space-x-1" href={event.data.uri} target="_blank">
@@ -78,6 +78,8 @@ const description = (
             }
             {!event.data.uri && event.data.title}
         </h5>
-        <small>{description(event, organisation)}</small>
+        <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">
+            {description(event, organisation)}
+        </p>
     </div>
 </div>

@@ -1,6 +1,6 @@
 ---
 import { AstroSeo } from '@astrolib/seo'
-import "../styles/global.css";
+import '../styles/global.css'
 
 interface metaTag {
     name: string
@@ -39,9 +39,7 @@ const site = 'Matthew Akino-Wittering'
         />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     </head>
-    <body class="flex min-h-screen flex-col bg-white">
+    <body class="flex min-h-screen flex-col bg-white dark:bg-gray-800">
         <slot />
-        <script is:inline src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"
-        ></script>
     </body>
 </html>

@@ -12,10 +12,10 @@ const skills = (await getCollection('skills')).sort(function (a, b) {
 })
 ---
 
-<div id="what-do-i-do" class="container mx-auto flex flex-col space-y-4">
+<div id="what-do-i-do" class="container mx-auto flex flex-col space-y-16">
     <div class="px-4">
-        <h2 class="text-3xl font-semibold">{blurb.data.title}</h2>
-        <div class="prose prose-lg mt-3">
+        <h2 class="text-3xl font-semibold text-gray-900 dark:text-white">{blurb.data.title}</h2>
+        <div class="prose prose-lg mt-4 text-gray-900 dark:text-white">
             <Content />
         </div>
     </div>
