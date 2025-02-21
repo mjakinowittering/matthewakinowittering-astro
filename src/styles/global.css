@@ -1,0 +1,13 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@plugin '@tailwindcss/typography';
+
+.prose a {
+    @apply font-bold text-amber-600 no-underline antialiased hover:underline;
+}
+
+.prose time {
+    @apply cursor-pointer text-amber-600 underline decoration-dashed underline-offset-2;
+}

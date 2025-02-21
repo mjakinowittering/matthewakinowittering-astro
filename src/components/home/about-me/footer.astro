@@ -1,0 +1,41 @@
+---
+import { Github, Linkedin, Worm } from 'lucide-astro'
+
+const socials = [
+    {
+        site: 'LinkedIn',
+        icon: Linkedin,
+        uri: 'https://www.linkedin.com/in/matthewwittering/'
+    },
+    {
+        site: 'Github',
+        icon: Github,
+        uri: 'https://github.com/mjakinowittering'
+    },
+    {
+        site: 'PyPI',
+        icon: Worm,
+        uri: 'https://pypi.org/user/mjakinowittering/'
+    }
+]
+---
+
+<footer>
+    <nav>
+        <ol class="flex justify-start space-x-4">
+            {
+                socials.map((social) => (
+                    <li class="flex h-12 w-12 items-center justify-center hover:rounded-lg hover:bg-gray-100">
+                        <a
+                            href={social.uri}
+                            aria-label={`Profile page on ${social.site}`}
+                            title={`Profile page on ${social.site}`}
+                        >
+                            <social.icon class="h-6 w-6" />
+                        </a>
+                    </li>
+                ))
+            }
+        </ol>
+    </nav>
+</footer>

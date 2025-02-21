@@ -1,32 +1,85 @@
 ---
+import { type CollectionEntry } from 'astro:content'
+
 import { ExternalLink } from 'lucide-astro'
+import { format } from 'date-fns'
+
+import { calcLengthInYearsAndMonths } from '../../../../lib/utils.ts'
 
 interface Props {
-    title: string
-    uri?: string | null | undefined
+    event: CollectionEntry<'events'>
+    organisation: 'employer' | 'trainer' | 'university'
 }
 
-const { title, uri } = Astro.props
+const { event, organisation } = Astro.props
+
+const isActive = (
+    event: CollectionEntry<'events'>,
+    organisation: 'employer' | 'trainer' | 'university'
+) => {
+    if (!event.data?.dateTo && organisation === 'employer') {
+        return true
+    }
+
+    return false
+}
+
+const description = (
+    event: CollectionEntry<'events'>,
+    organisation: 'employer' | 'trainer' | 'university'
+) => {
+    if (organisation === 'trainer') {
+        return format(event.data.dateFrom, 'MMM yyyy')
+    }
+
+    if (organisation === 'employer' || 'university') {
+        const dateFrom = format(event.data.dateFrom, 'MMM yyyy')
+
+        const dateTo = event.data.dateTo ? format(event.data.dateTo, 'MMM yyyy') : 'Present'
+
+        const duration = calcLengthInYearsAndMonths(
+            event.data.dateFrom,
+            event.data.dateTo ?? new Date()
+        )
+
+        return `${dateFrom} - ${dateTo} · ${duration}`
+    }
+}
 ---
 
-<li class="relative mb-4 flex space-x-4 pb-8">
+<div class="flex">
     <div
-        class="grid h-10 w-8 flex-none justify-center bg-white pt-1 text-slate-600 before:absolute before:left-[15px] before:-z-20 before:h-full before:w-[1px] before:bg-gray-300"
+        class=":bg-neutral-700 relative w-8 after:absolute after:start-4 after:top-7 after:bottom-2 after:w-px after:bg-gray-300 last:after:hidden"
     >
-        <slot name="icon" />
+        <div class="relative z-10 flex size-8 items-center justify-center">
+            <div class="relative z-10 flex size-8 items-center justify-center">
+                <span class="relative flex size-3">
+                    {
+                        isActive(event, organisation) && (
+                            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-600" />
+                        )
+                    }
+
+                    <span class="relative inline-flex size-3 rounded-full bg-amber-600"></span>
+                </span>
+            </div>
+        </div>
     </div>
-    <div class="m-h-4 grow">
-        <h5 class="align-middle font-sans text-lg font-semibold text-slate-900 antialiased">
+
+    <div class="grow pt-0.5 pb-8">
+        <h5 class="flex text-lg font-semibold tracking-tight text-gray-900">
             {
-                uri && (
-                    <a class="space-x-1" href={uri} target="_blank">
-                        <span class="hover:underline">{title}</span>
+                event.data.uri && (
+                    <a class="space-x-1" href={event.data.uri} target="_blank">
+                        <span class="hover:underline">{event.data.title}</span>
                         <ExternalLink class="inline h-4 w-4" />
                     </a>
                 )
             }
-            {!uri && title}
+            {!event.data.uri && event.data.title}
         </h5>
-        <small><slot name="description" /></small>
+        <p class="mt-2 text-sm text-gray-500">
+            {description(event, organisation)}
+        </p>
     </div>
-</li>
+</div>
