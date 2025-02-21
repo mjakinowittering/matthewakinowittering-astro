@@ -1,11 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro'
 
-import Header from '../components/header/index.astro'
-
 import AboutMe from '../components/home/about-me/index.astro'
 import Experience from '../components/home/experience/index.astro'
-import WhatDoIDo from '../components/home/what-do-i-do/index.astro'
 
 import { calcLengthInYears } from '../lib/utils.ts'
 
@@ -27,11 +24,13 @@ const metaData = {
 ---
 
 <Layout metaData={metaData}>
-    <Header />
-    <div class="flex-grow">
-        <div class="container mx-auto max-w-6xl space-y-32 py-8">
+    <div class="flex-grow bg-white">
+        <div class="container mx-auto max-w-6xl py-16">
             <AboutMe />
-            <WhatDoIDo />
+        </div>
+    </div>
+    <div class="flex-grow bg-[#f7f7f4]">
+        <div class="container mx-auto max-w-6xl space-y-16 py-16 md:space-y-32">
             <Experience />
         </div>
     </div>

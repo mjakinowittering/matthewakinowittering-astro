@@ -1,6 +1,10 @@
 ---
 import { getEntry } from 'astro:content'
 
+import Block from '../../block/index.astro'
+import BlockTitle from '../../block/title.astro'
+import BlockContent from '../../block/content.astro'
+
 import Employment from './employment/index.astro'
 import Education from './education/index.astro'
 import Training from './training/index.astro'
@@ -10,22 +14,20 @@ const blurb = await getEntry('blurbs', 'experience')
 const { Content } = await blurb.render()
 ---
 
-<div id="experience" class="container mx-auto px-4">
-    <div class="flex flex-col space-y-16">
+<Block>
+    <div class="flex flex-col space-y-4">
+        <BlockTitle>{blurb.data.title}</BlockTitle>
+        <BlockContent>
+            <Content />
+        </BlockContent>
+    </div>
+    <div class="md:grid md:grid-cols-2 md:gap-4">
         <div>
-            <h2 class="text-3xl font-semibold text-gray-900 dark:text-white">{blurb.data.title}</h2>
-            <div class="prose prose-lg prose-slate mt-4 text-gray-900 dark:text-white">
-                <Content />
-            </div>
+            <Employment />
         </div>
-        <div class="md:grid md:grid-cols-2 md:gap-4">
-            <div>
-                <Employment />
-            </div>
-            <div>
-                <Education />
-                <Training />
-            </div>
+        <div>
+            <Education />
+            <Training />
         </div>
     </div>
-</div>
+</Block>

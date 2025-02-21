@@ -1,6 +1,10 @@
 ---
 import { getCollection, getEntry } from 'astro:content'
 
+import Block from '../../block/index.astro'
+import BlockTitle from '../../block/title.astro'
+import BlockContent from '../../block/content.astro'
+
 import Skill from './skill.astro'
 
 const blurb = await getEntry('blurbs', 'what-do-i-do')
@@ -12,14 +16,14 @@ const skills = (await getCollection('skills')).sort(function (a, b) {
 })
 ---
 
-<div id="what-do-i-do" class="container mx-auto flex flex-col space-y-16">
-    <div class="px-4">
-        <h2 class="text-3xl font-semibold text-gray-900 dark:text-white">{blurb.data.title}</h2>
-        <div class="prose prose-lg mt-4 text-gray-900 dark:text-white">
+<Block>
+    <div class="flex flex-col space-y-4">
+        <BlockTitle>{blurb.data.title}</BlockTitle>
+        <BlockContent>
             <Content />
-        </div>
+        </BlockContent>
     </div>
-    <div class="grid gap-4 md:grid-cols-3">
+    <div class="grid gap-8 md:grid-cols-3">
         {skills.map((skill) => <Skill entry={skill} />)}
     </div>
-</div>
+</Block>
