@@ -34,9 +34,9 @@ const events = (
     {
         events.map((event) =>
             !event.data.type.includes('training') && !event.data.dateTo ? (
-                <Event client:only="svelte" event={event} organisation={organisation.data.type} />
+                <Event client:only="svelte" event={event} organisation={organisation} />
             ) : (
-                <Event event={event} organisation={organisation.data.type} />
+                <Event event={event} organisation={organisation} />
             )
         )
     }

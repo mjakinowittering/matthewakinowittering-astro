@@ -1,22 +1,35 @@
-<script>
+<script lang="ts">
+    import type { CollectionEntry } from 'astro:content'
+
     import { ExternalLink } from '@lucide/svelte'
 
     import { format } from 'date-fns'
 
     import { calcLengthInYearsAndMonths } from '../../../../lib/utils.ts'
 
-    let { event, organisation } = $props()
-
-    const isActive = (event, organisation) => {
-        return !event.data?.dateTo && organisation === 'employer' ? true : false
+    interface Props {
+        event: CollectionEntry<'events'>
+        organisation: CollectionEntry<'organisations'>
     }
 
-    const description = (event, organisation) => {
-        if (organisation === 'trainer') {
+    let { event, organisation }: Props = $props()
+
+    const isActive = (
+        event: CollectionEntry<'events'>,
+        organisation: CollectionEntry<'organisations'>
+    ) => {
+        return !event.data?.dateTo && organisation.data.type === 'employer' ? true : false
+    }
+
+    const description = (
+        event: CollectionEntry<'events'>,
+        organisation: CollectionEntry<'organisations'>
+    ) => {
+        if (organisation.data.type === 'trainer') {
             return format(event.data.dateFrom, 'MMM yyyy')
         }
 
-        if (organisation === 'employer' || organisation === 'university') {
+        if (organisation.data.type === 'employer' || organisation.data.type === 'university') {
             const dateFrom = format(event.data.dateFrom, 'MMM yyyy')
             const dateTo = event.data.dateTo ? format(event.data.dateTo, 'MMM yyyy') : 'Present'
             const duration = calcLengthInYearsAndMonths(
