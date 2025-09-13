@@ -9,7 +9,7 @@ import Skill from './skill.astro'
 
 const blurb = await getEntry('blurbs', 'what-do-i-do')
 
-const { Content } = await blurb.render()
+const Content = blurb ? (await blurb.render()).Content : null
 
 const skills = (await getCollection('skills')).sort(function (a, b) {
     return a.data.index - b.data.index
@@ -18,9 +18,9 @@ const skills = (await getCollection('skills')).sort(function (a, b) {
 
 <Block>
     <div class="flex flex-col space-y-4">
-        <BlockTitle>{blurb.data.title}</BlockTitle>
+        <BlockTitle>{blurb?.data.title}</BlockTitle>
         <BlockContent>
-            <Content />
+            {Content ? <Content /> : <p>Content not found</p>}
         </BlockContent>
     </div>
     <div class="grid gap-8 md:grid-cols-3">
