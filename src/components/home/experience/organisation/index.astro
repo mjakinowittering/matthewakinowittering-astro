@@ -3,7 +3,7 @@ import { type CollectionEntry, getCollection } from 'astro:content'
 
 import { ExternalLink } from 'lucide-astro'
 
-import Event from '../event/index.svelte'
+import Event from '../event/index.astro'
 
 interface Props {
     organisation: CollectionEntry<'organisations'>
@@ -31,13 +31,5 @@ const events = (
     </a>
 </h3>
 <div class="py-2">
-    {
-        events.map((event) =>
-            !event.data.type.includes('training') && !event.data.dateTo ? (
-                <Event client:only="svelte" event={event} organisation={organisation} />
-            ) : (
-                <Event event={event} organisation={organisation} />
-            )
-        )
-    }
+    {events.map((event) => <Event event={event} organisation={organisation} />)}
 </div>

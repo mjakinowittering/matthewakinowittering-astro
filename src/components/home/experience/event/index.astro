@@ -2,49 +2,18 @@
 import { type CollectionEntry } from 'astro:content'
 
 import { ExternalLink } from 'lucide-astro'
-import { format } from 'date-fns'
 
-import { calcLengthInYearsAndMonths } from '../../../../lib/utils.ts'
+import EventDate from './EventDate.astro'
+import EventDuration from './EventDuration.astro'
 
 interface Props {
     event: CollectionEntry<'events'>
-    organisation: 'employer' | 'trainer' | 'university'
+    organisation: CollectionEntry<'organisations'>
 }
 
 const { event, organisation } = Astro.props
 
-const isActive = (
-    event: CollectionEntry<'events'>,
-    organisation: 'employer' | 'trainer' | 'university'
-) => {
-    if (!event.data?.dateTo && organisation === 'employer') {
-        return true
-    }
-
-    return false
-}
-
-const description = (
-    event: CollectionEntry<'events'>,
-    organisation: 'employer' | 'trainer' | 'university'
-) => {
-    if (organisation === 'trainer') {
-        return format(event.data.dateFrom, 'MMM yyyy')
-    }
-
-    if (organisation === 'employer' || 'university') {
-        const dateFrom = format(event.data.dateFrom, 'MMM yyyy')
-
-        const dateTo = event.data.dateTo ? format(event.data.dateTo, 'MMM yyyy') : 'Present'
-
-        const duration = calcLengthInYearsAndMonths(
-            event.data.dateFrom,
-            event.data.dateTo ?? new Date()
-        )
-
-        return `${dateFrom} - ${dateTo} · ${duration}`
-    }
-}
+const isActive = !event.data?.dateTo && organisation.data.type === 'employer' ? true : false
 ---
 
 <div class="flex">
@@ -53,14 +22,12 @@ const description = (
     >
         <div class="relative z-10 flex size-8 items-center justify-center">
             <div class="relative z-10 flex size-8 items-center justify-center">
-                <span class="relative flex size-3">
+                <span class="relative inline-flex size-3 rounded-full bg-amber-600">
                     {
-                        isActive(event, organisation) && (
+                        isActive && (
                             <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-600" />
                         )
                     }
-
-                    <span class="relative inline-flex size-3 rounded-full bg-amber-600"></span>
                 </span>
             </div>
         </div>
@@ -79,7 +46,12 @@ const description = (
             {!event.data.uri && event.data.title}
         </h5>
         <p class="mt-2 text-sm text-gray-500">
-            {description(event, organisation)}
+            {event.data.type === 'training' && <EventDate date={event.data.dateFrom} />}
+            {
+                event.data.type !== 'training' && (
+                    <EventDuration dateFrom={event.data.dateFrom} dateTo={event.data.dateTo} />
+                )
+            }
         </p>
     </div>
 </div>

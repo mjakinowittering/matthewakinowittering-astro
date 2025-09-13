@@ -1,0 +1,29 @@
+---
+import { format } from 'date-fns'
+
+import EventDescription from './EventDescription.svelte'
+
+interface Props {
+    dateFrom: Date
+    dateTo: Date | null | undefined
+}
+
+const { dateFrom, dateTo } = Astro.props
+
+const now = new Date()
+---
+
+<time datetime={dateFrom.toISOString()}>
+    {format(dateFrom, 'MMM yyyy')}
+</time>
+to
+{dateTo ? <time datetime={dateTo.toISOString()}>{format(dateTo, 'MMM yyyy')}</time> : 'Present'}
+
+·
+{
+    !dateTo ? (
+        <EventDescription client:only="svelte" {dateFrom} {dateTo} />
+    ) : (
+        <EventDescription {dateFrom} {dateTo} />
+    )
+}
