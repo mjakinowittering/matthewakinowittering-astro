@@ -44,7 +44,8 @@ const organisations = defineCollection({
             .string()
             .datetime({ offset: true })
             .transform((str) => new Date(str))
-            .nullish()
+            .nullish(),
+        events: z.number().nullish()
     })
 })
 

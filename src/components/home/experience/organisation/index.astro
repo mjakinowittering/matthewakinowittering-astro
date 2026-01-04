@@ -4,6 +4,7 @@ import { type CollectionEntry, getCollection } from 'astro:content'
 import { ExternalLink } from 'lucide-astro'
 
 import Event from '../event/index.astro'
+import EventDescription from '../event/EventDescription.svelte'
 
 interface Props {
     organisation: CollectionEntry<'organisations'>
@@ -30,6 +31,16 @@ const events = (
         <ExternalLink class="inline h-4 w-4" />
     </a>
 </h3>
+{
+    organisation.data.events && organisation.data.events > 1 && (
+        <p class="mt-2 text-sm text-gray-500">
+            <EventDescription
+                dateFrom={organisation.data.dateFrom}
+                dateTo={organisation.data.dateTo}
+            />
+        </p>
+    )
+}
 <div class="py-2">
     {events.map((event) => <Event event={event} organisation={organisation} />)}
 </div>
