@@ -3,10 +3,10 @@
 
     interface Props {
         dateFrom: Date
-        dateTo: Date | null | undefined
+        dateTo: Date
     }
 
     let { dateFrom, dateTo }: Props = $props()
 </script>
 
-{calcLengthInYearsAndMonths(dateFrom, dateTo ?? new Date())}
+{calcLengthInYearsAndMonths(dateFrom, dateTo)}
