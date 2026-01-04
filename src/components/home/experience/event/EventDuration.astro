@@ -22,8 +22,8 @@ to
 ·
 {
     !dateTo ? (
-        <EventDescription client:only="svelte" {dateFrom} {dateTo} />
+        <EventDescription client:only="svelte" {dateFrom} dateTo={dateTo ?? now} />
     ) : (
-        <EventDescription {dateFrom} {dateTo} />
+        <EventDescription {dateFrom} dateTo={dateTo ?? now} />
     )
 }
