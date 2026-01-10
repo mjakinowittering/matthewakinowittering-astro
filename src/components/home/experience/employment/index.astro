@@ -3,33 +3,49 @@ import { getCollection } from 'astro:content'
 
 import Organisations from '../organisation/index.astro'
 
-const eventCountByOrganisation = (
-    await getCollection('events', ({ data }) => {
-        return data.type === 'employment'
-    })
-).reduce(
-    (acc, event) => {
-        const organisationId = event.data.organisationId
-        acc[organisationId] = (acc[organisationId] || 0) + 1
-        return acc
-    },
-    {} as Record<string, number>
-)
+const employmentEvents = await getCollection('events', ({ data }) => {
+    return data.type === 'employment'
+})
 
 const companies = (
     await getCollection('organisations', ({ data }) => {
         return data.type === 'employer'
     })
 )
-    .map((organisation) => ({
-        ...organisation,
-        data: {
-            ...organisation.data,
-            events: eventCountByOrganisation[organisation.data.id] || 0
+    .map((company) => {
+        const companyEvents = employmentEvents.filter(
+            (event) => event.data.organisationId === company.data.id
+        )
+
+        if (companyEvents.length === 0) {
+            return company
         }
-    }))
+
+        const dateFrom = companyEvents.reduce((earliest, event) => {
+            return event.data.dateFrom < earliest ? event.data.dateFrom : earliest
+        }, companyEvents[0].data.dateFrom)
+
+        const dateTo = companyEvents.reduce(
+            (latest: Date | null, event) => {
+                if (!event.data.dateTo) return latest
+                if (!latest) return event.data.dateTo
+                return event.data.dateTo > latest ? event.data.dateTo : latest
+            },
+            null as Date | null
+        )
+
+        return {
+            ...company,
+            data: {
+                ...company.data,
+                dateFrom,
+                dateTo,
+                events: companyEvents.length
+            }
+        }
+    })
     .sort(function (a, b) {
-        return b.data.dateFrom.getTime() - a.data.dateFrom.getTime()
+        return (b.data.dateFrom as Date).getTime() - (a.data.dateFrom as Date).getTime()
     })
 ---
 

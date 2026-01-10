@@ -7,9 +7,9 @@ export function calcLengthInYears(dateFrom: Date, dateTo: Date) {
 
     const years = Math.floor(diffInMonths / 12)
 
-    const yearSuffix = years > 1 ? 'years' : 'year'
+    const yearSuffix = years > 1 ? '+ years' : ' year'
 
-    return `${years} ${yearSuffix}`
+    return `${years}${yearSuffix}`
 }
 
 export function calcLengthInYearsAndMonths(dateFrom: Date, dateTo: Date) {

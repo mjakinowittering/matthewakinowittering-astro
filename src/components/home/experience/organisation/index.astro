@@ -32,14 +32,16 @@ const events = (
     </a>
 </h3>
 {
-    organisation.data.events && organisation.data.events > 1 && (
-        <p class="mt-2 text-sm text-gray-500">
-            <EventDescription
-                dateFrom={organisation.data.dateFrom}
-                dateTo={organisation.data.dateTo}
-            />
-        </p>
-    )
+    organisation.data.type === 'employer' &&
+        organisation.data.events &&
+        organisation.data.events > 1 && (
+            <p class="mt-2 text-sm text-gray-500">
+                <EventDescription
+                    dateFrom={organisation.data.dateFrom as Date}
+                    dateTo={organisation.data.dateTo as Date}
+                />
+            </p>
+        )
 }
 <div class="py-2">
     {events.map((event) => <Event event={event} organisation={organisation} />)}

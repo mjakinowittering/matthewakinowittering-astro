@@ -3,9 +3,50 @@ import { getCollection } from 'astro:content'
 
 import Organisation from '../organisation/index.astro'
 
-const trainers = await getCollection('organisations', ({ data }) => {
-    return data.type === 'trainer'
+const trainingEvents = await getCollection('events', ({ data }) => {
+    return data.type === 'training'
 })
+
+const trainers = (
+    await getCollection('organisations', ({ data }) => {
+        return data.type === 'trainer'
+    })
+)
+    .map((trainer) => {
+        const trainerEvents = trainingEvents.filter(
+            (event) => event.data.organisationId === trainer.data.id
+        )
+
+        if (trainerEvents.length === 0) {
+            return trainer
+        }
+
+        const dateFrom = trainerEvents.reduce((earliest, event) => {
+            return event.data.dateFrom < earliest ? event.data.dateFrom : earliest
+        }, trainerEvents[0].data.dateFrom)
+
+        const dateTo = trainerEvents.reduce(
+            (latest: Date | null, event) => {
+                if (!event.data.dateFrom) return latest
+                if (!latest) return event.data.dateFrom
+                return event.data.dateFrom > latest ? event.data.dateFrom : latest
+            },
+            null as Date | null
+        )
+
+        return {
+            ...trainer,
+            data: {
+                ...trainer.data,
+                dateFrom,
+                dateTo,
+                events: trainerEvents.length
+            }
+        }
+    })
+    .sort(function (a, b) {
+        return (b.data.dateTo as Date).getTime() - (a.data.dateTo as Date).getTime()
+    })
 ---
 
 <div class="space-y-4">
