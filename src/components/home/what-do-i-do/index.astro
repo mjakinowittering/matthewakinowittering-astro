@@ -1,19 +1,19 @@
 ---
-import { getCollection, getEntry } from 'astro:content'
+import { getCollection, getEntry } from 'astro:content';
 
-import Block from '../../block/index.astro'
-import BlockTitle from '../../block/title.astro'
-import BlockContent from '../../block/content.astro'
+import Block from '../../block/index.astro';
+import BlockTitle from '../../block/title.astro';
+import BlockContent from '../../block/content.astro';
 
-import Skill from './skill.astro'
+import Skill from './skill.astro';
 
-const blurb = await getEntry('blurbs', 'what-do-i-do')
+const blurb = await getEntry('blurbs', 'what-do-i-do');
 
-const Content = blurb ? (await blurb.render()).Content : null
+const Content = blurb ? (await blurb.render()).Content : null;
 
 const skills = (await getCollection('skills')).sort(function (a, b) {
-    return a.data.index - b.data.index
-})
+    return a.data.index - b.data.index;
+});
 ---
 
 <Block>

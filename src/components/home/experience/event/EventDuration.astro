@@ -1,16 +1,16 @@
 ---
-import { format } from 'date-fns'
+import { format } from 'date-fns';
 
-import EventDescription from './EventDescription.svelte'
+import EventDescription from './EventDescription.svelte';
 
 interface Props {
-    dateFrom: Date
-    dateTo: Date | null | undefined
+    dateFrom: Date;
+    dateTo: Date | null | undefined;
 }
 
-const { dateFrom, dateTo } = Astro.props
+const { dateFrom, dateTo } = Astro.props;
 
-const now = new Date()
+const now = new Date();
 ---
 
 <time datetime={dateFrom.toISOString()}>

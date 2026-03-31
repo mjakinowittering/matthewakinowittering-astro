@@ -1,28 +1,28 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content'
+import { type CollectionEntry, getCollection } from 'astro:content';
 
-import { ExternalLink } from 'lucide-astro'
+import { ExternalLink } from 'lucide-astro';
 
-import Event from '../event/index.astro'
-import EventDescription from '../event/EventDescription.svelte'
+import Event from '../event/index.astro';
+import EventDescription from '../event/EventDescription.svelte';
 
 interface Props {
-    organisation: CollectionEntry<'organisations'>
+    organisation: CollectionEntry<'organisations'>;
 }
 
-const { organisation } = Astro.props
+const { organisation } = Astro.props;
 
 const events = (
     await getCollection('events', ({ data }) => {
-        return data.organisationId === organisation.data.id
+        return data.organisationId === organisation.data.id;
     })
 ).sort(function (a, b) {
     if (a.data.dateFrom && b.data.dateFrom) {
-        return b.data.dateFrom.getTime() - a.data.dateFrom.getTime()
+        return b.data.dateFrom.getTime() - a.data.dateFrom.getTime();
     } else {
-        return 0
+        return 0;
     }
-})
+});
 ---
 
 <h3 class="flex text-xl font-semibold tracking-tight text-gray-900">

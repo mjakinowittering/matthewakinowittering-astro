@@ -1,17 +1,17 @@
 ---
-import { getEntry } from 'astro:content'
+import { getEntry } from 'astro:content';
 
-import Block from '../../block/index.astro'
-import BlockTitle from '../../block/title.astro'
-import BlockContent from '../../block/content.astro'
+import Block from '../../block/index.astro';
+import BlockTitle from '../../block/title.astro';
+import BlockContent from '../../block/content.astro';
 
-import Employment from './employment/index.astro'
-import Education from './education/index.astro'
-import Training from './training/index.astro'
+import Employment from './employment/index.astro';
+import Education from './education/index.astro';
+import Training from './training/index.astro';
 
-const blurb = await getEntry('blurbs', 'experience')
+const blurb = await getEntry('blurbs', 'experience');
 
-const Content = blurb ? (await blurb.render()).Content : null
+const Content = blurb ? (await blurb.render()).Content : null;
 ---
 
 <Block>

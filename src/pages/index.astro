@@ -1,13 +1,13 @@
 ---
-import Layout from '../layouts/Layout.astro'
+import Layout from '../layouts/Layout.astro';
 
-import AboutMe from '../components/home/about-me/index.astro'
-import Experience from '../components/home/experience/index.astro'
+import AboutMe from '../components/home/about-me/index.astro';
+import Experience from '../components/home/experience/index.astro';
 
-import { calcLengthInYears } from '../lib/utils.ts'
+import { calcLengthInYears } from '../lib/utils.ts';
 
-const dateFrom = new Date('2010-01-01T00:00:00+0000')
-const dateTo = new Date()
+const dateFrom = new Date('2010-01-01T00:00:00+0000');
+const dateTo = new Date();
 
 const metaData = {
     description: `I am a Product Manager with over ${calcLengthInYears(
@@ -20,7 +20,7 @@ const metaData = {
             content: 'F_gIghpXfLjo0LORq-3zJ1HjUIlKmy2iTb9lWQD_BfM'
         }
     ]
-}
+};
 ---
 
 <Layout metaData={metaData}>

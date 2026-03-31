@@ -1,5 +1,5 @@
 // Import utilities from `astro:content`
-import { defineCollection, reference, z } from 'astro:content'
+import { defineCollection, reference, z } from 'astro:content';
 
 // Define a `type` and `schema` for each collection
 const blurbs = defineCollection({
@@ -8,7 +8,7 @@ const blurbs = defineCollection({
         z.object({
             title: z.string()
         })
-})
+});
 
 const events = defineCollection({
     type: 'data',
@@ -27,7 +27,7 @@ const events = defineCollection({
             .transform((str) => new Date(str))
             .nullish()
     })
-})
+});
 
 const organisations = defineCollection({
     type: 'data',
@@ -48,7 +48,7 @@ const organisations = defineCollection({
             .nullish(),
         events: z.number().nullish()
     })
-})
+});
 
 const skills = defineCollection({
     type: 'content',
@@ -59,7 +59,7 @@ const skills = defineCollection({
             alt: z.string(),
             index: z.number()
         })
-})
+});
 
 // Export a single `collections` object to register your collection(s)
 export const collections = {
@@ -67,4 +67,4 @@ export const collections = {
     events,
     organisations,
     skills
-}
+};

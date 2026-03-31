@@ -1,18 +1,18 @@
 ---
-import { Image } from 'astro:assets'
-import { getEntry } from 'astro:content'
+import { Image } from 'astro:assets';
+import { getEntry } from 'astro:content';
 
-import Block from '../../block/index.astro'
-import BlockTitle from '../../block/title.astro'
-import BlockContent from '../../block/content.astro'
+import Block from '../../block/index.astro';
+import BlockTitle from '../../block/title.astro';
+import BlockContent from '../../block/content.astro';
 
-import Avatar from '../../../assets/MatthewAkinoWittering-BW-Alpha.png'
+import Avatar from '../../../assets/MatthewAkinoWittering-BW-Alpha.png';
 
-import Footer from './footer.astro'
+import Footer from './footer.astro';
 
-const blurb = await getEntry('blurbs', 'about-me')
+const blurb = await getEntry('blurbs', 'about-me');
 
-const Content = blurb ? (await blurb.render()).Content : null
+const Content = blurb ? (await blurb.render()).Content : null;
 ---
 
 <Block>

@@ -1,30 +1,30 @@
 ---
-import { AstroSeo } from '@astrolib/seo'
+import { AstroSeo } from '@astrolib/seo';
 
-import '../styles/global.css'
+import '../styles/global.css';
 
 interface metaTag {
-    name: string
-    content: string
+    name: string;
+    content: string;
 }
 
 interface metaData {
-    title?: string
-    description?: string
-    additionalMetaTags?: Array<metaTag>
+    title?: string;
+    description?: string;
+    additionalMetaTags?: Array<metaTag>;
 }
 
 interface Props {
-    metaData: metaData
+    metaData: metaData;
 }
 
 function titleText(title: string | undefined) {
-    return title ? `${title} - ${site}` : site
+    return title ? `${title} - ${site}` : site;
 }
 
-const { metaData } = Astro.props
+const { metaData } = Astro.props;
 
-const site = 'Matthew Akino-Wittering'
+const site = 'Matthew Akino-Wittering';
 ---
 
 <!doctype html>

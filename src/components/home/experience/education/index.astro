@@ -1,11 +1,11 @@
 ---
-import { getCollection } from 'astro:content'
+import { getCollection } from 'astro:content';
 
-import Organisation from '../organisation/index.astro'
+import Organisation from '../organisation/index.astro';
 
 const universities = await getCollection('organisations', ({ data }) => {
-    return data.type === 'university'
-})
+    return data.type === 'university';
+});
 ---
 
 <div class="space-y-4">

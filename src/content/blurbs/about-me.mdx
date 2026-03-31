@@ -2,11 +2,11 @@
 title: Hello! I'm Matthew Akino-Wittering
 ---
 
-export const dateFrom = new Date('2010-01-01T00:00:00+0000')
-export const dateTo = new Date()
+export const dateFrom = new Date('2010-01-01T00:00:00+0000');
+export const dateTo = new Date();
 
-import { format } from 'date-fns'
-import { calcLengthInYears } from '../../lib/utils.ts'
+import { format } from 'date-fns';
+import { calcLengthInYears } from '../../lib/utils.ts';
 
 I'm a Product Manager with <time time={dateFrom}
 title={`I've worked in Product Management roles since ${format(dateFrom, 'MMM yyyy')}`}>{calcLengthInYears(dateFrom,

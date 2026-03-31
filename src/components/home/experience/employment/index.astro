@@ -1,38 +1,38 @@
 ---
-import { getCollection } from 'astro:content'
+import { getCollection } from 'astro:content';
 
-import Organisations from '../organisation/index.astro'
+import Organisations from '../organisation/index.astro';
 
 const employmentEvents = await getCollection('events', ({ data }) => {
-    return data.type === 'employment'
-})
+    return data.type === 'employment';
+});
 
 const companies = (
     await getCollection('organisations', ({ data }) => {
-        return data.type === 'employer'
+        return data.type === 'employer';
     })
 )
     .map((company) => {
         const companyEvents = employmentEvents.filter(
             (event) => event.data.organisationId === company.data.id
-        )
+        );
 
         if (companyEvents.length === 0) {
-            return company
+            return company;
         }
 
         const dateFrom = companyEvents.reduce((earliest, event) => {
-            return event.data.dateFrom < earliest ? event.data.dateFrom : earliest
-        }, companyEvents[0].data.dateFrom)
+            return event.data.dateFrom < earliest ? event.data.dateFrom : earliest;
+        }, companyEvents[0].data.dateFrom);
 
         const dateTo = companyEvents.reduce(
             (latest: Date | null, event) => {
-                if (!event.data.dateTo) return latest
-                if (!latest) return event.data.dateTo
-                return event.data.dateTo > latest ? event.data.dateTo : latest
+                if (!event.data.dateTo) return latest;
+                if (!latest) return event.data.dateTo;
+                return event.data.dateTo > latest ? event.data.dateTo : latest;
             },
             null as Date | null
-        )
+        );
 
         return {
             ...company,
@@ -42,11 +42,11 @@ const companies = (
                 dateTo,
                 events: companyEvents.length
             }
-        }
+        };
     })
     .sort(function (a, b) {
-        return (b.data.dateFrom as Date).getTime() - (a.data.dateFrom as Date).getTime()
-    })
+        return (b.data.dateFrom as Date).getTime() - (a.data.dateFrom as Date).getTime();
+    });
 ---
 
 <div class="space-y-4">

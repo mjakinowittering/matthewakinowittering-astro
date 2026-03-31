@@ -1,19 +1,19 @@
 ---
-import { type CollectionEntry } from 'astro:content'
+import { type CollectionEntry } from 'astro:content';
 
-import { ExternalLink } from 'lucide-astro'
+import { ExternalLink } from 'lucide-astro';
 
-import EventDate from './EventDate.astro'
-import EventDuration from './EventDuration.astro'
+import EventDate from './EventDate.astro';
+import EventDuration from './EventDuration.astro';
 
 interface Props {
-    event: CollectionEntry<'events'>
-    organisation: CollectionEntry<'organisations'>
+    event: CollectionEntry<'events'>;
+    organisation: CollectionEntry<'organisations'>;
 }
 
-const { event, organisation } = Astro.props
+const { event, organisation } = Astro.props;
 
-const isActive = !event.data?.dateTo && organisation.data.type === 'employer' ? true : false
+const isActive = !event.data?.dateTo && organisation.data.type === 'employer' ? true : false;
 ---
 
 <div class="flex">
