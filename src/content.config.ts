@@ -1,28 +1,29 @@
-// Import utilities from `astro:content`
-import { defineCollection, reference, z } from 'astro:content';
+// 1. Import utilities from `astro:content`
+import { defineCollection, reference } from 'astro:content';
+
+// 2. Import loader(s)
+import { glob } from 'astro/loaders';
+
+// 3. Import Zod
+import { z } from 'astro/zod';
 
 // Define a `type` and `schema` for each collection
 const blurbs = defineCollection({
-    type: 'content',
-    schema: () =>
-        z.object({
-            title: z.string()
-        })
+    loader: glob({ base: './src/content/blurbs', pattern: '**/*.{md,mdx}' }),
+    schema: z.object({
+        title: z.string()
+    })
 });
 
 const events = defineCollection({
-    type: 'data',
+    loader: glob({ base: './src/content/events', pattern: '**/*.json' }),
     schema: z.object({
         title: z.string(),
-        organisationId: z.string(reference('organisation')),
+        organisationId: reference('organisations'),
         type: z.enum(['education', 'employment', 'training']),
-        uri: z.string().url().nullish(),
-        dateFrom: z
-            .string()
-            .datetime({ offset: true })
-            .transform((str) => new Date(str)),
-        dateTo: z
-            .string()
+        uri: z.url().nullable().optional(),
+        dateFrom: z.iso.datetime({ offset: true }).transform((str) => new Date(str)),
+        dateTo: z.iso
             .datetime({ offset: true })
             .transform((str) => new Date(str))
             .nullish()
@@ -30,19 +31,17 @@ const events = defineCollection({
 });
 
 const organisations = defineCollection({
-    type: 'data',
+    loader: glob({ base: './src/content/organisations', pattern: '**/*.json' }),
     schema: z.object({
         id: z.string(),
         name: z.string(),
         type: z.enum(['employer', 'trainer', 'university']),
         uri: z.string(),
-        dateFrom: z
-            .string()
+        dateFrom: z.iso
             .datetime({ offset: true })
             .transform((str) => new Date(str))
             .nullish(),
-        dateTo: z
-            .string()
+        dateTo: z.iso
             .datetime({ offset: true })
             .transform((str) => new Date(str))
             .nullish(),
@@ -51,7 +50,7 @@ const organisations = defineCollection({
 });
 
 const skills = defineCollection({
-    type: 'content',
+    loader: glob({ base: './src/content/skills', pattern: '**/*.{md,mdx}' }),
     schema: ({ image }) =>
         z.object({
             title: z.string(),

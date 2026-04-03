@@ -1,6 +1,4 @@
 ---
-import { AstroSeo } from '@astrolib/seo';
-
 import '../styles/global.css';
 
 interface metaTag {
@@ -33,11 +31,9 @@ const site = 'Matthew Akino-Wittering';
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width" />
         <meta name="generator" content={Astro.generator} />
-        <AstroSeo
-            title={`${titleText(metaData.title)}`}
-            description={metaData.description}
-            additionalMetaTags={metaData.additionalMetaTags}
-        />
+        <title>{titleText(metaData.title)}</title>
+        <meta name="description" content={metaData.description} />
+        {metaData.additionalMetaTags?.map((tag) => <meta name={tag.name} content={tag.content} />)}
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     </head>
     <body class="flex min-h-screen flex-col bg-gray-50">

@@ -14,11 +14,11 @@ const trainers = (
 )
     .map((trainer) => {
         const trainerEvents = trainingEvents.filter(
-            (event) => event.data.organisationId === trainer.data.id
+            (event) => event.data.organisationId.id === trainer.data.id
         );
 
         if (trainerEvents.length === 0) {
-            return trainer;
+            return null;
         }
 
         const dateFrom = trainerEvents.reduce((earliest, event) => {
@@ -44,8 +44,9 @@ const trainers = (
             }
         };
     })
+    .filter((trainer) => trainer !== null)
     .sort(function (a, b) {
-        return (b.data.dateTo as Date).getTime() - (a.data.dateTo as Date).getTime();
+        return (b.data.dateFrom as Date).getTime() - (a.data.dateFrom as Date).getTime();
     });
 ---
 

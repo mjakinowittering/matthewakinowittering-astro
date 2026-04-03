@@ -11,18 +11,18 @@
         "preview": "astro preview"
     },
     "dependencies": {
-        "@astrojs/mdx": "^4.3.13",
-        "@astrojs/svelte": "^7.2.4",
-        "@astrolib/seo": "^1.0.0-beta.8",
+        "@astrojs/mdx": "^5.0.3",
+        "@astrojs/svelte": "^8.0.4",
         "@lucide/svelte": "^0.541.0",
-        "@tailwindcss/typography": "^0.5.16",
-        "@tailwindcss/vite": "^4.0.6",
+        "@tailwindcss/typography": "^0.5.19",
+        "@tailwindcss/vite": "^4.2.2",
         "@trivago/prettier-plugin-sort-imports": "^6.0.2",
-        "astro": "^5.16.6",
+        "astro": "^6.1.2",
         "date-fns": "^4.1.0",
         "lucide-astro": "^0.473.0",
         "prettier-plugin-organize-imports": "^4.3.0",
         "svelte": "^5.38.3",
+        "tailwindcss": "^4.2.2",
         "typescript": "^5.9.2"
     },
     "devDependencies": {

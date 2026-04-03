@@ -14,7 +14,7 @@ const { organisation } = Astro.props;
 
 const events = (
     await getCollection('events', ({ data }) => {
-        return data.organisationId === organisation.data.id;
+        return data.organisationId.id === organisation.data.id;
     })
 ).sort(function (a, b) {
     if (a.data.dateFrom && b.data.dateFrom) {
