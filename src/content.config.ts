@@ -17,7 +17,7 @@ const blurbs = defineCollection({
 });
 
 const events = defineCollection({
-    loader: glob({ base: './src/content/events', pattern: '**/*.json' }),
+    loader: glob({ base: './src/content/events', pattern: '**/*.{md,mdx}' }),
     schema: z.object({
         title: z.string(),
         organisationId: reference('organisations'),
@@ -32,7 +32,7 @@ const events = defineCollection({
 });
 
 const organisations = defineCollection({
-    loader: glob({ base: './src/content/organisations', pattern: '**/*.json' }),
+    loader: glob({ base: './src/content/organisations', pattern: '**/*.{md,mdx}' }),
     schema: z.object({
         id: z.string(),
         name: z.string(),
