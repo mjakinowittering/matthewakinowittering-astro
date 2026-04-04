@@ -23,13 +23,9 @@ const { Content } = await render(blurb);
             {Content ? <Content /> : <p>Content not found</p>}
         </BlockContent>
     </div>
-    <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
-        <div class="space-y-8">
-            <Employment />
-        </div>
-        <div class="space-y-8">
-            <Education />
-            <Training />
-        </div>
+    <div class="space-y-8">
+        <Employment />
+        <Education />
+        <Training />
     </div>
 </Block>
