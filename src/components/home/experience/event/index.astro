@@ -1,5 +1,6 @@
 ---
-import { type CollectionEntry } from 'astro:content';
+import { render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
 
 import { ExternalLink } from 'lucide-astro';
 
@@ -12,6 +13,8 @@ interface Props {
 }
 
 const { event, organisation } = Astro.props;
+
+const { Content } = await render(event);
 
 const isActive = !event.data?.dateTo && organisation.data.type === 'employer' ? true : false;
 ---
@@ -35,7 +38,7 @@ const isActive = !event.data?.dateTo && organisation.data.type === 'employer' ? 
         </div>
     </div>
 
-    <div class="grow pb-8">
+    <div class="grow space-y-2 pb-8">
         <h5 class="flex text-lg font-semibold tracking-tight text-gray-900">
             {
                 event.data.uri && (
@@ -47,7 +50,7 @@ const isActive = !event.data?.dateTo && organisation.data.type === 'employer' ? 
             }
             {!event.data.uri && event.data.title}
         </h5>
-        <p class="mt-2 text-sm text-gray-500">
+        <p class="text-sm text-gray-500">
             {event.data.type === 'training' && <EventDate date={event.data.dateFrom} />}
             {
                 event.data.type !== 'training' && (
@@ -55,5 +58,18 @@ const isActive = !event.data?.dateTo && organisation.data.type === 'employer' ? 
                 )
             }
         </p>
+        <div
+            class="prose font-normal"
+            id={`event-content-${event.id.replaceAll('/', '-')}`}
+            data-event-prose
+            data-event-title={event.data.title}
+            data-event-active={isActive ? 'true' : undefined}
+        >
+            {Content ? <Content /> : <p>Content not found</p>}
+        </div>
     </div>
 </div>
+
+<script>
+    import './truncate.ts';
+</script>
