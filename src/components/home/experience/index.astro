@@ -11,22 +11,24 @@ import Training from './training/index.astro';
 
 const blurb = await getEntry('blurbs', 'experience');
 
+if (!blurb) return Astro.redirect('/404');
+
 const { Content } = await render(blurb);
 ---
 
 <Block>
-    <div class="flex flex-col space-y-4">
+    <div class="flex flex-col space-y-8">
         <BlockTitle>{blurb?.data.title}</BlockTitle>
         <BlockContent>
             {Content ? <Content /> : <p>Content not found</p>}
         </BlockContent>
     </div>
-    <div class="md:grid md:grid-cols-2 md:gap-4">
-        <div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="space-y-8">
             <Employment />
-        </div>
-        <div>
             <Education />
+        </div>
+        <div class="space-y-8">
             <Training />
         </div>
     </div>

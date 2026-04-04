@@ -4,6 +4,7 @@ import { getEntry, render } from 'astro:content';
 
 import Block from '../../block/index.astro';
 import BlockTitle from '../../block/title.astro';
+import BlockSubtitle from '../../block/subtitle.astro';
 import BlockContent from '../../block/content.astro';
 
 import Avatar from '../../../assets/MatthewAkinoWittering-BW-Alpha.png';
@@ -11,6 +12,8 @@ import Avatar from '../../../assets/MatthewAkinoWittering-BW-Alpha.png';
 import Footer from './footer.astro';
 
 const blurb = await getEntry('blurbs', 'about-me');
+
+if (!blurb) return Astro.redirect('/404');
 
 const { Content } = await render(blurb);
 ---
@@ -23,6 +26,7 @@ const { Content } = await render(blurb);
     </header>
     <div class="flex flex-col space-y-4">
         <BlockTitle>{blurb?.data.title}</BlockTitle>
+        <BlockSubtitle>{blurb?.data.subtitle}</BlockSubtitle>
         <BlockContent>
             {Content ? <Content /> : <p>Content not found</p>}
         </BlockContent>

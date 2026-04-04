@@ -11,7 +11,8 @@ import { z } from 'astro/zod';
 const blurbs = defineCollection({
     loader: glob({ base: './src/content/blurbs', pattern: '**/*.{md,mdx}' }),
     schema: z.object({
-        title: z.string()
+        title: z.string(),
+        subtitle: z.string().optional()
     })
 });
 
