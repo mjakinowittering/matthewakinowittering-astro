@@ -16,11 +16,9 @@
         "@lucide/svelte": "^0.541.0",
         "@tailwindcss/typography": "^0.5.19",
         "@tailwindcss/vite": "^4.2.2",
-        "@trivago/prettier-plugin-sort-imports": "^6.0.2",
         "astro": "^6.1.2",
         "date-fns": "^4.1.0",
         "lucide-astro": "^0.473.0",
-        "prettier-plugin-organize-imports": "^4.3.0",
         "svelte": "^5.38.3",
         "tailwindcss": "^4.2.2",
         "typescript": "^5.9.2"
@@ -30,8 +28,9 @@
         "eslint": "^9.39.4",
         "globals": "^17.4.0",
         "jiti": "^2.6.1",
-        "prettier": "^3.5.0",
+        "prettier": "^3.8.1",
         "prettier-plugin-astro": "^0.14.0",
+        "prettier-plugin-astro-organize-imports": "^0.4.11",
         "prettier-plugin-tailwindcss": "^0.6.11",
         "typescript-eslint": "^8.58.0"
     }

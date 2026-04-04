@@ -1,7 +1,15 @@
 // .prettierrc.mjs
 /** @type {import("prettier").Config} */
 export default {
-    plugins: ['prettier-plugin-astro', 'prettier-plugin-tailwindcss'],
+    useTabs: false,
+    tabWidth: 4,
+    singleQuote: true,
+    trailingComma: 'none',
+    plugins: [
+        'prettier-plugin-astro',
+        'prettier-plugin-tailwindcss',
+        'prettier-plugin-astro-organize-imports'
+    ],
     overrides: [
         {
             files: '*.astro',
@@ -9,5 +17,6 @@ export default {
                 parser: 'astro'
             }
         }
-    ]
+    ],
+    astroOrganizeImportsMode: 'All'
 };
