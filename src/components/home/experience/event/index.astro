@@ -1,6 +1,6 @@
 ---
-import { render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
+import { render } from 'astro:content';
 
 import { ExternalLink } from 'lucide-astro';
 
@@ -16,7 +16,8 @@ const { event, organisation } = Astro.props;
 
 const { Content } = await render(event);
 
-const isActive = !event.data?.dateTo && organisation.data.type === 'employer' ? true : false;
+const isActive =
+    !event.data?.dateTo && organisation.data.type === 'employer' ? true : false;
 ---
 
 <div class="flex">
@@ -24,7 +25,9 @@ const isActive = !event.data?.dateTo && organisation.data.type === 'employer' ? 
         class=":bg-neutral-700 relative w-8.5 after:absolute after:start-4 after:top-7 after:bottom-2 after:w-px after:bg-gray-300 last:after:hidden"
     >
         <div class="relative z-10 flex items-center justify-center">
-            <div class="relative z-10 flex w-8.25 items-center justify-center pt-2">
+            <div
+                class="relative z-10 flex w-8.25 items-center justify-center pt-2"
+            >
                 <span
                     class={`relative inline-flex size-3 rounded-full ${isActive ? 'bg-amber-600' : 'border-2 border-amber-600'}`}
                 >
@@ -51,10 +54,17 @@ const isActive = !event.data?.dateTo && organisation.data.type === 'employer' ? 
             {!event.data.uri && event.data.title}
         </h5>
         <p class="text-sm text-gray-500">
-            {event.data.type === 'training' && <EventDate date={event.data.dateFrom} />}
+            {
+                event.data.type === 'training' && (
+                    <EventDate date={event.data.dateFrom} />
+                )
+            }
             {
                 event.data.type !== 'training' && (
-                    <EventDuration dateFrom={event.data.dateFrom} dateTo={event.data.dateTo} />
+                    <EventDuration
+                        dateFrom={event.data.dateFrom}
+                        dateTo={event.data.dateTo}
+                    />
                 )
             }
         </p>

@@ -2,10 +2,10 @@
 import { Image } from 'astro:assets';
 import { getEntry, render } from 'astro:content';
 
-import Block from '../../block/index.astro';
-import BlockTitle from '../../block/title.astro';
-import BlockSubtitle from '../../block/subtitle.astro';
-import BlockContent from '../../block/content.astro';
+import BlockContent from '@components/block/content.astro';
+import Block from '@components/block/index.astro';
+import BlockSubtitle from '@components/block/subtitle.astro';
+import BlockTitle from '@components/block/title.astro';
 
 import Avatar from '../../../assets/MatthewAkinoWittering-BW-Alpha.png';
 
@@ -18,18 +18,26 @@ if (!blurb) return Astro.redirect('/404');
 const { Content } = await render(blurb);
 ---
 
-<Block>
-    <header>
-        <div class="h-56 w-56 overflow-hidden rounded-full bg-gray-100">
-            <Image src={Avatar} alt="Matthew Akino-Wittering" loading="eager" />
-        </div>
-    </header>
-    <div class="flex flex-col space-y-4">
-        <BlockTitle>{blurb?.data.title}</BlockTitle>
-        <BlockSubtitle>{blurb?.data.subtitle}</BlockSubtitle>
-        <BlockContent>
-            {Content ? <Content /> : <p>Content not found</p>}
-        </BlockContent>
+<div class="flex-grow bg-white">
+    <div class="container mx-auto max-w-6xl py-16">
+        <Block>
+            <header>
+                <div class="h-56 w-56 overflow-hidden rounded-full bg-gray-100">
+                    <Image
+                        src={Avatar}
+                        alt="Matthew Akino-Wittering"
+                        loading="eager"
+                    />
+                </div>
+            </header>
+            <div class="flex flex-col space-y-4">
+                <BlockTitle>{blurb?.data.title}</BlockTitle>
+                <BlockSubtitle>{blurb?.data.subtitle}</BlockSubtitle>
+                <BlockContent>
+                    {Content ? <Content /> : <p>Content not found</p>}
+                </BlockContent>
+            </div>
+            <Footer />
+        </Block>
     </div>
-    <Footer />
-</Block>
+</div>

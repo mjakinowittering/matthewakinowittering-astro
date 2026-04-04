@@ -33,7 +33,11 @@ const site = 'Matthew Akino-Wittering';
         <meta name="generator" content={Astro.generator} />
         <title>{titleText(metaData.title)}</title>
         <meta name="description" content={metaData.description} />
-        {metaData.additionalMetaTags?.map((tag) => <meta name={tag.name} content={tag.content} />)}
+        {
+            metaData.additionalMetaTags?.map((tag) => (
+                <meta name={tag.name} content={tag.content} />
+            ))
+        }
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     </head>
     <body class="flex min-h-screen flex-col bg-gray-50">

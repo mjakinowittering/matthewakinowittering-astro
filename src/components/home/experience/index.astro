@@ -1,13 +1,9 @@
 ---
 import { getEntry, render } from 'astro:content';
 
-import Block from '../../block/index.astro';
-import BlockTitle from '../../block/title.astro';
-import BlockContent from '../../block/content.astro';
-
-import Employment from './employment/index.astro';
-import Education from './education/index.astro';
-import Training from './training/index.astro';
+import BlockContent from '@components/block/content.astro';
+import Block from '@components/block/index.astro';
+import BlockTitle from '@components/block/title.astro';
 
 const blurb = await getEntry('blurbs', 'experience');
 
@@ -16,16 +12,15 @@ if (!blurb) return Astro.redirect('/404');
 const { Content } = await render(blurb);
 ---
 
-<Block>
-    <div class="flex flex-col space-y-8">
-        <BlockTitle>{blurb?.data.title}</BlockTitle>
-        <BlockContent>
-            {Content ? <Content /> : <p>Content not found</p>}
-        </BlockContent>
+<div class="flex-grow bg-[#f7f7f4]">
+    <div class="container mx-auto max-w-6xl space-y-16 py-16 md:space-y-32">
+        <Block>
+            <div class="flex flex-col space-y-8">
+                <BlockTitle>{blurb?.data.title}</BlockTitle>
+                <BlockContent>
+                    {Content ? <Content /> : <p>Content not found</p>}
+                </BlockContent>
+            </div>
+        </Block>
     </div>
-    <div class="space-y-8">
-        <Employment />
-        <Education />
-        <Training />
-    </div>
-</Block>
+</div>

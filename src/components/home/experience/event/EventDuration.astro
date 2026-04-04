@@ -17,12 +17,24 @@ const now = new Date();
     {format(dateFrom, 'MMM yyyy')}
 </time>
 to
-{dateTo ? <time datetime={dateTo.toISOString()}>{format(dateTo, 'MMM yyyy')}</time> : 'Present'}
+{
+    dateTo ? (
+        <time datetime={dateTo.toISOString()}>
+            {format(dateTo, 'MMM yyyy')}
+        </time>
+    ) : (
+        'Present'
+    )
+}
 
 ·
 {
     !dateTo ? (
-        <EventDescription client:only="svelte" {dateFrom} dateTo={dateTo ?? now} />
+        <EventDescription
+            client:only="svelte"
+            {dateFrom}
+            dateTo={dateTo ?? now}
+        />
     ) : (
         <EventDescription {dateFrom} dateTo={dateTo ?? now} />
     )

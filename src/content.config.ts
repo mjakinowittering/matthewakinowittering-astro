@@ -23,7 +23,9 @@ const events = defineCollection({
         organisationId: reference('organisations'),
         type: z.enum(['education', 'employment', 'training']),
         uri: z.url().nullable().optional(),
-        dateFrom: z.iso.datetime({ offset: true }).transform((str) => new Date(str)),
+        dateFrom: z.iso
+            .datetime({ offset: true })
+            .transform((str) => new Date(str)),
         dateTo: z.iso
             .datetime({ offset: true })
             .transform((str) => new Date(str))
@@ -32,7 +34,10 @@ const events = defineCollection({
 });
 
 const organisations = defineCollection({
-    loader: glob({ base: './src/content/organisations', pattern: '**/*.{md,mdx}' }),
+    loader: glob({
+        base: './src/content/organisations',
+        pattern: '**/*.{md,mdx}'
+    }),
     schema: z.object({
         id: z.string(),
         name: z.string(),

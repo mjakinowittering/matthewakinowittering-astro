@@ -1,0 +1,83 @@
+---
+import { getCollection } from 'astro:content';
+
+import Chapter from '@components/home/experience/chapter/index.astro';
+import ChapterSubtitle from '@components/home/experience/chapter/subtitle.astro';
+import ChapterTitle from '@components/home/experience/chapter/title.astro';
+import Organisation from '@components/home/experience/organisation/index.astro';
+
+const trainingEvents = await getCollection('events', ({ data }) => {
+    return data.type === 'training';
+});
+
+const trainers = (
+    await getCollection('organisations', ({ data }) => {
+        return data.type === 'trainer';
+    })
+)
+    .map((trainer) => {
+        const trainerEvents = trainingEvents.filter(
+            (event) => event.data.organisationId.id === trainer.data.id
+        );
+
+        if (trainerEvents.length === 0) {
+            return null;
+        }
+
+        const dateFrom = trainerEvents.reduce((earliest, event) => {
+            return event.data.dateFrom < earliest
+                ? event.data.dateFrom
+                : earliest;
+        }, trainerEvents[0].data.dateFrom);
+
+        const dateTo = trainerEvents.reduce(
+            (latest: Date | null, event) => {
+                if (!event.data.dateFrom) return latest;
+                if (!latest) return event.data.dateFrom;
+                return event.data.dateFrom > latest
+                    ? event.data.dateFrom
+                    : latest;
+            },
+            null as Date | null
+        );
+
+        return {
+            ...trainer,
+            data: {
+                ...trainer.data,
+                dateFrom,
+                dateTo,
+                events: trainerEvents.length
+            }
+        };
+    })
+    .filter((trainer) => trainer !== null)
+    .sort(function (a, b) {
+        return (
+            (b.data.dateFrom as Date).getTime() -
+            (a.data.dateFrom as Date).getTime()
+        );
+    });
+---
+
+<div class="flex-grow bg-white">
+    <div class="container mx-auto max-w-6xl space-y-16 py-16 md:space-y-32">
+        <Chapter>
+            <div class="flex flex-col space-y-4">
+                <header>
+                    <ChapterTitle>Training</ChapterTitle>
+                    <ChapterSubtitle
+                        >Always learning, here's the proof</ChapterSubtitle
+                    >
+                </header>
+                <div>
+                    {
+                        trainers.map((trainers) => (
+                            <Organisation organisation={trainers} />
+                        ))
+                    }
+                </div>
+            </div>
+        </Chapter>
+    </div>
+</div>

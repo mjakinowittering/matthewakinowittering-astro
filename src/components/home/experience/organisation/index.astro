@@ -3,8 +3,8 @@ import { type CollectionEntry, getCollection } from 'astro:content';
 
 import { ExternalLink } from 'lucide-astro';
 
-import Event from '../event/index.astro';
-import EventDescription from '../event/EventDescription.svelte';
+import EventDescription from '@components/home/experience/event/EventDescription.svelte';
+import Event from '@components/home/experience/event/index.astro';
 
 interface Props {
     organisation: CollectionEntry<'organisations'>;
