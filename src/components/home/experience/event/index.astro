@@ -18,10 +18,10 @@ const isActive = !event.data?.dateTo && organisation.data.type === 'employer' ? 
 
 <div class="flex">
     <div
-        class=":bg-neutral-700 relative w-8 after:absolute after:start-4 after:top-7 after:bottom-2 after:w-px after:bg-gray-300 last:after:hidden"
+        class=":bg-neutral-700 relative w-8.5 after:absolute after:start-4 after:top-7 after:bottom-2 after:w-px after:bg-gray-300 last:after:hidden"
     >
-        <div class="relative z-10 flex size-8 items-center justify-center">
-            <div class="relative z-10 flex size-8 items-center justify-center">
+        <div class="relative z-10 flex items-center justify-center">
+            <div class="relative z-10 flex w-8.25 items-center justify-center pt-2">
                 <span
                     class={`relative inline-flex size-3 rounded-full ${isActive ? 'bg-amber-600' : 'border-2 border-amber-600'}`}
                 >
@@ -35,7 +35,7 @@ const isActive = !event.data?.dateTo && organisation.data.type === 'employer' ? 
         </div>
     </div>
 
-    <div class="grow pt-0.5 pb-8">
+    <div class="grow pb-8">
         <h5 class="flex text-lg font-semibold tracking-tight text-gray-900">
             {
                 event.data.uri && (
