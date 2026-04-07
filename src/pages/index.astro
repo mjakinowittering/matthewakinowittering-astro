@@ -6,6 +6,7 @@ import Experience from '@components/home/experience/index.astro';
 import Education from '@components/home/experience/topics/education/index.astro';
 import Employment from '@components/home/experience/topics/employment/index.astro';
 import Training from '@components/home/experience/topics/training/index.astro';
+import WhatIdo from '@components/home/what-do-i-do/index.astro';
 
 import { calcLengthInYears } from '../lib/utils';
 
@@ -29,6 +30,7 @@ const metaData = {
 <Layout metaData={metaData}>
     <AboutMe />
     <Experience />
+    <WhatIdo />
     <Employment />
     <Education />
     <Training />

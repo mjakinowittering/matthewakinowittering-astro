@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import { getEntry, render } from 'astro:content';
 
 import BlockContent from '@components/block/content.astro';
+import BlockHeader from '@components/block/header.astro';
 import Block from '@components/block/index.astro';
 import BlockSubtitle from '@components/block/subtitle.astro';
 import BlockTitle from '@components/block/title.astro';
@@ -31,8 +32,10 @@ const { Content } = await render(blurb);
                 </div>
             </header>
             <div class="flex flex-col space-y-4">
-                <BlockTitle>{blurb?.data.title}</BlockTitle>
-                <BlockSubtitle>{blurb?.data.subtitle}</BlockSubtitle>
+                <BlockHeader class="space-y-2">
+                    <BlockTitle>{blurb?.data.title}</BlockTitle>
+                    <BlockSubtitle>{blurb?.data.subtitle}</BlockSubtitle>
+                </BlockHeader>
                 <BlockContent>
                     {Content ? <Content /> : <p>Content not found</p>}
                 </BlockContent>

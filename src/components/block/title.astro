@@ -1,3 +1,12 @@
-<h2 class="text-4xl font-extrabold tracking-tight text-gray-900 md:text-5xl">
+---
+const { class: className } = Astro.props;
+---
+
+<h2
+    class:list={[
+        'text-3xl font-semibold leading-tight tracking-tight text-pretty text-gray-900 md:text-5xl',
+        className
+    ]}
+>
     <slot />
 </h2>

@@ -1,6 +1,6 @@
 ---
-import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
+import { render } from 'astro:content';
 
 interface Props {
     entry: CollectionEntry<'skills'>;
@@ -8,22 +8,17 @@ interface Props {
 
 const { entry } = Astro.props;
 
-const Content = entry ? (await entry.render()).Content : null;
+const { Content } = await render(entry);
 ---
 
 <div
-    class="mx-auto flex max-w-lg flex-col space-y-8 rounded-lg border border-[#e2e2d3] bg-[#fbfbf9] p-6 text-gray-900 xl:p-8"
+    class="mx-auto flex max-w-lg flex-col space-y-8 rounded border border-[#e2e2d3] bg-[#fbfbf9] p-6 text-gray-900 xl:p-8"
 >
-    <div
-        class="flex h-22 w-22 items-center justify-center rounded-lg border border-[#e2e2d3] bg-gray-100 p-2"
-    >
-        <Image src={entry.data.img} alt={entry.data.alt} loading="eager" />
-    </div>
     <div>
-        <h5 class="tmb-4 text-2xl font-semibold">
+        <h5 class="mb-4 text-2xl font-semibold">
             {entry.data.title}
         </h5>
-        <div class="font-normal text-gray-500 sm:text-lg">
+        <div class="prose font-normal">
             {Content ? <Content /> : <p>Content not found</p>}
         </div>
     </div>
