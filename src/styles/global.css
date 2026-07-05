@@ -1,13 +1,26 @@
 @import 'tailwindcss';
 
-@custom-variant dark (&:where(.dark, .dark *));
-
 @plugin '@tailwindcss/typography';
 
+@theme {
+    --font-sans: 'Public Sans', system-ui, sans-serif;
+
+    --color-bg: #f7f3ea; /* page background (cream)  -> bg-bg */
+    --color-panel: #eee6d4; /* alt-section (sand)       -> bg-panel */
+    --color-border: #ded2b6; /* borders                  -> border-border */
+    --color-ink: #28231d; /* body text                -> text-ink */
+    --color-muted: #786b59; /* muted text               -> text-muted */
+    --color-accent: #3e6b4c; /* green accent             -> bg-accent / text-accent */
+    --color-accent-strong: #2c5138; /* hover/active             -> *-accent-strong */
+    --color-accent-soft: #e2ecdf; /* pill/tag backgrounds     -> bg-accent-soft */
+    --color-accent-contrast: #f4f8f1; /* text on accent buttons   -> text-accent-contrast */
+}
+
+/* MDX-rendered prose (role/course/education bodies) uses the green accent */
 .prose a {
-    @apply font-bold text-amber-600 no-underline antialiased hover:underline;
+    @apply text-accent font-semibold no-underline antialiased hover:underline;
 }
 
 .prose time {
-    @apply cursor-pointer text-amber-600 underline decoration-dashed underline-offset-2;
+    @apply text-accent cursor-pointer underline decoration-dashed underline-offset-2;
 }

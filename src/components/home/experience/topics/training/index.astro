@@ -1,8 +1,7 @@
 ---
-import ChapterDescription from '@components/home/experience/chapter/description.astro';
-import ChapterHeader from '@components/home/experience/chapter/header.astro';
-import Chapter from '@components/home/experience/chapter/index.astro';
-import ChapterTitle from '@components/home/experience/chapter/title.astro';
+import Badge from '@components/block/Badge.astro';
+import Section from '@components/block/Section.astro';
+import SectionHead from '@components/block/SectionHead.astro';
 import Organisation from '@components/home/experience/organisation/index.astro';
 import { School } from '@lucide/astro';
 import { getCollection } from 'astro:content';
@@ -25,65 +24,35 @@ const trainers = (
             return null;
         }
 
-        const dateFrom = trainerEvents.reduce((earliest, event) => {
-            return event.data.dateFrom < earliest
-                ? event.data.dateFrom
-                : earliest;
+        const dateFrom = trainerEvents.reduce((latest, event) => {
+            return event.data.dateFrom > latest ? event.data.dateFrom : latest;
         }, trainerEvents[0].data.dateFrom);
-
-        const dateTo = trainerEvents.reduce(
-            (latest: Date | null, event) => {
-                if (!event.data.dateFrom) return latest;
-                if (!latest) return event.data.dateFrom;
-                return event.data.dateFrom > latest
-                    ? event.data.dateFrom
-                    : latest;
-            },
-            null as Date | null
-        );
 
         return {
             ...trainer,
-            data: {
-                ...trainer.data,
-                dateFrom,
-                dateTo,
-                events: trainerEvents.length
-            }
+            data: { ...trainer.data, dateFrom }
         };
     })
     .filter((trainer) => trainer !== null)
     .sort(function (a, b) {
-        return (
-            (b.data.dateFrom as Date).getTime() -
-            (a.data.dateFrom as Date).getTime()
-        );
+        return b.data.dateFrom.getTime() - a.data.dateFrom.getTime();
     });
 ---
 
-<div class="flex-grow border-t border-[#e2e2d3] bg-[#f7f7f4]">
-    <div class="container mx-auto max-w-6xl space-y-16 py-16 md:space-y-32">
-        <Chapter>
-            <div class="flex flex-col space-y-8">
-                <header class="flex flex-row gap-4">
-                    <ChapterHeader>
-                        <ChapterTitle>Training</ChapterTitle>
-                        <ChapterDescription
-                            >Always learning, here's the proof</ChapterDescription
-                        >
-                    </ChapterHeader>
-                    <div class="flex h-14 w-14 items-center justify-center">
-                        <School size="48" stroke-width={1} />
-                    </div>
-                </header>
-                <div>
-                    {
-                        trainers.map((trainers) => (
-                            <Organisation organisation={trainers} />
-                        ))
-                    }
-                </div>
-            </div>
-        </Chapter>
+<Section>
+    <SectionHead title="Training" subtitle="Always learning, here's the proof">
+        <Badge slot="badge" label="Courses">
+            <School size={26} stroke-width={1.5} />
+        </Badge>
+    </SectionHead>
+    <div class="mt-9">
+        {
+            trainers.map((trainer, index) => (
+                <Organisation
+                    organisation={trainer}
+                    isLast={index === trainers.length - 1}
+                />
+            ))
+        }
     </div>
-</div>
+</Section>

@@ -1,0 +1,41 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { render } from 'astro:content';
+import { format } from 'date-fns';
+import EventDescription from './EventDescription.svelte';
+
+interface Props {
+    event: CollectionEntry<'events'>;
+}
+
+const { event } = Astro.props;
+
+const { Content } = await render(event);
+
+const range = `${format(event.data.dateFrom, 'yyyy')} – ${
+    event.data.dateTo ? format(event.data.dateTo, 'yyyy') : 'Present'
+}`;
+---
+
+<div class="text-muted flex items-baseline gap-2 text-[13px] font-bold">
+    <span class="text-ink">
+        {event.data.title}
+    </span>
+    ·
+    <span>
+        {range}
+    </span>
+    ·
+    <span>
+        <EventDescription
+            client:only="svelte"
+            dateFrom={event.data.dateFrom}
+            dateTo={event.data.dateTo}
+        />
+    </span>
+</div>
+<div
+    class="prose text-muted prose-p:text-sm prose-p:leading-[1.6] prose-p:text-muted mt-2 max-w-[64ch]"
+>
+    {Content ? <Content /> : <p>Content not found</p>}
+</div>

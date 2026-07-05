@@ -1,9 +1,12 @@
 ---
+import Nav from '@components/block/Nav.astro';
+import SiteFooter from '@components/block/SiteFooter.astro';
 import AboutMe from '@components/home/about-me/index.astro';
 import Experience from '@components/home/experience/index.astro';
 import Education from '@components/home/experience/topics/education/index.astro';
 import Employment from '@components/home/experience/topics/employment/index.astro';
 import Training from '@components/home/experience/topics/training/index.astro';
+import Projects from '@components/home/projects/index.astro';
 import WhatIdo from '@components/home/what-do-i-do/index.astro';
 import Layout from '../layouts/Layout.astro';
 import { calcLengthInYears } from '../lib/utils';
@@ -26,10 +29,13 @@ const metaData = {
 ---
 
 <Layout metaData={metaData}>
+    <Nav />
     <AboutMe />
     <Experience />
     <WhatIdo />
     <Employment />
+    <Projects />
     <Education />
     <Training />
+    <SiteFooter />
 </Layout>

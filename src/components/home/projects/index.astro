@@ -1,0 +1,26 @@
+---
+import Badge from '@components/block/Badge.astro';
+import Section from '@components/block/Section.astro';
+import SectionHead from '@components/block/SectionHead.astro';
+import { FolderGit2 } from '@lucide/astro';
+import { getCollection } from 'astro:content';
+import Project from './Project.astro';
+
+const projects = (await getCollection('projects')).sort(function (a, b) {
+    return a.data.index - b.data.index;
+});
+---
+
+<Section id="projects">
+    <SectionHead
+        title="Projects"
+        subtitle="Things I've built and shipped myself"
+    >
+        <Badge slot="badge" label="Builds">
+            <FolderGit2 size={26} stroke-width={1.5} />
+        </Badge>
+    </SectionHead>
+    <div class="mt-9 flex flex-col gap-6">
+        {projects.map((project) => <Project project={project} />)}
+    </div>
+</Section>

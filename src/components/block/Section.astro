@@ -1,0 +1,20 @@
+---
+interface Props {
+    id?: string;
+    alt?: boolean;
+}
+
+const { id, alt = false } = Astro.props;
+---
+
+<section
+    id={id}
+    class:list={[
+        'flex-grow py-20',
+        alt && 'border-border bg-panel border-t border-b'
+    ]}
+>
+    <div class="mx-auto max-w-[1180px] px-8">
+        <slot />
+    </div>
+</section>

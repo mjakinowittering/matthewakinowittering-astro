@@ -1,43 +1,71 @@
 ---
-import BlockContent from '@components/block/content.astro';
-import BlockHeader from '@components/block/header.astro';
-import Block from '@components/block/index.astro';
-import BlockSubtitle from '@components/block/subtitle.astro';
-import BlockTitle from '@components/block/title.astro';
+import Button from '@components/block/Button.astro';
 import { Image } from 'astro:assets';
 import { getEntry, render } from 'astro:content';
 import Avatar from '../../../assets/MatthewAkinoWittering-BW-Alpha.png';
-import Footer from './footer.astro';
 
 const blurb = await getEntry('blurbs', 'about-me');
 
 if (!blurb) return Astro.redirect('/404');
 
 const { Content } = await render(blurb);
+
+const socials = [
+    { site: 'LinkedIn', uri: 'https://www.linkedin.com/in/matthewwittering/' },
+    { site: 'GitHub', uri: 'https://github.com/mjakinowittering' }
+];
 ---
 
-<div class="flex-grow bg-white">
-    <div class="container mx-auto max-w-6xl py-16">
-        <Block>
-            <header>
-                <div class="h-56 w-56 overflow-hidden rounded-full bg-gray-100">
+<div class="grow" id="about">
+    <div class="mx-auto max-w-295 px-8">
+        <div class="grid items-center gap-12 py-14 md:grid-cols-[1.2fr_.8fr]">
+            <div>
+                <h1
+                    class="mt-4 text-5xl leading-[1.06] font-extrabold tracking-[-0.01em]"
+                >
+                    {blurb.data.title}
+                </h1>
+                <div
+                    class="prose text-muted prose-p:text-[17px] prose-p:leading-[1.65] prose-p:text-muted mt-5 max-w-[56ch]"
+                >
+                    {Content ? <Content /> : <p>Content not found</p>}
+                </div>
+                <div class="mt-6 flex flex-wrap gap-3">
+                    <Button href="#projects">View projects</Button>
+                    <Button
+                        href="mailto:matthew.akinowittering@gmail.com"
+                        variant="ghost"
+                    >
+                        Get in touch
+                    </Button>
+                </div>
+                <div class="mt-6 flex gap-2">
+                    {
+                        socials.map((social) => (
+                            <a
+                                href={social.uri}
+                                target="_blank"
+                                rel="noopener"
+                                class="border-border text-muted hover:border-accent-strong hover:text-ink inline-flex items-center gap-1.5 rounded-full border px-3.5 py-[7px] text-xs font-bold no-underline"
+                            >
+                                {social.site}
+                            </a>
+                        ))
+                    }
+                </div>
+            </div>
+            <div class="justify-self-center md:justify-self-end">
+                <div
+                    class="border-border bg-panel rounded-full border-[1.5px] p-1.5"
+                >
                     <Image
                         src={Avatar}
                         alt="Matthew Akino-Wittering"
                         loading="eager"
+                        class="h-64 w-64 rounded-full object-cover"
                     />
                 </div>
-            </header>
-            <div class="flex flex-col space-y-4">
-                <BlockHeader class="space-y-2">
-                    <BlockTitle>{blurb?.data.title}</BlockTitle>
-                    <BlockSubtitle>{blurb?.data.subtitle}</BlockSubtitle>
-                </BlockHeader>
-                <BlockContent>
-                    {Content ? <Content /> : <p>Content not found</p>}
-                </BlockContent>
             </div>
-            <Footer />
-        </Block>
+        </div>
     </div>
 </div>

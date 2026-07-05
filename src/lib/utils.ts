@@ -1,3 +1,14 @@
+import { format } from 'date-fns';
+
+export function formatMonthYear(date: Date) {
+    return format(date, 'MMM yyyy');
+}
+
+export function formatDateRange(dateFrom: Date, dateTo?: Date | null) {
+    const to = dateTo ? formatMonthYear(dateTo) : 'Present';
+    return `${formatMonthYear(dateFrom)} – ${to}`;
+}
+
 export function calcLengthInYears(dateFrom: Date, dateTo: Date) {
     const diffInMonths =
         dateTo.getMonth() -

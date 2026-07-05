@@ -1,7 +1,7 @@
 ---
-import BlockContent from '@components/block/content.astro';
-import Block from '@components/block/index.astro';
-import BlockTitle from '@components/block/title.astro';
+import Badge from '@components/block/Badge.astro';
+import Section from '@components/block/Section.astro';
+import SectionHead from '@components/block/SectionHead.astro';
 import { Clock4 } from '@lucide/astro';
 import { getEntry, render } from 'astro:content';
 
@@ -12,23 +12,15 @@ if (!blurb) return Astro.redirect('/404');
 const { Content } = await render(blurb);
 ---
 
-<div class="flex-grow border-t border-b border-[#e2e2d3] bg-[#f7f7f4]">
-    <div class="container mx-auto max-w-6xl space-y-16 py-16 md:space-y-32">
-        <Block>
-            <div class="flex flex-col space-y-8">
-                <header class="flex h-14 flex-row gap-4">
-                    <BlockTitle
-                        class="flex h-14 flex-1 items-center justify-start"
-                        >{blurb?.data.title}</BlockTitle
-                    >
-                    <div class="flex h-14 w-14 items-center justify-center">
-                        <Clock4 size="48" stroke-width={1} />
-                    </div>
-                </header>
-                <BlockContent>
-                    {Content ? <Content /> : <p>Content not found</p>}
-                </BlockContent>
-            </div>
-        </Block>
+<Section alt>
+    <SectionHead title={blurb.data.title} subtitle={blurb.data.subtitle}>
+        <Badge slot="badge" label="Timeline">
+            <Clock4 size={26} stroke-width={1.5} />
+        </Badge>
+    </SectionHead>
+    <div
+        class="prose text-muted prose-p:text-[17px] prose-p:leading-[1.65] prose-p:text-muted mt-5 max-w-[70ch]"
+    >
+        {Content ? <Content /> : <p>Content not found</p>}
     </div>
-</div>
+</Section>

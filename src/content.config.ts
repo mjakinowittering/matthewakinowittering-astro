@@ -64,10 +64,26 @@ const skills = defineCollection({
         })
 });
 
+const projects = defineCollection({
+    loader: glob({ base: './src/content/projects', pattern: '**/*.{md,mdx}' }),
+    schema: ({ image }) =>
+        z.object({
+            title: z.string(),
+            description: z.string(),
+            uri: z.url(),
+            sourceUri: z.url(),
+            tags: z.array(z.string()),
+            index: z.number(),
+            img: image().optional(),
+            alt: z.string().optional()
+        })
+});
+
 // Export a single `collections` object to register your collection(s)
 export const collections = {
     blurbs,
     events,
     organisations,
+    projects,
     skills
 };

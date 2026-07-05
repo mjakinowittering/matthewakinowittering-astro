@@ -1,46 +1,74 @@
 ---
-import EventDescription from '@components/home/experience/event/EventDescription.svelte';
-import Event from '@components/home/experience/event/index.astro';
+import Course from '@components/home/experience/event/Course.astro';
+import Education from '@components/home/experience/event/Education.astro';
+import Role from '@components/home/experience/event/Role.astro';
 import { ExternalLink } from '@lucide/astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
 
 interface Props {
     organisation: CollectionEntry<'organisations'>;
+    isLast?: boolean;
 }
 
-const { organisation } = Astro.props;
+const { organisation, isLast = false } = Astro.props;
 
 const events = (
     await getCollection('events', ({ data }) => {
         return data.organisationId.id === organisation.data.id;
     })
 ).sort(function (a, b) {
-    if (a.data.dateFrom && b.data.dateFrom) {
-        return b.data.dateFrom.getTime() - a.data.dateFrom.getTime();
-    } else {
-        return 0;
-    }
+    return b.data.dateFrom.getTime() - a.data.dateFrom.getTime();
 });
+
+const active =
+    organisation.data.type === 'employer' &&
+    events.some((event) => !event.data.dateTo);
 ---
 
-<h3 class="flex text-xl font-semibold tracking-tight text-gray-900">
-    <a class="space-x-1" href={organisation.data.uri} target="_blank">
-        <span class="hover:underline">{organisation.data.name}</span>
-        <ExternalLink class="inline h-4 w-4" />
-    </a>
-</h3>
-{
-    organisation.data.type === 'employer' &&
-        organisation.data.events &&
-        organisation.data.events > 1 && (
-            <p class="mt-2 text-sm text-gray-500">
-                <EventDescription
-                    dateFrom={organisation.data.dateFrom as Date}
-                    dateTo={organisation.data.dateTo as Date}
-                />
-            </p>
-        )
-}
-<div class="py-2">
-    {events.map((event) => <Event event={event} organisation={organisation} />)}
+<div class="flex gap-[18px]">
+    <div class="relative flex w-5 justify-center">
+        <div
+            class:list={[
+                'border-accent-strong mt-1.5 h-[11px] w-[11px] flex-none rounded-full border-2',
+                active ? 'bg-accent-strong' : 'bg-bg'
+            ]}
+        >
+        </div>
+        {!isLast && <div class="bg-border absolute top-6 -bottom-1.5 w-px" />}
+    </div>
+    <div class="flex-1 pb-8">
+        <h3 class="text-lg font-bold">
+            <a
+                class="inline-flex items-center gap-1 hover:underline"
+                href={organisation.data.uri}
+                target="_blank"
+                rel="noopener"
+            >
+                <span>{organisation.data.name}</span>
+                <ExternalLink class="inline h-4 w-4" />
+            </a>
+        </h3>
+        {
+            organisation.data.type === 'employer' && (
+                <div class="mt-3 flex flex-col gap-[18px]">
+                    {events.map((event) => (
+                        <Role event={event} />
+                    ))}
+                </div>
+            )
+        }
+        {
+            organisation.data.type === 'trainer' && (
+                <div class="mt-2.5 flex flex-col">
+                    {events.map((event) => (
+                        <Course event={event} />
+                    ))}
+                </div>
+            )
+        }
+        {
+            organisation.data.type === 'university' &&
+                events.map((event) => <Education event={event} />)
+        }
+    </div>
 </div>

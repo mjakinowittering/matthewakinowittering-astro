@@ -63,9 +63,9 @@ user review it with `git diff`. It is version-controlled and easy to revert.
   _explored_, _grounded_, or _deepened_, and state plainly what the course was
   about. Name the core framework or methodology if the source has one.
 - Follow with one or two short sentences drawing out only the most important
-  themes. Fold the "why it matters" into brief purpose clauses (for example,
-  "to drive measurable business outcomes", "outcomes that matter to both
-  customers and the business") rather than a separate sentence.
+  themes. Fold the "why it matters" into brief purpose clauses (for example, "to
+  drive measurable business outcomes", "outcomes that matter to both customers
+  and the business") rather than a separate sentence.
 - Be reflective and factual, describing what the course covered rather than
   selling it. Strip all second-person marketing copy such as "you'll be able
   to", "you'll learn", "you'll discover", and "by the end of this course".

@@ -1,0 +1,51 @@
+---
+const navLinks = [
+    { label: 'About', href: '#about' },
+    { label: 'Career', href: '#career' },
+    { label: 'Projects', href: '#projects' },
+    { label: 'Education', href: '#education' }
+];
+
+const socials = [
+    {
+        label: 'LinkedIn',
+        href: 'https://www.linkedin.com/in/matthewwittering/'
+    },
+    { label: 'GitHub', href: 'https://github.com/mjakinowittering' }
+];
+---
+
+<nav
+    class="border-border bg-bg sticky top-0 z-20 flex items-center justify-between border-b px-8 py-4"
+>
+    <span class="text-sm font-bold">Matthew Akino-Wittering</span>
+    <div class="flex items-center gap-6">
+        <div
+            class="text-muted hidden items-center gap-[26px] text-[13px] font-semibold sm:flex"
+        >
+            {
+                navLinks.map((link) => (
+                    <a href={link.href} class="hover:text-ink no-underline">
+                        {link.label}
+                    </a>
+                ))
+            }
+        </div>
+        <div
+            class="text-muted flex items-center gap-3.5 text-[13px] font-semibold"
+        >
+            {
+                socials.map((social) => (
+                    <a
+                        href={social.href}
+                        target="_blank"
+                        rel="noopener"
+                        class="hover:text-ink no-underline"
+                    >
+                        {social.label}
+                    </a>
+                ))
+            }
+        </div>
+    </div>
+</nav>

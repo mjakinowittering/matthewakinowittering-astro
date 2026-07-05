@@ -1,0 +1,30 @@
+---
+import { Code, Compass, Search } from '@lucide/astro';
+import type { CollectionEntry } from 'astro:content';
+import { render } from 'astro:content';
+
+interface Props {
+    entry: CollectionEntry<'skills'>;
+}
+
+const { entry } = Astro.props;
+
+const { Content } = await render(entry);
+
+const icons = { 1: Compass, 2: Search, 3: Code } as const;
+const Icon = icons[entry.data.index as keyof typeof icons] ?? Compass;
+---
+
+<div class="border-border bg-bg rounded-[10px] border p-[26px]">
+    <div
+        class="border-border bg-panel text-accent-strong mb-[14px] flex h-[38px] w-[38px] items-center justify-center rounded-full border-[1.5px]"
+    >
+        <Icon size={18} stroke-width={1.5} />
+    </div>
+    <h3 class="mb-[10px] text-lg font-bold">{entry.data.title}</h3>
+    <div
+        class="prose text-muted prose-p:text-[13.5px] prose-p:leading-[1.6] prose-p:text-muted"
+    >
+        {Content ? <Content /> : <p>Content not found</p>}
+    </div>
+</div>

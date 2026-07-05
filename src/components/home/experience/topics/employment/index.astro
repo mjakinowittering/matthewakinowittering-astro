@@ -1,8 +1,7 @@
 ---
-import ChapterDescription from '@components/home/experience/chapter/description.astro';
-import ChapterHeader from '@components/home/experience/chapter/header.astro';
-import Chapter from '@components/home/experience/chapter/index.astro';
-import ChapterTitle from '@components/home/experience/chapter/title.astro';
+import Badge from '@components/block/Badge.astro';
+import Section from '@components/block/Section.astro';
+import SectionHead from '@components/block/SectionHead.astro';
 import Organisation from '@components/home/experience/organisation/index.astro';
 import { Building } from '@lucide/astro';
 import { getCollection } from 'astro:content';
@@ -31,57 +30,34 @@ const companies = (
                 : earliest;
         }, companyEvents[0].data.dateFrom);
 
-        const dateTo = companyEvents.reduce(
-            (latest: Date | null, event) => {
-                if (!event.data.dateTo) return latest;
-                if (!latest) return event.data.dateTo;
-                return event.data.dateTo > latest ? event.data.dateTo : latest;
-            },
-            null as Date | null
-        );
-
         return {
             ...company,
-            data: {
-                ...company.data,
-                dateFrom,
-                dateTo,
-                events: companyEvents.length
-            }
+            data: { ...company.data, dateFrom }
         };
     })
     .filter((company) => company !== null)
     .sort(function (a, b) {
-        return (
-            (b.data.dateFrom as Date).getTime() -
-            (a.data.dateFrom as Date).getTime()
-        );
+        return b.data.dateFrom.getTime() - a.data.dateFrom.getTime();
     });
 ---
 
-<div class="flex-grow border-t border-b border-[#e2e2d3] bg-[#f7f7f4]">
-    <div class="container mx-auto max-w-6xl space-y-16 py-16 md:space-y-32">
-        <Chapter>
-            <div class="flex flex-col space-y-8">
-                <header class="flex flex-row gap-4">
-                    <ChapterHeader>
-                        <ChapterTitle>Career</ChapterTitle>
-                        <ChapterDescription
-                            >Where I've worked and what I've built</ChapterDescription
-                        >
-                    </ChapterHeader>
-                    <div class="flex h-14 w-14 items-center justify-center">
-                        <Building size="48" stroke-width={1} />
-                    </div>
-                </header>
-                <div>
-                    {
-                        companies.map((company) => (
-                            <Organisation organisation={company} />
-                        ))
-                    }
-                </div>
-            </div>
-        </Chapter>
+<Section id="career" alt>
+    <SectionHead
+        title="Career"
+        subtitle="Where I've worked and what I've built"
+    >
+        <Badge slot="badge" label="Employer">
+            <Building size={26} stroke-width={1.5} />
+        </Badge>
+    </SectionHead>
+    <div class="mt-9">
+        {
+            companies.map((company, index) => (
+                <Organisation
+                    organisation={company}
+                    isLast={index === companies.length - 1}
+                />
+            ))
+        }
     </div>
-</div>
+</Section>

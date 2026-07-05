@@ -1,0 +1,52 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { render } from 'astro:content';
+import { formatDateRange, formatMonthYear } from '../../../../lib/utils';
+import EventDescription from './EventDescription.svelte';
+
+interface Props {
+    event: CollectionEntry<'events'>;
+}
+
+const { event } = Astro.props;
+
+const { Content } = await render(event);
+
+const ongoing = !event.data.dateTo;
+---
+
+<div class="max-w-[66]">
+    <div class="text-muted flex items-baseline gap-2 text-[13px] font-bold">
+        <span class="text-ink">
+            {event.data.title}
+        </span>
+        ·
+        <span>
+            {
+                ongoing ? (
+                    <>{formatMonthYear(event.data.dateFrom)} – Present</>
+                ) : (
+                    <>
+                        {formatDateRange(
+                            event.data.dateFrom,
+                            event.data.dateTo
+                        )}
+                    </>
+                )
+            }
+        </span>
+        ·
+        <span>
+            <EventDescription
+                client:only="svelte"
+                dateFrom={event.data.dateFrom}
+                dateTo={event.data.dateTo}
+            />
+        </span>
+    </div>
+    <div
+        class="prose text-muted prose-p:text-sm prose-p:leading-[1.6] prose-p:text-muted mt-2"
+    >
+        {Content ? <Content /> : <p>Content not found</p>}
+    </div>
+</div>

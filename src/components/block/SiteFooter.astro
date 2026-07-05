@@ -1,0 +1,31 @@
+---
+const socials = [
+    {
+        label: 'LinkedIn',
+        href: 'https://www.linkedin.com/in/matthewwittering/'
+    },
+    { label: 'GitHub', href: 'https://github.com/mjakinowittering' }
+];
+---
+
+<footer class="border-border border-t">
+    <div
+        class="text-muted mx-auto flex max-w-[1180px] items-center justify-between px-8 py-10 text-[13px]"
+    >
+        <span>© 2026 Matthew Akino-Wittering</span>
+        <div class="flex gap-5">
+            {
+                socials.map((social) => (
+                    <a
+                        href={social.href}
+                        target="_blank"
+                        rel="noopener"
+                        class="hover:text-ink no-underline"
+                    >
+                        {social.label}
+                    </a>
+                ))
+            }
+        </div>
+    </div>
+</footer>

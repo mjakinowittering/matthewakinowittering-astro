@@ -1,8 +1,7 @@
 ---
-import ChapterDescription from '@components/home/experience/chapter/description.astro';
-import ChapterHeader from '@components/home/experience/chapter/header.astro';
-import Chapter from '@components/home/experience/chapter/index.astro';
-import ChapterTitle from '@components/home/experience/chapter/title.astro';
+import Badge from '@components/block/Badge.astro';
+import Section from '@components/block/Section.astro';
+import SectionHead from '@components/block/SectionHead.astro';
 import Organisation from '@components/home/experience/organisation/index.astro';
 import { GraduationCap } from '@lucide/astro';
 import { getCollection } from 'astro:content';
@@ -12,29 +11,20 @@ const universities = await getCollection('organisations', ({ data }) => {
 });
 ---
 
-<div class="flex-grow bg-white">
-    <div class="container mx-auto max-w-6xl space-y-16 py-16 md:space-y-32">
-        <Chapter>
-            <div class="flex flex-col space-y-8">
-                <header class="flex flex-row gap-4">
-                    <ChapterHeader>
-                        <ChapterTitle> Education </ChapterTitle>
-                        <ChapterDescription
-                            >How I got started</ChapterDescription
-                        >
-                    </ChapterHeader>
-                    <div class="flex h-14 w-14 items-center justify-center">
-                        <GraduationCap size="48" stroke-width={1} />
-                    </div>
-                </header>
-                <div>
-                    {
-                        universities.map((universities) => (
-                            <Organisation organisation={universities} />
-                        ))
-                    }
-                </div>
-            </div>
-        </Chapter>
+<Section id="education" alt>
+    <SectionHead title="Education" subtitle="How I got started">
+        <Badge slot="badge" label="Degree">
+            <GraduationCap size={26} stroke-width={1.5} />
+        </Badge>
+    </SectionHead>
+    <div class="mt-9">
+        {
+            universities.map((university, index) => (
+                <Organisation
+                    organisation={university}
+                    isLast={index === universities.length - 1}
+                />
+            ))
+        }
     </div>
-</div>
+</Section>

@@ -1,12 +1,15 @@
 <script lang="ts">
-    import { calcLengthInYearsAndMonths } from '../../../../lib/utils.ts'
+    import { calcLengthInYearsAndMonths } from '../../../../lib/utils.ts';
 
     interface Props {
-        dateFrom: Date
-        dateTo: Date
+        dateFrom: Date;
+        // Optional: when omitted the duration is calculated against the
+        // browser's current date, so an ongoing role's tenure stays correct
+        // without redeploying the site.
+        dateTo: Date | null | undefined;
     }
 
-    let { dateFrom, dateTo }: Props = $props()
+    let { dateFrom, dateTo }: Props = $props();
 </script>
 
-{calcLengthInYearsAndMonths(dateFrom, dateTo)}
+{calcLengthInYearsAndMonths(dateFrom, dateTo ?? new Date())}
