@@ -1,12 +1,11 @@
 ---
-import { getCollection } from 'astro:content';
-
 import ChapterDescription from '@components/home/experience/chapter/description.astro';
+import ChapterHeader from '@components/home/experience/chapter/header.astro';
 import Chapter from '@components/home/experience/chapter/index.astro';
 import ChapterTitle from '@components/home/experience/chapter/title.astro';
 import Organisation from '@components/home/experience/organisation/index.astro';
-
 import { Building } from '@lucide/astro';
+import { getCollection } from 'astro:content';
 
 const employmentEvents = await getCollection('events', ({ data }) => {
     return data.type === 'employment';
@@ -58,8 +57,6 @@ const companies = (
             (a.data.dateFrom as Date).getTime()
         );
     });
-
-import ChapterHeader from '@components/home/experience/chapter/header.astro';
 ---
 
 <div class="flex-grow border-t border-b border-[#e2e2d3] bg-[#f7f7f4]">

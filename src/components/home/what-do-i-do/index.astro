@@ -1,11 +1,9 @@
 ---
+import { Laptop } from '@lucide/astro';
 import { getCollection, getEntry, render } from 'astro:content';
-
 import BlockContent from '../../block/content.astro';
 import Block from '../../block/index.astro';
 import BlockTitle from '../../block/title.astro';
-
-import { Laptop } from '@lucide/astro';
 import Skill from './skill.astro';
 
 const blurb = await getEntry('blurbs', 'what-do-i-do');

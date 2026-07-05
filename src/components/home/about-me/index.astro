@@ -1,15 +1,12 @@
 ---
-import { Image } from 'astro:assets';
-import { getEntry, render } from 'astro:content';
-
 import BlockContent from '@components/block/content.astro';
 import BlockHeader from '@components/block/header.astro';
 import Block from '@components/block/index.astro';
 import BlockSubtitle from '@components/block/subtitle.astro';
 import BlockTitle from '@components/block/title.astro';
-
+import { Image } from 'astro:assets';
+import { getEntry, render } from 'astro:content';
 import Avatar from '../../../assets/MatthewAkinoWittering-BW-Alpha.png';
-
 import Footer from './footer.astro';
 
 const blurb = await getEntry('blurbs', 'about-me');

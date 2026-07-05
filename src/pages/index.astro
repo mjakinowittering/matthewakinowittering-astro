@@ -1,13 +1,11 @@
 ---
-import Layout from '../layouts/Layout.astro';
-
 import AboutMe from '@components/home/about-me/index.astro';
 import Experience from '@components/home/experience/index.astro';
 import Education from '@components/home/experience/topics/education/index.astro';
 import Employment from '@components/home/experience/topics/employment/index.astro';
 import Training from '@components/home/experience/topics/training/index.astro';
 import WhatIdo from '@components/home/what-do-i-do/index.astro';
-
+import Layout from '../layouts/Layout.astro';
 import { calcLengthInYears } from '../lib/utils';
 
 const dateFrom = new Date('2010-01-01T00:00:00+00:00');

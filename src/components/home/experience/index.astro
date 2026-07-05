@@ -1,10 +1,9 @@
 ---
-import { getEntry, render } from 'astro:content';
-
 import BlockContent from '@components/block/content.astro';
 import Block from '@components/block/index.astro';
 import BlockTitle from '@components/block/title.astro';
 import { Clock4 } from '@lucide/astro';
+import { getEntry, render } from 'astro:content';
 
 const blurb = await getEntry('blurbs', 'experience');
 
