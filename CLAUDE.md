@@ -90,3 +90,9 @@ the organisation file first if it does not exist.
   so run `npm run format` rather than hand-ordering classes.
 - **Prose**: do not use em-dashes in written content; use commas or restructure
   the sentence.
+- **DRY**: avoid repetition. Destructure shared values once in the frontmatter
+  and reuse them, and spread a shared prop object (`{...props}`) into components
+  rather than re-typing the same props. Note that Astro client directives
+  (`client:only`, `client:load`, etc.) are compile-time and cannot be spread or
+  applied conditionally, so branch on the directive while still spreading the
+  shared props.

@@ -12,7 +12,11 @@ const { event } = Astro.props;
 
 const { Content } = await render(event);
 
-const ongoing = !event.data.dateTo;
+const { dateFrom, dateTo } = event.data;
+
+const ongoing = !dateTo;
+
+const eventDates = { dateFrom, dateTo };
 ---
 
 <div class="max-w-[66ch]">
@@ -24,24 +28,21 @@ const ongoing = !event.data.dateTo;
         <span>
             {
                 ongoing ? (
-                    <>{formatMonthYear(event.data.dateFrom)} – Present</>
+                    <>{formatMonthYear(dateFrom)} – Present</>
                 ) : (
-                    <>
-                        {formatDateRange(
-                            event.data.dateFrom,
-                            event.data.dateTo
-                        )}
-                    </>
+                    <>{formatDateRange(dateFrom, dateTo)}</>
                 )
             }
         </span>
         ·
         <span>
-            <EventDescription
-                client:only="svelte"
-                dateFrom={event.data.dateFrom}
-                dateTo={event.data.dateTo}
-            />
+            {
+                ongoing ? (
+                    <EventDescription client:only="svelte" {...eventDates} />
+                ) : (
+                    <EventDescription {...eventDates} />
+                )
+            }
         </span>
     </div>
     <div
