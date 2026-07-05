@@ -28,7 +28,7 @@ const skills = (await getCollection('skills')).sort(function (a, b) {
     >
         {Content ? <Content /> : <p>Content not found</p>}
     </div>
-    <div class="mt-9 grid gap-[22px] md:grid-cols-3">
+    <div class="mt-9 grid gap-5.5 md:grid-cols-3">
         {skills.map((skill) => <Skill entry={skill} />)}
     </div>
 </Section>
