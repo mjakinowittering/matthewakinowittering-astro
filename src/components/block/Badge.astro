@@ -8,11 +8,11 @@ const { label } = Astro.props;
 
 <div class="flex flex-none flex-col items-center gap-2">
     <div
-        class="border-border bg-bg text-accent-strong flex h-15 w-15 items-center justify-center rounded-full border"
+        class="border-border bg-bg text-accent-strong flex size-15 items-center justify-center rounded-full border"
     >
         <slot />
     </div>
-    <span class="text-muted text-[10px] font-bold tracking-[0.1em] uppercase">
+    <span class="text-muted text-[10px] font-bold tracking-widest uppercase">
         {label}
     </span>
 </div>
