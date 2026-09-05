@@ -1,8 +1,8 @@
 import js from '@eslint/js';
+import type { ESLint, Linter } from 'eslint';
 import eslintPluginAstro from 'eslint-plugin-astro';
 import tailwind from 'eslint-plugin-tailwindcss';
 import { defineConfig } from 'eslint/config';
-import type { ESLint, Linter } from 'eslint';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 

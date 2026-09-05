@@ -1,8 +1,8 @@
 ---
+import ExternalTextLink from '@components/block/ExternalTextLink.astro';
 import Course from '@components/home/experience/event/Course.astro';
 import Education from '@components/home/experience/event/Education.astro';
 import Role from '@components/home/experience/event/Role.astro';
-import { ExternalLink } from '@lucide/astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
 
 interface Props {
@@ -38,15 +38,9 @@ const active =
     </div>
     <div class="flex-1 pb-8">
         <h3 class="text-lg font-bold">
-            <a
-                class="inline-flex items-center gap-1 hover:underline"
-                href={organisation.data.uri}
-                target="_blank"
-                rel="noopener"
-            >
-                <span>{organisation.data.name}</span>
-                <ExternalLink class="inline size-4" />
-            </a>
+            <ExternalTextLink href={organisation.data.uri}>
+                {organisation.data.name}
+            </ExternalTextLink>
         </h3>
         {
             organisation.data.type === 'employer' && (

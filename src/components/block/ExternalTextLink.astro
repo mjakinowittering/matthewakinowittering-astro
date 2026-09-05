@@ -1,0 +1,25 @@
+---
+import { ExternalLink } from '@lucide/astro';
+
+interface Props {
+    href: string;
+    size?: 'sm' | 'md';
+}
+
+const { href, size = 'md' } = Astro.props;
+
+const iconSizes = {
+    sm: 'size-3.5',
+    md: 'size-4'
+};
+---
+
+<a
+    class="inline-flex items-center gap-1 hover:underline"
+    href={href}
+    target="_blank"
+    rel="noopener"
+>
+    <span><slot /></span>
+    <ExternalLink class:list={['inline flex-none', iconSizes[size]]} />
+</a>
