@@ -1,14 +1,14 @@
 ---
 name: rewrite-course
 description:
-    Rewrite the body of a course .mdx under src/content/events/courses into the
+    Rewrite the body of a course .md under src/content/events/courses into the
     site's house style, preserving frontmatter. Invoke as /rewrite-course
     <path-to-file>.
 ---
 
 # Rewrite course description
 
-Rewrites the body of a completed-course `.mdx` file into the site's house style,
+Rewrites the body of a completed-course `.md` file into the site's house style,
 so raw pasted-in source material (curriculum text, learning objectives,
 marketing copy) reads like the other entries in `src/content/events/courses/`.
 
@@ -18,8 +18,8 @@ marketing material for the course.
 
 ## Argument
 
-A single path to the target `.mdx` file, e.g.
-`/rewrite-course src/content/events/courses/anthropic/claude-code-101.mdx`.
+A single path to the target `.md` file, e.g.
+`/rewrite-course src/content/events/courses/anthropic/claude-code-101.md`.
 
 If no path is given, ask which file to rewrite before doing anything else.
 
@@ -27,7 +27,7 @@ If no path is given, ask which file to rewrite before doing anything else.
 
 1. **Read the target file.** Note its frontmatter, especially `type` (`training`
    vs `education`) and `organisationId`.
-2. **Calibrate against siblings.** Read 1 to 3 other `.mdx` files in the _same_
+2. **Calibrate against siblings.** Read 1 to 3 other `.md` files in the _same_
    organisation directory (the folder the target file sits in). Use them to
    settle the two things that vary between organisations: whether the voice uses
    first person ("my", "me") or stays neutral, and the typical length. Match the
@@ -90,9 +90,9 @@ user review it with `git diff`. It is version-controlled and easy to revert.
 
 Model tone and length on these short, to-the-point entries:
 
-- `src/content/events/courses/pendo/product-analytics-certification.mdx`
-- `src/content/events/courses/pendo/ai-for-product-managers.mdx`
-- `src/content/events/courses/pendo/radical-product-thinking.mdx`
-- `src/content/events/courses/scrum-alliance/certified-scrum-product-owner.mdx`
+- `src/content/events/courses/pendo/product-analytics-certification.md`
+- `src/content/events/courses/pendo/ai-for-product-managers.md`
+- `src/content/events/courses/pendo/radical-product-thinking.md`
+- `src/content/events/courses/scrum-alliance/certified-scrum-product-owner.md`
 
 Avoid the sprawl of the longer, exhaustive entries.
