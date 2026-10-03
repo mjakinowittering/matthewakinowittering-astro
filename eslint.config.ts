@@ -8,7 +8,13 @@ import tseslint from 'typescript-eslint';
 
 export default defineConfig([
     {
-        ignores: ['node_modules/**', 'dist/**', '.astro/**']
+        ignores: [
+            'node_modules/**',
+            'dist/**',
+            '.astro/**',
+            'src/paraglide/**',
+            'project.inlang/cache/**'
+        ]
     },
     {
         files: ['**/*.{js,mjs,cjs,ts,mts,cts}'],

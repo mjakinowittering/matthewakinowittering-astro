@@ -1,2 +1,4 @@
 dist
 .astro
+src/paraglide
+project.inlang/cache

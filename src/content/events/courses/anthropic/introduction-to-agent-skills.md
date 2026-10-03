@@ -12,5 +12,5 @@ options such as CLAUDE.md, hooks, and subagents. It covered creating a Skill
 from scratch, writing the SKILL.md frontmatter and trigger descriptions, and
 organising the directory with progressive disclosure to keep context windows
 efficient. It also covered restricting tool access, sharing Skills through
-repositories, plugins, and enterprise managed settings, and diagnosing common
+repositories, plugins, and enterprise-managed settings, and diagnosing common
 triggering and runtime issues.

@@ -1,4 +1,5 @@
 ---
+import { m } from '@paraglide/messages.js';
 import '../styles/global.css';
 
 interface metaTag {
@@ -17,12 +18,12 @@ interface Props {
 }
 
 function titleText(title: string | undefined) {
-    return title ? `${title} - ${site}` : site;
+    return title ? m.site_title({ title, site }) : site;
 }
 
 const { metaData } = Astro.props;
 
-const site = 'Matthew Akino-Wittering';
+const site = m.site_name();
 ---
 
 <!doctype html>

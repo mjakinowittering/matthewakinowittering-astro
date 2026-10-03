@@ -1,5 +1,6 @@
 ---
 import { Code, Compass, Search } from '@lucide/astro';
+import { m } from '@paraglide/messages.js';
 import type { CollectionEntry } from 'astro:content';
 import { render } from 'astro:content';
 
@@ -25,6 +26,6 @@ const Icon = icons[entry.data.index as keyof typeof icons] ?? Compass;
     <div
         class="prose text-muted prose-p:text-[13.5px] prose-p:leading-[1.6] prose-p:text-muted"
     >
-        {Content ? <Content /> : <p>Content not found</p>}
+        {Content ? <Content /> : <p>{m.content_not_found()}</p>}
     </div>
 </div>

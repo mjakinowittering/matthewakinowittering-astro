@@ -1,6 +1,7 @@
 ---
 import ExternalTextLink from '@components/block/ExternalTextLink.astro';
 import { BadgeCheck } from '@lucide/astro';
+import { m } from '@paraglide/messages.js';
 import type { CollectionEntry } from 'astro:content';
 import { render } from 'astro:content';
 import { formatMonthYear } from '../../../../lib/utils';
@@ -26,7 +27,7 @@ const { title, uri, dateFrom } = event.data;
                     <BadgeCheck
                         class="text-accent-strong inline size-3.5 flex-none"
                         role="img"
-                        aria-label="Certificate available"
+                        aria-label={m.course_certificate_available()}
                     />
                 )
             }
@@ -39,13 +40,13 @@ const { title, uri, dateFrom } = event.data;
     <div
         class="prose text-muted prose-p:text-sm prose-p:leading-[1.6] prose-p:text-muted mt-2 max-w-[64ch]"
     >
-        {Content ? <Content /> : <p>Content not found</p>}
+        {Content ? <Content /> : <p>{m.content_not_found()}</p>}
     </div>
     {
         uri && (
             <div class="text-accent-strong mt-2.5 text-[13px] font-semibold">
                 <ExternalTextLink href={uri} size="sm">
-                    View certificate
+                    {m.course_view_certificate()}
                 </ExternalTextLink>
             </div>
         )
