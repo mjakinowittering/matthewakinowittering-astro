@@ -32,8 +32,8 @@ description:
     │   │   ├── trainer/           one .md per course provider
     │   │   └── university/        one .md per university
     │   ├── events/
-    │   │   ├── employment/<org>/  one .md per role
-    │   │   └── courses/<org>/     one .md per course or degree
+    │   │   ├── employment/<yyyy-mm>/<org>/  one .md per role
+    │   │   └── courses/<yyyy-mm>/<org>/     one .md per course or degree
     │   ├── skills/                three cards + img/
     │   └── projects/              one .md per project + img/
     ├── components/
@@ -60,18 +60,18 @@ description:
 
 ## Where a new file goes
 
-| Adding…                                  | Goes in                                                |
-| ---------------------------------------- | ------------------------------------------------------ |
-| a role                                   | `src/content/events/employment/<org-folder>/<role>.md` |
-| a course or degree                       | `src/content/events/courses/<org-folder>/<course>.md`  |
-| an employer, trainer or university       | `src/content/organisations/<type>/<id>.md`             |
-| a UI string                              | `messages/en.json` (see **`i18n-messages`**)           |
-| a project or its screenshot              | `src/content/projects/`, image in `projects/img/`      |
-| a primitive used by two or more sections | `src/components/block/`                                |
-| a part used by one section only          | that section's folder under `components/home/`         |
-| a pure helper (no Astro, no DOM)         | `src/lib/`                                             |
-| an image a component imports             | `src/assets/`                                          |
-| a file served at a fixed URL             | `public/`                                              |
+| Adding…                                  | Goes in                                                          |
+| ---------------------------------------- | ---------------------------------------------------------------- |
+| a role                                   | `src/content/events/employment/<yyyy-mm>/<org-folder>/<role>.md` |
+| a course or degree                       | `src/content/events/courses/<yyyy-mm>/<org-folder>/<course>.md`  |
+| an employer, trainer or university       | `src/content/organisations/<type>/<id>.md`                       |
+| a UI string                              | `messages/en.json` (see **`i18n-messages`**)                     |
+| a project or its screenshot              | `src/content/projects/`, image in `projects/img/`                |
+| a primitive used by two or more sections | `src/components/block/`                                          |
+| a part used by one section only          | that section's folder under `components/home/`                   |
+| a pure helper (no Astro, no DOM)         | `src/lib/`                                                       |
+| an image a component imports             | `src/assets/`                                                    |
+| a file served at a fixed URL             | `public/`                                                        |
 
 `<org-folder>` is a readable folder for grouping and does not have to equal the
 organisation's `id` (`andalucia.com/` holds `organisationId: andalucia`). The
