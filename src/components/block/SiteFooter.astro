@@ -1,18 +1,18 @@
 ---
-const socials = [
-    {
-        label: 'LinkedIn',
-        href: 'https://www.linkedin.com/in/matthewwittering/'
-    },
-    { label: 'GitHub', href: 'https://github.com/mjakinowittering' }
-];
+import { m } from '@paraglide/messages.js';
+import { socials } from '../../lib/socials';
+
+const copyright = m.footer_copyright({
+    year: new Date().getFullYear(),
+    name: m.site_name()
+});
 ---
 
 <footer class="border-border border-t">
     <div
         class="text-muted mx-auto flex max-w-295 items-center justify-between px-8 py-10 text-[13px]"
     >
-        <span>© 2026 Matthew Akino-Wittering</span>
+        <span>{copyright}</span>
         <div class="flex gap-5">
             {
                 socials.map((social) => (
@@ -22,7 +22,7 @@ const socials = [
                         rel="noopener"
                         class="hover:text-ink no-underline"
                     >
-                        {social.label}
+                        {social.label()}
                     </a>
                 ))
             }

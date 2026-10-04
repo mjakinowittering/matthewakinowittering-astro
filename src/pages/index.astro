@@ -8,6 +8,7 @@ import Employment from '@components/home/experience/topics/employment/index.astr
 import Training from '@components/home/experience/topics/training/index.astro';
 import Projects from '@components/home/projects/index.astro';
 import WhatIdo from '@components/home/what-do-i-do/index.astro';
+import { m } from '@paraglide/messages.js';
 import Layout from '../layouts/Layout.astro';
 import { calcLengthInYears } from '../lib/utils';
 
@@ -15,10 +16,9 @@ const dateFrom = new Date('2010-01-01T00:00:00+00:00');
 const dateTo = new Date();
 
 const metaData = {
-    description: `I am a Product Manager with ${calcLengthInYears(
-        dateFrom,
-        dateTo
-    )} of experience, primarily in internal platforms and B2B SaaS applications.`,
+    description: m.site_description({
+        experience: calcLengthInYears(dateFrom, dateTo)
+    }),
     additionalMetaTags: [
         {
             name: 'google-site-verification',

@@ -1,0 +1,82 @@
+{
+    "$schema": "https://inlang.com/schema/inlang-message-format",
+    "site_name": "Matthew Akino-Wittering",
+    "site_title": "{title} - {site}",
+    "site_description": "I am a Product Manager with {experience} of experience, primarily in internal platforms and B2B SaaS applications.",
+    "nav_about": "About",
+    "nav_career": "Career",
+    "nav_projects": "Projects",
+    "nav_education": "Education",
+    "social_linkedin": "LinkedIn",
+    "social_github": "GitHub",
+    "footer_copyright": "© {year} {name}",
+    "about_view_projects": "View projects",
+    "about_get_in_touch": "Get in touch",
+    "content_not_found": "Content not found",
+    "experience_badge": "Timeline",
+    "what_i_do_badge": "Craft",
+    "career_title": "Career",
+    "career_subtitle": "Where I've worked and what I've built",
+    "career_badge": "Employer",
+    "projects_title": "Projects",
+    "projects_subtitle": "Things I've built and shipped myself",
+    "projects_badge": "Builds",
+    "projects_screenshot_placeholder": "app screenshot goes here · youdemo recorder ui",
+    "projects_try_live": "Try it live",
+    "projects_view_source": "View source",
+    "education_title": "Education",
+    "education_subtitle": "How I got started",
+    "education_badge": "Degree",
+    "education_view_course": "View course",
+    "training_title": "Training",
+    "training_subtitle": "Always learning, here's the proof",
+    "training_badge": "Courses",
+    "course_certificate_available": "Certificate available",
+    "course_view_certificate": "View certificate",
+    "date_present": "Present",
+    "date_range": "{from} – {to}",
+    "duration_years_plus": [
+        {
+            "declarations": [
+                "input years",
+                "local yearsPlural = years: plural"
+            ],
+            "selectors": ["yearsPlural"],
+            "match": {
+                "yearsPlural=one": "{years} year",
+                "yearsPlural=*": "{years}+ years"
+            }
+        }
+    ],
+    "duration_years": [
+        {
+            "declarations": [
+                "input years",
+                "local yearsPlural = years: plural"
+            ],
+            "selectors": ["yearsPlural"],
+            "match": {
+                "yearsPlural=one": "{years} year",
+                "yearsPlural=*": "{years} years"
+            }
+        }
+    ],
+    "duration_months": [
+        {
+            "declarations": [
+                "input months",
+                "local monthsPlural = months: plural"
+            ],
+            "selectors": ["monthsPlural"],
+            "match": {
+                "monthsPlural=one": "{months} month",
+                "monthsPlural=*": "{months} months"
+            }
+        }
+    ],
+    "duration_years_months": "{years} {months}",
+    "not_found_title": "Page Not Found!",
+    "not_found_description": "Oops! This is embarrassing. You weren't supposed to see me...",
+    "not_found_image_alt": "Alien with Spock hand",
+    "not_found_run_away": "Run away..."
+}

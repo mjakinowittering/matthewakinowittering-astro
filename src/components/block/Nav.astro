@@ -1,24 +1,19 @@
 ---
-const navLinks = [
-    { label: 'About', href: '#about' },
-    { label: 'Career', href: '#career' },
-    { label: 'Projects', href: '#projects' },
-    { label: 'Education', href: '#education' }
-];
+import { m } from '@paraglide/messages.js';
+import { socials } from '../../lib/socials';
 
-const socials = [
-    {
-        label: 'LinkedIn',
-        href: 'https://www.linkedin.com/in/matthewwittering/'
-    },
-    { label: 'GitHub', href: 'https://github.com/mjakinowittering' }
+const navLinks = [
+    { label: m.nav_about, href: '#about' },
+    { label: m.nav_career, href: '#career' },
+    { label: m.nav_projects, href: '#projects' },
+    { label: m.nav_education, href: '#education' }
 ];
 ---
 
 <nav
     class="border-border bg-bg sticky top-0 z-20 flex items-center justify-between border-b px-8 py-4"
 >
-    <span class="text-sm font-bold">Matthew Akino-Wittering</span>
+    <span class="text-sm font-bold">{m.site_name()}</span>
     <div class="flex items-center gap-6">
         <div
             class="text-muted hidden items-center gap-6.5 text-[13px] font-semibold sm:flex"
@@ -26,7 +21,7 @@ const socials = [
             {
                 navLinks.map((link) => (
                     <a href={link.href} class="hover:text-ink no-underline">
-                        {link.label}
+                        {link.label()}
                     </a>
                 ))
             }
@@ -42,7 +37,7 @@ const socials = [
                         rel="noopener"
                         class="hover:text-ink no-underline"
                     >
-                        {social.label}
+                        {social.label()}
                     </a>
                 ))
             }

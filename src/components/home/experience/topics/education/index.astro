@@ -4,6 +4,7 @@ import Section from '@components/block/Section.astro';
 import SectionHead from '@components/block/SectionHead.astro';
 import Organisation from '@components/home/experience/organisation/index.astro';
 import { GraduationCap } from '@lucide/astro';
+import { m } from '@paraglide/messages.js';
 import { getCollection } from 'astro:content';
 
 const universities = await getCollection('organisations', ({ data }) => {
@@ -12,8 +13,8 @@ const universities = await getCollection('organisations', ({ data }) => {
 ---
 
 <Section id="education" alt>
-    <SectionHead title="Education" subtitle="How I got started">
-        <Badge slot="badge" label="Degree">
+    <SectionHead title={m.education_title()} subtitle={m.education_subtitle()}>
+        <Badge slot="badge" label={m.education_badge()}>
             <GraduationCap size={26} stroke-width={1.5} />
         </Badge>
     </SectionHead>

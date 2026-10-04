@@ -1,7 +1,8 @@
 ---
+import { m } from '@paraglide/messages.js';
 import type { CollectionEntry } from 'astro:content';
 import { render } from 'astro:content';
-import { formatDateRange, formatMonthYear } from '../../../../lib/utils';
+import { formatDateRange } from '../../../../lib/utils';
 import EventDescription from './EventDescription.svelte';
 
 interface Props {
@@ -26,13 +27,7 @@ const eventDates = { dateFrom, dateTo };
         </span>
         ·
         <span>
-            {
-                ongoing ? (
-                    <>{formatMonthYear(dateFrom)} – Present</>
-                ) : (
-                    <>{formatDateRange(dateFrom, dateTo)}</>
-                )
-            }
+            {formatDateRange(dateFrom, dateTo)}
         </span>
         ·
         <span>
@@ -48,6 +43,6 @@ const eventDates = { dateFrom, dateTo };
     <div
         class="prose text-muted prose-p:text-sm prose-p:leading-[1.6] prose-p:text-muted mt-2"
     >
-        {Content ? <Content /> : <p>Content not found</p>}
+        {Content ? <Content /> : <p>{m.content_not_found()}</p>}
     </div>
 </div>

@@ -1,3 +1,4 @@
+import { m } from '@paraglide/messages.js';
 import { format } from 'date-fns';
 
 export function formatMonthYear(date: Date) {
@@ -5,8 +6,10 @@ export function formatMonthYear(date: Date) {
 }
 
 export function formatDateRange(dateFrom: Date, dateTo?: Date | null) {
-    const to = dateTo ? formatMonthYear(dateTo) : 'Present';
-    return `${formatMonthYear(dateFrom)} – ${to}`;
+    return m.date_range({
+        from: formatMonthYear(dateFrom),
+        to: dateTo ? formatMonthYear(dateTo) : m.date_present()
+    });
 }
 
 export function calcLengthInYears(dateFrom: Date, dateTo: Date) {
@@ -18,9 +21,7 @@ export function calcLengthInYears(dateFrom: Date, dateTo: Date) {
 
     const years = Math.floor(diffInMonths / 12);
 
-    const yearSuffix = years > 1 ? '+ years' : ' year';
-
-    return `${years}${yearSuffix}`;
+    return m.duration_years_plus({ years });
 }
 
 export function calcLengthInYearsAndMonths(dateFrom: Date, dateTo: Date) {
@@ -33,10 +34,10 @@ export function calcLengthInYearsAndMonths(dateFrom: Date, dateTo: Date) {
     const years = Math.floor(diffInMonths / 12);
     const months = diffInMonths - years * 12;
 
-    const monthSuffix = months > 1 ? 'months' : 'month';
-    const yearSuffix = years > 1 ? 'years' : 'year';
-
     return months > 0
-        ? `${years} ${yearSuffix} ${months} ${monthSuffix}`
-        : `${years} ${yearSuffix}`;
+        ? m.duration_years_months({
+              years: m.duration_years({ years }),
+              months: m.duration_months({ months })
+          })
+        : m.duration_years({ years });
 }

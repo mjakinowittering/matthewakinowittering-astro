@@ -4,6 +4,7 @@ import Section from '@components/block/Section.astro';
 import SectionHead from '@components/block/SectionHead.astro';
 import Organisation from '@components/home/experience/organisation/index.astro';
 import { School } from '@lucide/astro';
+import { m } from '@paraglide/messages.js';
 import { getCollection } from 'astro:content';
 
 const trainingEvents = await getCollection('events', ({ data }) => {
@@ -40,8 +41,8 @@ const trainers = (
 ---
 
 <Section>
-    <SectionHead title="Training" subtitle="Always learning, here's the proof">
-        <Badge slot="badge" label="Courses">
+    <SectionHead title={m.training_title()} subtitle={m.training_subtitle()}>
+        <Badge slot="badge" label={m.training_badge()}>
             <School size={26} stroke-width={1.5} />
         </Badge>
     </SectionHead>
