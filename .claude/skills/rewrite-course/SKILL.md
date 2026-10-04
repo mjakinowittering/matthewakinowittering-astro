@@ -19,7 +19,7 @@ marketing material for the course.
 ## Argument
 
 A single path to the target `.md` file, e.g.
-`/rewrite-course src/content/events/courses/anthropic/claude-code-101.md`.
+`/rewrite-course src/content/events/courses/2026-06/anthropic/claude-code-101.md`.
 
 If no path is given, ask which file to rewrite before doing anything else.
 
@@ -90,9 +90,9 @@ user review it with `git diff`. It is version-controlled and easy to revert.
 
 Model tone and length on these short, to-the-point entries:
 
-- `src/content/events/courses/pendo/product-analytics-certification.md`
-- `src/content/events/courses/pendo/ai-for-product-managers.md`
-- `src/content/events/courses/pendo/radical-product-thinking.md`
-- `src/content/events/courses/scrum-alliance/certified-scrum-product-owner.md`
+- `src/content/events/courses/2023-06/pendo/product-analytics-certification.md`
+- `src/content/events/courses/2023-12/pendo/ai-for-product-managers.md`
+- `src/content/events/courses/2024-08/pendo/radical-product-thinking.md`
+- `src/content/events/courses/2016-06/scrum-alliance/certified-scrum-product-owner.md`
 
 Avoid the sprawl of the longer, exhaustive entries.

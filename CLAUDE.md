@@ -126,18 +126,18 @@ one home. Field-by-field detail lives in each collection's skill.
 ### How events meet organisations
 
 ```
-organisations/employer/acorn-i.md         events/employment/acorn-i/product-lead.md
+organisations/employer/acorn-i.md         events/employment/2019-08/acorn-i/product-lead.md
 ---                                       ---
 id: acorn-i            <───────────────   organisationId: acorn-i
 type: employer                            type: employment
 ---                                       ---
 ```
 
-| Event `type` | Organisation `type` | Section   | Event file lives in        |
-| ------------ | ------------------- | --------- | -------------------------- |
-| `employment` | `employer`          | Career    | `events/employment/<org>/` |
-| `training`   | `trainer`           | Training  | `events/courses/<org>/`    |
-| `education`  | `university`        | Education | `events/courses/<org>/`    |
+| Event `type` | Organisation `type` | Section   | Event file lives in                  |
+| ------------ | ------------------- | --------- | ------------------------------------ |
+| `employment` | `employer`          | Career    | `events/employment/<yyyy-mm>/<org>/` |
+| `training`   | `trainer`           | Training  | `events/courses/<yyyy-mm>/<org>/`    |
+| `education`  | `university`        | Education | `events/courses/<yyyy-mm>/<org>/`    |
 
 The join is on the organisation's **frontmatter `id`**, not its file path.
 Astro's `reference('organisations')` does not resolve that value against a real

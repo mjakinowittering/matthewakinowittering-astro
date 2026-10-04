@@ -13,11 +13,15 @@ description:
 An event is one thing Matthew did at one organisation. Its `type` decides which
 section shows it and which component renders it.
 
-| `type`       | Section   | Rendered by       | Lives in                   |
-| ------------ | --------- | ----------------- | -------------------------- |
-| `employment` | Career    | `Role.astro`      | `events/employment/<org>/` |
-| `training`   | Training  | `Course.astro`    | `events/courses/<org>/`    |
-| `education`  | Education | `Education.astro` | `events/courses/<org>/`    |
+| `type`       | Section   | Rendered by       | Lives in                             |
+| ------------ | --------- | ----------------- | ------------------------------------ |
+| `employment` | Career    | `Role.astro`      | `events/employment/<yyyy-mm>/<org>/` |
+| `training`   | Training  | `Course.astro`    | `events/courses/<yyyy-mm>/<org>/`    |
+| `education`  | Education | `Education.astro` | `events/courses/<yyyy-mm>/<org>/`    |
+
+`<yyyy-mm>` is the year and month of the event's `dateFrom`, so a folder listing
+reads in date order. If `dateFrom` changes, move the file to match. The folder
+is for finding files only: the page still sorts by the dates in frontmatter.
 
 ## Frontmatter
 
