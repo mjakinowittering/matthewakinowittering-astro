@@ -26,9 +26,9 @@ skill shows the list, then **plans**, **adds** or **prunes**. It never
 implements — planning ends at an approved plan. Every mode spans both lists and
 leaves both `###` headings in place, even empty.
 
-Inside each list, related items sit under a `####` **theme heading** — "Images
-and layout", "Content", "Code health". The themes are part of the shape: an item
-goes under the theme it belongs to, a new theme is added only when nothing
+Inside each list, related items sit under a `####` **theme heading** —
+"Projects", "Timeline", "Content model". The themes are part of the shape: an
+item goes under the theme it belongs to, a new theme is added only when nothing
 existing fits, and a theme emptied by a removal goes with it. The `###` headings
 always stay.
 
@@ -136,10 +136,10 @@ it's a genuine coin-flip.
 
 House style, matching the existing entries:
 
-- opens with an imperative — "Fix…", "Add…", "Style…", "Ship…", "Decide…",
-  "Consider…"
-- states **what exists** and **what's missing** ("the extension is installed and
-  configured, but there is no table CSS at all")
+- opens with an imperative — "Fix…", "Add…", "Hide…", "Move…", "Drop…",
+  "Decide…"
+- states **what exists** and **what's missing** ("the schema requires them, but
+  `Skill.astro` shows a Lucide icon and renders neither")
 - cites files and symbols in backticks (`event/Education.astro:35`,
   `Skill.astro`)
 - names the fix when known, and fences the scope if it could read bigger than it

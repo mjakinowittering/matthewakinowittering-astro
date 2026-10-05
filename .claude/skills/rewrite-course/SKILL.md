@@ -27,12 +27,13 @@ If no path is given, ask which file to rewrite before doing anything else.
 
 1. **Read the target file.** Note its frontmatter, especially `type` (`training`
    vs `education`) and `organisationId`.
-2. **Calibrate against siblings.** Read 1 to 3 other `.md` files in the _same_
-   organisation directory (the folder the target file sits in). Use them to
-   settle the two things that vary between organisations: whether the voice uses
-   first person ("my", "me") or stays neutral, and the typical length. Match the
-   siblings. If the folder has no other files, fall back to the style rules
-   below and a neutral voice.
+2. **Calibrate against siblings.** Read 1 to 3 other courses from the _same_
+   organisation, newest first. They sit in other month folders, so glob across
+   them: `src/content/events/courses/*/<org-folder>/*.md`. Use them to settle
+   the two things that vary between organisations: whether the voice uses first
+   person ("my", "me") or stays neutral, and the typical length. Match the
+   siblings. If the organisation has no other courses, fall back to the style
+   rules below and a neutral voice.
 3. **Rewrite the body only**, following the style rules below. Leave the
    frontmatter (everything between the opening and closing `---`) completely
    untouched, character for character.
