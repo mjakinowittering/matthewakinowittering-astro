@@ -54,6 +54,26 @@ is merged into `develop` first and released to `main` from there.
 
 ### Bugs
 
+#### Accessibility
+
+- [ ] Stop the sticky header covering anchor targets: following a nav link
+      scrolls the section's top to the very top of the viewport, under the
+      header (`h-14` in `Nav.astro`), so its heading sits hidden behind the bar
+      (`#career` lands at 0px). WCAG 2.2's Focus Not Obscured (2.4.11) asks for
+      better. A `scroll-padding-top` on `html` in `global.css`, kept equal to
+      the header's `h-14`, is the likely fix.
+
+#### Timeline
+
+- [ ] Count durations in UTC: `monthsInclusive` in `src/lib/utils.ts` reads
+      `getMonth()` and `getFullYear()`, which use the machine's time zone, but
+      every date is stored in UTC. The degree's `dateTo`
+      (`'2009-08-31T23:59:59+00:00'`) becomes 1 September in UK summer time, so
+      a local build prints "4 years" where CI, in UTC, prints "3 years 11
+      months". An ongoing role's duration runs in the visitor's browser, so west
+      of UTC its start month (midnight UTC on the 1st) slips back a month. Use
+      `getUTCMonth()` and `getUTCFullYear()`.
+
 #### Tooling
 
 - [ ] Fix the build's 27 "Invalid content reference" errors: Astro 7 checks
@@ -61,6 +81,17 @@ is merged into `develop` first and released to `main` from there.
       entry ids (file paths), not the frontmatter `id` the timeline joins on.
       The build still completes and every event renders, but real errors hide in
       the noise.
+- [ ] Quiet the build's two `MODULE_LEVEL_DIRECTIVE` warnings: since
+      `blurbs/about-me.mdx` and `blurbs/hero.mdx` import `CareerLength.astro`,
+      Vite warns that the `"use astro:head-inject"` directive "may not be
+      preserved when bundling". The page renders the same as before; it is
+      noise. Find out whether Astro fixes it upstream before filtering it, and
+      never by silencing other warnings with it.
+- [ ] Clear the five high `npm audit` findings: all are `braces`, reached
+      through `micromatch`, `fast-glob` and `astro-eslint-parser` from
+      `eslint-plugin-astro@1.7.0`, a devDependency used only by `npm run lint`,
+      so nothing ships to the site. The only fix is `eslint-plugin-astro` 3.x, a
+      major bump; check `eslint.config` still works with it.
 
 ### Features
 
@@ -74,6 +105,14 @@ is merged into `develop` first and released to `main` from there.
 - [ ] Drop `dateFrom`, `dateTo` and `events` from the organisation schema: they
       are derived from events at render time and nothing reads them. Only
       `loughborough-university.md` still carries stale dates.
+
+#### Projects
+
+- [ ] Finish checking the DyslexicWriter card: it shipped in PR #6 with the
+      keyboard and screen reader pass `CLAUDE.md` asks for still owed, and
+      without a look at phone, tablet and desktop widths (headless screenshots
+      came out blank). Its markup matches the YouDemo card's, so its layout
+      should too; confirm it, and that the `alt` text reads well aloud.
 
 #### Sharing
 
@@ -96,3 +135,33 @@ is merged into `develop` first and released to `main` from there.
       now also stat cards in `src/content/accomplishments/`. Decide once the
       redesign's hero renders the stat cards. A decision to make, not a
       commitment.
+- [ ] Settle the redesign blurbs' headings and the hero's wording when their
+      sections are built. Both are decisions to make, not commitments:
+    - the `title`s of `hero.mdx`, `how-i-work.md`, `career.md` and `contact.md`
+      are the headings from `design-brief`, put in because the schema requires
+      one. `hero.mdx`'s holds "I'm Matthew, a product leader", but the marker
+      line "and builder." has no home yet: a message or part of the blurb
+    - the draft "{years} years shaping…" became `<CareerLength /> shaping…`,
+      which renders "16+ years shaping…" because `calcLengthInYears` already
+      says "years". Check it reads as intended
+- [ ] Decide whether the stat cards show their organisation: each accomplishment
+      carries `organisationId: acorn-i`, but nothing reads it, and the hero
+      design has no place for it. Either show it on the cards or drop the field.
+      A decision to make, not a commitment.
+
+#### Tooling
+
+- [ ] Drop the `format` narrowing in `projects/Project.astro` once Astro's types
+      allow: the `image()` schema infers `format` as optional, though Astro's
+      own `ImageFunction` declares it required, so the card copies `img` with
+      `format` narrowed rather than passing it straight to `<Image>`. Retry
+      after an Astro upgrade with `npm run astro check`.
+
+#### Guidance
+
+- [ ] Update the stack table in `CLAUDE.md`: it says Astro 6, but `package.json`
+      has `astro` at `^7.3.5`.
+- [ ] Decide the branch prefix for Bugs work: `branch-and-commit` says `bug/`,
+      but step 1 went out as `fix/delivery-and-accessibility` because Matthew
+      named it. Either keep `bug/` and treat that as a one-off, or allow `fix/`
+      in the skill. A decision to make, not a commitment.
