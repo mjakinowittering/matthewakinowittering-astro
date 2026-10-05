@@ -16,6 +16,10 @@ any change a visitor will see gets a wireframe the user has approved before its
 code is written. When feedback on a built change moves the layout, redraw before
 rebuilding.
 
+**Load `design-brief` before drawing.** A visible change follows the brief as
+well as this skill (`CLAUDE.md`, Planning), so check each drawing against it
+before showing it.
+
 They are often read in the VS Code chat panel, where only plain ASCII is
 reliably one column wide: box-drawing characters render narrower than letters,
 and symbol glyphs wider or narrower again, so a row containing any of them
@@ -33,9 +37,10 @@ drifts out of line. **Draw with printable ASCII only.**
       without `sourceUri`
     - an organisation with one event and one with several
     - copy longer than the sample: a long course title, a three-line subtitle
-- **Phone and desktop.** The nav links hide below `sm`, and two-column grids
-  stack below `md`. Draw the width where the change is hardest to fit, and both
-  when the layout differs.
+- **Phone first, then wider.** Base styles are for a phone (`CLAUDE.md`,
+  Styling). Today the nav links hide below `sm`, and two-column grids stack
+  below `md`. Draw the width where the change is hardest to fit, and each width
+  where the layout differs.
 - **Before and after** for a change to something that exists. Label them
   `BEFORE` / `AFTER`.
 - **The neighbours.** Draw enough of the section above and below to show where
@@ -44,7 +49,8 @@ drifts out of line. **Draw with printable ASCII only.**
   and the content files ("Where I've worked and what I've built", "View
   certificate"), never lorem ipsum. Name an icon with a short ASCII word in
   brackets (`[building]`, `[external]`), and name the **Lucide** icon in a note
-  underneath.
+  underneath. Say in the notes whether each icon is decorative or carries
+  meaning; how each is labelled is in `CLAUDE.md`, Accessibility.
 
 ## How to draw
 

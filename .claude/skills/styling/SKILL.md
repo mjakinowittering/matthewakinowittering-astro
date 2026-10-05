@@ -35,13 +35,16 @@ copy hex codes into this skill or into components.
 
 The palette is warm cream and sand with one green accent. Rules:
 
-- Never a hex value, `rgb()` or stock palette class (`gray-300`, `white`,
-  `black`) in a component. If no token fits, add one to `@theme` with a comment
-  arguing for it, then use it
+- No hex value or stock palette class in a component (`CLAUDE.md`, Styling), and
+  that includes `rgb()`, `white` and `black`. If no token fits, add one to
+  `@theme` with a comment arguing for it, then use it
 - A token is referenced in arbitrary CSS as `var(--color-<name>)`, as the
   project placeholder's stripe gradient does
-- There is no dark theme. Do not add `dark:` variants piecemeal; a dark theme
-  would be a whole-palette proposal
+- There is no dark mode, and that is decided (`CLAUDE.md`, Styling): no `dark:`
+  variants, no second palette
+- A new token, or a new pairing of existing ones, meets the contrast ratios in
+  `CLAUDE.md`, Accessibility. `text-muted` on `bg-panel` falls short today; that
+  is a Todo bug in `README.md`
 
 ## Type
 
@@ -91,6 +94,7 @@ Every rendered content body sits in a wrapper like:
 - Conditional classes use `class:list={[base, cond && 'x', variants[variant]]}`
 - Interactive elements get a visible hover state (`hover:text-ink`,
   `hover:border-accent-strong`), and links that look like buttons get
-  `no-underline`
-- Mobile first: base classes for small screens, then `sm:` / `md:` upwards.
-  Check every change at a phone width
+  `no-underline`. The focus style rule is in `CLAUDE.md`, Accessibility; there
+  is no shared focus style yet (a Todo bug)
+- Mobile first, checked at phone, tablet and desktop widths (`CLAUDE.md`,
+  Styling)

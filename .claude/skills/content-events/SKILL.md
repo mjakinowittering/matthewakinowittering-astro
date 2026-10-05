@@ -76,8 +76,7 @@ and the timeline's active dot follow on their own.
 
 ## Body copy, per type
 
-General writing rules (British English, no em dashes, prose only, never invent a
-number) are in `CLAUDE.md`. On top of those:
+General writing rules are in `CLAUDE.md`, Writing. On top of those:
 
 ### `employment`
 
@@ -93,9 +92,8 @@ number) are in `CLAUDE.md`. On top of those:
 
 ### `training`
 
-Load the **`rewrite-course`** skill and follow its style rules: one short
-paragraph opening "This course…", 50 to 90 words, factual rather than
-promotional. When adding a new course from pasted material, write the
+The body's voice and length are set by **`rewrite-course`**; load it and follow
+its style rules. When adding a new course from pasted material, write the
 frontmatter here, then apply `rewrite-course` to the body.
 
 ### `education`

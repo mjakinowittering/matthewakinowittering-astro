@@ -93,15 +93,17 @@ role is ongoing**, so the duration counts on in the browser; a finished role
 renders it at build time with no JavaScript. Because directives cannot be spread
 or made conditional, `Role` branches on the directive and spreads `eventDates`
 into both. `Education` does not follow this yet; that is a Todo item in
-`README.md`.
+`README.md`. The island renders plain text, not an `aria-live` region, so a
+screen reader reads it once (`CLAUDE.md`, Accessibility).
 
 ## Adding a section
 
 1. Check scope: a new kind of content should be raised before it is built
 2. If it needs content, add a collection to `content.config.ts` and a content
    skill for it in the same change
-3. Draw it first (**`ascii-wireframes`**), and add its title, subtitle and badge
-   to `messages/en.json` under a new section prefix
+3. Draw it first (**`ascii-wireframes`**), following **`design-brief`**, and add
+   its title, subtitle and badge to `messages/en.json` under a new section
+   prefix
 4. Create `src/components/home/<section>/index.astro` in the shape above
 5. Add it to `pages/index.astro` in position, setting `alt` so bands alternate
 6. Give it an `id` and a `navLinks` entry (with an `nav_` message) only if it
@@ -118,6 +120,12 @@ when `title` is absent. `pages/index.astro` builds the description from the
 site-verification tag through `additionalMetaTags`. Public Sans loads from
 Google Fonts here. Open Graph and canonical tags belong here too, once, rather
 than per page.
+
+It is also the page shell `CLAUDE.md`'s Accessibility section sets out: `lang`,
+the viewport tag, the skip link and the landmarks. Today it has
+`<html lang="en">`, a viewport of `width=device-width` alone, and no skip link;
+`pages/index.astro` has no `header` around `Nav` and no `main` around the
+sections. Each is a Todo bug in `README.md`.
 
 ## Pages
 

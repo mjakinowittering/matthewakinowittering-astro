@@ -79,7 +79,8 @@ organisation's `id` (`andalucia.com/` holds `organisationId: andalucia`). The
 
 ## Page order and anchors
 
-`src/pages/index.astro` is the only place the order is set:
+`src/pages/index.astro` is the only place the order is set. This table is
+today's order; the redesign's target order is in **`design-brief`**.
 
 | #   | Section       | Component                           | `id`        | In Nav | `alt` band |
 | --- | ------------- | ----------------------------------- | ----------- | ------ | ---------- |

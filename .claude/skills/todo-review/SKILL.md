@@ -99,12 +99,13 @@ each step traceable to its item. It covers:
 
 - **first step:** cut the branch off `develop` (`branch-and-commit`)
 - what the user will see afterwards — as ASCII wireframes for any visible
-  change, approved before the plan (`ascii-wireframes`) — and the files touched
-  and what changes in each
+  change, following `design-brief` and approved before the plan
+  (`ascii-wireframes`) — and the files touched and what changes in each
 - the CLAUDE.md rules it brushes against, new Paraglide keys (`i18n-messages`),
   any schema field added with its first use, and how it will be checked: there
-  is no test suite, so name what to look for on the built page, at phone and
-  desktop width
+  is no test suite, so name what to look for on the built page, at phone, tablet
+  and desktop width, and for a visible change the keyboard and screen reader
+  pass `CLAUDE.md` asks for before the PR
 - what's **out of scope** — each item's own fence still binds when planned with
   others
 - **last step:** remove each completed item from its list and run
@@ -128,8 +129,9 @@ say so plainly if the request's premise was wrong.
 
 **Pick the list** by whether the thing exists yet, and say which and why.
 Something built that misbehaves is a Bug however small its audience — the View
-source item is filed there because the button renders fine and simply goes
-nowhere. Something that has never existed is a Feature, chores and open
+source item is filed there because the button is built and always renders,
+source or not. A gap against `CLAUDE.md`'s Accessibility rules is a Bug, as that
+section says. Something that has never existed is a Feature, chores and open
 decisions included. Split an item whose broken half and unbuilt half could ship
 apart; if they can't, file it where the bulk lands and note the rest. Ask if
 it's a genuine coin-flip.

@@ -25,7 +25,11 @@ components.
 | a section title, subtitle, badge, nav or button label | `messages/en.json` |
 | `alt` text for an image a component imports           | `messages/en.json` |
 | `alt` text for an image a content file references     | that file's `alt`  |
+| an `aria-label` for an icon, or an icon-only link     | `messages/en.json` |
 | `<title>` and meta description                        | `messages/en.json` |
+
+Which images and icons need text, and of which kind, is in `CLAUDE.md`,
+Accessibility.
 
 A section heading that comes from a blurb's `title` stays in the blurb; only
 sections without a blurb (Career, Projects, Education, Training) take their
