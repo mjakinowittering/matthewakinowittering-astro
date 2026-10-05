@@ -68,10 +68,6 @@ is merged into `develop` first and released to `main` from there.
       `content.config.ts` requires `sourceUri`, so a project with no public repo
       fails the build, and `Project.astro` always renders the ghost `Button`.
       Make the field optional and render the button only when it is set.
-- [ ] Fix the screenshot placeholder copy: `projects_screenshot_placeholder`
-      reads "app screenshot goes here · youdemo recorder ui", so every project
-      without an `img` names YouDemo. Give it neutral copy, such as "Screenshot
-      coming soon".
 
 ### Features
 
