@@ -43,7 +43,9 @@ meta description. Change both together until it has one home (a Todo item in
 
 ## Voice
 
-General writing rules are in `CLAUDE.md`. For blurbs:
+General writing rules are in `CLAUDE.md`. Where the hero and how-I-work copy is
+heading in the redesign is in **`design-brief`**; until those sections are
+rebuilt, the rules below describe today's blurbs. For blurbs:
 
 - First person, present tense: these describe who Matthew is now
 - **about-me**: two short paragraphs. What he does and where, then what he is

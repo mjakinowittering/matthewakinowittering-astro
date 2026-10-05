@@ -8,6 +8,12 @@ is a single static page that tells potential employers more than a LinkedIn
 profile can: who he is, how he works, where he has worked, what he has built,
 and what he has studied.
 
+**It is a hiring tool, used quietly.** Matthew is open to the right role but not
+announcing it: nothing on the page says "open to work", and nothing would be
+awkward if a current colleague landed on it. Getting in touch is easy but
+understated. The page positions him as a **product leader and builder**; how
+that shows up in layout, copy and look is in **`design-brief`**.
+
 The bar for this project is **the content being right**. A wrong date, a broken
 link or a role silently missing from the timeline costs more than any visual
 flaw. Every fact on the page comes from a validated content file, and the build
@@ -45,6 +51,7 @@ below are the invariants, the skill is the _how_.
 
 | Skill                   | Load when working on…                                                                                                     |
 | ----------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `design-brief`          | the redesign, any visible change, the page's section order, or hero, how-I-work, projects, learning or contact copy       |
 | `project-structure`     | locating a file, deciding where a new file belongs, the page's section order and anchors                                  |
 | `content-blurbs`        | the intro copy in `src/content/blurbs/` — About me, My experience, What I do                                              |
 | `content-organisations` | adding or editing an employer, trainer or university in `src/content/organisations/`                                      |
@@ -63,6 +70,12 @@ below are the invariants, the skill is the _how_.
 > When a domain skill contradicts a stale line here, the skill is the more
 > detailed source — but the General Rules always hold regardless of which skill
 > is loaded.
+
+> **Target versus current.** `design-brief` describes the design the site is
+> moving to. The domain skills describe the code as it is today. Until a section
+> has been rebuilt, follow its domain skill for how the code works and
+> `design-brief` for where it is heading; when a section is rebuilt, update its
+> domain skill in the same PR.
 
 ---
 
@@ -228,15 +241,58 @@ years of experience" figure.
 - Every external link opens in a new tab with `rel="noopener"` — use
   `ExternalTextLink` or `Button external` rather than writing the attributes by
   hand
-- Icons come from Lucide. An icon that carries meaning gets `role="img"` and an
-  `aria-label`; a decorative one gets neither
+- Icons come from Lucide today; the redesign moves them to Hugeicons (see
+  **`design-brief`**). How icons are labelled is under Accessibility below
+- **One theme, light.** The site has no dark mode: no theme toggle, no `dark:`
+  variants, no `prefers-color-scheme` styles
+- **Mobile first.** Base styles are for a phone (320px to 390px wide), and `sm:`
+  / `md:` / `lg:` add to them. Check every visible change at phone, tablet and
+  desktop widths
+
+### Accessibility
+
+Accessibility is built in, not bolted on. Target **WCAG 2.2 AA**, and treat a
+screen reader user and a dyslexic reader as primary audiences. A gap between
+these rules and the code is a Bugs item in `README.md`'s Todo list.
+
+- **Semantic HTML first.** One `<h1>`; headings descend in order without
+  skipping; `header`, `nav`, `main` and `footer` landmarks; a "Skip to content"
+  link as the first focusable element
+- **Real controls.** `<a href>` to go somewhere, `<button>` to do something,
+  native `<details>`/`<summary>` for expanders. Never a click handler on a `div`
+  or `span`. An `<a>` always has an `href`
+- **Keyboard.** Everything interactive is reachable and usable by keyboard in a
+  sensible order, with a clearly visible focus style. Never remove `outline`
+  without a replacement. Navigation works at every width, including on a phone
+- **Text alternatives.** Meaningful images get descriptive `alt`; purely
+  decorative images get `alt=""`; decorative icons and doodles get
+  `aria-hidden="true"`; an icon that carries meaning gets `role="img"` and an
+  `aria-label`; icon-only links and buttons get an `aria-label`. All of it comes
+  from `messages/en.json`
+- **New tabs are announced.** A link that opens a new tab says so to assistive
+  tech (visually hidden "opens in a new tab"), built into `ExternalTextLink` and
+  `Button external` rather than repeated by hand
+- **Contrast.** Body text at least 4.5:1, large text and UI edges at least 3:1.
+  Never use colour alone to carry meaning
+- **Readable text.** `lang="en-GB"`; body copy left-aligned (headings, labels
+  and short statements may be centred), never justified; comfortable line length
+  (about 70 characters) and line height; no text baked into images. Display or
+  handwritten fonts are for short accents only and are always real text
+- **Motion.** No autoplaying animation; honour `prefers-reduced-motion`
+- **Zoom.** The viewport tag is `width=device-width, initial-scale=1` and never
+  blocks zoom; layouts hold at 200% zoom and 320px wide
+- **Live values stay quiet.** The ticking duration island must not be an
+  `aria-live` region; screen readers read it once, not every update
 
 ### Planning, branching and committing
 
 - A visible change is drawn as a wireframe and approved before it is built
-  (**`ascii-wireframes`**)
+  (**`ascii-wireframes`**), following **`design-brief`**
 - Planned work runs on its own branch off `develop` and reaches it by PR; never
   commit or push to `main` directly. The how is in **`branch-and-commit`**
 - Before committing: `npm run format`, then `npm run lint`, then
   `npm run build`, all three clean
+- Before opening a PR with a visible change: a keyboard-only pass and a screen
+  reader pass (VoiceOver or NVDA) over what changed. Automated checks such as
+  axe are welcome, but raise them first: they are new tooling
 - Remember `main` is production. Nothing is "just a test push"

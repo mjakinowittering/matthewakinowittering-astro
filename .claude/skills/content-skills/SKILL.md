@@ -54,4 +54,5 @@ One paragraph, 60 to 80 words, first person, present tense. Shape:
 2. What Matthew does in it, concretely
 3. What goes wrong without it, or the line he holds
 
-General writing rules are in `CLAUDE.md`.
+General writing rules are in `CLAUDE.md`. Where the how-I-work copy is heading
+in the redesign is in **`design-brief`**.

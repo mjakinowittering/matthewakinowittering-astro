@@ -10,7 +10,8 @@ description:
 # Projects
 
 Each file is one card in the Projects section: screenshot on one side, title,
-description, tags and two buttons on the other.
+description, tags and two buttons on the other. Where the Projects section and
+its copy are heading in the redesign is in **`design-brief`**.
 
 ## Frontmatter
 
@@ -22,7 +23,7 @@ description:
     Pages. No backend, no SSR, no routing library, just record, edit and
     download.
 uri: https://mjakinowittering.github.io/youdemo/ # "Try it live"
-sourceUri: https://github.com/mjakinowittering/youdemo # "View source", optional
+sourceUri: https://github.com/mjakinowittering/youdemo # "View source", required today
 tags:
     - Browser-only
     - No backend
@@ -35,11 +36,12 @@ alt:
 ---
 ```
 
-`uri` is required: every project has a live version to try. `sourceUri` is
-optional; leave it out for a private repo. Never point it at something other
-than the source. `Project.astro` still renders "View source" without it, an
-`<a>` with no link; that is a Todo bug in `README.md`, so fix it before adding a
-project without a public repo.
+`uri` is required: every project has a live version to try. `sourceUri` is meant
+to be left out for a private repo, but today the schema requires it and
+`Project.astro` always renders "View source". Making it optional and hiding the
+button without it is a Todo bug in `README.md`; fix that before adding a project
+without a public repo. Never point `sourceUri` at something other than the
+source.
 
 ### `description`
 
@@ -72,4 +74,4 @@ Lower comes first. Renumber the others when inserting, so indexes stay 1, 2, 3â€
 2. Description is one or two plain sentences, body empty
 3. Screenshot is current and `alt` describes it
 4. `index` places it where intended
-5. `npm run build`, then check the card on desktop and mobile widths
+5. `npm run build`, then check the card at phone, tablet and desktop widths

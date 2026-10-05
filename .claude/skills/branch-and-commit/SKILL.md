@@ -46,7 +46,8 @@ should merge into `develop` first.
 - **Prefix**: `bug/` for something already built that doesn't behave as
   intended; `feature/` for work not yet built, plus the decisions and chores
   that go with it. Content changes (a new role, a rewritten blurb) are
-  `content/`. From a README Todo item the **list decides**: `### Bugs` → `bug/`,
+  `content/`. Guidance-only changes (`CLAUDE.md`, skills, README) are `docs/`.
+  From a README Todo item the **list decides**: `### Bugs` → `bug/`,
   `### Features` → `feature/`; a selection spanning both takes `feature/`.
 - **Description**: kebab-case, 3 to 8 words, area + change. No item numbers or
   ticket refs. One branch per plan.
@@ -54,20 +55,21 @@ should merge into `develop` first.
   ask rather than carrying it along. Stay on the current branch only when
   resuming the same plan; a new plan always gets a new branch.
 - **No plan, no branch.** A README Todo or docs edit the user asked for directly
-  stays on the current branch, uncommitted.
+  stays on the current branch, uncommitted, unless they ask for a branch and PR.
 
 ```
 bug/view-source-button-without-source
 feature/open-graph-tags
 content/add-claude-code-101-course
+docs/sync-skills-with-claude-md
 ```
 
 ## Commit, last
 
-Only once the work is done and `npm run format`, `npm run lint` and
-`npm run build` are clean, and anything added to the content has been found on
-the built page. A failure already recorded under README `### Bugs` doesn't
-block, but name it in the handover; any other failure does.
+Only once the work is done, the pre-commit checks in `CLAUDE.md` (Planning,
+branching and committing) are clean, and anything added to the content has been
+found on the built page. A failure already recorded under README `### Bugs`
+doesn't block, but name it in the handover; any other failure does.
 
 - **Stage the work's own files by path**, then show `git status --short`. Use
   `git add -A` only when nothing else is uncommitted; name anything left
@@ -98,6 +100,9 @@ Hide View source on projects without a public repo
 Push only when asked: `git push -u origin <branch>`. Then **offer** a PR into
 `develop` once ("Pushed `<branch>`. Open a PR into `develop`?") and wait; skip
 the offer if the user already asked for the PR.
+
+A PR with a visible change needs the keyboard and screen reader pass `CLAUDE.md`
+asks for. Say in the PR body that it was done, or that it is still owed.
 
 GitHub's default branch is `main`, so **always pass `--base develop`**:
 

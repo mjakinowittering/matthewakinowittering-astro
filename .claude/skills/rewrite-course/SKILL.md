@@ -50,9 +50,8 @@ user review it with `git diff`. It is version-controlled and easy to revert.
 **Structure**
 
 - Frontmatter is preserved byte for byte. Never edit it.
-- The body is flowing prose only. Remove all headings, bullet lists, and
-  scaffolding such as `Curriculum` or `About this course`, and any duplicated
-  course title.
+- The body is flowing prose (`CLAUDE.md`, Writing): strip headings, bullet
+  lists, scaffolding such as `Curriculum`, and any duplicated course title.
 - One short paragraph for `type: training` entries, even when the source is
   deep. Do not expand into a second paragraph or a long exhaustive list.
   `type: education` entries run two short paragraphs.
@@ -75,8 +74,7 @@ user review it with `git diff`. It is version-controlled and easy to revert.
 
 **Language**
 
-- British English spelling (organisation, prioritise, specialise, behaviour).
-- No em-dashes. Use commas or restructure the sentence instead.
+- `CLAUDE.md`'s Writing rules apply.
 - Short and to the point: aim for 2 to 4 sentences, roughly 50 to 90 words.
   Resist letting a deep source balloon the length; select, do not inventory.
 

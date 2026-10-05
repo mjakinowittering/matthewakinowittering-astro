@@ -47,7 +47,8 @@ The `<h2>` and optional subtitle, with a `badge` slot on the right. Every
 
 A round icon with a small uppercase label under it, made for `SectionHead`'s
 badge slot. Props: `label`. Slot: one Lucide icon at
-`size={26} stroke-width={1.5}`, the size every section uses.
+`size={26} stroke-width={1.5}`, the size every section uses. The icon is
+decorative beside its label, and Lucide renders it `aria-hidden` by default.
 
 ### `Button`
 
@@ -78,15 +79,22 @@ An inline text link with a trailing external-link icon, opening in a new tab.
 `size` is `'sm'` or `'md'` (default) and sizes the icon only; colour and type
 come from the parent. Use it for any off-site text link.
 
+`Button external` and `ExternalTextLink` are the one home for new-tab links, so
+the new-tab announcement `CLAUDE.md`'s Accessibility section asks for belongs in
+them. Neither has it yet; that is a Todo bug in `README.md`.
+
 ### `Nav` and `SiteFooter`
 
 The sticky top bar and the footer. `Nav` holds `navLinks` (anchor links, hidden
-below the `sm` breakpoint) and the social links. Adding a section to the nav
-means adding an entry to `navLinks` whose `href` matches that section's `id`.
+below the `sm` breakpoint with no alternative on a phone yet, a Todo bug) and
+the social links. Adding a section to the nav means adding an entry to
+`navLinks` whose `href` matches that section's `id`.
 
 Both, and the About section, map over `socials` from `src/lib/socials.ts`; add
-or change a social link there, never in a component. The footer's year is
-`new Date().getFullYear()`, so it is right at each build.
+or change a social link there, never in a component. All three write
+`target="_blank"` by hand today rather than using a primitive; that is part of
+the new-tab Todo bug. The footer's year is `new Date().getFullYear()`, so it is
+right at each build.
 
 ## Writing a new primitive
 
@@ -100,4 +108,6 @@ Only when the same markup is needed in **two** places (YAGNI). Then:
 - No content collection imports, no hardcoded copy; text arrives by prop or
   slot, or from `messages/en.json` for the primitive's own labels
 - Colours from tokens only (see **`styling`**)
+- Meets `CLAUDE.md`'s Accessibility rules from the first commit: a visible focus
+  style, and any label from `messages/en.json`
 - Replace the duplicated markup with it in the same commit
