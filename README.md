@@ -84,10 +84,6 @@ is merged into `develop` first and released to `main` from there.
 
 #### Timeline
 
-- [ ] Remove the `uri` from the Certified Scrum Product Owner course
-      (`events/courses/2016-06/scrum-alliance/certified-scrum-product-owner.md`):
-      it points at an out-of-date Scrum Alliance profile page. Without it the
-      row loses its tick and "View certificate".
 - [ ] Fix durations under a year in `src/lib/utils.ts`:
       `calcLengthInYearsAndMonths` prints "0 years 5 months", where it should
       print "5 months". A whole number of years is fine ("2 years").
