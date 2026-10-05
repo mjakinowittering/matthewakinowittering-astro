@@ -10,14 +10,12 @@ import Projects from '@components/home/projects/index.astro';
 import WhatIdo from '@components/home/what-do-i-do/index.astro';
 import { m } from '@paraglide/messages.js';
 import Layout from '../layouts/Layout.astro';
+import { getCareerStart } from '../lib/career';
 import { calcLengthInYears } from '../lib/utils';
-
-const dateFrom = new Date('2010-01-01T00:00:00+00:00');
-const dateTo = new Date();
 
 const metaData = {
     description: m.site_description({
-        experience: calcLengthInYears(dateFrom, dateTo)
+        experience: calcLengthInYears(await getCareerStart(), new Date())
     }),
     additionalMetaTags: [
         {

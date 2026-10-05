@@ -1,15 +1,17 @@
 ---
 name: content-blurbs
 description:
-    The intro copy for the About me, My experience and What I do sections, in
-    src/content/blurbs/. Use whenever the user wants to change their headline,
-    introduction, bio, profile summary, career story or "how I work" copy, or
-    asks how the years-of-experience figure is shown.
+    The section copy in src/content/blurbs/, for today's About me, My experience
+    and What I do intros and the redesign's hero, How I work, Career and contact
+    copy. Use whenever the user wants to change their headline, introduction,
+    bio, profile summary, career story or "how I work" copy, or asks how the
+    years-of-experience figure is shown.
 ---
 
-# Blurbs: section intro copy
+# Blurbs: section copy
 
-Three files, each read by exactly one component by its file name:
+Each file is read by exactly one component by its file name. Three feed today's
+page:
 
 | File              | Read by                         | Shows as                                             |
 | ----------------- | ------------------------------- | ---------------------------------------------------- |
@@ -17,9 +19,19 @@ Three files, each read by exactly one component by its file name:
 | `experience.md`   | `home/experience/index.astro`   | "My experience" heading, subtitle, story             |
 | `what-do-i-do.md` | `home/what-do-i-do/index.astro` | "What I do" heading, subtitle, intro above the cards |
 
+Four more hold the redesign's copy and are read by nothing until their section
+is built (see **`design-brief`**). Their bodies are Matthew's draft, kept as
+written; How I work and contact are to be rewritten in his own voice:
+
+| File            | `title` (the section heading) | Feeds                               |
+| --------------- | ----------------------------- | ----------------------------------- |
+| `hero.mdx`      | I'm Matthew, a product leader | 1. Hero: the lead paragraph         |
+| `how-i-work.md` | How I work                    | 3. How I work: the two sentences    |
+| `career.md`     | Where I've worked             | 4. Career: the intro above the list |
+| `contact.md`    | Fancy a chat about product?   | 6. Contact: the panel's sentences   |
+
 The file name **is** the key (`getEntry('blurbs', 'about-me')`). Renaming a file
-breaks its section; adding a fourth file does nothing until a component reads
-it.
+breaks its section; a new file does nothing until a component reads it.
 
 ## Frontmatter
 
@@ -32,14 +44,13 @@ subtitle: The story behind the CV # optional; about-me has none
 
 ## Body
 
-Plain Markdown, except `about-me.mdx`, which is MDX because it computes: it
-exports a `dateFrom` and uses `calcLengthInYears` to render "16+ years" inside a
-`<time>` element. Keep any logic that small; anything bigger belongs in
-`src/lib/`. Turn a blurb into `.mdx` only when it has to compute too.
-
-The career start date (`2010-01-01`) is also set in `pages/index.astro` for the
-meta description. Change both together until it has one home (a Todo item in
-`README.md`).
+Plain Markdown, except `about-me.mdx` and `hero.mdx`, which are MDX because they
+show the years in product. Each imports `CareerLength` from
+`@components/content/CareerLength.astro` and writes `<CareerLength />` where the
+figure goes; it renders "16+ years" inside a `<time>`, counted from the
+`careerStart` event (see `CLAUDE.md`, "Derived, never stored"). Never type the
+number or the date. Turn a blurb into `.mdx` only when it has to compute too,
+and keep the computing in a component or `src/lib/`, not the blurb.
 
 ## Voice
 

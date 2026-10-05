@@ -10,15 +10,19 @@ interface Props {
 
 const { project } = Astro.props;
 const { img, alt, title, description, tags, uri, sourceUri } = project.data;
+
+// The image() schema types `format` as optional, though Astro always sets it
+// and <Image> requires it; narrowing here keeps the type honest without a cast
+const src = img?.format ? { ...img, format: img.format } : undefined;
 ---
 
 <div
     class="border-border bg-bg grid overflow-hidden rounded-lg border md:grid-cols-2"
 >
     {
-        img ? (
+        src ? (
             <Image
-                src={img}
+                src={src}
                 alt={alt ?? title}
                 class="size-full object-cover"
             />
@@ -44,9 +48,13 @@ const { img, alt, title, description, tags, uri, sourceUri } = project.data;
             <Button href={uri} external>
                 {m.projects_try_live()}
             </Button>
-            <Button href={sourceUri} variant="ghost" external>
-                {m.projects_view_source()}
-            </Button>
+            {
+                sourceUri && (
+                    <Button href={sourceUri} variant="ghost" external>
+                        {m.projects_view_source()}
+                    </Button>
+                )
+            }
         </div>
     </div>
 </div>
