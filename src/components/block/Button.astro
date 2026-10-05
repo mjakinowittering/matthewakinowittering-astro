@@ -1,4 +1,6 @@
 ---
+import { m } from '@paraglide/messages.js';
+
 interface Props {
     href: string;
     variant?: 'primary' | 'ghost';
@@ -22,4 +24,5 @@ const variants = {
     {...external ? { target: '_blank', rel: 'noopener' } : {}}
 >
     <slot />
+    {external && <span class="sr-only">{m.external_new_tab()}</span>}
 </a>

@@ -1,5 +1,6 @@
 ---
 import Button from '@components/block/Button.astro';
+import ExternalTextLink from '@components/block/ExternalTextLink.astro';
 import { m } from '@paraglide/messages.js';
 import { Image } from 'astro:assets';
 import { getEntry, render } from 'astro:content';
@@ -39,14 +40,13 @@ const { Content } = await render(blurb);
                 <div class="mt-6 flex gap-2">
                     {
                         socials.map((social) => (
-                            <a
+                            <ExternalTextLink
                                 href={social.href}
-                                target="_blank"
-                                rel="noopener"
-                                class="border-border text-muted hover:border-accent-strong hover:text-ink inline-flex items-center gap-1.5 rounded-full border px-3.5 py-1.75 text-xs font-bold no-underline"
+                                size="sm"
+                                class="border-border text-muted hover:border-accent-strong hover:text-ink rounded-full border px-3.5 py-1.75 text-xs font-bold no-underline"
                             >
                                 {social.label()}
-                            </a>
+                            </ExternalTextLink>
                         ))
                     }
                 </div>

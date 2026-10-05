@@ -50,6 +50,7 @@ prefix before adding a key:
 | `career_`, `projects_`, `education_`, `training_` | the four list sections                                   |
 | `course_`                                         | one training row inside the Training timeline            |
 | `content_`                                        | fallbacks shared by every section                        |
+| `external_`                                       | the new-tab text inside `Button` and `ExternalTextLink`  |
 | `date_`, `duration_`                              | date ranges and lengths, used through `src/lib/utils.ts` |
 | `not_found_`                                      | the 404 page                                             |
 

@@ -63,11 +63,6 @@ is merged into `develop` first and released to `main` from there.
       styles `:focus-visible`, so every link, button and the training rows'
       `<summary>` rely on the browser's default ring, untested against the green
       primary button and the sand `alt` bands.
-- [ ] Announce new tabs: `ExternalTextLink` and `Button external` open links in
-      a new tab without a visually hidden "opens in a new tab". The social links
-      in `Nav.astro`, `SiteFooter.astro` and `about-me/index.astro` write
-      `target="_blank"` by hand, so route them through a primitive in the same
-      change.
 - [ ] Fix contrast on the sand bands: `text-muted` on `bg-panel` is 4.18:1,
       under the 4.5:1 body text needs, and it is the body colour of the My
       experience, Career and Education sections. The `border` token is 1.35:1 on
