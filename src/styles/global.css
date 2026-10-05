@@ -14,6 +14,20 @@
     --color-accent-strong: #2c5138; /* hover/active             -> *-accent-strong */
     --color-accent-soft: #e2ecdf; /* pill/tag backgrounds     -> bg-accent-soft */
     --color-accent-contrast: #f4f8f1; /* text on accent buttons   -> text-accent-contrast */
+    --color-focus: #28231d; /* focus ring, 12:1+ on bg, panel, accent-soft -> outline-focus */
+}
+
+/* One focus ring for every link, button and summary. The offset puts it on the
+   surrounding surface, never on a filled button, so it only meets bg, panel or
+   accent-soft. */
+:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+}
+
+/* The skip link's target: focus lands here but it isn't a control, so no ring */
+main:focus {
+    outline: none;
 }
 
 /* MDX-rendered prose (role/course/education bodies) uses the green accent */

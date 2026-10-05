@@ -94,7 +94,8 @@ Every rendered content body sits in a wrapper like:
 - Conditional classes use `class:list={[base, cond && 'x', variants[variant]]}`
 - Interactive elements get a visible hover state (`hover:text-ink`,
   `hover:border-accent-strong`), and links that look like buttons get
-  `no-underline`. The focus style rule is in `CLAUDE.md`, Accessibility; there
-  is no shared focus style yet (a Todo bug)
+  `no-underline`. Focus needs nothing per component: one `:focus-visible` rule
+  in `global.css` draws the `focus` token ring on every link, button and
+  summary. Never set `outline-none` on a control
 - Mobile first, checked at phone, tablet and desktop widths (`CLAUDE.md`,
   Styling)

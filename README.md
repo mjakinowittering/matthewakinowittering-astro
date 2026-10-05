@@ -56,10 +56,6 @@ is merged into `develop` first and released to `main` from there.
 
 #### Accessibility
 
-- [ ] Add a visible focus style: nothing in `global.css` or the primitives
-      styles `:focus-visible`, so every link, button and the training rows'
-      `<summary>` rely on the browser's default ring, untested against the green
-      primary button and the sand `alt` bands.
 - [ ] Fix contrast on the sand bands: `text-muted` on `bg-panel` is 4.18:1,
       under the 4.5:1 body text needs, and it is the body colour of the My
       experience, Career and Education sections. The `border` token is 1.35:1 on
