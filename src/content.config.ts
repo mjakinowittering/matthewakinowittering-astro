@@ -14,6 +14,19 @@ const blurbs = defineCollection({
     })
 });
 
+const accomplishments = defineCollection({
+    loader: glob({
+        base: './src/content/accomplishments',
+        pattern: '**/*.{md,mdx}'
+    }),
+    schema: z.object({
+        value: z.number().int().positive(),
+        suffix: z.string().optional(),
+        caption: z.string(),
+        organisationId: reference('organisations').optional()
+    })
+});
+
 const events = defineCollection({
     loader: glob({ base: './src/content/events', pattern: '**/*.{md,mdx}' }),
     schema: z.object({
@@ -27,7 +40,8 @@ const events = defineCollection({
         dateTo: z.iso
             .datetime({ offset: true })
             .transform((str) => new Date(str))
-            .nullish()
+            .nullish(),
+        careerStart: z.boolean().optional()
     })
 });
 
@@ -71,7 +85,7 @@ const projects = defineCollection({
             title: z.string(),
             description: z.string(),
             uri: z.url(),
-            sourceUri: z.url(),
+            sourceUri: z.url().optional(),
             tags: z.array(z.string()),
             index: z.number(),
             img: image().optional(),
@@ -81,6 +95,7 @@ const projects = defineCollection({
 
 // Export a single `collections` object to register your collection(s)
 export const collections = {
+    accomplishments,
     blurbs,
     events,
     organisations,

@@ -23,7 +23,7 @@ description:
     Pages. No backend, no SSR, no routing library, just record, edit and
     download.
 uri: https://mjakinowittering.github.io/youdemo/ # "Try it live"
-sourceUri: https://github.com/mjakinowittering/youdemo # "View source", required today
+sourceUri: https://github.com/mjakinowittering/youdemo # "View source", optional
 tags:
     - Browser-only
     - No backend
@@ -36,12 +36,11 @@ alt:
 ---
 ```
 
-`uri` is required: every project has a live version to try. `sourceUri` is meant
-to be left out for a private repo, but today the schema requires it and
-`Project.astro` always renders "View source". Making it optional and hiding the
-button without it is a Todo bug in `README.md`; fix that before adding a project
-without a public repo. Never point `sourceUri` at something other than the
-source.
+`uri` is required: every project has a live version to try. `sourceUri` is
+optional: set it only when the code is public, and `Project.astro` renders the
+"View source" button only when it is set. DyslexicWriter has no `sourceUri`, so
+its card shows "Try it live" alone. Never point `sourceUri` at something other
+than the source.
 
 ### `description`
 

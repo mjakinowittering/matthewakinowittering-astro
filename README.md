@@ -54,32 +54,18 @@ is merged into `develop` first and released to `main` from there.
 
 ### Bugs
 
-#### Projects
-
-- [ ] Hide "View source" on a project without a `sourceUri`: the schema in
-      `content.config.ts` requires `sourceUri`, so a project with no public repo
-      fails the build, and `Project.astro` always renders the ghost `Button`.
-      Make the field optional and render the button only when it is set.
-
 #### Tooling
 
-- [ ] Make `npm run astro check` run clean: `@astrojs/check` and `typescript`
-      aren't devDependencies, so it stops at an install prompt. Installed, it
-      reports one error at `projects/Project.astro:21`: the `image()` schema
-      type has an optional `format`, which `<Image src>` requires. Already on
-      `develop`; add the two packages and fix the type without an `as` cast.
-- [ ] Fix the build's 24 "Invalid content reference" errors: Astro 7 checks
-      every event's `organisationId` against organisation entry ids (file
-      paths), not the frontmatter `id` the timeline joins on. The build still
-      completes and every event renders, but real errors hide in the noise.
+- [ ] Fix the build's 27 "Invalid content reference" errors: Astro 7 checks
+      every event's and accomplishment's `organisationId` against organisation
+      entry ids (file paths), not the frontmatter `id` the timeline joins on.
+      The build still completes and every event renders, but real errors hide in
+      the noise.
 
 ### Features
 
 #### Content model
 
-- [ ] Give the career start date one home: `2010-01-01` is set in both
-      `blurbs/about-me.mdx` and `pages/index.astro`, and the two must be changed
-      together. A `src/lib/site.ts` both import is the likely home.
 - [ ] Decide what the skill cards' `img` and `alt` are for: the schema requires
       them, but `Skill.astro` shows a Lucide icon and renders neither, and two
       of the five SVGs in `skills/img/` aren't referenced at all. Either drop
@@ -102,3 +88,11 @@ is merged into `develop` first and released to `main` from there.
       is 1.35:1 on `bg-bg`, under 3:1, as the only edge of the ghost `Button`
       and the About section's social pills. The redesign's new tokens replace
       both pairings; measure them then rather than retuning today's.
+- [ ] Rewrite the How I work and contact copy in Matthew's own voice:
+      `blurbs/how-i-work.md` and `blurbs/contact.md` hold draft copy for the
+      redesign, kept as written until he rewrites it.
+- [ ] Decide whether the Acorn-i role body keeps the Ignite figures: they are
+      typed out in `events/employment/2019-08/acorn-i/product-lead.md` and are
+      now also stat cards in `src/content/accomplishments/`. Decide once the
+      redesign's hero renders the stat cards. A decision to make, not a
+      commitment.

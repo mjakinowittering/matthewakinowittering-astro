@@ -49,23 +49,24 @@ workflows live in a **project skill** under `.claude/skills/`. **Load the
 matching skill before doing substantive work in its domain** — the General Rules
 below are the invariants, the skill is the _how_.
 
-| Skill                   | Load when working on…                                                                                                     |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `design-brief`          | the redesign, any visible change, the page's section order, or hero, how-I-work, projects, learning or contact copy       |
-| `project-structure`     | locating a file, deciding where a new file belongs, the page's section order and anchors                                  |
-| `content-blurbs`        | the intro copy in `src/content/blurbs/` — About me, My experience, What I do                                              |
-| `content-organisations` | adding or editing an employer, trainer or university in `src/content/organisations/`                                      |
-| `content-events`        | adding or editing a role, course or degree in `src/content/events/`, its dates, link and body copy                        |
-| `rewrite-course`        | turning pasted course material into the house style for one training event (`/rewrite-course <path>`)                     |
-| `content-skills`        | the three "What I do" cards in `src/content/skills/`                                                                      |
-| `content-projects`      | the project cards in `src/content/projects/`, their screenshots, tags and links                                           |
-| `components-block`      | the shared primitives in `src/components/block/` — Section, SectionHead, Badge, Button, ExternalTextLink, Nav, SiteFooter |
-| `components-sections`   | the page sections in `src/components/home/`, the timeline join, `Layout.astro`, `pages/`, adding a section                |
-| `styling`               | colour tokens, typography, prose styling, Tailwind v4 in `src/styles/global.css` and class strings                        |
-| `i18n-messages`         | adding or editing a UI string or message key in `messages/en.json`                                                        |
-| `ascii-wireframes`      | any visible change: draw it and get it approved before building                                                           |
-| `todo-review`           | the `## Todo` list in `README.md`, and every time plan mode is entered (`/todo-review`)                                   |
-| `branch-and-commit`     | cutting a branch off `develop`, writing a commit message, pushing, opening a PR                                           |
+| Skill                     | Load when working on…                                                                                                     |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `design-brief`            | the redesign, any visible change, the page's section order, or hero, how-I-work, projects, learning or contact copy       |
+| `project-structure`       | locating a file, deciding where a new file belongs, the page's section order and anchors                                  |
+| `content-blurbs`          | the section copy in `src/content/blurbs/`, today's and the redesign's (hero, How I work, Career, contact)                 |
+| `content-organisations`   | adding or editing an employer, trainer or university in `src/content/organisations/`                                      |
+| `content-accomplishments` | the hero's stat figures in `src/content/accomplishments/`, their values, captions and order                               |
+| `content-events`          | adding or editing a role, course or degree in `src/content/events/`, its dates, link and body copy                        |
+| `rewrite-course`          | turning pasted course material into the house style for one training event (`/rewrite-course <path>`)                     |
+| `content-skills`          | the three "What I do" cards in `src/content/skills/`                                                                      |
+| `content-projects`        | the project cards in `src/content/projects/`, their screenshots, tags and links                                           |
+| `components-block`        | the shared primitives in `src/components/block/` — Section, SectionHead, Badge, Button, ExternalTextLink, Nav, SiteFooter |
+| `components-sections`     | the page sections in `src/components/home/`, the timeline join, `Layout.astro`, `pages/`, adding a section                |
+| `styling`                 | colour tokens, typography, prose styling, Tailwind v4 in `src/styles/global.css` and class strings                        |
+| `i18n-messages`           | adding or editing a UI string or message key in `messages/en.json`                                                        |
+| `ascii-wireframes`        | any visible change: draw it and get it approved before building                                                           |
+| `todo-review`             | the `## Todo` list in `README.md`, and every time plan mode is entered (`/todo-review`)                                   |
+| `branch-and-commit`       | cutting a branch off `develop`, writing a commit message, pushing, opening a PR                                           |
 
 > When a domain skill contradicts a stale line here, the skill is the more
 > detailed source — but the General Rules always hold regardless of which skill
@@ -124,17 +125,18 @@ must agree with it.
 
 ## Data Model
 
-Everything on the page is driven by five content collections, defined with their
+Everything on the page is driven by six content collections, defined with their
 Zod schemas in [`src/content.config.ts`](src/content.config.ts) — the schema's
 one home. Field-by-field detail lives in each collection's skill.
 
-| Collection      | Holds                                                        | Rendered by                               |
-| --------------- | ------------------------------------------------------------ | ----------------------------------------- |
-| `blurbs`        | intro copy for three sections, keyed by file name            | about-me, experience, what-do-i-do        |
-| `organisations` | employers, trainers and universities                         | the Career, Education, Training timelines |
-| `events`        | roles, courses and degrees, each pointing at an organisation | `Role`, `Course`, `Education`             |
-| `skills`        | the three "What I do" cards                                  | `what-do-i-do/Skill.astro`                |
-| `projects`      | things built and shipped                                     | `projects/Project.astro`                  |
+| Collection        | Holds                                                        | Rendered by                                                     |
+| ----------------- | ------------------------------------------------------------ | --------------------------------------------------------------- |
+| `accomplishments` | the hero's stat cards, one figure each                       | nothing yet; the redesign's hero                                |
+| `blurbs`          | intro and long copy for each section, keyed by file name     | about-me, experience, what-do-i-do; the redesign's four not yet |
+| `organisations`   | employers, trainers and universities                         | the Career, Education, Training timelines                       |
+| `events`          | roles, courses and degrees, each pointing at an organisation | `Role`, `Course`, `Education`                                   |
+| `skills`          | the three "What I do" cards                                  | `what-do-i-do/Skill.astro`                                      |
+| `projects`        | things built and shipped                                     | `projects/Project.astro`                                        |
 
 ### How events meet organisations
 
@@ -163,6 +165,11 @@ just vanishes from the page. The section components do the join; see
 These are computed at render time and must never be written into a content file:
 an organisation's date span and event count, a role's duration, and the "N+
 years of experience" figure.
+
+Every "years in product" figure counts from the one event marked
+`careerStart: true`, read through `getCareerStart()` in `src/lib/career.ts`. A
+career start date is never typed by hand, in a page, a blurb or a message; a
+blurb shows the figure with `<CareerLength />`.
 
 ---
 

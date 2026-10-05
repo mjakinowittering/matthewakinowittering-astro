@@ -33,6 +33,7 @@ type: employment # employment | training | education
 uri: https://… # optional, see below
 dateFrom: '2019-08-05T00:00:00+00:00' # quoted ISO 8601 with offset
 dateTo: '2021-03-31T00:00:00+00:00' # omit while ongoing
+careerStart: true # optional, see below
 ---
 ```
 
@@ -46,6 +47,14 @@ name**: Scrum Alliance's is `scrumalliance`. Open the organisation file and copy
 its `id`. If the organisation does not exist yet, create it first (see
 **`content-organisations`**). A wrong value does not fail the build; the event
 just disappears, so always check the page afterwards.
+
+### `careerStart`
+
+Set on **exactly one** event: the first product role, Junior Product Manager at
+Ask Jeeves. Its `dateFrom` is where every "years in product" figure counts from
+(the meta description, the About me and hero blurbs), read through
+`getCareerStart()` in `src/lib/career.ts`. The build fails if no event sets it
+or more than one does. Leave it off every other event; never write `false`.
 
 ### `uri`, per type
 
