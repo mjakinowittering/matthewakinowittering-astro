@@ -54,80 +54,24 @@ is merged into `develop` first and released to `main` from there.
 
 ### Bugs
 
-#### Deployment
-
-- [ ] Point `site` in `astro.config.mjs` at the real domain: it is
-      `https://mjakinowittering.github.io`, but `public/CNAME` and `Host` in
-      `public/robots.txt` say `matthew.akinowittering.com`. Anything built from
-      `Astro.site`, such as a canonical tag, would point at the wrong host.
-- [ ] Drop the dead `Disallow` lines from `public/robots.txt`: `/assets`,
-      `/blog` and `/bookmarks` don't exist (the build writes its assets to
-      `/_astro`). Keep `/resume`, which is reserved for a downloadable CV.
-
-#### Accessibility
-
-- [ ] Fix the page language and viewport in `Layout.astro`: `<html lang="en">`
-      should be `en-GB`, and the viewport tag is `width=device-width` with no
-      `initial-scale=1`.
-- [ ] Add a "Skip to content" link and the missing landmarks: there is no skip
-      link, `Nav` sits in no `header`, and neither `pages/index.astro` nor
-      `pages/404.astro` wraps its content in `main`. Only `nav` and `footer`
-      exist.
-- [ ] Give the nav links a phone layout: `Nav.astro` hides `navLinks` below `sm`
-      with nothing in their place, so on a phone only the social links are
-      reachable from the top bar.
-- [ ] Add a visible focus style: nothing in `global.css` or the primitives
-      styles `:focus-visible`, so every link, button and the training rows'
-      `<summary>` rely on the browser's default ring, untested against the green
-      primary button and the sand `alt` bands.
-- [ ] Announce new tabs: `ExternalTextLink` and `Button external` open links in
-      a new tab without a visually hidden "opens in a new tab". The social links
-      in `Nav.astro`, `SiteFooter.astro` and `about-me/index.astro` write
-      `target="_blank"` by hand, so route them through a primitive in the same
-      change.
-- [ ] Fix contrast on the sand bands: `text-muted` on `bg-panel` is 4.18:1,
-      under the 4.5:1 body text needs, and it is the body colour of the My
-      experience, Career and Education sections. The `border` token is 1.35:1 on
-      `bg-bg`, under 3:1, and is the only edge of the ghost `Button` and the
-      About section's social pills.
-
 #### Projects
 
 - [ ] Hide "View source" on a project without a `sourceUri`: the schema in
       `content.config.ts` requires `sourceUri`, so a project with no public repo
       fails the build, and `Project.astro` always renders the ghost `Button`.
       Make the field optional and render the button only when it is set.
-- [ ] Fix the screenshot placeholder copy: `projects_screenshot_placeholder`
-      reads "app screenshot goes here · youdemo recorder ui", so every project
-      without an `img` names YouDemo. Give it neutral copy, such as "Screenshot
-      coming soon".
 
-#### Pages
+#### Tooling
 
-- [ ] Move the 404 page onto the palette: `pages/404.astro` uses stock
-      `text-gray-800`, `bg-gray-300` and `hover:bg-gray-400`, and a hand-built
-      link. Use `text-muted` and `Button` instead.
-- [ ] Fix the `<time>` in `blurbs/about-me.mdx`: it sets a `time` attribute,
-      which doesn't exist. The machine-readable one is
-      `datetime={dateFrom.toISOString()}`.
-
-#### Timeline
-
-- [ ] Remove the `uri` from the Certified Scrum Product Owner course
-      (`events/courses/2016-06/scrum-alliance/certified-scrum-product-owner.md`):
-      it points at an out-of-date Scrum Alliance profile page. Without it the
-      row loses its tick and "View certificate".
-- [ ] Fix durations under a year in `src/lib/utils.ts`:
-      `calcLengthInYearsAndMonths` prints "0 years 5 months", where it should
-      print "5 months". A whole number of years is fine ("2 years").
-      `calcLengthInYears` also prints "0+ years" under a year and "1 year",
-      without the plus, at one; it only feeds the career figure today, so that
-      half is harmless for now.
-
-- [ ] Stop shipping JavaScript for a finished degree: `event/Education.astro`
-      always mounts `EventDescription` with `client:only`. Follow `Role.astro`,
-      which only goes live while the event is ongoing and renders at build time
-      otherwise.
+- [ ] Make `npm run astro check` run clean: `@astrojs/check` and `typescript`
+      aren't devDependencies, so it stops at an install prompt. Installed, it
+      reports one error at `projects/Project.astro:21`: the `image()` schema
+      type has an optional `format`, which `<Image src>` requires. Already on
+      `develop`; add the two packages and fix the type without an `as` cast.
+- [ ] Fix the build's 24 "Invalid content reference" errors: Astro 7 checks
+      every event's `organisationId` against organisation entry ids (file
+      paths), not the frontmatter `id` the timeline joins on. The build still
+      completes and every event renders, but real errors hide in the noise.
 
 ### Features
 
@@ -149,3 +93,12 @@ is merged into `develop` first and released to `main` from there.
 
 - [ ] Add Open Graph and canonical tags in `Layout.astro`, once for the page
       rather than per page, so a link shared on LinkedIn shows a proper card.
+
+#### Redesign
+
+- [ ] Check contrast when the redesign tokens land. Today `text-muted` on
+      `bg-panel` is 4.18:1, under the 4.5:1 body text needs (the body colour of
+      the My experience, Career and Education sections), and the `border` token
+      is 1.35:1 on `bg-bg`, under 3:1, as the only edge of the ghost `Button`
+      and the About section's social pills. The redesign's new tokens replace
+      both pairings; measure them then rather than retuning today's.

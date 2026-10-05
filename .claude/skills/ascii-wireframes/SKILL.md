@@ -38,9 +38,9 @@ drifts out of line. **Draw with printable ASCII only.**
     - an organisation with one event and one with several
     - copy longer than the sample: a long course title, a three-line subtitle
 - **Phone first, then wider.** Base styles are for a phone (`CLAUDE.md`,
-  Styling). Today the nav links hide below `sm`, and two-column grids stack
-  below `md`. Draw the width where the change is hardest to fit, and each width
-  where the layout differs.
+  Styling). Below `sm` the nav links move into a menu, and two-column grids
+  stack below `md`. Draw the width where the change is hardest to fit, and each
+  width where the layout differs.
 - **Before and after** for a change to something that exists. Label them
   `BEFORE` / `AFTER`.
 - **The neighbours.** Draw enough of the section above and below to show where

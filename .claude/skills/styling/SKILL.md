@@ -4,8 +4,7 @@ description:
     Colour tokens, typography scale, prose styling and Tailwind v4 conventions,
     with src/styles/global.css as their home. Use whenever writing or changing
     class strings, picking a colour, font size or spacing, styling content body
-    text, adding a token, or fixing anything that looks off-palette, including
-    on the 404 page (still a Todo item in README.md).
+    text, adding a token, or fixing anything that looks off-palette.
 ---
 
 # Styling
@@ -43,8 +42,9 @@ The palette is warm cream and sand with one green accent. Rules:
 - There is no dark mode, and that is decided (`CLAUDE.md`, Styling): no `dark:`
   variants, no second palette
 - A new token, or a new pairing of existing ones, meets the contrast ratios in
-  `CLAUDE.md`, Accessibility. `text-muted` on `bg-panel` falls short today; that
-  is a Todo bug in `README.md`
+  `CLAUDE.md`, Accessibility. `text-muted` on `bg-panel` falls short today; the
+  redesign's tokens replace it, and a Features item in `README.md` says to check
+  them
 
 ## Type
 
@@ -94,7 +94,8 @@ Every rendered content body sits in a wrapper like:
 - Conditional classes use `class:list={[base, cond && 'x', variants[variant]]}`
 - Interactive elements get a visible hover state (`hover:text-ink`,
   `hover:border-accent-strong`), and links that look like buttons get
-  `no-underline`. The focus style rule is in `CLAUDE.md`, Accessibility; there
-  is no shared focus style yet (a Todo bug)
+  `no-underline`. Focus needs nothing per component: one `:focus-visible` rule
+  in `global.css` draws the `focus` token ring on every link, button and
+  summary. Never set `outline-none` on a control
 - Mobile first, checked at phone, tablet and desktop widths (`CLAUDE.md`,
   Styling)

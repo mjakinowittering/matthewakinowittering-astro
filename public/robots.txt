@@ -1,7 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /assets
-Disallow: /blog
-Disallow: /bookmarks
 Disallow: /resume
 Host: https://matthew.akinowittering.com

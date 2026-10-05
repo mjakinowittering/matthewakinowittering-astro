@@ -65,6 +65,12 @@ A training event without a certificate omits `uri`, and loses the tick.
 | `training`   | the completion date     | omit                         | `Mar 2026`                              |
 | `education`  | first day of the course | the end of the course        | `2005 – 2009 · 3 years 11 months`       |
 
+Durations count **both the start and the end month**, matching LinkedIn: Aug
+2019 to Oct 2026 is 7 years 3 months. This is deliberate; don't "fix" it (the
+comment on `monthsInclusive` in `src/lib/utils.ts` says the same). Under a year
+shows the months alone ("5 months"), and a whole number of years the years alone
+("2 years").
+
 Use midnight UTC (`T00:00:00+00:00`) unless the existing siblings use an
 end-of-day time. An ongoing role's duration is computed in the browser, so it
 keeps counting without a redeploy.

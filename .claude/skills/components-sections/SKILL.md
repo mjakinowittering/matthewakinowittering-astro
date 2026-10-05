@@ -88,13 +88,12 @@ Prefer fixing the content over loosening the join.
 | `Education.astro` | title · year range · duration, the body, a course link                                |
 
 `EventDescription.svelte` renders the duration with
-`calcLengthInYearsAndMonths`. `Role` mounts it `client:only` **only when the
-role is ongoing**, so the duration counts on in the browser; a finished role
-renders it at build time with no JavaScript. Because directives cannot be spread
-or made conditional, `Role` branches on the directive and spreads `eventDates`
-into both. `Education` does not follow this yet; that is a Todo item in
-`README.md`. The island renders plain text, not an `aria-live` region, so a
-screen reader reads it once (`CLAUDE.md`, Accessibility).
+`calcLengthInYearsAndMonths`. `Role` and `Education` mount it `client:only`
+**only when the event is ongoing**, so the duration counts on in the browser; a
+finished event renders it at build time with no JavaScript. Because directives
+cannot be spread or made conditional, both branch on the directive and spread
+`eventDates` into each branch. The island renders plain text, not an `aria-live`
+region, so a screen reader reads it once (`CLAUDE.md`, Accessibility).
 
 ## Adding a section
 
@@ -121,11 +120,13 @@ site-verification tag through `additionalMetaTags`. Public Sans loads from
 Google Fonts here. Open Graph and canonical tags belong here too, once, rather
 than per page.
 
-It is also the page shell `CLAUDE.md`'s Accessibility section sets out: `lang`,
-the viewport tag, the skip link and the landmarks. Today it has
-`<html lang="en">`, a viewport of `width=device-width` alone, and no skip link;
-`pages/index.astro` has no `header` around `Nav` and no `main` around the
-sections. Each is a Todo bug in `README.md`.
+It is also the page shell `CLAUDE.md`'s Accessibility section sets out:
+`<html lang="en-GB">`, the viewport tag, and the "Skip to content" link as the
+first focusable element, jumping to `<main id="main">`. The default slot lands
+in `main`; the `header` and `footer` named slots sit either side of it, so
+`pages/index.astro` passes `<Nav slot="header" />` and
+`<SiteFooter slot="footer" />`. `Nav` renders the `header` landmark itself and
+`SiteFooter` the `footer`.
 
 ## Pages
 

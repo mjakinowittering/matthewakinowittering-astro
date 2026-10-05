@@ -1,4 +1,5 @@
 ---
+import ExternalTextLink from '@components/block/ExternalTextLink.astro';
 import { m } from '@paraglide/messages.js';
 import { socials } from '../../lib/socials';
 
@@ -16,14 +17,13 @@ const copyright = m.footer_copyright({
         <div class="flex gap-5">
             {
                 socials.map((social) => (
-                    <a
+                    <ExternalTextLink
                         href={social.href}
-                        target="_blank"
-                        rel="noopener"
+                        size="sm"
                         class="hover:text-ink no-underline"
                     >
                         {social.label()}
-                    </a>
+                    </ExternalTextLink>
                 ))
             }
         </div>

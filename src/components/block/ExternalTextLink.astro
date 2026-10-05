@@ -1,12 +1,15 @@
 ---
 import { ExternalLink } from '@lucide/astro';
+import { m } from '@paraglide/messages.js';
 
 interface Props {
     href: string;
     size?: 'sm' | 'md';
+    // Replaces the default hover underline, for links styled as pills or nav
+    class?: string;
 }
 
-const { href, size = 'md' } = Astro.props;
+const { href, size = 'md', class: className } = Astro.props;
 
 const iconSizes = {
     sm: 'size-3.5',
@@ -15,11 +18,15 @@ const iconSizes = {
 ---
 
 <a
-    class="inline-flex items-center gap-1 hover:underline"
+    class:list={[
+        'inline-flex items-center gap-1',
+        className ?? 'hover:underline'
+    ]}
     href={href}
     target="_blank"
     rel="noopener"
 >
     <span><slot /></span>
+    <span class="sr-only">{m.external_new_tab()}</span>
     <ExternalLink class:list={['inline flex-none', iconSizes[size]]} />
 </a>

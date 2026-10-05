@@ -3,16 +3,19 @@
     "site_name": "Matthew Akino-Wittering",
     "site_title": "{title} - {site}",
     "site_description": "I am a Product Manager with {experience} of experience, primarily in internal platforms and B2B SaaS applications.",
+    "nav_skip_to_content": "Skip to content",
     "nav_about": "About",
     "nav_career": "Career",
     "nav_projects": "Projects",
     "nav_education": "Education",
+    "nav_menu": "Menu",
     "social_linkedin": "LinkedIn",
     "social_github": "GitHub",
     "footer_copyright": "© {year} {name}",
     "about_view_projects": "View projects",
     "about_get_in_touch": "Get in touch",
     "content_not_found": "Content not found",
+    "external_new_tab": "(opens in a new tab)",
     "experience_badge": "Timeline",
     "what_i_do_badge": "Craft",
     "career_title": "Career",
@@ -21,7 +24,7 @@
     "projects_title": "Projects",
     "projects_subtitle": "Things I've built and shipped myself",
     "projects_badge": "Builds",
-    "projects_screenshot_placeholder": "app screenshot goes here · youdemo recorder ui",
+    "projects_screenshot_placeholder": "Screenshot coming soon",
     "projects_try_live": "Try it live",
     "projects_view_source": "View source",
     "education_title": "Education",
@@ -35,19 +38,7 @@
     "course_view_certificate": "View certificate",
     "date_present": "Present",
     "date_range": "{from} – {to}",
-    "duration_years_plus": [
-        {
-            "declarations": [
-                "input years",
-                "local yearsPlural = years: plural"
-            ],
-            "selectors": ["yearsPlural"],
-            "match": {
-                "yearsPlural=one": "{years} year",
-                "yearsPlural=*": "{years}+ years"
-            }
-        }
-    ],
+    "duration_years_plus": "{years}+ years",
     "duration_years": [
         {
             "declarations": [

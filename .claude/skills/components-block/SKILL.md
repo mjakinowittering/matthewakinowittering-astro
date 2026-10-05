@@ -77,24 +77,30 @@ One primary per group, the action Matthew most wants taken; the rest are ghost.
 
 An inline text link with a trailing external-link icon, opening in a new tab.
 `size` is `'sm'` or `'md'` (default) and sizes the icon only; colour and type
-come from the parent. Use it for any off-site text link.
+come from the parent. Use it for any off-site text link. An optional `class`
+replaces the default hover underline, for a link styled as a pill or a nav item
+(the social links pass one).
 
-`Button external` and `ExternalTextLink` are the one home for new-tab links, so
-the new-tab announcement `CLAUDE.md`'s Accessibility section asks for belongs in
-them. Neither has it yet; that is a Todo bug in `README.md`.
+`Button external` and `ExternalTextLink` are the one home for new-tab links:
+both add the visually hidden `external_new_tab` message ("(opens in a new tab)")
+that `CLAUDE.md`'s Accessibility section asks for. Never write `target="_blank"`
+by hand.
 
 ### `Nav` and `SiteFooter`
 
-The sticky top bar and the footer. `Nav` holds `navLinks` (anchor links, hidden
-below the `sm` breakpoint with no alternative on a phone yet, a Todo bug) and
-the social links. Adding a section to the nav means adding an entry to
+The sticky top bar (the `header` landmark) and the footer. `Nav` holds
+`navLinks` (anchor links) and the social links. From `sm` up they sit inline;
+below `sm` both move into a native `popover` menu opened by a real "Menu"
+`<button popovertarget>`, which the browser announces as expanded or collapsed
+and closes on Escape or a tap outside. A short inline script closes it after a
+link is followed. The header's fixed `h-14` is what the menu's `top-14` lines up
+with; change both together. Adding a section to the nav means adding an entry to
 `navLinks` whose `href` matches that section's `id`.
 
-Both, and the About section, map over `socials` from `src/lib/socials.ts`; add
-or change a social link there, never in a component. All three write
-`target="_blank"` by hand today rather than using a primitive; that is part of
-the new-tab Todo bug. The footer's year is `new Date().getFullYear()`, so it is
-right at each build.
+Both, and the About section, map over `socials` from `src/lib/socials.ts` and
+render each through `ExternalTextLink`; add or change a social link there, never
+in a component. The footer's year is `new Date().getFullYear()`, so it is right
+at each build.
 
 ## Writing a new primitive
 
