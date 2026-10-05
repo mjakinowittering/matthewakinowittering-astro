@@ -1,5 +1,6 @@
 ---
 import ExternalTextLink from '@components/block/ExternalTextLink.astro';
+import { Menu, X } from '@lucide/astro';
 import { m } from '@paraglide/messages.js';
 import { socials } from '../../lib/socials';
 
@@ -11,13 +12,13 @@ const navLinks = [
 ];
 ---
 
-<header class="border-border bg-bg sticky top-0 z-20 border-b">
-    <nav class="flex items-center justify-between px-8 py-4">
+<header class="group border-border bg-bg sticky top-0 z-20 h-14 border-b">
+    <nav class="flex h-full items-center justify-between px-4 sm:px-8">
         <span class="text-sm font-bold">{m.site_name()}</span>
-        <div class="flex items-center gap-6">
-            <div
-                class="text-muted hidden items-center gap-6.5 text-[13px] font-semibold sm:flex"
-            >
+        <div
+            class="text-muted hidden items-center gap-6 text-[13px] font-semibold sm:flex"
+        >
+            <div class="flex items-center gap-6.5">
                 {
                     navLinks.map((link) => (
                         <a href={link.href} class="hover:text-ink no-underline">
@@ -26,9 +27,7 @@ const navLinks = [
                     ))
                 }
             </div>
-            <div
-                class="text-muted flex items-center gap-3.5 text-[13px] font-semibold"
-            >
+            <div class="flex items-center gap-3.5">
                 {
                     socials.map((social) => (
                         <ExternalTextLink
@@ -42,5 +41,56 @@ const navLinks = [
                 }
             </div>
         </div>
+        <button
+            type="button"
+            popovertarget="nav-menu"
+            class="border-border text-ink hover:border-accent-strong inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-[13px] font-bold sm:hidden"
+        >
+            <Menu class="size-4 group-has-[:popover-open]:hidden" />
+            <X class="hidden size-4 group-has-[:popover-open]:inline" />
+            {m.nav_menu()}
+        </button>
+        <div
+            id="nav-menu"
+            popover
+            class="border-border bg-bg text-muted inset-x-0 top-14 bottom-auto m-0 w-full max-w-none border-b px-4 py-2 text-[13px] font-semibold sm:hidden"
+        >
+            <div class="flex flex-col">
+                {
+                    navLinks.map((link) => (
+                        <a
+                            href={link.href}
+                            class="hover:text-ink py-3 no-underline"
+                        >
+                            {link.label()}
+                        </a>
+                    ))
+                }
+            </div>
+            <div class="border-border flex flex-col border-t">
+                {
+                    socials.map((social) => (
+                        <ExternalTextLink
+                            href={social.href}
+                            size="sm"
+                            class="hover:text-ink py-3 no-underline"
+                        >
+                            {social.label()}
+                        </ExternalTextLink>
+                    ))
+                }
+            </div>
+        </div>
     </nav>
 </header>
+
+<script>
+    // Following a link in the phone menu closes it; without this script the
+    // menu still closes with Escape or a tap outside.
+    const menu = document.getElementById('nav-menu');
+    menu?.addEventListener('click', (event) => {
+        if (event.target instanceof Element && event.target.closest('a')) {
+            menu.hidePopover();
+        }
+    });
+</script>

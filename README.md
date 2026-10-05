@@ -56,9 +56,6 @@ is merged into `develop` first and released to `main` from there.
 
 #### Accessibility
 
-- [ ] Give the nav links a phone layout: `Nav.astro` hides `navLinks` below `sm`
-      with nothing in their place, so on a phone only the social links are
-      reachable from the top bar.
 - [ ] Add a visible focus style: nothing in `global.css` or the primitives
       styles `:focus-visible`, so every link, button and the training rows'
       `<summary>` rely on the browser's default ring, untested against the green
