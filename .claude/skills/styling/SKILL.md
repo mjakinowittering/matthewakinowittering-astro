@@ -42,8 +42,9 @@ The palette is warm cream and sand with one green accent. Rules:
 - There is no dark mode, and that is decided (`CLAUDE.md`, Styling): no `dark:`
   variants, no second palette
 - A new token, or a new pairing of existing ones, meets the contrast ratios in
-  `CLAUDE.md`, Accessibility. `text-muted` on `bg-panel` falls short today; that
-  is a Todo bug in `README.md`
+  `CLAUDE.md`, Accessibility. `text-muted` on `bg-panel` falls short today; the
+  redesign's tokens replace it, and a Features item in `README.md` says to check
+  them
 
 ## Type
 

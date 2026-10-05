@@ -54,14 +54,6 @@ is merged into `develop` first and released to `main` from there.
 
 ### Bugs
 
-#### Accessibility
-
-- [ ] Fix contrast on the sand bands: `text-muted` on `bg-panel` is 4.18:1,
-      under the 4.5:1 body text needs, and it is the body colour of the My
-      experience, Career and Education sections. The `border` token is 1.35:1 on
-      `bg-bg`, under 3:1, and is the only edge of the ghost `Button` and the
-      About section's social pills.
-
 #### Projects
 
 - [ ] Hide "View source" on a project without a `sourceUri`: the schema in
@@ -89,3 +81,12 @@ is merged into `develop` first and released to `main` from there.
 
 - [ ] Add Open Graph and canonical tags in `Layout.astro`, once for the page
       rather than per page, so a link shared on LinkedIn shows a proper card.
+
+#### Redesign
+
+- [ ] Check contrast when the redesign tokens land. Today `text-muted` on
+      `bg-panel` is 4.18:1, under the 4.5:1 body text needs (the body colour of
+      the My experience, Career and Education sections), and the `border` token
+      is 1.35:1 on `bg-bg`, under 3:1, as the only edge of the ghost `Button`
+      and the About section's social pills. The redesign's new tokens replace
+      both pairings; measure them then rather than retuning today's.
