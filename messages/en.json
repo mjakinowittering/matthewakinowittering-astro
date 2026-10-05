@@ -38,19 +38,7 @@
     "course_view_certificate": "View certificate",
     "date_present": "Present",
     "date_range": "{from} – {to}",
-    "duration_years_plus": [
-        {
-            "declarations": [
-                "input years",
-                "local yearsPlural = years: plural"
-            ],
-            "selectors": ["yearsPlural"],
-            "match": {
-                "yearsPlural=one": "{years} year",
-                "yearsPlural=*": "{years}+ years"
-            }
-        }
-    ],
+    "duration_years_plus": "{years}+ years",
     "duration_years": [
         {
             "declarations": [

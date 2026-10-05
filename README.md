@@ -84,13 +84,6 @@ is merged into `develop` first and released to `main` from there.
 
 #### Timeline
 
-- [ ] Fix durations under a year in `src/lib/utils.ts`:
-      `calcLengthInYearsAndMonths` prints "0 years 5 months", where it should
-      print "5 months". A whole number of years is fine ("2 years").
-      `calcLengthInYears` also prints "0+ years" under a year and "1 year",
-      without the plus, at one; it only feeds the career figure today, so that
-      half is harmless for now.
-
 - [ ] Stop shipping JavaScript for a finished degree: `event/Education.astro`
       always mounts `EventDescription` with `client:only`. Follow `Role.astro`,
       which only goes live while the event is ongoing and renders at build time
