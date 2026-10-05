@@ -54,16 +54,6 @@ is merged into `develop` first and released to `main` from there.
 
 ### Bugs
 
-#### Deployment
-
-- [ ] Point `site` in `astro.config.mjs` at the real domain: it is
-      `https://mjakinowittering.github.io`, but `public/CNAME` and `Host` in
-      `public/robots.txt` say `matthew.akinowittering.com`. Anything built from
-      `Astro.site`, such as a canonical tag, would point at the wrong host.
-- [ ] Drop the dead `Disallow` lines from `public/robots.txt`: `/assets`,
-      `/blog` and `/bookmarks` don't exist (the build writes its assets to
-      `/_astro`). Keep `/resume`, which is reserved for a downloadable CV.
-
 #### Accessibility
 
 - [ ] Fix the page language and viewport in `Layout.astro`: `<html lang="en">`
