@@ -88,13 +88,12 @@ Prefer fixing the content over loosening the join.
 | `Education.astro` | title · year range · duration, the body, a course link                                |
 
 `EventDescription.svelte` renders the duration with
-`calcLengthInYearsAndMonths`. `Role` mounts it `client:only` **only when the
-role is ongoing**, so the duration counts on in the browser; a finished role
-renders it at build time with no JavaScript. Because directives cannot be spread
-or made conditional, `Role` branches on the directive and spreads `eventDates`
-into both. `Education` does not follow this yet; that is a Todo item in
-`README.md`. The island renders plain text, not an `aria-live` region, so a
-screen reader reads it once (`CLAUDE.md`, Accessibility).
+`calcLengthInYearsAndMonths`. `Role` and `Education` mount it `client:only`
+**only when the event is ongoing**, so the duration counts on in the browser; a
+finished event renders it at build time with no JavaScript. Because directives
+cannot be spread or made conditional, both branch on the directive and spread
+`eventDates` into each branch. The island renders plain text, not an `aria-live`
+region, so a screen reader reads it once (`CLAUDE.md`, Accessibility).
 
 ## Adding a section
 

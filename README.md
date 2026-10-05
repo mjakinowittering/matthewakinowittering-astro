@@ -82,13 +82,6 @@ is merged into `develop` first and released to `main` from there.
       which doesn't exist. The machine-readable one is
       `datetime={dateFrom.toISOString()}`.
 
-#### Timeline
-
-- [ ] Stop shipping JavaScript for a finished degree: `event/Education.astro`
-      always mounts `EventDescription` with `client:only`. Follow `Role.astro`,
-      which only goes live while the event is ongoing and renders at build time
-      otherwise.
-
 ### Features
 
 #### Content model

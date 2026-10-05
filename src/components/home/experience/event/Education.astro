@@ -16,6 +16,10 @@ const { Content } = await render(event);
 
 const { title, uri, dateFrom, dateTo } = event.data;
 
+const ongoing = !dateTo;
+
+const eventDates = { dateFrom, dateTo };
+
 const range = m.date_range({
     from: format(dateFrom, 'yyyy'),
     to: dateTo ? format(dateTo, 'yyyy') : m.date_present()
@@ -32,7 +36,13 @@ const range = m.date_range({
     </span>
     ·
     <span>
-        <EventDescription client:only="svelte" {dateFrom} {dateTo} />
+        {
+            ongoing ? (
+                <EventDescription client:only="svelte" {...eventDates} />
+            ) : (
+                <EventDescription {...eventDates} />
+            )
+        }
     </span>
 </div>
 <div
