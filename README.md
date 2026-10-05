@@ -61,6 +61,18 @@ is merged into `develop` first and released to `main` from there.
       fails the build, and `Project.astro` always renders the ghost `Button`.
       Make the field optional and render the button only when it is set.
 
+#### Tooling
+
+- [ ] Make `npm run astro check` run clean: `@astrojs/check` and `typescript`
+      aren't devDependencies, so it stops at an install prompt. Installed, it
+      reports one error at `projects/Project.astro:21`: the `image()` schema
+      type has an optional `format`, which `<Image src>` requires. Already on
+      `develop`; add the two packages and fix the type without an `as` cast.
+- [ ] Fix the build's 24 "Invalid content reference" errors: Astro 7 checks
+      every event's `organisationId` against organisation entry ids (file
+      paths), not the frontmatter `id` the timeline joins on. The build still
+      completes and every event renders, but real errors hide in the noise.
+
 ### Features
 
 #### Content model
