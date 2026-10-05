@@ -4,8 +4,7 @@ description:
     Colour tokens, typography scale, prose styling and Tailwind v4 conventions,
     with src/styles/global.css as their home. Use whenever writing or changing
     class strings, picking a colour, font size or spacing, styling content body
-    text, adding a token, or fixing anything that looks off-palette, including
-    on the 404 page (still a Todo item in README.md).
+    text, adding a token, or fixing anything that looks off-palette.
 ---
 
 # Styling
