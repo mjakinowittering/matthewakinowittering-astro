@@ -56,13 +56,6 @@ is merged into `develop` first and released to `main` from there.
 
 #### Accessibility
 
-- [ ] Fix the page language and viewport in `Layout.astro`: `<html lang="en">`
-      should be `en-GB`, and the viewport tag is `width=device-width` with no
-      `initial-scale=1`.
-- [ ] Add a "Skip to content" link and the missing landmarks: there is no skip
-      link, `Nav` sits in no `header`, and neither `pages/index.astro` nor
-      `pages/404.astro` wraps its content in `main`. Only `nav` and `footer`
-      exist.
 - [ ] Give the nav links a phone layout: `Nav.astro` hides `navLinks` below `sm`
       with nothing in their place, so on a phone only the social links are
       reachable from the top bar.

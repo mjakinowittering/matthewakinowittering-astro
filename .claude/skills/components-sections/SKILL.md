@@ -121,11 +121,13 @@ site-verification tag through `additionalMetaTags`. Public Sans loads from
 Google Fonts here. Open Graph and canonical tags belong here too, once, rather
 than per page.
 
-It is also the page shell `CLAUDE.md`'s Accessibility section sets out: `lang`,
-the viewport tag, the skip link and the landmarks. Today it has
-`<html lang="en">`, a viewport of `width=device-width` alone, and no skip link;
-`pages/index.astro` has no `header` around `Nav` and no `main` around the
-sections. Each is a Todo bug in `README.md`.
+It is also the page shell `CLAUDE.md`'s Accessibility section sets out:
+`<html lang="en-GB">`, the viewport tag, and the "Skip to content" link as the
+first focusable element, jumping to `<main id="main">`. The default slot lands
+in `main`; the `header` and `footer` named slots sit either side of it, so
+`pages/index.astro` passes `<Nav slot="header" />` and
+`<SiteFooter slot="footer" />`. `Nav` renders the `header` landmark itself and
+`SiteFooter` the `footer`.
 
 ## Pages
 
