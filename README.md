@@ -78,9 +78,6 @@ is merged into `develop` first and released to `main` from there.
 - [ ] Move the 404 page onto the palette: `pages/404.astro` uses stock
       `text-gray-800`, `bg-gray-300` and `hover:bg-gray-400`, and a hand-built
       link. Use `text-muted` and `Button` instead.
-- [ ] Fix the `<time>` in `blurbs/about-me.mdx`: it sets a `time` attribute,
-      which doesn't exist. The machine-readable one is
-      `datetime={dateFrom.toISOString()}`.
 
 ### Features
 
