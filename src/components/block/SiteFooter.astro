@@ -1,7 +1,5 @@
 ---
-import ExternalTextLink from '@components/block/ExternalTextLink.astro';
 import { m } from '@paraglide/messages.js';
-import { socials } from '../../lib/socials';
 
 const copyright = m.footer_copyright({
     year: new Date().getFullYear(),
@@ -9,23 +7,8 @@ const copyright = m.footer_copyright({
 });
 ---
 
-<footer class="border-border border-t">
-    <div
-        class="text-muted mx-auto flex max-w-295 items-center justify-between px-8 py-10 text-[13px]"
-    >
-        <span>{copyright}</span>
-        <div class="flex gap-5">
-            {
-                socials.map((social) => (
-                    <ExternalTextLink
-                        href={social.href}
-                        size="sm"
-                        class="hover:text-ink no-underline"
-                    >
-                        {social.label()}
-                    </ExternalTextLink>
-                ))
-            }
-        </div>
-    </div>
+<footer>
+    <p class="text-muted mx-auto max-w-280 px-4 py-10 text-[13px] sm:px-8">
+        {copyright}
+    </p>
 </footer>

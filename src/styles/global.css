@@ -48,6 +48,32 @@ html {
     scroll-padding-top: var(--spacing-header);
 }
 
+/* The header's reading-progress bar (Nav): grows with the page's scroll, with
+   no JavaScript. Where scroll-driven animations aren't supported it stays at
+   zero width, so it simply doesn't show. */
+@utility scroll-progress {
+    transform: scaleX(0);
+    transform-origin: left;
+
+    @supports (animation-timeline: scroll()) {
+        animation: scroll-progress linear both;
+    }
+}
+
+/* Its own rule, so the minifier can't fold the timeline into the `animation`
+   shorthand, which browsers then reject */
+@supports (animation-timeline: scroll()) {
+    html .scroll-progress {
+        animation-timeline: scroll(root);
+    }
+}
+
+@keyframes scroll-progress {
+    to {
+        transform: scaleX(1);
+    }
+}
+
 /* One focus ring for every link, button and summary. The offset puts it on the
    surrounding surface, never on a filled button, so ink always meets a light
    surface (15.9:1 or more on base, sand and card). */
