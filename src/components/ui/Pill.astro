@@ -1,0 +1,37 @@
+---
+interface Props {
+    // Each section's index-card colour, used for nothing else
+    tone: 'yellow' | 'blue' | 'green' | 'pink' | 'teal';
+    // A pill that goes somewhere, as on the 404 page
+    href?: string;
+}
+
+const { tone, href } = Astro.props;
+
+const tones = {
+    yellow: 'bg-ic-yellow',
+    blue: 'bg-ic-blue',
+    green: 'bg-ic-green',
+    pink: 'bg-ic-pink',
+    teal: 'bg-ic-teal'
+};
+
+// A label above a section heading is small capitals; a link reads as words
+const kinds = {
+    label: 'px-3 py-1 text-[12px] tracking-[0.06em] uppercase',
+    link: 'box-content min-h-9 px-3.5 text-[14px] no-underline underline-offset-4 hover:underline'
+};
+
+const Tag = href ? 'a' : 'span';
+---
+
+<Tag
+    href={href}
+    class:list={[
+        'border-ink text-ink inline-flex items-center self-center rounded-full border-[1.5px] font-bold',
+        kinds[href ? 'link' : 'label'],
+        tones[tone]
+    ]}
+>
+    <slot />
+</Tag>

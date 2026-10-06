@@ -8,7 +8,16 @@ import tseslint from 'typescript-eslint';
 
 export default defineConfig([
     {
-        ignores: ['node_modules/**', 'dist/**', '.astro/**']
+        ignores: [
+            'node_modules/**',
+            'dist/**',
+            '.astro/**',
+            'src/paraglide/**',
+            'project.inlang/cache/**',
+            // Exported mock-ups, never reformatted or linted
+            'docs/design/reference/**',
+            '.compare/**'
+        ]
     },
     {
         files: ['**/*.{js,mjs,cjs,ts,mts,cts}'],
@@ -16,9 +25,14 @@ export default defineConfig([
         extends: ['js/recommended'],
         languageOptions: { globals: globals.browser }
     },
+    // Build scripts run in Node, not the browser
+    {
+        files: ['scripts/**'],
+        languageOptions: { globals: globals.node }
+    },
     tseslint.configs.recommended,
     // Parse .astro files so their templates are lintable.
-    eslintPluginAstro.configs['flat/recommended'],
+    eslintPluginAstro.configs.recommended,
     // Run the Tailwind rules against the class attributes in .astro files.
     // The plugin ships `@typescript-eslint/utils` types that don't structurally
     // match eslint's own `Plugin`/`Config` types even though the runtime shapes

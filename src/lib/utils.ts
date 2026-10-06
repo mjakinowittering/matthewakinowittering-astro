@@ -1,3 +1,4 @@
+import { m } from '@paraglide/messages.js';
 import { format } from 'date-fns';
 
 export function formatMonthYear(date: Date) {
@@ -5,38 +6,33 @@ export function formatMonthYear(date: Date) {
 }
 
 export function formatDateRange(dateFrom: Date, dateTo?: Date | null) {
-    const to = dateTo ? formatMonthYear(dateTo) : 'Present';
-    return `${formatMonthYear(dateFrom)} – ${to}`;
+    return m.date_range({
+        from: formatMonthYear(dateFrom),
+        to: dateTo ? formatMonthYear(dateTo) : m.date_present()
+    });
 }
 
+// Counts both the start and the end month, so Aug 2019 to Aug 2019 is one
+// month, matching how LinkedIn shows durations. This is deliberate: don't
+// "fix" it to a plain difference, or every duration on the page drops a month
+// against LinkedIn. Read in UTC, as every date is stored, so the count is the
+// same on any build machine and in any visitor's time zone.
+function monthsInclusive(dateFrom: Date, dateTo: Date) {
+    return (
+        dateTo.getUTCMonth() -
+        dateFrom.getUTCMonth() +
+        1 +
+        12 * (dateTo.getUTCFullYear() - dateFrom.getUTCFullYear())
+    );
+}
+
+// "16+ years"; under a year, the months alone ("5 months")
 export function calcLengthInYears(dateFrom: Date, dateTo: Date) {
-    const diffInMonths =
-        dateTo.getMonth() -
-        dateFrom.getMonth() +
-        1 +
-        12 * (dateTo.getFullYear() - dateFrom.getFullYear());
+    const diffInMonths = monthsInclusive(dateFrom, dateTo);
 
-    const years = Math.floor(diffInMonths / 12);
+    if (diffInMonths < 12) {
+        return m.duration_months({ months: diffInMonths });
+    }
 
-    const yearSuffix = years > 1 ? '+ years' : ' year';
-
-    return `${years}${yearSuffix}`;
-}
-
-export function calcLengthInYearsAndMonths(dateFrom: Date, dateTo: Date) {
-    const diffInMonths =
-        dateTo.getMonth() -
-        dateFrom.getMonth() +
-        1 +
-        12 * (dateTo.getFullYear() - dateFrom.getFullYear());
-
-    const years = Math.floor(diffInMonths / 12);
-    const months = diffInMonths - years * 12;
-
-    const monthSuffix = months > 1 ? 'months' : 'month';
-    const yearSuffix = years > 1 ? 'years' : 'year';
-
-    return months > 0
-        ? `${years} ${yearSuffix} ${months} ${monthSuffix}`
-        : `${years} ${yearSuffix}`;
+    return m.duration_years_plus({ years: Math.floor(diffInMonths / 12) });
 }

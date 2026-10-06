@@ -4,7 +4,11 @@
     "exclude": ["dist"],
     "compilerOptions": {
         "paths": {
-            "@components/*": ["./src/components/*"]
+            "@assets/*": ["./src/assets/*"],
+            "@components/*": ["./src/components/*"],
+            "@layouts/*": ["./src/layouts/*"],
+            "@lib/*": ["./src/lib/*"],
+            "@paraglide/*": ["./src/paraglide/*"]
         },
         "plugins": [
             {

@@ -1,0 +1,35 @@
+---
+import { ExternalTextLink } from '@components/ui';
+import { formatDateRange } from '@lib/utils';
+import { m } from '@paraglide/messages.js';
+import type { CollectionEntry } from 'astro:content';
+import { render } from 'astro:content';
+
+interface Props {
+    event: CollectionEntry<'events'>;
+    organisation: CollectionEntry<'organisations'>;
+}
+
+const { event, organisation } = Astro.props;
+
+const { Content } = await render(event);
+
+const { title, dateFrom, dateTo } = event.data;
+---
+
+<p
+    class="text-muted flex-[1_1_170px] pt-1 text-[12.5px] font-bold tracking-[0.06em] uppercase"
+>
+    {formatDateRange(dateFrom, dateTo)}
+</p>
+<div class="flex min-w-0 flex-[999_1_420px] flex-col gap-1.5">
+    <h3 class="text-[19px] font-bold tracking-[-0.01em]">
+        {title}{' '}<span class="font-medium">{m.career_at()}</span>{' '}
+        <ExternalTextLink href={organisation.data.uri}>
+            {organisation.data.name}
+        </ExternalTextLink>
+    </h3>
+    <div class="text-muted max-w-[64ch] text-[15.5px]">
+        {Content ? <Content /> : <p>{m.content_not_found()}</p>}
+    </div>
+</div>

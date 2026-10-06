@@ -1,0 +1,52 @@
+---
+import { Button, Card, Doodle, Section, SectionHead } from '@components/ui';
+import { BubbleChatIcon, Mail01Icon } from '@hugeicons/core-free-icons';
+import { email, socials } from '@lib/socials';
+import { m } from '@paraglide/messages.js';
+import { getEntry, render } from 'astro:content';
+
+const blurb = await getEntry('blurbs', 'contact');
+
+if (!blurb) return Astro.redirect('/404');
+
+const { Content } = await render(blurb);
+---
+
+<Section id="contact" pad="contact" class="gap-10">
+    <SectionHead pill={m.nav_contact()} tone="teal" title={blurb.data.title} />
+    <Card
+        shape="panel"
+        class="relative flex w-full max-w-180 flex-col items-center gap-4.5 self-center px-5 py-9 text-center sm:px-8 sm:py-12"
+    >
+        <Doodle
+            icon={BubbleChatIcon}
+            position="top-right"
+            class="size-[34px] rotate-8"
+        />
+        <p class="font-marker -rotate-2 text-[30px] leading-[1.2]">
+            {m.contact_marker()}
+        </p>
+        <div class="text-muted max-w-[60ch] text-left">
+            {Content ? <Content /> : <p>{m.content_not_found()}</p>}
+        </div>
+        <div class="flex flex-wrap justify-center gap-3.5 pt-1.5">
+            <Button href={`mailto:${email}`} icon={Mail01Icon}>
+                {m.contact_get_in_touch()}
+            </Button>
+            {
+                socials
+                    .filter((social) => social.inContact)
+                    .map((social) => (
+                        <Button
+                            href={social.href}
+                            variant="ghost"
+                            external
+                            icon={social.icon}
+                        >
+                            {social.label()}
+                        </Button>
+                    ))
+            }
+        </div>
+    </Card>
+</Section>

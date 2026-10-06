@@ -1,0 +1,188 @@
+---
+name: todo-review
+description:
+    Work through the `## Todo` section in README.md and its two lists — `###
+    Bugs` (something already built that doesn't behave as intended) and `###
+    Features` (work not yet built, plus the decisions and chores that go with
+    it). Pick one or more items and plan them together, write a new item into
+    the right list, or prune items that are already done or redundant. Load
+    whenever plan mode is entered — it holds the plan's shape — and when the
+    user runs `/todo-review`, or asks to review the todo list, pick up a todo or
+    a bug, add to the features or bugs, or clear out stale ones.
+---
+
+# Todo review
+
+`README.md`'s final `## Todo` section holds two lists:
+
+- **`### Bugs`** — something **already built** that doesn't behave as intended.
+  Whether a visitor would notice it or only a developer makes no difference: a
+  button with no link and a page off the colour tokens are both bugs.
+- **`### Features`** — work **not yet built**, plus the decisions ("a decision
+  to make, not a commitment") and project chores that go with it.
+
+The split is built-but-broken versus not-yet-built, not who it is for. This
+skill shows the list, then **plans**, **adds** or **prunes**. It never
+implements — planning ends at an approved plan. Every mode spans both lists and
+leaves both `###` headings in place, even empty.
+
+Inside each list, related items sit under a `####` **theme heading** —
+"Projects", "Timeline", "Content model". The themes are part of the shape: an
+item goes under the theme it belongs to, a new theme is added only when nothing
+existing fits, and a theme emptied by a removal goes with it. The `###` headings
+always stay.
+
+## 1 — Read and show the list
+
+Each top-level `- [ ]` bullet is one item. Items are hand-wrapped, continuations
+indented six spaces, and some carry sub-bullets at four — all of that belongs to
+the parent item, not to a new one. (Prettier leaves README prose alone, so the
+wrapping is yours to keep.) Number items `1..N` **straight through both lists**
+— Bugs first, Features continuing — so a number needs no list name. Ignore
+`- [x]` unless asked.
+
+Print a **digest** under `## Bugs` / `## Features` headings (`(none)` if a list
+is empty), each `####` theme as a bold line above its items: per item, a **bold
+one-line headline**, then two to four plain sentences on what exists and what
+falls short, then — only where the item has one — `_Fix:_`, `_Out of scope:_`,
+`**Open decision:**`, `_Depends on:_ <number>`. Prefer plain words to
+identifiers.
+
+- **Flag work in flight** — uncommitted files or a branch named after an item
+  mean it's partly underway; say so on that item.
+- **Close with natural groupings** — one line on which items would plan well
+  together and why (shared files, a dependency), across lists if they fit.
+  Adjacent numbers are a hint only, and only within a list: two items either
+  side of the Bugs/Features boundary are neighbours by accident.
+
+Then ask with AskUserQuestion (header `Mode`): **Plan item(s)**, **Add an
+item**, or **Prune the list**.
+
+## 2a — Plan item(s)
+
+**Choosing.** Ask for a number, or several (`3, 7`) — the list outgrows
+AskUserQuestion's four options. An argument skips both questions: a number, a
+list or range (`3,7` / `3 7` / `2-4`, deduped, planned in list order), or a
+description (match it and confirm; list every match if several). Numbers outside
+`1..N` are a typo — say which and ask again.
+
+**Unrelated selection?** Say once that it will read as separate workstreams and
+offer to plan separately; accept the answer. A bug and a feature in one area are
+a natural pair — fixing a project card's buttons and adding a field to it both
+live in `Project.astro`.
+
+**Before plan mode:** re-read each item's full text (it names files, lines, and
+what already exists). With several items, find **overlap** (one shared edit),
+**ordering** (one unblocks or moots another) and **conflict** (ask which wins).
+Load the matching project skills from the CLAUDE.md index.
+
+**Name the session** — hand over one pasteable line and carry on without
+waiting:
+
+```
+/rename Project card source button + tags
+```
+
+About 40 characters, sentence case, describing the work — no item numbers, no
+`Todo` prefix. For several items, name what they share.
+
+**Name the branch** under `branch-and-commit`'s rules (Bugs → `bug/`, Features →
+`feature/`) and write it into the plan.
+
+**`EnterPlanMode`**, then: verify every cited path and claim against the code —
+report and drop a stale item rather than planning on it (re-emit `/rename` if
+that changes the name); explore the surrounding patterns; ask AskUserQuestion
+only on forks the code can't settle.
+
+**The plan** is one plan organised by the work — shared groundwork first — with
+each step traceable to its item. It covers:
+
+- **first step:** cut the branch off `develop` (`branch-and-commit`)
+- what the user will see afterwards — as ASCII wireframes for any visible
+  change, following `design-brief` and approved before the plan
+  (`ascii-wireframes`) — and the files touched and what changes in each
+- the CLAUDE.md rules it brushes against, new Paraglide keys (`i18n-messages`),
+  any schema field added with its first use, and how it will be checked: there
+  is no test suite, so name what to look for on the built page, at phone, tablet
+  and desktop width, and for a visible change the keyboard and screen reader
+  pass `CLAUDE.md` asks for before the PR, and `npm run compare` against the
+  reference in `docs/design/reference/` (`ascii-wireframes`, After building)
+- what's **out of scope** — each item's own fence still binds when planned with
+  others
+- **last step:** remove each completed item from its list and run
+  `npx prettier --write README.md`
+
+`ExitPlanMode`. Once approved, load `branch-and-commit` and cut the branch
+**before any edit**.
+
+**Closing the loop** is part of the work. Delete each finished item (with its
+sub-bullets), and the `####` theme with it if that emptied one. A partly done
+item is rewritten down to its remainder — and moved if the remainder now belongs
+in the other list. Report the removals with the change. Then load
+`branch-and-commit` again to stage and commit, ending the message with
+`Closes the "<item>" todo.` for each finished item.
+
+## 2b — Add an item
+
+Take the description (argument, or ask). **Investigate first**: the premise is
+often half-built or different from how it looked. Write what the code says, and
+say so plainly if the request's premise was wrong.
+
+**Pick the list** by whether the thing exists yet, and say which and why.
+Something built that misbehaves is a Bug however small its audience — the View
+source item is filed there because the button is built and always renders,
+source or not. A gap against `CLAUDE.md`'s Accessibility rules is a Bug, as that
+section says. Something that has never existed is a Feature, chores and open
+decisions included. Split an item whose broken half and unbuilt half could ship
+apart; if they can't, file it where the bulk lands and note the rest. Ask if
+it's a genuine coin-flip.
+
+House style, matching the existing entries:
+
+- opens with an imperative — "Fix…", "Add…", "Hide…", "Move…", "Drop…",
+  "Decide…"
+- states **what exists** and **what's missing** ("the schema infers `format` as
+  optional, though Astro's own `ImageFunction` declares it required")
+- cites files and symbols in backticks (`projects/Project.astro:17`,
+  `monthsInclusive`)
+- names the fix when known, and fences the scope if it could read bigger than it
+  is ("a dark theme is out of scope")
+- uses sub-bullets only for genuinely separate parts; plain tone — a note to a
+  future reader, not a ticket
+
+Write it under the right `####` theme in the right list — adding the theme only
+if nothing existing fits — then run `npx prettier --write README.md`. Show it
+and name the list and theme; if the user disagrees, just move it.
+
+**No branch, no commit** — edit README in place and leave it for the user.
+
+## 2c — Prune the list
+
+Default scope is both lists; the user may name items (`/todo-review prune 3,7`)
+or a list (`prune the bugs`). A named item is still only a candidate.
+
+Check every candidate **against the code**, never memory. Remove only on
+evidence:
+
+- **Done** — the files it names show the described state is now current.
+- **Obsolete** — its target is gone, or a later decision (CLAUDE.md, a skill,
+  another item) ruled it out; cite where.
+- **Redundant** — another item covers it; say which. Compare **across** lists —
+  a missing feature and the defect in its half-built predecessor are the
+  commonest duplicate. Partial overlap usually means merging into the fuller
+  entry.
+
+Age and size are not reasons, and a "Decide whether…" item is doing its job
+until the user rules on it. A **misfiled** item is live — offer to move it,
+don't prune it. Bugs rot fastest (they get fixed in passing), but hold them to
+the same bar.
+
+**Report before removing**: each candidate's number, reason and evidence (file
+and line). The user decides item by item — AskUserQuestion with `multiSelect`
+for up to four, otherwise a reply with numbers ("all", "none", `2, 5`). Confirm
+back any selection that differs from your proposal. Nothing qualifies? Say so
+and change nothing.
+
+Delete the confirmed items in full, drop any `####` theme that emptied, run
+`npx prettier --write README.md` once, and show both lists renumbered — without
+re-sorting the survivors. **No branch, no commit.**

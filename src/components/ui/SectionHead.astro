@@ -1,0 +1,22 @@
+---
+import Pill from './Pill.astro';
+
+interface Props {
+    // The section's pill label and its index-card colour
+    pill: string;
+    tone: 'yellow' | 'blue' | 'green' | 'pink' | 'teal';
+    title: string;
+}
+
+const { pill, tone, title } = Astro.props;
+---
+
+<div class="flex flex-col items-center gap-3.5 text-center">
+    <Pill tone={tone}>{pill}</Pill>
+    <h2
+        class="text-[30px] leading-[1.15] font-extrabold tracking-[-0.03em] sm:text-[40px]"
+    >
+        {title}
+    </h2>
+    <slot />
+</div>

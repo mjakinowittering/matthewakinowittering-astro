@@ -1,0 +1,34 @@
+---
+import { Doodle, Pill, Section } from '@components/ui';
+import { BinocularsIcon, Navigation05Icon } from '@hugeicons/core-free-icons';
+import { m } from '@paraglide/messages.js';
+import { getEntry, render } from 'astro:content';
+
+const blurb = await getEntry('blurbs', 'how-i-work');
+
+if (!blurb) return Astro.redirect('/404');
+
+const { Content } = await render(blurb);
+---
+
+<Section id="how-i-work" alt class="items-center gap-6 text-center">
+    <Doodle
+        icon={BinocularsIcon}
+        position="top-left"
+        class="size-[42px] -rotate-10"
+    />
+    <Doodle
+        icon={Navigation05Icon}
+        position="bottom-right"
+        class="size-10 rotate-10"
+    />
+    <h2 class="flex"><Pill tone="blue">{blurb.data.title}</Pill></h2>
+    {
+        // The first paragraph is the statement; the second qualifies it
+    }
+    <div
+        class="[&>p:last-child]:text-muted flex flex-col items-center gap-6 [&>p:first-child]:max-w-[30ch] [&>p:first-child]:text-[26px] [&>p:first-child]:leading-[1.3] [&>p:first-child]:font-bold [&>p:first-child]:tracking-tight sm:[&>p:first-child]:text-[36px] [&>p:last-child]:max-w-[52ch] [&>p:last-child]:text-[19px]"
+    >
+        {Content ? <Content /> : <p>{m.content_not_found()}</p>}
+    </div>
+</Section>

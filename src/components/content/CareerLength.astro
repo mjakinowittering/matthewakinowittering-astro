@@ -1,0 +1,13 @@
+---
+import { getCareerStart } from '@lib/career';
+import { calcLengthInYears, formatMonthYear } from '@lib/utils';
+import { m } from '@paraglide/messages.js';
+
+const dateFrom = await getCareerStart();
+---
+
+<time
+    datetime={dateFrom.toISOString()}
+    title={m.duration_since({ date: formatMonthYear(dateFrom) })}
+    >{calcLengthInYears(dateFrom, new Date())}</time
+>

@@ -1,24 +1,22 @@
 ---
-import Nav from '@components/block/Nav.astro';
-import SiteFooter from '@components/block/SiteFooter.astro';
-import AboutMe from '@components/home/about-me/index.astro';
-import Experience from '@components/home/experience/index.astro';
-import Education from '@components/home/experience/topics/education/index.astro';
-import Employment from '@components/home/experience/topics/employment/index.astro';
-import Training from '@components/home/experience/topics/training/index.astro';
-import Projects from '@components/home/projects/index.astro';
-import WhatIdo from '@components/home/what-do-i-do/index.astro';
-import Layout from '../layouts/Layout.astro';
-import { calcLengthInYears } from '../lib/utils';
-
-const dateFrom = new Date('2010-01-01T00:00:00+00:00');
-const dateTo = new Date();
+import {
+    Career,
+    Contact,
+    Hero,
+    HowIWork,
+    Learning,
+    Projects
+} from '@components/sections';
+import { Nav, SiteFooter } from '@components/site';
+import Layout from '@layouts/Layout.astro';
+import { getCareerStart } from '@lib/career';
+import { calcLengthInYears } from '@lib/utils';
+import { m } from '@paraglide/messages.js';
 
 const metaData = {
-    description: `I am a Product Manager with ${calcLengthInYears(
-        dateFrom,
-        dateTo
-    )} of experience, primarily in internal platforms and B2B SaaS applications.`,
+    description: m.site_description({
+        experience: calcLengthInYears(await getCareerStart(), new Date())
+    }),
     additionalMetaTags: [
         {
             name: 'google-site-verification',
@@ -29,13 +27,12 @@ const metaData = {
 ---
 
 <Layout metaData={metaData}>
-    <Nav />
-    <AboutMe />
-    <Experience />
-    <WhatIdo />
-    <Employment />
+    <Nav slot="header" />
+    <Hero />
     <Projects />
-    <Education />
-    <Training />
-    <SiteFooter />
+    <HowIWork />
+    <Career />
+    <Learning />
+    <Contact />
+    <SiteFooter slot="footer" />
 </Layout>

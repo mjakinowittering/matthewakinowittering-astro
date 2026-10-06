@@ -1,16 +1,20 @@
 ---
 name: rewrite-course
 description:
-    Rewrite the body of a course .mdx under src/content/events/courses into the
+    Rewrite the body of a course .md under src/content/events/courses into the
     site's house style, preserving frontmatter. Invoke as /rewrite-course
     <path-to-file>.
 ---
 
 # Rewrite course description
 
-Rewrites the body of a completed-course `.mdx` file into the site's house style,
+Rewrites the body of a completed-course `.md` file into the site's house style,
 so raw pasted-in source material (curriculum text, learning objectives,
 marketing copy) reads like the other entries in `src/content/events/courses/`.
+
+The page lists courses by name, date and certificate only, so a training body is
+not shown today; it stays as the record of what the course covered, and a
+degree's body is shown on its card.
 
 The target is a short, to-the-point paragraph that quickly conveys **what the
 course was** and **why it matters**. It should read as a factual summary, not as
@@ -18,8 +22,8 @@ marketing material for the course.
 
 ## Argument
 
-A single path to the target `.mdx` file, e.g.
-`/rewrite-course src/content/events/courses/anthropic/claude-code-101.mdx`.
+A single path to the target `.md` file, e.g.
+`/rewrite-course src/content/events/courses/2026-06/anthropic/claude-code-101.md`.
 
 If no path is given, ask which file to rewrite before doing anything else.
 
@@ -27,12 +31,13 @@ If no path is given, ask which file to rewrite before doing anything else.
 
 1. **Read the target file.** Note its frontmatter, especially `type` (`training`
    vs `education`) and `organisationId`.
-2. **Calibrate against siblings.** Read 1 to 3 other `.mdx` files in the _same_
-   organisation directory (the folder the target file sits in). Use them to
-   settle the two things that vary between organisations: whether the voice uses
-   first person ("my", "me") or stays neutral, and the typical length. Match the
-   siblings. If the folder has no other files, fall back to the style rules
-   below and a neutral voice.
+2. **Calibrate against siblings.** Read 1 to 3 other courses from the _same_
+   organisation, newest first. They sit in other month folders, so glob across
+   them: `src/content/events/courses/*/<org-folder>/*.md`. Use them to settle
+   the two things that vary between organisations: whether the voice uses first
+   person ("my", "me") or stays neutral, and the typical length. Match the
+   siblings. If the organisation has no other courses, fall back to the style
+   rules below and a neutral voice.
 3. **Rewrite the body only**, following the style rules below. Leave the
    frontmatter (everything between the opening and closing `---`) completely
    untouched, character for character.
@@ -49,9 +54,8 @@ user review it with `git diff`. It is version-controlled and easy to revert.
 **Structure**
 
 - Frontmatter is preserved byte for byte. Never edit it.
-- The body is flowing prose only. Remove all headings, bullet lists, and
-  scaffolding such as `Curriculum` or `About this course`, and any duplicated
-  course title.
+- The body is flowing prose (`CLAUDE.md`, Writing): strip headings, bullet
+  lists, scaffolding such as `Curriculum`, and any duplicated course title.
 - One short paragraph for `type: training` entries, even when the source is
   deep. Do not expand into a second paragraph or a long exhaustive list.
   `type: education` entries run two short paragraphs.
@@ -74,8 +78,7 @@ user review it with `git diff`. It is version-controlled and easy to revert.
 
 **Language**
 
-- British English spelling (organisation, prioritise, specialise, behaviour).
-- No em-dashes. Use commas or restructure the sentence instead.
+- `CLAUDE.md`'s Writing rules apply.
 - Short and to the point: aim for 2 to 4 sentences, roughly 50 to 90 words.
   Resist letting a deep source balloon the length; select, do not inventory.
 
@@ -90,9 +93,9 @@ user review it with `git diff`. It is version-controlled and easy to revert.
 
 Model tone and length on these short, to-the-point entries:
 
-- `src/content/events/courses/pendo/product-analytics-certification.mdx`
-- `src/content/events/courses/pendo/ai-for-product-managers.mdx`
-- `src/content/events/courses/pendo/radical-product-thinking.mdx`
-- `src/content/events/courses/scrum-alliance/certified-scrum-product-owner.mdx`
+- `src/content/events/courses/2023-06/pendo/product-analytics-certification.md`
+- `src/content/events/courses/2023-12/pendo/ai-for-product-managers.md`
+- `src/content/events/courses/2024-08/pendo/radical-product-thinking.md`
+- `src/content/events/courses/2016-06/scrum-alliance/certified-scrum-product-owner.md`
 
 Avoid the sprawl of the longer, exhaustive entries.

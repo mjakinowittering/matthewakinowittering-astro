@@ -1,0 +1,13 @@
+---
+title: Digital Adoption Certification
+uri: https://www.credly.com/badges/1f0b0553-2e0e-482a-a3ee-adc12e60e503/public_url
+organisationId: pendo
+type: training
+dateFrom: '2024-04-01T00:00:00+00:00'
+---
+
+This course covered what it means to build effective digital experiences for
+internal audiences as part of broader digital transformation efforts. It
+explored how to analyse and optimise employee software usage, reduce friction in
+business processes, and apply best practices for building and managing internal
+applications to drive measurable business outcomes.

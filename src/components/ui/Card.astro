@@ -1,0 +1,35 @@
+---
+interface Props {
+    as?: 'div' | 'li' | 'article';
+    // The corner: card (16px), tile (14px, the stat cards) or panel (20px,
+    // the contact panel)
+    shape?: 'card' | 'tile' | 'panel';
+    // The large 8px offset shadow, as on the degree card
+    shadow?: boolean;
+    class?: string;
+}
+
+const {
+    as: Tag = 'div',
+    shape = 'card',
+    shadow = false,
+    class: className
+} = Astro.props;
+
+const shapes = {
+    card: 'rounded-card',
+    tile: 'rounded-tile',
+    panel: 'rounded-panel'
+};
+---
+
+<Tag
+    class:list={[
+        'border-ink bg-card border-[1.5px]',
+        shapes[shape],
+        shadow && 'shadow-panel',
+        className
+    ]}
+>
+    <slot />
+</Tag>

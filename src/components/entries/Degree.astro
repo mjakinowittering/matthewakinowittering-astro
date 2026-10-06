@@ -1,0 +1,60 @@
+---
+import { Card, ExternalTextLink, Icon } from '@components/ui';
+import { Mortarboard01Icon } from '@hugeicons/core-free-icons';
+import { m } from '@paraglide/messages.js';
+import type { CollectionEntry } from 'astro:content';
+import { render } from 'astro:content';
+
+interface Props {
+    event: CollectionEntry<'events'>;
+    organisation: CollectionEntry<'organisations'>;
+}
+
+const { event, organisation } = Astro.props;
+
+const { Content } = await render(event);
+
+const { title, uri, dateFrom, dateTo } = event.data;
+
+const range = m.date_range({
+    from: String(dateFrom.getUTCFullYear()),
+    to: dateTo ? String(dateTo.getUTCFullYear()) : m.date_present()
+});
+---
+
+<Card
+    as="article"
+    shadow
+    class="flex flex-wrap items-start gap-x-8 gap-y-6 p-6 sm:p-8"
+>
+    <div
+        class="border-ink bg-ic-pink rounded-tile box-content flex size-16 flex-none items-center justify-center border-[1.5px]"
+    >
+        <Icon icon={Mortarboard01Icon} class="size-8" />
+    </div>
+    <div class="flex min-w-0 flex-[999_1_420px] flex-col gap-2.5">
+        <p
+            class="text-muted text-[12.5px] font-bold tracking-[0.06em] uppercase"
+        >
+            {range}
+            <span aria-hidden="true">·</span>
+            {organisation.data.name}
+        </p>
+        <h3 class="text-[28px] leading-[1.2] font-extrabold tracking-[-0.02em]">
+            {title}
+        </h3>
+        <div class="text-muted flex max-w-[68ch] flex-col gap-2.5">
+            {Content ? <Content /> : <p>{m.content_not_found()}</p>}
+        </div>
+        {
+            uri && (
+                <ExternalTextLink
+                    href={uri}
+                    class="link self-start text-[15px] font-semibold"
+                >
+                    {m.learning_view_course()}
+                </ExternalTextLink>
+            )
+        }
+    </div>
+</Card>

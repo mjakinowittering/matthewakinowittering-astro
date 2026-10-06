@@ -1,0 +1,30 @@
+---
+import { ArrowUpRight01Icon } from '@hugeicons/core-free-icons';
+import { m } from '@paraglide/messages.js';
+import Icon from './Icon.astro';
+
+interface Props {
+    href: string;
+    // A trailing arrow, as on the Certificate links; organisation names and
+    // View course go without
+    arrow?: boolean;
+    // Replaces the default content link style
+    class?: string;
+}
+
+const { href, arrow = false, class: className } = Astro.props;
+---
+
+<a
+    class:list={[
+        arrow && 'inline-flex items-center gap-[3px]',
+        className ?? 'link'
+    ]}
+    href={href}
+    target="_blank"
+    rel="noopener"
+>
+    <slot />
+    <span class="sr-only">{m.external_new_tab()}</span>
+    {arrow && <Icon icon={ArrowUpRight01Icon} class="size-3.5 flex-none" />}
+</a>

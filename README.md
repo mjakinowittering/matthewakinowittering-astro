@@ -1,21 +1,23 @@
 # Matthew's Astro Site
 
-Personal site for Matthew Akino-Wittering, a Product Manager. It presents
-employment history, training, education, and a short profile so potential
-employers can learn more than a LinkedIn page shows.
+Personal site for Matthew Akino-Wittering, a product leader and builder. One
+page presents who he is, how he works, what he has built, where he has worked
+and what he has studied, so potential employers can learn more than a LinkedIn
+page shows.
 
-Built with [Astro](https://astro.build), [Svelte](https://svelte.dev) islands,
-[Tailwind CSS](https://tailwindcss.com) v4, and MDX. It is a static site
-deployed to GitHub Pages.
+Built with [Astro](https://astro.build), [Tailwind CSS](https://tailwindcss.com)
+v4, Markdown content collections and
+[Paraglide](https://inlang.com/m/gerre34r/library-inlang-paraglideJs) for UI
+copy. It is a static site deployed to GitHub Pages.
 
-Live at [mjakinowittering.github.io](https://mjakinowittering.github.io).
+Live at [matthew.akinowittering.com](https://matthew.akinowittering.com).
 
 ## 🧞 Commands
 
 All commands are run from the root of the project, from a terminal:
 
 | Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
+| ------------------------- | ------------------------------------------------ |
 | `npm install`             | Installs dependencies                            |
 | `npm run dev`             | Starts local dev server at `localhost:4321`      |
 | `npm run build`           | Build your production site to `./dist/`          |
@@ -28,20 +30,95 @@ All commands are run from the root of the project, from a terminal:
 ## Content
 
 Site content is data-driven through Astro content collections defined in
-[`src/content.config.ts`](src/content.config.ts):
+`src/content.config.ts`:
 
-- **blurbs** intro copy for page sections
-- **organisations** employers, trainers, and universities
-- **events** individual roles and courses, each referencing an organisation
-- **skills** the "what I do" cards
+- **accomplishments:** the hero's stat cards
+- **blurbs:** the longer copy for the hero, How I work, Career and contact
+- **organisations:** employers, trainers, and universities
+- **events:** individual roles and courses, each referencing an organisation
+- **projects:** things built and shipped
 
-To add a role or course, create an event MDX file under `src/content/events/`
-with the correct `type` and an `organisationId` matching an existing
-organisation. Add the organisation under `src/content/organisations/` first if
-it does not exist.
+UI labels (section titles, buttons, page metadata) live in `messages/en.json`.
+
+To add a role or course, create an event Markdown file under
+`src/content/events/` with the correct `type` and an `organisationId` matching
+an existing organisation. Add the organisation under
+`src/content/organisations/` first if it does not exist.
 
 ## Deployment
 
 Pushing to `main` builds and deploys to GitHub Pages via
-[`.github/workflows/astro.yml`](.github/workflows/astro.yml). There is no
-separate staging environment.
+`.github/workflows/astro.yml`. There is no separate staging environment, so work
+is merged into `develop` first and released to `main` from there.
+
+## Todo
+
+### Bugs
+
+#### Tooling
+
+- [ ] Quiet the build's `MODULE_LEVEL_DIRECTIVE` warning for `blurbs/hero.mdx`:
+      Vite warns that the `"use astro:head-inject"` directive "may not be
+      preserved when bundling". The directive is added by Astro itself
+      (`vite-plugin-content-assets.js`) to every MDX content entry, whatever the
+      file holds, so nothing in this repo causes it; the page renders correctly.
+      Wait for an Astro fix rather than filtering it, and never silence other
+      warnings with it.
+- [ ] Clear the moderate `npm audit` finding: `postcss-selector-parser` 7.1.4,
+      pinned by `postcss-nested` under `eslint-plugin-tailwindcss`, which only
+      runs when linting. `npm audit fix` does not clear it; recheck when
+      `eslint-plugin-tailwindcss` releases an update.
+
+### Features
+
+#### Projects
+
+- [ ] Finish checking the DyslexicWriter card: the screen reader pass
+      `CLAUDE.md` asks for is still owed. Its layout has been checked at phone,
+      tablet and desktop widths in the redesign; confirm with VoiceOver or NVDA
+      that the card reads in order and that its `alt` text reads well aloud.
+
+#### Sharing
+
+- [ ] Redraw `public/og.png` When the years in product reach 17, in January
+      2027, the sharing card bakes "16+ years in product" into the image, so it
+      cannot derive the figure from `careerStart` as the page does. Its source
+      is `docs/design/reference/og-image.html`.
+
+#### Redesign
+
+- [ ] Rewrite the How I work and contact copy in Matthew's own voice:
+      `blurbs/how-i-work.md` and `blurbs/contact.md` hold draft copy for the
+      redesign, kept as written until he rewrites it.
+- [ ] Decide whether the Acorn-i role body keeps the Ignite figures: they are
+      typed out in `events/employment/2019-08/acorn-i/product-lead.md` and also
+      shown as the hero's stat cards from `src/content/accomplishments/`, so a
+      changed figure has two homes. A decision to make, not a commitment.
+- [ ] Add a "Download CV" button to Career once a CV exists: `design-brief`
+      places it under the Career intro, and `robots.txt` already reserves
+      `/resume`. Nothing renders it until there is a file to point at.
+- [ ] Replace the hero photo when Matthew supplies a new one: the hero still
+      uses `src/assets/MatthewAkinoWittering-BW-Alpha.png`.
+
+#### Tooling
+
+- [ ] Drop the `format` narrowing in `projects/Project.astro` once Astro's types
+      allow: the `image()` schema infers `format` as optional, though Astro's
+      own `ImageFunction` declares it required, so the card copies `img` with
+      `format` narrowed rather than passing it straight to `<Image>`. Retry
+      after an Astro upgrade with `npm run astro check`.
+- [ ] Add a pull request CI workflow and make it a required check on both `main`
+      and `develop`, as youdemo does for `master`: the only workflow,
+      `.github/workflows/astro.yml`, deploys on push to `main`, so nothing
+      checks a PR before it merges. The "Protecting main" ruleset already blocks
+      deletion and force pushes and requires a PR, but only on `main`, and it
+      lacks youdemo's required status check because there is no job to require;
+      `develop` has no protection at all. The workflow should run on every
+      `pull_request`, whatever its base, and on nothing else (see youdemo's
+      `ci.yml` for why), and cover `npm run lint`, `npm run astro check`,
+      `npm run build`, and a link check over the built `dist/`, since a broken
+      link is the kind of fault `CLAUDE.md` ranks above visual ones. `CLAUDE.md`
+      says there is no test suite: decide whether build and link checks are
+      enough or a test runner is wanted too, and update the "no test suite" line
+      to match. Once the job has run, add `refs/heads/develop` to the ruleset
+      and its name as the required check.

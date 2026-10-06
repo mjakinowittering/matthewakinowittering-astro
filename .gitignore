@@ -22,3 +22,9 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# paraglide compiled messages
+src/paraglide/
+
+# visual comparison output (npm run compare)
+.compare/

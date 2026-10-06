@@ -1,0 +1,102 @@
+---
+import { Degree, Provider } from '@components/entries';
+import { Card, Section, SectionHead } from '@components/ui';
+import { getOrganisation } from '@lib/organisations';
+import { m } from '@paraglide/messages.js';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+function newestFirst(
+    a: CollectionEntry<'events'>,
+    b: CollectionEntry<'events'>
+) {
+    return b.data.dateFrom.getTime() - a.data.dateFrom.getTime();
+}
+
+const degrees = await Promise.all(
+    (await getCollection('events', ({ data }) => data.type === 'education'))
+        .sort(newestFirst)
+        .map(async (event) => ({
+            event,
+            organisation: await getOrganisation(event)
+        }))
+);
+
+// Walking the courses newest first meets each provider at its most recent
+// course, so the providers come out in the same order
+const providers = new Map<
+    string,
+    {
+        organisation: CollectionEntry<'organisations'>;
+        courses: CollectionEntry<'events'>[];
+    }
+>();
+
+for (const course of (
+    await getCollection('events', ({ data }) => data.type === 'training')
+).sort(newestFirst)) {
+    const organisation = await getOrganisation(course);
+    const provider = providers.get(organisation.id) ?? {
+        organisation,
+        courses: []
+    };
+    provider.courses.push(course);
+    providers.set(organisation.id, provider);
+}
+---
+
+<Section id="learning" alt class="gap-8">
+    <SectionHead
+        pill={m.nav_learning()}
+        tone="pink"
+        title={m.learning_title()}
+    />
+    {
+        degrees.map(({ event, organisation }) => (
+            <Degree event={event} organisation={organisation} />
+        ))
+    }
+    <p class="mt-2 flex items-end gap-2.5 pl-2">
+        {
+            // A drawn mark, like the hero's swish: an arrow down to the list
+        }
+        <svg
+            aria-hidden="true"
+            width="70"
+            height="56"
+            viewBox="0 0 70 56"
+            fill="none"
+            class="stroke-ink flex-none"
+        >
+            <path
+                d="M6 6c6 26 24 40 54 42"
+                stroke-width="2.2"
+                stroke-linecap="round"></path>
+            <path
+                d="M50 38l11 10-14 5"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+        </svg>
+        <span class="font-marker -rotate-2 pb-3.5 text-[30px]">
+            {m.learning_marker()}
+        </span>
+    </p>
+    <Card class="overflow-hidden">
+        <ol>
+            {
+                [...providers.values()].map(
+                    ({ organisation, courses }, index) => (
+                        <li class="border-ink not-first:border-t-[1.5px]">
+                            <Provider
+                                organisation={organisation}
+                                courses={courses}
+                                number={index + 1}
+                                open={index === 0}
+                            />
+                        </li>
+                    )
+                )
+            }
+        </ol>
+    </Card>
+</Section>

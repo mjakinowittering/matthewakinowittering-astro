@@ -1,0 +1,52 @@
+---
+import { Role } from '@components/entries';
+import { Doodle, Section, SectionHead } from '@components/ui';
+import { Briefcase01Icon, Rocket01Icon } from '@hugeicons/core-free-icons';
+import { getOrganisation } from '@lib/organisations';
+import { m } from '@paraglide/messages.js';
+import { getCollection, getEntry, render } from 'astro:content';
+
+const blurb = await getEntry('blurbs', 'career');
+
+if (!blurb) return Astro.redirect('/404');
+
+const { Content } = await render(blurb);
+
+const roles = await Promise.all(
+    (await getCollection('events', ({ data }) => data.type === 'employment'))
+        .sort((a, b) => b.data.dateFrom.getTime() - a.data.dateFrom.getTime())
+        .map(async (event) => ({
+            event,
+            organisation: await getOrganisation(event)
+        }))
+);
+---
+
+<Section id="career" class="gap-16">
+    <Doodle
+        icon={Briefcase01Icon}
+        position="top-left"
+        class="size-[46px] -rotate-14"
+    />
+    <Doodle
+        icon={Rocket01Icon}
+        position="bottom-right"
+        class="size-11 rotate-12"
+    />
+    <SectionHead pill={m.nav_career()} tone="green" title={blurb.data.title}>
+        <div class="text-muted max-w-[56ch] text-left">
+            {Content ? <Content /> : <p>{m.content_not_found()}</p>}
+        </div>
+    </SectionHead>
+    <div class="flex justify-center">
+        <ol class="flex min-w-0 flex-[0_1_760px] flex-col">
+            {
+                roles.map(({ event, organisation }) => (
+                    <li class="border-ink flex flex-wrap gap-x-7 gap-y-1.5 py-7.5 not-first:border-t-[1.5px] first:pt-0 last:pb-0">
+                        <Role event={event} organisation={organisation} />
+                    </li>
+                ))
+            }
+        </ol>
+    </div>
+</Section>
