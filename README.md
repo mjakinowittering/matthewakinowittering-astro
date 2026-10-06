@@ -63,17 +63,6 @@ is merged into `develop` first and released to `main` from there.
       better. A `scroll-padding-top` on `html` in `global.css`, kept equal to
       the header's `h-14`, is the likely fix.
 
-#### Timeline
-
-- [ ] Count durations in UTC: `monthsInclusive` in `src/lib/utils.ts` reads
-      `getMonth()` and `getFullYear()`, which use the machine's time zone, but
-      every date is stored in UTC. The degree's `dateTo`
-      (`'2009-08-31T23:59:59+00:00'`) becomes 1 September in UK summer time, so
-      a local build prints "4 years" where CI, in UTC, prints "3 years 11
-      months". An ongoing role's duration runs in the visitor's browser, so west
-      of UTC its start month (midnight UTC on the 1st) slips back a month. Use
-      `getUTCMonth()` and `getUTCFullYear()`.
-
 #### Tooling
 
 - [ ] Quiet the build's two `MODULE_LEVEL_DIRECTIVE` warnings: since
