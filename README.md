@@ -107,3 +107,18 @@ is merged into `develop` first and released to `main` from there.
       own `ImageFunction` declares it required, so the card copies `img` with
       `format` narrowed rather than passing it straight to `<Image>`. Retry
       after an Astro upgrade with `npm run astro check`.
+- [ ] Add a pull request CI workflow and make it a required check on both `main`
+      and `develop`, as youdemo does for `master`: the only workflow,
+      `.github/workflows/astro.yml`, deploys on push to `main`, so nothing
+      checks a PR before it merges. The "Protecting main" ruleset already blocks
+      deletion and force pushes and requires a PR, but only on `main`, and it
+      lacks youdemo's required status check because there is no job to require;
+      `develop` has no protection at all. The workflow should run on every
+      `pull_request`, whatever its base, and on nothing else (see youdemo's
+      `ci.yml` for why), and cover `npm run lint`, `npm run astro check`,
+      `npm run build`, and a link check over the built `dist/`, since a broken
+      link is the kind of fault `CLAUDE.md` ranks above visual ones. `CLAUDE.md`
+      says there is no test suite: decide whether build and link checks are
+      enough or a test runner is wanted too, and update the "no test suite" line
+      to match. Once the job has run, add `refs/heads/develop` to the ruleset
+      and its name as the required check.
