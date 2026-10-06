@@ -1,11 +1,11 @@
 ---
 name: components-sections
 description:
-    The page sections in src/components/home/, how Career and Learning join
-    events to organisations, Layout.astro and the pages. Use whenever changing
-    how a section renders, debugging an event or organisation missing from the
-    page, changing sort order, adding a new section, editing <head> metadata or
-    sharing tags, or touching the 404 page.
+    The page sections in src/components/sections/ and the entries/ they render,
+    how Career and Learning join events to organisations, Layout.astro and the
+    pages. Use whenever changing how a section renders, debugging an event or
+    organisation missing from the page, changing sort order, adding a new
+    section, editing <head> metadata or sharing tags, or touching the 404 page.
 ---
 
 # Sections, layout and pages
@@ -15,14 +15,14 @@ description:
 `pages/index.astro` composes them in this order (anchors and bands are in
 **`project-structure`**):
 
-| Section    | Component         | Reads                                                        |
-| ---------- | ----------------- | ------------------------------------------------------------ |
-| Hero       | `home/hero`       | `blurbs/hero.mdx`, `accomplishments`, the career start       |
-| Projects   | `home/projects`   | `projects`, sorted by `index`                                |
-| How I work | `home/how-i-work` | `blurbs/how-i-work.md`                                       |
-| Career     | `home/career`     | `blurbs/career.md`, `employment` events, their organisations |
-| Learning   | `home/learning`   | `education` and `training` events, their organisations       |
-| Contact    | `home/contact`    | `blurbs/contact.md`, `src/lib/socials.ts`                    |
+| Section    | Component           | Reads                                                        |
+| ---------- | ------------------- | ------------------------------------------------------------ |
+| Hero       | `sections/Hero`     | `blurbs/hero.mdx`, `accomplishments`, the career start       |
+| Projects   | `sections/Projects` | `projects`, sorted by `index`                                |
+| How I work | `sections/HowIWork` | `blurbs/how-i-work.md`                                       |
+| Career     | `sections/Career`   | `blurbs/career.md`, `employment` events, their organisations |
+| Learning   | `sections/Learning` | `education` and `training` events, their organisations       |
+| Contact    | `sections/Contact`  | `blurbs/contact.md`, `src/lib/socials.ts`                    |
 
 ## How a section is built
 
@@ -52,14 +52,14 @@ reads the event's `organisationId` reference (organisation entries are keyed by
 their frontmatter `id`, see `content.config.ts`) and **throws when the
 organisation doesn't exist**, so a mistyped `organisationId` fails the build.
 
-- **Career** (`career/index.astro`) takes every `employment` event, newest
-  first, as one flat list. `career/Role.astro` renders a row: date range and
+- **Career** (`sections/Career.astro`) takes every `employment` event, newest
+  first, as one flat list. `entries/Role.astro` renders a row: date range and
   duration, "role at organisation" as the `<h3>` with the organisation linked,
   then the body. Rows are an `<ol>` divided by `rule` hairlines
-- **Learning** (`learning/index.astro`) renders each `education` event as a
-  featured `learning/Degree.astro` card (title, university, years and duration,
+- **Learning** (`sections/Learning.astro`) renders each `education` event as a
+  featured `entries/Degree.astro` card (title, university, years and duration,
   body, View course), then groups `training` events by provider:
-  `learning/Provider.astro` is the provider's linked `<h3>` and an `<ol>` of its
+  `entries/Provider.astro` is the provider's linked `<h3>` and an `<ol>` of its
   courses. Walking the courses newest first meets each provider at its latest
   course, so providers come out ordered by their most recent course with no
   extra sort. A course row shows its name, date and, only with a `uri`, a
@@ -87,7 +87,9 @@ Prefer fixing the content over loosening the code.
    skill for it in the same change
 3. Draw it first (**`ascii-wireframes`**), following **`design-brief`**; give it
    an index-card tone, which means a new `ic-` token, so raise it first
-4. Create `src/components/home/<section>/index.astro` in the shape above
+4. Create `src/components/sections/<Section>.astro` in the shape above, and add
+   it to `sections/index.ts`; a part rendering one entry goes in `entries/` and
+   its barrel
 5. Add it to `pages/index.astro` in position, setting `alt` so bands alternate
 6. Add it to `src/lib/sections.ts` (label, href, tone, `inNav`) so the header
    and the 404 page link to it, with a `nav_` message for its name

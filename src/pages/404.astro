@@ -1,11 +1,9 @@
 ---
-import Button from '@components/block/Button.astro';
-import Nav from '@components/block/Nav.astro';
-import Pill from '@components/block/Pill.astro';
-import SiteFooter from '@components/block/SiteFooter.astro';
+import { Nav, SiteFooter } from '@components/site';
+import { Button, Pill } from '@components/ui';
+import Layout from '@layouts/Layout.astro';
+import { sections } from '@lib/sections';
 import { m } from '@paraglide/messages.js';
-import Layout from '../layouts/Layout.astro';
-import { sections } from '../lib/sections';
 
 const metaData = {
     title: m.not_found_title(),

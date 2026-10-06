@@ -1,12 +1,10 @@
 ---
-import Doodle from '@components/block/Doodle.astro';
-import Section from '@components/block/Section.astro';
-import SectionHead from '@components/block/SectionHead.astro';
+import { Role } from '@components/entries';
+import { Doodle, Section, SectionHead } from '@components/ui';
 import { Briefcase01Icon, Rocket01Icon } from '@hugeicons/core-free-icons';
+import { getOrganisation } from '@lib/organisations';
 import { m } from '@paraglide/messages.js';
 import { getCollection, getEntry, render } from 'astro:content';
-import { getOrganisation } from '../../../lib/organisations';
-import Role from './Role.astro';
 
 const blurb = await getEntry('blurbs', 'career');
 

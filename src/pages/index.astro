@@ -1,16 +1,17 @@
 ---
-import Nav from '@components/block/Nav.astro';
-import SiteFooter from '@components/block/SiteFooter.astro';
-import Career from '@components/home/career/index.astro';
-import Contact from '@components/home/contact/index.astro';
-import Hero from '@components/home/hero/index.astro';
-import HowIWork from '@components/home/how-i-work/index.astro';
-import Learning from '@components/home/learning/index.astro';
-import Projects from '@components/home/projects/index.astro';
+import {
+    Career,
+    Contact,
+    Hero,
+    HowIWork,
+    Learning,
+    Projects
+} from '@components/sections';
+import { Nav, SiteFooter } from '@components/site';
+import Layout from '@layouts/Layout.astro';
+import { getCareerStart } from '@lib/career';
+import { calcLengthInYears } from '@lib/utils';
 import { m } from '@paraglide/messages.js';
-import Layout from '../layouts/Layout.astro';
-import { getCareerStart } from '../lib/career';
-import { calcLengthInYears } from '../lib/utils';
 
 const metaData = {
     description: m.site_description({

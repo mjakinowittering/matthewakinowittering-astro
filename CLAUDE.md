@@ -49,23 +49,23 @@ workflows live in a **project skill** under `.claude/skills/`. **Load the
 matching skill before doing substantive work in its domain** — the General Rules
 below are the invariants, the skill is the _how_.
 
-| Skill                     | Load when working on…                                                                                                                       |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `design-brief`            | why the page looks and reads as it does: any visible change, the section order, or hero, how-I-work, projects, learning or contact copy     |
-| `project-structure`       | locating a file, deciding where a new file belongs, the page's section order and anchors                                                    |
-| `content-blurbs`          | the section copy in `src/content/blurbs/`: hero, How I work, Career intro, contact                                                          |
-| `content-organisations`   | adding or editing an employer, trainer or university in `src/content/organisations/`                                                        |
-| `content-accomplishments` | the hero's stat figures in `src/content/accomplishments/`, their values, captions and order                                                 |
-| `content-events`          | adding or editing a role, course or degree in `src/content/events/`, its dates, link and body copy                                          |
-| `rewrite-course`          | turning pasted course material into the house style for one training event (`/rewrite-course <path>`)                                       |
-| `content-projects`        | the project cards in `src/content/projects/`, their screenshots, tags and links                                                             |
-| `components-block`        | the shared primitives in `src/components/block/`: Section, SectionHead, Pill, Card, Button, ExternalTextLink, Icon, Doodle, Nav, SiteFooter |
-| `components-sections`     | the page sections in `src/components/home/`, joining events to organisations, `Layout.astro`, `pages/`, adding a section                    |
-| `styling`                 | colour tokens, typography, prose styling, Tailwind v4 in `src/styles/global.css` and class strings                                          |
-| `i18n-messages`           | adding or editing a UI string or message key in `messages/en.json`                                                                          |
-| `ascii-wireframes`        | any visible change: draw it and get it approved before building                                                                             |
-| `todo-review`             | the `## Todo` list in `README.md`, and every time plan mode is entered (`/todo-review`)                                                     |
-| `branch-and-commit`       | cutting a branch off `develop`, writing a commit message, pushing, opening a PR                                                             |
+| Skill                     | Load when working on…                                                                                                                                              |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `design-brief`            | why the page looks and reads as it does: any visible change, the section order, or hero, how-I-work, projects, learning or contact copy                            |
+| `project-structure`       | locating a file, deciding where a new file belongs, the page's section order and anchors                                                                           |
+| `content-blurbs`          | the section copy in `src/content/blurbs/`: hero, How I work, Career intro, contact                                                                                 |
+| `content-organisations`   | adding or editing an employer, trainer or university in `src/content/organisations/`                                                                               |
+| `content-accomplishments` | the hero's stat figures in `src/content/accomplishments/`, their values, captions and order                                                                        |
+| `content-events`          | adding or editing a role, course or degree in `src/content/events/`, its dates, link and body copy                                                                 |
+| `rewrite-course`          | turning pasted course material into the house style for one training event (`/rewrite-course <path>`)                                                              |
+| `content-projects`        | the project cards in `src/content/projects/`, their screenshots, tags and links                                                                                    |
+| `components-block`        | the shared primitives in `src/components/ui/` (Section, SectionHead, Pill, Card, Button, ExternalTextLink, Icon, Doodle), `site/` (Nav, SiteFooter) and `islands/` |
+| `components-sections`     | the page sections in `src/components/sections/` and their `entries/`, joining events to organisations, `Layout.astro`, `pages/`, adding a section                  |
+| `styling`                 | colour tokens, typography, prose styling, Tailwind v4 in `src/styles/global.css` and class strings                                                                 |
+| `i18n-messages`           | adding or editing a UI string or message key in `messages/en.json`                                                                                                 |
+| `ascii-wireframes`        | any visible change: draw it and get it approved before building                                                                                                    |
+| `todo-review`             | the `## Todo` list in `README.md`, and every time plan mode is entered (`/todo-review`)                                                                            |
+| `branch-and-commit`       | cutting a branch off `develop`, writing a commit message, pushing, opening a PR                                                                                    |
 
 > When a domain skill contradicts a stale line here, the skill is the more
 > detailed source — but the General Rules always hold regardless of which skill
@@ -129,7 +129,7 @@ one home. Field-by-field detail lives in each collection's skill.
 
 | Collection        | Holds                                                        | Rendered by                                                 |
 | ----------------- | ------------------------------------------------------------ | ----------------------------------------------------------- |
-| `accomplishments` | the hero's stat cards, one figure each                       | `home/hero`                                                 |
+| `accomplishments` | the hero's stat cards, one figure each                       | `sections/Hero`                                             |
 | `blurbs`          | intro and long copy for each section, keyed by file name     | hero, how-i-work, career, contact                           |
 | `organisations`   | employers, trainers and universities                         | named on Career rows and on Learning's degree and providers |
 | `events`          | roles, courses and degrees, each pointing at an organisation | `career/Role`, `learning/Degree`, `learning/Provider`       |
@@ -224,10 +224,19 @@ blurb shows the figure with `<CareerLength />`.
 - **Destructure once, spread once.** Pull shared values out of `entry.data` once
   in the frontmatter and reuse them; pass a shared props object with
   `{...props}` rather than retyping the same props
-- Import components through the `@components/*` alias and messages through
-  `@paraglide/messages.js`. `src/lib/` has no alias yet; import it relatively.
-  `src/paraglide/` is compiled by the Vite plugin and ignored by git; never edit
-  it
+- Each component file is named for what it is, never `index.astro`. Each folder
+  under `src/components/` has an `index.ts` barrel re-exporting its `.astro`
+  components by name; a new component is added to its folder's barrel
+- Import components by name from their folder's barrel
+  (`import { Button, Section } from '@components/ui'`), but relatively
+  (`./Icon.astro`) from inside the same folder, so a barrel never imports
+  itself. Islands are the exception: import `.svelte` files directly by path
+  (`@components/islands/EventDescription.svelte`) and keep them out of barrels,
+  so hydration points at the island alone
+- Import `src/lib/`, `src/layouts/` and `src/assets/` through `@lib/*`,
+  `@layouts/*` and `@assets/*`, and messages through `@paraglide/messages.js`;
+  never a `../` chain. `src/paraglide/` is compiled by the Vite plugin and
+  ignored by git; never edit it
 - Every collection entry is read through `getCollection` / `getEntry` and
   rendered with `render()` — never read content files from disk directly
 - No `any`. Explicit `interface Props` on every component that takes props
@@ -249,7 +258,7 @@ blurb shows the figure with `<CareerLength />`.
   `ExternalTextLink` or `Button external` rather than writing the attributes by
   hand
 - Icons come from Hugeicons Free, rendered as static inline SVG through
-  `block/Icon.astro`; never mix in another set. How icons are labelled is under
+  `ui/Icon.astro`; never mix in another set. How icons are labelled is under
   Accessibility below
 - **One theme, light.** The site has no dark mode: no theme toggle, no `dark:`
   variants, no `prefers-color-scheme` styles

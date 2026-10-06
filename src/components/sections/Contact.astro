@@ -1,13 +1,9 @@
 ---
-import Button from '@components/block/Button.astro';
-import Card from '@components/block/Card.astro';
-import Doodle from '@components/block/Doodle.astro';
-import Section from '@components/block/Section.astro';
-import SectionHead from '@components/block/SectionHead.astro';
+import { Button, Card, Doodle, Section, SectionHead } from '@components/ui';
 import { BubbleChatIcon } from '@hugeicons/core-free-icons';
+import { email, socials } from '@lib/socials';
 import { m } from '@paraglide/messages.js';
 import { getEntry, render } from 'astro:content';
-import { email, socials } from '../../../lib/socials';
 
 const blurb = await getEntry('blurbs', 'contact');
 
