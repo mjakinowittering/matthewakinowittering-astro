@@ -1,9 +1,10 @@
 ---
 import Badge from '@components/block/Badge.astro';
+import Icon from '@components/block/Icon.astro';
 import Section from '@components/block/Section.astro';
 import SectionHead from '@components/block/SectionHead.astro';
 import Organisation from '@components/home/experience/organisation/index.astro';
-import { GraduationCap } from '@lucide/astro';
+import { Mortarboard01Icon } from '@hugeicons/core-free-icons';
 import { m } from '@paraglide/messages.js';
 import { getCollection } from 'astro:content';
 
@@ -15,7 +16,7 @@ const universities = await getCollection('organisations', ({ data }) => {
 <Section id="education" alt>
     <SectionHead title={m.education_title()} subtitle={m.education_subtitle()}>
         <Badge slot="badge" label={m.education_badge()}>
-            <GraduationCap size={26} stroke-width={1.5} />
+            <Icon icon={Mortarboard01Icon} class="size-6.5" />
         </Badge>
     </SectionHead>
     <div class="mt-9">

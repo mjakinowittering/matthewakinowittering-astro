@@ -1,6 +1,7 @@
 ---
 import ExternalTextLink from '@components/block/ExternalTextLink.astro';
-import { BadgeCheck } from '@lucide/astro';
+import Icon from '@components/block/Icon.astro';
+import { CheckmarkBadge01Icon } from '@hugeicons/core-free-icons';
 import { m } from '@paraglide/messages.js';
 import type { CollectionEntry } from 'astro:content';
 import { render } from 'astro:content';
@@ -24,10 +25,10 @@ const { title, uri, dateFrom } = event.data;
         <span class="text-ink flex flex-1 items-center gap-1.5 font-semibold">
             {
                 uri && (
-                    <BadgeCheck
+                    <Icon
+                        icon={CheckmarkBadge01Icon}
                         class="text-accent-strong inline size-3.5 flex-none"
-                        role="img"
-                        aria-label={m.course_certificate_available()}
+                        label={m.course_certificate_available()}
                     />
                 )
             }

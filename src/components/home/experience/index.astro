@@ -1,8 +1,9 @@
 ---
 import Badge from '@components/block/Badge.astro';
+import Icon from '@components/block/Icon.astro';
 import Section from '@components/block/Section.astro';
 import SectionHead from '@components/block/SectionHead.astro';
-import { Clock4 } from '@lucide/astro';
+import { Clock01Icon } from '@hugeicons/core-free-icons';
 import { m } from '@paraglide/messages.js';
 import { getEntry, render } from 'astro:content';
 
@@ -16,7 +17,7 @@ const { Content } = await render(blurb);
 <Section alt>
     <SectionHead title={blurb.data.title} subtitle={blurb.data.subtitle}>
         <Badge slot="badge" label={m.experience_badge()}>
-            <Clock4 size={26} stroke-width={1.5} />
+            <Icon icon={Clock01Icon} class="size-6.5" />
         </Badge>
     </SectionHead>
     <div

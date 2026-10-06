@@ -1,0 +1,46 @@
+---
+// A Hugeicons icon is data, a list of [tag, attributes] pairs; the package
+// doesn't export the type, so it is spelled out here
+type IconData = readonly (readonly [
+    string,
+    Readonly<Record<string, string | number>>
+])[];
+
+interface Props {
+    icon: IconData;
+    class?: string;
+    // Only for an icon that carries meaning; without it the icon is decorative
+    label?: string;
+}
+
+const { icon, class: className, label } = Astro.props;
+
+// The data is written for React: camelCase names (strokeWidth) and a `key`.
+// Markup wants stroke-width and no key.
+function toAttributes(attributes: IconData[number][1]) {
+    return Object.fromEntries(
+        Object.entries(attributes)
+            .filter(([name]) => name !== 'key')
+            .map(([name, value]) => [
+                name.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`),
+                value
+            ])
+    );
+}
+
+const a11y = label
+    ? { role: 'img', 'aria-label': label }
+    : { 'aria-hidden': 'true' };
+---
+
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    width="24"
+    height="24"
+    fill="none"
+    class={className}
+    {...a11y}
+>
+    {icon.map(([Tag, attributes]) => <Tag {...toAttributes(attributes)} />)}
+</svg>

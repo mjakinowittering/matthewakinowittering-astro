@@ -1,8 +1,9 @@
 ---
 import Badge from '@components/block/Badge.astro';
+import Icon from '@components/block/Icon.astro';
 import Section from '@components/block/Section.astro';
 import SectionHead from '@components/block/SectionHead.astro';
-import { Laptop } from '@lucide/astro';
+import { LaptopIcon } from '@hugeicons/core-free-icons';
 import { m } from '@paraglide/messages.js';
 import { getCollection, getEntry, render } from 'astro:content';
 import Skill from './Skill.astro';
@@ -21,7 +22,7 @@ const skills = (await getCollection('skills')).sort(function (a, b) {
 <Section>
     <SectionHead title={blurb.data.title} subtitle={blurb.data.subtitle}>
         <Badge slot="badge" label={m.what_i_do_badge()}>
-            <Laptop size={26} stroke-width={1.5} />
+            <Icon icon={LaptopIcon} class="size-6.5" />
         </Badge>
     </SectionHead>
     <div

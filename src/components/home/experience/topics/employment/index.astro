@@ -1,9 +1,10 @@
 ---
 import Badge from '@components/block/Badge.astro';
+import Icon from '@components/block/Icon.astro';
 import Section from '@components/block/Section.astro';
 import SectionHead from '@components/block/SectionHead.astro';
 import Organisation from '@components/home/experience/organisation/index.astro';
-import { Building } from '@lucide/astro';
+import { Building03Icon } from '@hugeicons/core-free-icons';
 import { m } from '@paraglide/messages.js';
 import { getCollection } from 'astro:content';
 
@@ -45,7 +46,7 @@ const companies = (
 <Section id="career" alt>
     <SectionHead title={m.career_title()} subtitle={m.career_subtitle()}>
         <Badge slot="badge" label={m.career_badge()}>
-            <Building size={26} stroke-width={1.5} />
+            <Icon icon={Building03Icon} class="size-6.5" />
         </Badge>
     </SectionHead>
     <div class="mt-9">

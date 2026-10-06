@@ -1,5 +1,6 @@
 ---
-import { ExternalLink } from '@lucide/astro';
+import Icon from '@components/block/Icon.astro';
+import { ArrowUpRight01Icon } from '@hugeicons/core-free-icons';
 import { m } from '@paraglide/messages.js';
 
 interface Props {
@@ -28,5 +29,8 @@ const iconSizes = {
 >
     <span><slot /></span>
     <span class="sr-only">{m.external_new_tab()}</span>
-    <ExternalLink class:list={['inline flex-none', iconSizes[size]]} />
+    <Icon
+        icon={ArrowUpRight01Icon}
+        class:list={['inline flex-none', iconSizes[size]]}
+    />
 </a>

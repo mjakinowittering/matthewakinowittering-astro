@@ -46,9 +46,9 @@ The `<h2>` and optional subtitle, with a `badge` slot on the right. Every
 ### `Badge`
 
 A round icon with a small uppercase label under it, made for `SectionHead`'s
-badge slot. Props: `label`. Slot: one Lucide icon at
-`size={26} stroke-width={1.5}`, the size every section uses. The icon is
-decorative beside its label, and Lucide renders it `aria-hidden` by default.
+badge slot. Props: `label`. Slot: one `Icon` at `class="size-6.5"`, the size
+every section uses. The icon is decorative beside its label, so it takes no
+`label` and renders `aria-hidden`.
 
 ### `Button`
 

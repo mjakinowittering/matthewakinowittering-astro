@@ -90,7 +90,7 @@ below are the invariants, the skill is the _how_.
 | Content         | Markdown in Astro content collections, validated with Zod          |
 | UI copy         | Paraglide JS, English only, in `messages/en.json`                  |
 | Styling         | Tailwind CSS v4 via `@tailwindcss/vite`, `@tailwindcss/typography` |
-| Icons           | Lucide (`@lucide/astro`, `@lucide/svelte`)                         |
+| Icons           | Hugeicons Free (`@hugeicons/core-free-icons`), as static SVG       |
 | Dates           | date-fns                                                           |
 | Formatting      | Prettier (Astro, import-sort and Tailwind plugins)                 |
 | Linting         | ESLint (TypeScript, Astro, Tailwind)                               |
@@ -248,8 +248,9 @@ blurb shows the figure with `<CareerLength />`.
 - Every external link opens in a new tab with `rel="noopener"` — use
   `ExternalTextLink` or `Button external` rather than writing the attributes by
   hand
-- Icons come from Lucide today; the redesign moves them to Hugeicons (see
-  **`design-brief`**). How icons are labelled is under Accessibility below
+- Icons come from Hugeicons Free, rendered as static inline SVG through
+  `block/Icon.astro`; never mix in another set. How icons are labelled is under
+  Accessibility below
 - **One theme, light.** The site has no dark mode: no theme toggle, no `dark:`
   variants, no `prefers-color-scheme` styles
 - **Mobile first.** Base styles are for a phone (320px to 390px wide), and `sm:`

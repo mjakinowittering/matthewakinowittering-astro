@@ -1,8 +1,9 @@
 ---
 import Badge from '@components/block/Badge.astro';
+import Icon from '@components/block/Icon.astro';
 import Section from '@components/block/Section.astro';
 import SectionHead from '@components/block/SectionHead.astro';
-import { FolderGit2 } from '@lucide/astro';
+import { Folder01Icon } from '@hugeicons/core-free-icons';
 import { m } from '@paraglide/messages.js';
 import { getCollection } from 'astro:content';
 import Project from './Project.astro';
@@ -15,7 +16,7 @@ const projects = (await getCollection('projects')).sort(function (a, b) {
 <Section id="projects">
     <SectionHead title={m.projects_title()} subtitle={m.projects_subtitle()}>
         <Badge slot="badge" label={m.projects_badge()}>
-            <FolderGit2 size={26} stroke-width={1.5} />
+            <Icon icon={Folder01Icon} class="size-6.5" />
         </Badge>
     </SectionHead>
     <div class="mt-9 flex flex-col gap-6">
