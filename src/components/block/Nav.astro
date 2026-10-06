@@ -2,14 +2,9 @@
 import Icon from '@components/block/Icon.astro';
 import { Cancel01Icon, Menu01Icon } from '@hugeicons/core-free-icons';
 import { m } from '@paraglide/messages.js';
+import { sections } from '../../lib/sections';
 
-// Rooted at `/`, so they work from the 404 page as well as the home page
-const navLinks = [
-    { label: m.nav_projects, href: '/#projects' },
-    { label: m.nav_how_i_work, href: '/#how-i-work' },
-    { label: m.nav_career, href: '/#career' },
-    { label: m.nav_learning, href: '/#learning' }
-];
+const navLinks = sections.filter((section) => section.inNav);
 
 const linkClass =
     'text-ink decoration-accent decoration-[2.5px] underline-offset-4 no-underline hover:underline';

@@ -64,8 +64,8 @@
     ],
     "duration_years_months": "{years} {months}",
     "duration_since": "I've worked in Product Management roles since {date}",
-    "not_found_title": "Page Not Found!",
-    "not_found_description": "Oops! This is embarrassing. You weren't supposed to see me...",
-    "not_found_image_alt": "Alien with Spock hand",
-    "not_found_run_away": "Run away..."
+    "not_found_title": "Page not found",
+    "not_found_description": "Sorry, the page you're looking for doesn't exist or has moved.",
+    "not_found_home": "Back to the homepage",
+    "not_found_suggestions": "Or try one of these:"
 }
