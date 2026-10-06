@@ -5,8 +5,8 @@ page presents who he is, how he works, what he has built, where he has worked
 and what he has studied, so potential employers can learn more than a LinkedIn
 page shows.
 
-Built with [Astro](https://astro.build), [Svelte](https://svelte.dev) islands,
-[Tailwind CSS](https://tailwindcss.com) v4, Markdown content collections and
+Built with [Astro](https://astro.build), [Tailwind CSS](https://tailwindcss.com)
+v4, Markdown content collections and
 [Paraglide](https://inlang.com/m/gerre34r/library-inlang-paraglideJs) for UI
 copy. It is a static site deployed to GitHub Pages.
 

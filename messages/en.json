@@ -39,7 +39,9 @@
                 "input count",
                 "local countPlural = count: plural"
             ],
-            "selectors": ["countPlural"],
+            "selectors": [
+                "countPlural"
+            ],
             "match": {
                 "countPlural=one": "{count} course",
                 "countPlural=*": "{count} courses"
@@ -52,33 +54,21 @@
     "date_present": "Present",
     "date_range": "{from} – {to}",
     "duration_years_plus": "{years}+ years",
-    "duration_years": [
-        {
-            "declarations": [
-                "input years",
-                "local yearsPlural = years: plural"
-            ],
-            "selectors": ["yearsPlural"],
-            "match": {
-                "yearsPlural=one": "{years} year",
-                "yearsPlural=*": "{years} years"
-            }
-        }
-    ],
     "duration_months": [
         {
             "declarations": [
                 "input months",
                 "local monthsPlural = months: plural"
             ],
-            "selectors": ["monthsPlural"],
+            "selectors": [
+                "monthsPlural"
+            ],
             "match": {
                 "monthsPlural=one": "{months} month",
                 "monthsPlural=*": "{months} months"
             }
         }
     ],
-    "duration_years_months": "{years} {months}",
     "duration_since": "I've worked in Product Management roles since {date}",
     "not_found_title": "Page not found",
     "not_found_description": "Sorry, the page you're looking for doesn't exist or has moved.",
