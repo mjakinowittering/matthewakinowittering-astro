@@ -1,0 +1,23 @@
+---
+import Pill from '@components/block/Pill.astro';
+import Section from '@components/block/Section.astro';
+import { m } from '@paraglide/messages.js';
+import { getEntry, render } from 'astro:content';
+
+const blurb = await getEntry('blurbs', 'how-i-work');
+
+if (!blurb) return Astro.redirect('/404');
+
+const { Content } = await render(blurb);
+---
+
+<Section id="how-i-work">
+    <div class="md:text-center">
+        <h2><Pill tone="blue">{blurb.data.title}</Pill></h2>
+        <div
+            class="prose text-ink prose-p:text-[20px] prose-p:leading-normal prose-p:font-medium prose-p:text-ink sm:prose-p:text-[26px] mx-auto mt-6 max-w-[52ch]"
+        >
+            {Content ? <Content /> : <p>{m.content_not_found()}</p>}
+        </div>
+    </div>
+</Section>

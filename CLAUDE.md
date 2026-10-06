@@ -58,7 +58,6 @@ below are the invariants, the skill is the _how_.
 | `content-accomplishments` | the hero's stat figures in `src/content/accomplishments/`, their values, captions and order                               |
 | `content-events`          | adding or editing a role, course or degree in `src/content/events/`, its dates, link and body copy                        |
 | `rewrite-course`          | turning pasted course material into the house style for one training event (`/rewrite-course <path>`)                     |
-| `content-skills`          | the three "What I do" cards in `src/content/skills/`                                                                      |
 | `content-projects`        | the project cards in `src/content/projects/`, their screenshots, tags and links                                           |
 | `components-block`        | the shared primitives in `src/components/block/` — Section, SectionHead, Badge, Button, ExternalTextLink, Nav, SiteFooter |
 | `components-sections`     | the page sections in `src/components/home/`, the timeline join, `Layout.astro`, `pages/`, adding a section                |
@@ -125,18 +124,17 @@ must agree with it.
 
 ## Data Model
 
-Everything on the page is driven by six content collections, defined with their
+Everything on the page is driven by five content collections, defined with their
 Zod schemas in [`src/content.config.ts`](src/content.config.ts) — the schema's
 one home. Field-by-field detail lives in each collection's skill.
 
-| Collection        | Holds                                                        | Rendered by                                                     |
-| ----------------- | ------------------------------------------------------------ | --------------------------------------------------------------- |
-| `accomplishments` | the hero's stat cards, one figure each                       | nothing yet; the redesign's hero                                |
-| `blurbs`          | intro and long copy for each section, keyed by file name     | about-me, experience, what-do-i-do; the redesign's four not yet |
-| `organisations`   | employers, trainers and universities                         | the Career, Education, Training timelines                       |
-| `events`          | roles, courses and degrees, each pointing at an organisation | `Role`, `Course`, `Education`                                   |
-| `skills`          | the three "What I do" cards                                  | `what-do-i-do/Skill.astro`                                      |
-| `projects`        | things built and shipped                                     | `projects/Project.astro`                                        |
+| Collection        | Holds                                                        | Rendered by                                  |
+| ----------------- | ------------------------------------------------------------ | -------------------------------------------- |
+| `accomplishments` | the hero's stat cards, one figure each                       | `home/hero`                                  |
+| `blurbs`          | intro and long copy for each section, keyed by file name     | hero, how-i-work; career and contact not yet |
+| `organisations`   | employers, trainers and universities                         | the Career, Education, Training timelines    |
+| `events`          | roles, courses and degrees, each pointing at an organisation | `Role`, `Course`, `Education`                |
+| `projects`        | things built and shipped                                     | `projects/Project.astro`                     |
 
 ### How events meet organisations
 
@@ -189,7 +187,7 @@ blurb shows the figure with `<CareerLength />`.
   `site_name` message, and the social links are `src/lib/socials.ts`. A fact
   still retyped in two places is a Todo item in `README.md`
 - Content files are `.md`. Use `.mdx` only when the body must import or compute
-  something (`about-me.mdx` derives the years of experience)
+  something (`hero.mdx` derives the years in product)
 - A new frontmatter field is added to its schema in `content.config.ts` **in the
   same commit** as the first file that uses it, and rendered by the component in
   that commit too. A field nothing renders is dead weight, not "for later"
@@ -198,8 +196,8 @@ blurb shows the figure with `<CareerLength />`.
   never a far-future date
 - After adding or renaming an event or organisation, **build and look for it on
   the page**. The build cannot catch a broken `organisationId`
-- Order comes from data: `index` for skills and projects, dates for the
-  timelines. Never reorder by moving markup around
+- Order comes from data: `index` for projects, dates for the timelines. Never
+  reorder by moving markup around
 
 ### Writing
 

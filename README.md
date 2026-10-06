@@ -70,14 +70,6 @@ is merged into `develop` first and released to `main` from there.
 
 ### Features
 
-#### Content model
-
-- [ ] Decide what the skill cards' `img` and `alt` are for: the schema requires
-      them, but `Skill.astro` shows a Lucide icon and renders neither, and two
-      of the five SVGs in `skills/img/` aren't referenced at all. Either drop
-      the fields, the files and the folder in one commit, or bring the images
-      back into the card. A decision to make, not a commitment.
-
 #### Projects
 
 - [ ] Finish checking the DyslexicWriter card: it shipped in PR #6 with the

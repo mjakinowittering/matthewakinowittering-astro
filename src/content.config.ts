@@ -60,17 +60,6 @@ const organisations = defineCollection({
     })
 });
 
-const skills = defineCollection({
-    loader: glob({ base: './src/content/skills', pattern: '**/*.{md,mdx}' }),
-    schema: ({ image }) =>
-        z.object({
-            title: z.string(),
-            img: image(),
-            alt: z.string(),
-            index: z.number()
-        })
-});
-
 const projects = defineCollection({
     loader: glob({ base: './src/content/projects', pattern: '**/*.{md,mdx}' }),
     schema: ({ image }) =>
@@ -92,6 +81,5 @@ export const collections = {
     blurbs,
     events,
     organisations,
-    projects,
-    skills
+    projects
 };
