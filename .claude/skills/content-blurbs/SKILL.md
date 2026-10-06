@@ -11,12 +11,12 @@ description: >-
 
 Each file is read by exactly one component, by its file name:
 
-| File            | `title` shows as                      | Body shows as                        | Read by             |
-| --------------- | ------------------------------------- | ------------------------------------ | ------------------- |
-| `hero.mdx`      | the `<h1>`, "I'm Matthew, a product…" | the lead paragraph under it          | `sections/Hero`     |
-| `how-i-work.md` | the blue pill, as the section's `h2`  | the two sentences, a short statement | `sections/HowIWork` |
-| `career.md`     | the Career heading                    | the intro above the roles            | `sections/Career`   |
-| `contact.md`    | the heading above the contact panel   | the panel's sentences                | `sections/Contact`  |
+| File            | `title` shows as                      | Body shows as                   | Read by             |
+| --------------- | ------------------------------------- | ------------------------------- | ------------------- |
+| `hero.mdx`      | the `<h1>`, "I'm Matthew, a product…" | the lead paragraph under it     | `sections/Hero`     |
+| `how-i-work.md` | the blue pill, as the section's `h2`  | two paragraphs, a sentence each | `sections/HowIWork` |
+| `career.md`     | the Career heading                    | the intro above the roles       | `sections/Career`   |
+| `contact.md`    | the heading above the contact panel   | the panel's sentences           | `sections/Contact`  |
 
 The file name **is** the key (`getEntry('blurbs', 'career')`). Renaming a file
 breaks its section; a new file does nothing until a component reads it.
@@ -38,11 +38,12 @@ title: Where I've worked # the section heading (the <h1> for hero)
 Plain Markdown, except `hero.mdx`, which is MDX because it shows the years in
 product. It imports `CareerLength` from `@components/content` and writes
 `<CareerLength />` where the figure goes; it renders "16+ years" inside a
-`<time>`, counted from the `careerStart` event (see `CLAUDE.md`, "Derived, never
-stored"). Never type the number or the date. Turn a blurb into `.mdx` only when
-it has to compute too, and keep the computing in a component or `src/lib/`, not
-the blurb. Every MDX entry draws a `MODULE_LEVEL_DIRECTIVE` warning from Astro
-itself (a Bugs item in `README.md`), another reason to keep to `.md`.
+`<time>`, as plain text styled like the rest of the paragraph, counted from the
+`careerStart` event (see `CLAUDE.md`, "Derived, never stored"). Never type the
+number or the date. Turn a blurb into `.mdx` only when it has to compute too,
+and keep the computing in a component or `src/lib/`, not the blurb. Every MDX
+entry draws a `MODULE_LEVEL_DIRECTIVE` warning from Astro itself (a Bugs item in
+`README.md`), another reason to keep to `.md`.
 
 ## Voice
 
@@ -53,8 +54,9 @@ General writing rules are in `CLAUDE.md`; what each section is for is in
 - **hero**: one short paragraph qualifying the heading with the hireable angle:
   data-heavy B2B SaaS, 0 to 1, AI, and happy writing the query or the spec as
   well as the strategy
-- **how-i-work**: two sentences only, carrying the product canon without naming
-  it (`design-brief`, "Hidden structure")
+- **how-i-work**: two sentences only, each its own paragraph, carrying the
+  product canon without naming it (`design-brief`, "Hidden structure"). The
+  first is set as the large statement, the second smaller beneath it
 - **career**: two or three sentences on the arc, which the role bodies below
   then record in detail; it does not repeat them
 - **contact**: three short sentences, warm and understated, never a call to

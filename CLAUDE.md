@@ -91,6 +91,7 @@ below are the invariants, the skill is the _how_.
 | Dates           | date-fns                                                         |
 | Formatting      | Prettier (Astro, import-sort and Tailwind plugins)               |
 | Linting         | ESLint 10 (TypeScript, Astro, Tailwind)                          |
+| Visual checks   | Playwright and pixelmatch, through `npm run compare`             |
 | Package manager | npm                                                              |
 | Hosting         | GitHub Pages, `matthew.akinowittering.com`                       |
 
@@ -100,14 +101,15 @@ fails the build.
 
 ## Commands
 
-| Command               | Action                               |
-| :-------------------- | :----------------------------------- |
-| `npm run dev`         | Local dev server at `localhost:4321` |
-| `npm run build`       | Production build to `./dist/`        |
-| `npm run preview`     | Preview the build locally            |
-| `npm run lint`        | `prettier --check .` then `eslint .` |
-| `npm run format`      | Format everything with Prettier      |
-| `npm run astro check` | Type check                           |
+| Command               | Action                                |
+| :-------------------- | :------------------------------------ |
+| `npm run dev`         | Local dev server at `localhost:4321`  |
+| `npm run build`       | Production build to `./dist/`         |
+| `npm run preview`     | Preview the build locally             |
+| `npm run lint`        | `prettier --check .` then `eslint .`  |
+| `npm run format`      | Format everything with Prettier       |
+| `npm run astro check` | Type check                            |
+| `npm run compare`     | Build, then diff against the mock-ups |
 
 ## Deployment
 
@@ -159,8 +161,8 @@ fails the build: the sections resolve each event through `getOrganisation()` in
 ### Derived, never stored
 
 These are computed at render time and must never be written into a content file:
-an organisation's date span and event count, a role's duration, and the "N+
-years of experience" figure.
+a provider's course count and latest course date, and the "N+ years of
+experience" figure.
 
 Every "years in product" figure counts from the one event marked
 `careerStart: true`, read through `getCareerStart()` in `src/lib/career.ts`. A
@@ -293,7 +295,9 @@ these rules and the code is a Bugs item in `README.md`'s Todo list.
 ### Planning, branching and committing
 
 - A visible change is drawn as a wireframe and approved before it is built
-  (**`ascii-wireframes`**), following **`design-brief`**
+  (**`ascii-wireframes`**), following **`design-brief`**, and checked with
+  `npm run compare` against the reference in `docs/design/reference/`, the
+  visual source of truth
 - Planned work runs on its own branch off `develop` and reaches it by PR; never
   commit or push to `main` directly. The how is in **`branch-and-commit`**
 - Before committing: `npm run format`, then `npm run lint`, then

@@ -34,11 +34,14 @@ description:
    most two `Doodle`s. Short labels are messages (see **`i18n-messages`**);
    longer copy is a blurb (see **`content-blurbs`**)
 
-A rendered content body sits in a `prose` wrapper with the section's size
-overrides, for example
-`class="prose text-muted prose-p:text-[15px] prose-p:leading-[1.65] prose-p:text-muted mt-3"`.
-Copy the nearest sibling's wrapper rather than inventing new sizes (see
-**`styling`**).
+A rendered content body sits in a plain wrapper that sets its size and colour,
+for example `<div class="text-muted max-w-[64ch] text-[15.5px]">`, with the
+values taken from the reference for that place (see **`styling`**, Content
+bodies).
+
+Every section is drawn in `docs/design/reference/`, the visual source of truth
+(see **`design-brief`**). A change to how a section looks reads its values from
+the reference `.html`, and `npm run compare` checks the result.
 
 Blurb-driven sections guard a missing entry with
 `if (!blurb) return Astro.redirect('/404');`. Keep the pattern for any new
@@ -53,21 +56,24 @@ their frontmatter `id`, see `content.config.ts`) and **throws when the
 organisation doesn't exist**, so a mistyped `organisationId` fails the build.
 
 - **Career** (`sections/Career.astro`) takes every `employment` event, newest
-  first, as one flat list. `entries/Role.astro` renders a row: date range and
-  duration, "role at organisation" as the `<h3>` with the organisation linked,
-  then the body. Rows are an `<ol>` divided by `rule` hairlines
+  first, as one flat list in a centred 760px `<ol>`. `entries/Role.astro`
+  renders a row's two flex children: the date range in a 170px column, then
+  "role at organisation" as the `<h3>` with the organisation linked and the
+  body. On a phone the date wraps above. Rows are divided by 1.5px ink rules as
+  wide as the list. No duration is shown
 - **Learning** (`sections/Learning.astro`) renders each `education` event as a
-  featured `entries/Degree.astro` card (title, university, years and duration,
-  body, View course), then groups `training` events by provider:
-  `entries/Provider.astro` is the provider's linked `<h3>` and an `<ol>` of its
-  courses. Walking the courses newest first meets each provider at its latest
-  course, so providers come out ordered by their most recent course with no
-  extra sort. A course row shows its name, date and, only with a `uri`, a
-  Certificate link whose accessible name includes the course. Course bodies are
-  not rendered
-
-The durations come from `EventDescription.svelte` (see **`components-block`**):
-live in the browser for an ongoing event, static otherwise.
+  featured `entries/Degree.astro` card (mortarboard badge, years and university,
+  title, body, View course; no duration), then the "and still learning…" marker
+  line, then one outlined card listing the `training` events grouped by
+  provider. `entries/Provider.astro` is one native `<details>`: its `<summary>`
+  shows the provider's number (01, 02…, hidden from screen readers, as the
+  `<ol>` already numbers it), name, course count and latest course date; its
+  `<ol>` holds the courses. Only the first provider starts open. Walking the
+  courses newest first meets each provider at its latest course, so providers
+  come out ordered by their most recent course with no extra sort. A course row
+  shows its name, date and, only with a `uri`, a Certificate link whose
+  accessible name includes the course. Course bodies are not rendered, and the
+  provider's name is not a link, as a link inside a `<summary>` would be
 
 ### When something is missing from the page
 
@@ -106,9 +112,11 @@ Takes `metaData: { title?, description?, additionalMetaTags?, noindex? }`.
   Google site-verification tag through `additionalMetaTags`
 - Sharing tags are set here once, for every page: a canonical link built from
   `Astro.url` and `site`, Open Graph (`og:type`, site name, `en_GB` locale,
-  title, description, url, and the hero photo as a PNG `og:image` with its
-  `alt`) and `twitter:card` `summary`. `noindex: true` swaps the canonical and
-  `og:url` for `<meta name="robots" content="noindex">`
+  title, description, url, and `og:image` pointing at the 1200 by 630
+  `public/og.png` with its width, height and the `og_image_alt` message) and the
+  Twitter card (`summary_large_image`, with the same image and alt).
+  `noindex: true` swaps the canonical and `og:url` for
+  `<meta name="robots" content="noindex">`
 - Figtree and Permanent Marker load from Google Fonts here
 
 It is also the page shell `CLAUDE.md`'s Accessibility section sets out:
@@ -122,7 +130,8 @@ renders the `header` landmark itself and `SiteFooter` the `footer`.
 
 - `index.astro` composes the sections and sets the page metadata. It holds no
   markup of its own beyond the section list
-- `404.astro` uses the shared header and footer around a centred block: a large
-  decorative "404" (`aria-hidden`), the `<h1>`, one line, a "Back to the
-  homepage" button and every section in `sections.ts` as a `Pill` link. It
-  passes `noindex`. Its copy is the `not_found_` messages
+- `404.astro` uses the shared header (with `progress={false}`) and the `ruled`
+  footer around a centred 640px block: a large decorative "404" (`aria-hidden`),
+  the `<h1>`, one line, a `size="lg"` "Back to the homepage" button and a
+  "Sections" `nav` of every section in `sections.ts` as a `Pill` link. It passes
+  `noindex`. Its copy is the `not_found_` messages

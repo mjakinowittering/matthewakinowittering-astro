@@ -3,11 +3,10 @@ name: components-block
 description: >-
     The shared primitives in src/components/ui/ (Section, SectionHead, Pill,
     Card, Button, ExternalTextLink, Icon, Doodle), the page chrome in site/
-    (Nav, SiteFooter) and the island in islands/ (EventDescription): their
-    props, when to use each, and when a new primitive is justified. Use whenever
-    building or editing any section or card, adding a button, link, pill or
-    icon, changing the nav or footer, or tempted to write a section wrapper,
-    heading or link by hand.
+    (Nav, SiteFooter): their props, when to use each, and when a new primitive
+    is justified. Use whenever building or editing any section or card, adding a
+    button, link, pill or icon, changing the nav or footer, or tempted to write
+    a section wrapper, heading or link by hand.
 ---
 
 # Block components
@@ -16,24 +15,32 @@ Primitives know nothing about content collections. They take plain props and
 slots, and every section is assembled from them. Before writing markup for a
 wrapper, heading, card, button, pill, icon or external link, use the primitive.
 
+Their values come from the reference pack in `docs/design/reference/` (see
+**`design-brief`**). Where the reference's markup sizes a box as `content-box`
+(a `min-height` or `width` that excludes padding and border), the primitive says
+`box-content` so it measures the same; Tailwind's default is `border-box`.
+
 ## Catalogue
 
 ### `Section`
 
 ```astro
-<Section id="career" alt>…</Section>
+<Section id="learning" alt class="gap-8">…</Section>
 ```
 
-| Prop  | Type      | Default | Does                            |
-| ----- | --------- | ------- | ------------------------------- |
-| `id`  | `string`  | none    | anchor target for the nav links |
-| `alt` | `boolean` | `false` | the sand band instead of base   |
+| Prop    | Type                               | Default     | Does                                       |
+| ------- | ---------------------------------- | ----------- | ------------------------------------------ |
+| `id`    | `string`                           | none        | anchor target for the nav links            |
+| `alt`   | `boolean`                          | `false`     | the sand band instead of base              |
+| `pad`   | `'section' \| 'hero' \| 'contact'` | `'section'` | the vertical padding, from a lookup        |
+| `class` | `string`                           | none        | the content column's layout, usually `gap` |
 
-Owns the vertical rhythm (`py-16 sm:py-20`) and the 1120px container
-(`max-w-280`, 16px gutter on a phone). The container is `relative`, so a
-`Doodle` placed inside sits in the section's padding. Neighbours alternate
-`alt`. Career, Learning and contact narrow their content to a centred 760px
-column (`mx-auto max-w-190`) inside it.
+The content column is a flex column, 1120px wide with 24px gutters at every
+width (`max-w-page px-6`), and `relative`, so a `Doodle` inside sits in its
+padding. `pad` is `py-16 sm:py-24` for most sections; the hero has its own, and
+Contact has no bottom padding because the footer below it supplies it. Each
+section after the first draws the 1.5px ink rule above itself
+(`not-first:border-t`) and clips its overflow. Neighbours alternate `alt`.
 
 ### `SectionHead`
 
@@ -43,9 +50,10 @@ column (`mx-auto max-w-190`) inside it.
 </SectionHead>
 ```
 
-The section's pill, then its `<h2>`. The optional slot sits beside the heading,
-outside the `<h2>`, for a marker accent. How I work has no heading beyond its
-pill, so it puts a `Pill` inside its own `<h2>` instead.
+A centred column, 14px apart: the section's pill, its `<h2>`, then the optional
+slot, outside the `<h2>`, for what follows it (Projects' marker line, Career's
+intro). How I work has no heading beyond its pill, so it puts a `Pill` inside
+its own `<h2>` instead.
 
 ### `Pill`
 
@@ -55,39 +63,47 @@ pill, so it puts a `Pill` inside its own `<h2>` instead.
 ```
 
 An outlined, fully round label in a section's index-card colour (`tone`:
-`yellow`, `blue`, `green`, `pink`, `teal`). With `href` it is a link, as on the
+`yellow`, `blue`, `green`, `pink`, `teal`). As a label it is 12px bold uppercase
+with wide tracking; with `href` it is a sentence-case 14px link pill, as on the
 404 page. The tones belong to their sections (`src/lib/sections.ts`); never pick
 one for decoration.
 
 ### `Card`
 
 ```astro
-<Card as="li" class="p-6">…</Card>
-<Card panel class="p-10">…</Card>
+<Card as="li" shape="tile" class="px-5.5 py-5">…</Card>
+<Card as="article" shadow class="p-6 sm:p-8">…</Card>
 ```
 
-The raised surface: card white, 1.5px ink outline, 16px radius. `as` is `div` or
-`li` (the stat cards are a list); `panel` adds the contact panel's `8px 8px 0`
-shadow; `class` sets padding and layout.
+The raised surface: card white with a 1.5px ink outline. `as` is `div`, `li` or
+`article`; `shape` is `card` (16px, the default), `tile` (14px, the stat cards)
+or `panel` (20px, the contact panel); `shadow` adds the large `8px 8px 0` offset
+(the degree card); `class` sets padding and layout.
 
 ### `Button`
 
 ```astro
-<Button href="#projects">{m.hero_see_projects()}</Button>
-<Button href={sourceUri} variant="ghost" external>
+<Button href="#projects" icon={ArrowDown01Icon} iconAfter>
+    {m.hero_see_projects()}
+</Button>
+<Button href={sourceUri} variant="ghost" external icon={SourceCodeIcon}>
     {m.projects_view_source()}
 </Button>
 ```
 
-| Prop       | Type                   | Default     | Does                          |
-| ---------- | ---------------------- | ----------- | ----------------------------- |
-| `href`     | `string`               | required    | it is always a link           |
-| `variant`  | `'primary' \| 'ghost'` | `'primary'` | tangerine fill, or card white |
-| `external` | `boolean`              | `false`     | new tab with `rel="noopener"` |
+| Prop        | Type                   | Default     | Does                                 |
+| ----------- | ---------------------- | ----------- | ------------------------------------ |
+| `href`      | `string`               | required    | it is always a link                  |
+| `variant`   | `'primary' \| 'ghost'` | `'primary'` | tangerine fill, or card white        |
+| `size`      | `'md' \| 'lg'`         | `'md'`      | `lg` is the 404 page's larger button |
+| `external`  | `boolean`              | `false`     | new tab with `rel="noopener"`        |
+| `icon`      | a Hugeicons icon       | none        | an 18px icon beside the label        |
+| `iconAfter` | `boolean`              | `false`     | the icon after the label, for arrows |
 
-Both variants are outlined in ink with ink text, on a hard `0 4px 0` ink edge
-that sinks to 3px when pressed. One primary per group, the action Matthew most
-wants taken; the rest are ghost.
+Both variants are outlined in ink with ink text (15px, semibold, 44px tall), on
+a hard `0 4px 0` ink edge; hovering or pressing moves it down 2px onto a 2px
+edge. One primary per group, the action Matthew most wants taken; the rest are
+ghost.
 
 ### `ExternalTextLink`
 
@@ -97,9 +113,9 @@ wants taken; the rest are ghost.
 </ExternalTextLink>
 ```
 
-An inline text link with a trailing arrow icon, opening in a new tab, styled
-with the `link` utility. `size` (`'sm'` or `'md'`) sizes the icon only. An
-optional `class` replaces the `link` style.
+An inline text link opening in a new tab, styled with the `link` utility.
+`arrow` adds a 14px trailing arrow, as on the Certificate links; organisation
+names and View course go without. An optional `class` replaces the `link` style.
 
 `Button external` and `ExternalTextLink` are the one home for new-tab links:
 both add the visually hidden `external_new_tab` message ("(opens in a new tab)")
@@ -109,7 +125,7 @@ by hand.
 ### `Icon`
 
 ```astro
-<Icon icon={Moon02Icon} class="size-6" />
+<Icon icon={Mail01Icon} class="size-5" />
 <Icon icon={CheckmarkBadge01Icon} label={iconLabel} />
 ```
 
@@ -117,46 +133,46 @@ Renders a Hugeicons Free icon (imported from `@hugeicons/core-free-icons`) as
 static inline SVG in `currentColor`, so icons ship no JavaScript. Without
 `label` it is decorative (`aria-hidden`); with one it gets `role="img"` and that
 `aria-label`, for an icon that carries meaning. Size it with a `size-*` class.
-Pick names from the package; never mix in another set.
+Pick names from the package; never mix in another set. The hero's swish, the
+bat, Learning's arrow and the starburst are drawn marks from the reference,
+inline in their sections, not icons.
 
 ### `Doodle`
 
 ```astro
-<Doodle icon={BulbIcon} position="top-left" />
+<Doodle icon={Idea01Icon} position="top-left" class="size-[38px] -rotate-10" />
 ```
 
-A decorative line icon in a section's padding, `top-left` or `bottom-right`,
-hidden below tablet width and always `aria-hidden`. At most two per section, one
-in each corner (`design-brief`, Doodles and stickers).
-
-### `EventDescription.svelte`
-
-The duration of an event ("7 years 3 months"), from
-`calcLengthInYearsAndMonths`. Career and Learning mount it `client:only` **only
-when the event is ongoing**, so the duration counts on in the browser; a
-finished event renders it at build time with no JavaScript. Because directives
-cannot be spread or made conditional, callers branch on the directive and spread
-`eventDates` into each branch (`entries/Role.astro` shows it). It lives in
-`src/components/islands/` and is imported by path, never through a barrel. It
-renders plain text, not an `aria-live` region, so a screen reader reads it once.
+A decorative ink line icon, always `aria-hidden` and hidden below 640px.
+`position` is `top-left` or `bottom-right` (72px in and 4% across, in a
+section's padding) or `top-right` (inside the contact panel). `class` is
+required: each doodle's size and tilt are copied from the reference. Placement
+rules are in **`design-brief`**, Doodles and stickers.
 
 ### `Nav` and `SiteFooter`
 
-The sticky header (the `header` landmark) and the footer. `Nav` shows the name,
-linking home, and the sections in `src/lib/sections.ts` marked `inNav`; their
-hrefs are rooted at `/` so they work from the 404 page. From 900px (the `nav:`
-breakpoint) the links sit inline; below it they move into a native `popover`
-menu opened by a real "Menu" `<button popovertarget>`, which the browser
-announces as expanded or collapsed and closes on Escape or a tap outside. A
-short inline script closes it after a link is followed. The header's height is
-the `spacing-header` token, which the menu's `top-header` and `html`'s
-`scroll-padding-top` also read. A tangerine progress bar along its bottom edge
-is a CSS scroll-driven animation (`scroll-progress` in `global.css`),
-`aria-hidden` and absent where unsupported.
+The sticky header (the `header` landmark) and the footer. The header is on the
+page base with an ink bottom edge. `Nav` shows the name, linking home; the
+sections in `src/lib/sections.ts` marked `inNav`, in a `nav` labelled
+"Sections", with hrefs rooted at `/` so they work from the 404 page; and, from
+640px, 44px square buttons for each social in `src/lib/socials.ts` and email,
+each icon-only with an `aria-label`. From 900px (the `nav:` breakpoint) the
+links sit inline; below it they move into a native `popover` menu opened by an
+icon-only `<button popovertarget>` labelled "Menu", which the browser announces
+as expanded or collapsed and closes on Escape or a tap outside. Below 640px the
+menu also carries the socials, so they stay reachable on a phone. A short inline
+script closes it after a link is followed.
+
+A 4px progress bar runs along the header's top edge: a `rule` track with a
+tangerine fill grown by a CSS scroll-driven animation (`scroll-progress` in
+`global.css`), `aria-hidden` and absent where unsupported. `progress={false}`
+leaves it out, as the 404 page does. The header's height, bar included, is the
+`spacing-header` token, which the menu's `top-header` and `html`'s
+`scroll-padding-top` also read.
 
 `SiteFooter` is the copyright line only; its year is `new Date().getFullYear()`,
-so it is right at each build. The social links live in the contact panel, read
-from `src/lib/socials.ts`.
+so it is right at each build. On the homepage it follows the contact panel with
+no rule; `ruled` puts it under a hairline, as on the 404 page.
 
 ## Writing a new primitive
 

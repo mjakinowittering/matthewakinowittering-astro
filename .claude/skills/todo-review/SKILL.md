@@ -105,7 +105,8 @@ each step traceable to its item. It covers:
   any schema field added with its first use, and how it will be checked: there
   is no test suite, so name what to look for on the built page, at phone, tablet
   and desktop width, and for a visible change the keyboard and screen reader
-  pass `CLAUDE.md` asks for before the PR
+  pass `CLAUDE.md` asks for before the PR, and `npm run compare` against the
+  reference in `docs/design/reference/` (`ascii-wireframes`, After building)
 - what's **out of scope** — each item's own fence still binds when planned with
   others
 - **last step:** remove each completed item from its list and run

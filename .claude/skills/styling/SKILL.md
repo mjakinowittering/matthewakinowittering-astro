@@ -1,19 +1,19 @@
 ---
 name: styling
 description:
-    Colour tokens, typography scale, prose styling and Tailwind v4 conventions,
-    with src/styles/global.css as their home. Use whenever writing or changing
-    class strings, picking a colour, font size or spacing, styling content body
-    text, adding a token, or fixing anything that looks off-palette.
+    Colour tokens, typography scale, content body styling and Tailwind v4
+    conventions, with src/styles/global.css as their home. Use whenever writing
+    or changing class strings, picking a colour, font size or spacing, styling
+    content body text, adding a token, or fixing anything that looks
+    off-palette.
 ---
 
 # Styling
 
 Tailwind CSS v4, loaded through the `@tailwindcss/vite` plugin in
-`astro.config.mjs` (not an Astro integration), with `@tailwindcss/typography`
-for content bodies. There is no `tailwind.config.*`: theme values are declared
-in CSS. Why the site looks as it does is in **`design-brief`**; this skill is
-how the code does it.
+`astro.config.mjs` (not an Astro integration). There is no `tailwind.config.*`:
+theme values are declared in CSS. Why the site looks as it does is in
+**`design-brief`**; this skill is how the code does it.
 
 ## Tokens
 
@@ -21,20 +21,26 @@ how the code does it.
 comment on each saying what it is for. That file is the one home for the values;
 do not copy hex codes into this skill or into components.
 
-| Token family                     | Utility examples                 | Used for                                                         |
-| -------------------------------- | -------------------------------- | ---------------------------------------------------------------- |
-| `base`, `sand`                   | `bg-base`, `bg-sand`             | the page, and the alternate section bands (`Section alt`)        |
-| `card`                           | `bg-card`                        | every raised surface: cards, header, contact panel               |
-| `ink`                            | `text-ink`, `border-ink`         | headings, outlines, button text, offset shadows, the focus ring  |
-| `muted`                          | `text-muted`                     | body copy, dates, captions, doodles                              |
-| `rule`                           | `divide-rule`                    | hairlines between Career and Learning rows; decorative only      |
-| `accent`                         | `bg-accent`, `decoration-accent` | tangerine: primary buttons, link underlines, the progress bar    |
-| `ic-*`                           | `bg-ic-yellow` … `bg-ic-teal`    | one per section's pill, through `Pill`'s `tone`; never elsewhere |
-| `ic-apricot`                     | `fill-ic-apricot`                | the hero sticker only                                            |
-| `radius-card`, `-button`         | `rounded-card`, `rounded-button` | cards and the panel; buttons and screenshots                     |
-| `shadow-offset`, `-sm`, `-panel` | `shadow-offset`, `shadow-panel`  | the hard ink edge under buttons; the contact panel's larger one  |
-| `breakpoint-nav`                 | `nav:flex`, `nav:hidden`         | 900px, where the header's links replace the menu button          |
-| `spacing-header`                 | `h-header`, `top-header`         | the header's height, also read by `scroll-padding-top` on `html` |
+| Token family                                | Utility examples                 | Used for                                                                                                                  |
+| ------------------------------------------- | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `base`, `sand`                              | `bg-base`, `bg-sand`             | the page and header, and the alternate section bands (`Section alt`)                                                      |
+| `card`                                      | `bg-card`                        | every raised surface: cards, the contact panel, the header's buttons                                                      |
+| `ink`                                       | `text-ink`, `border-ink`         | headings, outlines, the rules between sections and rows, shadows, focus                                                   |
+| `muted`                                     | `text-muted`                     | body copy, dates, captions                                                                                                |
+| `rule`                                      | `bg-rule`, `border-rule`         | the progress bar's track, the 404 footer's top edge; decorative only                                                      |
+| `hairline`                                  | `border-hairline`                | dividers between course rows in Learning; decorative only                                                                 |
+| `accent`                                    | `bg-accent`, `decoration-accent` | tangerine: primary buttons, link underlines, the hero swish, the bar                                                      |
+| `ic-*`                                      | `bg-ic-yellow` … `bg-ic-teal`    | one per section, its pill through `Pill`'s `tone`; pink also the degree badge                                             |
+| `ic-apricot`                                | `fill-ic-apricot`                | the hero sticker only                                                                                                     |
+| `radius-card`, `-tile`, `-panel`, `-button` | `rounded-card`, `rounded-tile`   | 16px cards; 14px stat cards and badge; 20px contact panel; 10px buttons                                                   |
+| `shadow-offset`, `-sm`, `-press`, `-panel`  | `shadow-offset`, `shadow-panel`  | the ink edge under buttons (4px, 3px on header squares, 2px pressed); the 8px offset under the hero photo and degree card |
+| `breakpoint-nav`                            | `nav:block`, `nav:hidden`        | 900px, where the header's links replace the menu button                                                                   |
+| `container-page`                            | `max-w-page`                     | 1168px: the 1120px content column plus its 24px gutters                                                                   |
+| `spacing-header`                            | `h-header`, `top-header`         | the header's height with its bar, also read by `scroll-padding-top`                                                       |
+
+The values match the reference pack in `docs/design/reference/`, which
+**`design-brief`** makes the visual source of truth: a new value is read from
+its `.html`, never estimated from the screenshots.
 
 Rules:
 
@@ -63,8 +69,8 @@ Every pairing in use meets `CLAUDE.md`, Accessibility. Measured:
 | `muted`    | `base`, `sand`, `card`         | 8.5 to 9.3:1   |
 
 `accent` on the page is 2.5 to 2.7:1, which is why it is never text or a lone
-edge; `rule` on `card` is 1.24:1, which is why it only ever divides. A new token
-or pairing is measured and added here.
+edge; `rule` on `base` is 1.18:1 and `hairline` on `card` 1.39:1, which is why
+they only ever divide. A new token or pairing is measured and added here.
 
 ## Type
 
@@ -73,38 +79,37 @@ or pairing is measured and added here.
 marker rule in **`design-brief`** names, always real text, never body copy.
 Sizes in use; reuse a step rather than adding one:
 
-| Role                           | Classes                                                                       |
-| ------------------------------ | ----------------------------------------------------------------------------- |
-| hero `<h1>`                    | `text-[40px] sm:text-[58px] font-extrabold leading-[1.05] tracking-[-0.02em]` |
-| section `<h2>` (`SectionHead`) | `text-[32px] sm:text-[42px] font-extrabold leading-[1.1] tracking-[-0.01em]`  |
-| card / row `<h3>`              | `text-[20px]` to `text-[24px] font-extrabold`                                 |
-| lead body                      | `text-[17px]`, `sm:text-[19px]` in the hero, `leading-[1.65]`                 |
-| body                           | `text-[15px] leading-[1.65]`                                                  |
-| meta (dates, durations)        | `text-sm font-semibold text-muted`                                            |
-| pill                           | `text-[13px] font-bold`                                                       |
-| marker accent                  | `font-marker`, `text-xl` to `text-2xl`, a slight rotate                       |
+| Role                           | Classes                                                                             |
+| ------------------------------ | ----------------------------------------------------------------------------------- |
+| body (set on `<body>`)         | `text-[16px] leading-[1.6]`; everything inherits the 1.6 line height                |
+| hero `<h1>`                    | `text-[40px] sm:text-[58px] font-extrabold leading-[1.08] tracking-[-0.035em]`      |
+| section `<h2>` (`SectionHead`) | `text-[30px] sm:text-[40px] font-extrabold leading-[1.15] tracking-[-0.03em]`       |
+| How I work statement           | `text-[26px] sm:text-[36px] font-bold leading-[1.3] tracking-tight`                 |
+| card `<h3>`                    | `text-[24px]` (projects) or `text-[28px]` (degree) `font-extrabold`                 |
+| row `<h3>`                     | `text-[19px] font-bold` (roles), `text-[22px] font-extrabold` (providers)           |
+| lead body                      | `text-[18.5px]` in the hero, `text-[19px]` in How I work                            |
+| body                           | inherited 16px; `text-[15.5px]` in role bodies                                      |
+| meta (dates)                   | `text-[12.5px] font-bold tracking-[0.06em] uppercase text-muted`                    |
+| pill                           | `text-[12px] font-bold tracking-[0.06em] uppercase`; link pills `text-[14px]`       |
+| marker accent                  | `font-marker`, `text-[22px]` to `text-[30px]`, a slight rotate; stats `text-[44px]` |
 
-Arbitrary values (`text-[15px]`, `max-w-190`) are normal in this codebase and
-fine; matching an existing value matters more than avoiding brackets.
+Arbitrary values (`text-[15.5px]`, `max-w-[56ch]`) are normal in this codebase
+and fine; matching the reference matters more than avoiding brackets.
 
-## Prose (content bodies)
+## Content bodies
 
-Every rendered content body sits in a wrapper like:
+A rendered content body sits in a plain wrapper that sets its size and colour,
+copied from the reference for that place, for example
+`<div class="text-muted max-w-[64ch] text-[15.5px]"><Content /></div>`.
+Paragraphs have no margins (Tailwind's preflight), so a body with several
+paragraphs sets the gap between them on the wrapper (`flex flex-col gap-2.5`, as
+the degree card does). There is no typography plugin.
 
-```astro
-<div
-    class="prose text-muted prose-p:text-[15px] prose-p:leading-[1.65] prose-p:text-muted mt-3"
->
-    <Content />
-</div>
-```
-
-- `prose-p:*` modifiers set paragraph size and colour per context; copy them
-  from the nearest sibling component
-- Site-wide prose overrides live in `global.css`: links use the `link` utility
-  (ink text, tangerine underline that thickens on hover and focus), and `<time>`
-  (the `CareerLength` figure) gets a dashed tangerine underline. Change those
-  there, not per component
+- A link written in a markdown body has no class, and `global.css` gives every
+  class-less `<a>` the `link` utility (ink text, tangerine underline that
+  thickens on hover and focus). Change that there, not per component
+- The `CareerLength` figure in the hero is plain text, styled like the rest of
+  its paragraph
 
 ## Class strings
 
