@@ -1,7 +1,7 @@
 ---
 import { Project } from '@components/entries';
-import { Doodle, Icon, Section, SectionHead } from '@components/ui';
-import { Idea01Icon, Moon02Icon } from '@hugeicons/core-free-icons';
+import { Doodle, Section, SectionHead } from '@components/ui';
+import { Idea01Icon } from '@hugeicons/core-free-icons';
 import { m } from '@paraglide/messages.js';
 import { getCollection } from 'astro:content';
 
@@ -10,25 +10,49 @@ const projects = (await getCollection('projects')).sort(function (a, b) {
 });
 ---
 
-<Section id="projects" alt>
-    <Doodle icon={Idea01Icon} position="top-left" />
+<Section id="projects" class="gap-10">
+    <Doodle
+        icon={Idea01Icon}
+        position="top-left"
+        class="size-[38px] -rotate-10"
+    />
     <SectionHead
         pill={m.nav_projects()}
         tone="yellow"
         title={m.projects_title()}
     >
-        <p class="font-marker inline-flex -rotate-3 items-center gap-2 text-xl">
-            {m.projects_marker()}
-            <Icon icon={Moon02Icon} class="size-6" />
+        <p class="flex items-center gap-3">
+            <span class="font-marker -rotate-3 text-[22px]">
+                {m.projects_marker()}
+            </span>
+            {
+                // A drawn mark, like the hero's swish: Hugeicons has no bat
+            }
+            <svg
+                aria-hidden="true"
+                width="72"
+                height="40"
+                viewBox="0 0 64 34"
+                fill="none"
+                class="fill-base stroke-ink rotate-10"
+            >
+                <path
+                    d="M32 13C26 7 16 4 4 8C8 10 9 13 8 17C12 15 15 16 16 19C19 16 22 16 24 19C26 17 29 17 32 22C35 17 38 17 40 19C42 16 45 16 48 19C49 16 52 15 56 17C55 13 56 10 60 8C48 4 38 7 32 13Z"
+                    stroke-width="1.8"
+                    stroke-linejoin="round"></path>
+                <path
+                    d="M28.5 13.5L27.5 7L30.5 10H33.5L36.5 7L35.5 13.5"
+                    stroke-width="1.8"
+                    stroke-linejoin="round"
+                    stroke-linecap="round"></path>
+                <circle cx="30.6" cy="12.4" r="0.9" class="fill-ink stroke-0"
+                ></circle>
+                <circle cx="33.4" cy="12.4" r="0.9" class="fill-ink stroke-0"
+                ></circle>
+            </svg>
         </p>
     </SectionHead>
-    <ul class="mt-10 grid gap-6 md:grid-cols-2">
-        {
-            projects.map((project) => (
-                <li class="flex">
-                    <Project project={project} />
-                </li>
-            ))
-        }
+    <ul class="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-7">
+        {projects.map((project) => <Project project={project} />)}
     </ul>
 </Section>
