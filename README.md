@@ -64,10 +64,10 @@ is merged into `develop` first and released to `main` from there.
       file holds, so nothing in this repo causes it; the page renders correctly.
       Wait for an Astro fix rather than filtering it, and never silence other
       warnings with it.
-- [ ] Clear the two moderate `npm audit` findings: `postcss-selector-parser`,
-      reached through `@tailwindcss/typography`, which only runs at build time.
-      npm's only offer is a downgrade to 0.5.4, which is not a fix; recheck when
-      `@tailwindcss/typography` releases an update.
+- [ ] Clear the moderate `npm audit` finding: `postcss-selector-parser` 7.1.4,
+      pinned by `postcss-nested` under `eslint-plugin-tailwindcss`, which only
+      runs when linting. `npm audit fix` does not clear it; recheck when
+      `eslint-plugin-tailwindcss` releases an update.
 
 ### Features
 

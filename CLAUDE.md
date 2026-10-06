@@ -61,7 +61,7 @@ below are the invariants, the skill is the _how_.
 | `content-projects`        | the project cards in `src/content/projects/`, their screenshots, tags and links                                                                     |
 | `components-block`        | the shared primitives in `src/components/ui/` (Section, SectionHead, Pill, Card, Button, ExternalTextLink, Icon, Doodle), `site/` (Nav, SiteFooter) |
 | `components-sections`     | the page sections in `src/components/sections/` and their `entries/`, joining events to organisations, `Layout.astro`, `pages/`, adding a section   |
-| `styling`                 | colour tokens, typography, prose styling, Tailwind v4 in `src/styles/global.css` and class strings                                                  |
+| `styling`                 | colour tokens, typography, content body styling, Tailwind v4 in `src/styles/global.css` and class strings                                           |
 | `i18n-messages`           | adding or editing a UI string or message key in `messages/en.json`                                                                                  |
 | `ascii-wireframes`        | any visible change: draw it and get it approved before building                                                                                     |
 | `todo-review`             | the `## Todo` list in `README.md`, and every time plan mode is entered (`/todo-review`)                                                             |
@@ -79,20 +79,20 @@ below are the invariants, the skill is the _how_.
 
 ## Tech Stack
 
-| Concern         | Choice                                                             |
-| --------------- | ------------------------------------------------------------------ |
-| Framework       | Astro 7, static output                                             |
-| Language        | TypeScript                                                         |
-| Content         | Markdown in Astro content collections, validated with Zod          |
-| UI copy         | Paraglide JS, English only, in `messages/en.json`                  |
-| Styling         | Tailwind CSS v4 via `@tailwindcss/vite`, `@tailwindcss/typography` |
-| Type            | Figtree, and Permanent Marker for the marker rule (Google Fonts)   |
-| Icons           | Hugeicons Free (`@hugeicons/core-free-icons`), as static SVG       |
-| Dates           | date-fns                                                           |
-| Formatting      | Prettier (Astro, import-sort and Tailwind plugins)                 |
-| Linting         | ESLint 10 (TypeScript, Astro, Tailwind)                            |
-| Package manager | npm                                                                |
-| Hosting         | GitHub Pages, `matthew.akinowittering.com`                         |
+| Concern         | Choice                                                           |
+| --------------- | ---------------------------------------------------------------- |
+| Framework       | Astro 7, static output                                           |
+| Language        | TypeScript                                                       |
+| Content         | Markdown in Astro content collections, validated with Zod        |
+| UI copy         | Paraglide JS, English only, in `messages/en.json`                |
+| Styling         | Tailwind CSS v4 via `@tailwindcss/vite`                          |
+| Type            | Figtree, and Permanent Marker for the marker rule (Google Fonts) |
+| Icons           | Hugeicons Free (`@hugeicons/core-free-icons`), as static SVG     |
+| Dates           | date-fns                                                         |
+| Formatting      | Prettier (Astro, import-sort and Tailwind plugins)               |
+| Linting         | ESLint 10 (TypeScript, Astro, Tailwind)                          |
+| Package manager | npm                                                              |
+| Hosting         | GitHub Pages, `matthew.akinowittering.com`                       |
 
 There is no test suite. `npm run build` is the test: every content file is
 parsed against its schema, so a bad date, a missing field or a malformed URL

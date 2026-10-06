@@ -1,7 +1,5 @@
 @import 'tailwindcss';
 
-@plugin '@tailwindcss/typography';
-
 @theme {
     /* Stock Tailwind colours off, so only the tokens below can be used */
     --color-*: initial;
@@ -90,7 +88,8 @@ main:focus {
     outline: none;
 }
 
-/* Links in content bodies */
-.prose a {
+/* A link written in a markdown body has no class of its own; give it the
+   content link style */
+a:not([class]) {
     @apply link font-semibold;
 }
