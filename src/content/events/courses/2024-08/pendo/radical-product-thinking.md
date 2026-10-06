@@ -7,7 +7,7 @@ dateFrom: '2024-08-30T00:00:00+00:00'
 ---
 
 This course introduced the Radical Product Thinking methodology, developed by
-Radhika Dutt, as an alternative to conventional approaches to product visioning.
-It focused on what makes a strong product vision statement, how to write a
-Radical Vision Statement, and how to use a clear vision to drive alignment
-across a team and organisation.
+Radhika Dutt, as an alternative to conventional product visioning approaches. It
+focused on what makes a strong product vision statement, how to write a Radical
+Vision Statement, and how to use a clear vision to drive alignment across a team
+and organisation.

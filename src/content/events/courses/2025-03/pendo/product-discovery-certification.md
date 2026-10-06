@@ -9,5 +9,5 @@ dateFrom: '2025-03-04T00:00:00+00:00'
 This course covered the fundamentals of product discovery and how to build a
 data-driven process for understanding customer needs and deciding what to build.
 It explored how to incorporate AI at each stage of discovery, tactical
-approaches to gathering and analysing insight, and best practices for scaling
+approaches to gathering and analysing insights, and best practices for scaling
 discovery efforts across a product organisation.

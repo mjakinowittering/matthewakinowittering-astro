@@ -7,7 +7,7 @@ dateFrom: '2016-06-01T00:00:00+00:00'
 
 This course grounded me in the Scrum framework, its principles, and the values
 that underpin effective agile teamwork. It covered the product owner role in
-practice, including how to manage competing stakeholder needs, how to develop a
-clear product vision, and how to maintain and prioritise a product backlog. It
-also focused on understanding customers well enough to consistently choose the
-right increment of value to deliver next.
+practice, including how to manage competing stakeholder needs, develop a clear
+product vision, and maintain and prioritise a product backlog. It also focused
+on understanding customers well enough to consistently choose the right
+increment of value to deliver next.

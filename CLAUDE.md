@@ -1,4 +1,4 @@
-# CLAUDE.md
+# [CLAUDE.md](http://CLAUDE.md)
 
 This file defines the conventions, patterns, and architecture for this project.
 Follow these guidelines precisely. Do not deviate without explicit instruction.
@@ -12,17 +12,17 @@ and what he has studied.
 announcing it: nothing on the page says "open to work", and nothing would be
 awkward if a current colleague landed on it. Getting in touch is easy but
 understated. The page positions him as a **product leader and builder**; how
-that shows up in layout, copy and look is in **`design-brief`**.
+that shows up in layout, copy and look is in `design-brief`.
 
 The bar for this project is **the content being right**. A wrong date, a broken
-link or a role silently missing from the timeline costs more than any visual
+link, or a role silently missing from the timeline costs more than any visual
 flaw. Every fact on the page comes from a validated content file, and the build
-is the check that it still does. Favour accuracy and plainness over cleverness.
+verifies that it still does. Favour accuracy and plainness over cleverness.
 
 **Scope — one page, by design.** The site builds to static files and has no
-server, no CMS, no database, no analytics and no forms. Any proposal that adds a
-blog, a second page type, a backend, tracking, or a contact form is out of scope
-and should be raised before it is built, not after.
+server, CMS, database, analytics, or forms. Any proposal that adds a blog, a
+second page type, a backend, tracking, or a contact form is out of scope and
+should be raised before it is built, not after.
 
 ## Principles
 
@@ -44,10 +44,10 @@ They apply to code and to guidance (this file, the skills, the README) alike.
 ## Skills Index — where the depth lives
 
 This file is the **always-on core**: invariants, the data model, and
-cross-cutting conventions. Each domain's full patterns, worked examples and
+cross-cutting conventions. Each domain's full patterns, worked examples, and
 workflows live in a **project skill** under `.claude/skills/`. **Load the
 matching skill before doing substantive work in its domain** — the General Rules
-below are the invariants, the skill is the _how_.
+below are the invariants; the skill is the _how_.
 
 | Skill                     | Load when working on…                                                                                                                               |
 | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -87,11 +87,11 @@ below are the invariants, the skill is the _how_.
 | UI copy         | Paraglide JS, English only, in `messages/en.json`                |
 | Styling         | Tailwind CSS v4 via `@tailwindcss/vite`                          |
 | Type            | Figtree, and Permanent Marker for the marker rule (Google Fonts) |
-| Icons           | Hugeicons Free (`@hugeicons/core-free-icons`), as static SVG     |
+| Icons           | HugeIcons Free (`@hugeicons/core-free-icons`), as static SVG     |
 | Dates           | date-fns                                                         |
 | Formatting      | Prettier (Astro, import-sort and Tailwind plugins)               |
 | Linting         | ESLint 10 (TypeScript, Astro, Tailwind)                          |
-| Visual checks   | Playwright and pixelmatch, through `npm run compare`             |
+| Visual checks   | Playwright and pixelmatch `npm run compare`                      |
 | Package manager | npm                                                              |
 | Hosting         | GitHub Pages, `matthew.akinowittering.com`                       |
 
@@ -102,7 +102,7 @@ fails the build.
 ## Commands
 
 | Command               | Action                                |
-| :-------------------- | :------------------------------------ |
+| --------------------- | ------------------------------------- |
 | `npm run dev`         | Local dev server at `localhost:4321`  |
 | `npm run build`       | Production build to `./dist/`         |
 | `npm run preview`     | Preview the build locally             |
@@ -114,9 +114,9 @@ fails the build.
 ## Deployment
 
 `.github/workflows/astro.yml` builds and deploys to GitHub Pages on every push
-to `main`. There is no staging environment: **pushing to `main` publishes**.
+to `main`. There is no staging environment: **pushing to** `main` **publishes**.
 Work lands on `develop` through PRs, and `main` only moves when `develop` is
-released into it (see **`branch-and-commit`**). The domain's one home is
+released into it (see `branch-and-commit`). The domain's one home is
 `public/CNAME`; `site` in `astro.config.mjs` and `Host` in `public/robots.txt`
 must agree with it.
 
@@ -125,8 +125,8 @@ must agree with it.
 ## Data Model
 
 Everything on the page is driven by five content collections, defined with their
-Zod schemas in [`src/content.config.ts`](src/content.config.ts) — the schema's
-one home. Field-by-field detail lives in each collection's skill.
+Zod schemas in `src/content.config.ts` — the schema's one home. Field-by-field
+detail lives in each collection's skill.
 
 | Collection        | Holds                                                        | Rendered by                                                 |
 | ----------------- | ------------------------------------------------------------ | ----------------------------------------------------------- |
@@ -152,11 +152,11 @@ type: employer                            type: employment
 | `training`   | `trainer`           | Learning | `events/courses/<yyyy-mm>/<org>/`    |
 | `education`  | `university`        | Learning | `events/courses/<yyyy-mm>/<org>/`    |
 
-The join is on the organisation's **frontmatter `id`**, not its file path: the
+The join is on the organisation's **frontmatter** `id`, not its file path: the
 `organisations` loader keys each entry by that `id`. A mistyped `organisationId`
 fails the build: the sections resolve each event through `getOrganisation()` in
 `src/lib/organisations.ts`, which throws on a missing one. See
-**`components-sections`**.
+`components-sections`.
 
 ### Derived, never stored
 
@@ -179,10 +179,10 @@ blurb shows the figure with `<CareerLength />`.
 
 ### Content
 
-- **Facts about Matthew live in `src/content/`**, never in a component
-- **UI copy lives in `messages/en.json`**, never as English in a component, a
+- **Facts about Matthew live in** `src/content/`, never in a component
+- **UI copy lives in** `messages/en.json`, never as English in a component, a
   page or `src/lib/`: section titles, button text, `alt` text, page metadata.
-  Read it as `m.<key>()`; details in **`i18n-messages`**
+  Read it as `m.<key>()`; details in `i18n-messages`
 - **Site-wide facts have one home**, imported, never retyped: his name is the
   `site_name` message, and the social links are `src/lib/socials.ts`. A fact
   still retyped in two places is a Todo item in `README.md`
@@ -192,7 +192,7 @@ blurb shows the figure with `<CareerLength />`.
   same commit** as the first file that uses it, and rendered by the component in
   that commit too. A field nothing renders is dead weight, not "for later"
 - Dates are **quoted ISO 8601 strings with an offset**:
-  `'2019-08-05T00:00:00+00:00'`. An ongoing role or course has **no `dateTo`** —
+  `'2019-08-05T00:00:00+00:00'`. An ongoing role or course has **no** `dateTo` —
   never a far-future date
 - After adding or renaming an event or organisation, **build and look for it on
   the page**
@@ -202,7 +202,7 @@ blurb shows the figure with `<CareerLength />`.
 ### Writing
 
 - **British English** throughout: organisation, prioritise, behaviour, programme
-- **No em dashes** in site copy (anything under `src/content/`); use a comma or
+- **No em dashes** in site copy (anything under `src/content/`), use a comma or
   restructure the sentence. The en dash `–` in a date range
   (`Aug 2019 – Present`) is correct and stays
 - Bodies are flowing prose: no headings, no bullet lists, no "About this course"
@@ -237,12 +237,12 @@ blurb shows the figure with `<CareerLength />`.
 
 ### Styling and assets
 
-- **Colours are tokens in `src/styles/global.css`**, never a hex value or a
+- **Colours are tokens in** `src/styles/global.css`, never a hex value or a
   stock Tailwind palette colour (`gray-300`) in a component; stock colours are
   switched off, so they don't compile. A new colour gets a token there with a
-  comment saying what it is for. Details in **`styling`**
-- **Type is Figtree.** Permanent Marker is for the marker rule in
-  **`design-brief`** only: short accents, always real text, never body copy
+  comment saying what it is for. Details in `styling`
+- **Type is Figtree.** Permanent Marker is for the marker rule in `design-brief`
+  only: short accents, always real text, never body copy
 - Class order is Prettier's job. Run `npm run format`; never hand-sort classes
 - Images go through `astro:assets` `<Image>` with meaningful `alt` text. A
   collection's images sit in an `img/` folder beside its content files and are
@@ -295,11 +295,11 @@ these rules and the code is a Bugs item in `README.md`'s Todo list.
 ### Planning, branching and committing
 
 - A visible change is drawn as a wireframe and approved before it is built
-  (**`ascii-wireframes`**), following **`design-brief`**, and checked with
+  (`ascii-wireframes`), following `design-brief`, and checked with
   `npm run compare` against the reference in `docs/design/reference/`, the
   visual source of truth
 - Planned work runs on its own branch off `develop` and reaches it by PR; never
-  commit or push to `main` directly. The how is in **`branch-and-commit`**
+  commit or push to `main` directly. The how is in `branch-and-commit`
 - Before committing: `npm run format`, then `npm run lint`, then
   `npm run build`, all three clean
 - Before opening a PR with a visible change: a keyboard-only pass and a screen

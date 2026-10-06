@@ -8,7 +8,7 @@ dateFrom: '2023-11-01T00:00:00+00:00'
 
 This course covered the fundamentals of the product manager role through the
 lens of the Product Management Life Cycle: Discover, Validate, Build, Launch,
-Evaluate, and Iterate. It reinforced the shift away from shipping features as a
-measure of success towards delivering outcomes that matter to both customers and
-the business. It also covered common challenges in product management and the
-best practices for navigating each phase of the lifecycle.
+Evaluate, and Iterate. It reinforced the shift away from measuring success by
+shipping features toward measuring success by delivering outcomes that matter to
+both customers and the business. It also covered common challenges in product
+management and the best practices for navigating each phase of the lifecycle.

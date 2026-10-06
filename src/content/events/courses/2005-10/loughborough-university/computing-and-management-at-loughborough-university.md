@@ -13,7 +13,7 @@ management subjects, covering software engineering, databases, programming, and
 networking alongside marketing, operations management, and accounting.
 
 The placement year gave me real-world experience before returning to complete my
-final year. For my final year project I built a project planning and reporting
-application that generated Gantt charts using the SVG file format. The
-combination of technical and business subjects has been directly relevant to
-working in product roles ever since.
+final year. For my final-year project, I built a project planning and reporting
+application that generated Gantt charts in SVG format. The combination of
+technical and business subjects has been directly relevant to working in product
+roles ever since.

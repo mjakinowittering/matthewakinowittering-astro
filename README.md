@@ -80,8 +80,8 @@ is merged into `develop` first and released to `main` from there.
 
 #### Sharing
 
-- [ ] Redraw `public/og.png` when the years in product reach 17, in January
-      2027: the sharing card bakes "16+ years in product" into the image, so it
+- [ ] Redraw `public/og.png` When the years in product reach 17, in January
+      2027, the sharing card bakes "16+ years in product" into the image, so it
       cannot derive the figure from `careerStart` as the page does. Its source
       is `docs/design/reference/og-image.html`.
 
