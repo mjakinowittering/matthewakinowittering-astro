@@ -131,7 +131,7 @@ one home. Field-by-field detail lives in each collection's skill.
 | Collection        | Holds                                                        | Rendered by                                                 |
 | ----------------- | ------------------------------------------------------------ | ----------------------------------------------------------- |
 | `accomplishments` | the hero's stat cards, one figure each                       | `home/hero`                                                 |
-| `blurbs`          | intro and long copy for each section, keyed by file name     | hero, how-i-work, career; contact not yet                   |
+| `blurbs`          | intro and long copy for each section, keyed by file name     | hero, how-i-work, career, contact                           |
 | `organisations`   | employers, trainers and universities                         | named on Career rows and on Learning's degree and providers |
 | `events`          | roles, courses and degrees, each pointing at an organisation | `career/Role`, `learning/Degree`, `learning/Provider`       |
 | `projects`        | things built and shipped                                     | `projects/Project.astro`                                    |

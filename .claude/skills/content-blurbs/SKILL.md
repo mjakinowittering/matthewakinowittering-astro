@@ -1,71 +1,67 @@
 ---
 name: content-blurbs
 description:
-    The section copy in src/content/blurbs/, for today's About me, My experience
-    and What I do intros and the redesign's hero, How I work, Career and contact
-    copy. Use whenever the user wants to change their headline, introduction,
-    bio, profile summary, career story or "how I work" copy, or asks how the
-    years-of-experience figure is shown.
+    The section copy in src/content/blurbs/: the hero's heading and lead, How I
+    work, the Career intro and the contact panel. Use whenever the user wants to
+    change their headline, introduction, bio, profile summary, career story,
+    "how I work" copy or contact copy, or asks how the years-in-product figure
+    is shown.
 ---
 
 # Blurbs: section copy
 
-Each file is read by exactly one component by its file name. Three feed today's
-page:
+Each file is read by exactly one component, by its file name:
 
-| File              | Read by                         | Shows as                                             |
-| ----------------- | ------------------------------- | ---------------------------------------------------- |
-| `about-me.mdx`    | `home/about-me/index.astro`     | the `<h1>` and opening paragraphs                    |
-| `experience.md`   | `home/experience/index.astro`   | "My experience" heading, subtitle, story             |
-| `what-do-i-do.md` | `home/what-do-i-do/index.astro` | "What I do" heading, subtitle, intro above the cards |
+| File            | `title` shows as                      | Body shows as                        | Read by           |
+| --------------- | ------------------------------------- | ------------------------------------ | ----------------- |
+| `hero.mdx`      | the `<h1>`, "I'm Matthew, a product…" | the lead paragraph under it          | `home/hero`       |
+| `how-i-work.md` | the blue pill, as the section's `h2`  | the two sentences, a short statement | `home/how-i-work` |
+| `career.md`     | the Career heading                    | the intro above the roles            | `home/career`     |
+| `contact.md`    | the heading above the contact panel   | the panel's sentences                | `home/contact`    |
 
-Four more hold the redesign's copy and are read by nothing until their section
-is built (see **`design-brief`**). Their bodies are Matthew's draft, kept as
-written; How I work and contact are to be rewritten in his own voice:
-
-| File            | `title` (the section heading) | Feeds                               |
-| --------------- | ----------------------------- | ----------------------------------- |
-| `hero.mdx`      | I'm Matthew, a product leader | 1. Hero: the lead paragraph         |
-| `how-i-work.md` | How I work                    | 3. How I work: the two sentences    |
-| `career.md`     | Where I've worked             | 4. Career: the intro above the list |
-| `contact.md`    | Fancy a chat about product?   | 6. Contact: the panel's sentences   |
-
-The file name **is** the key (`getEntry('blurbs', 'about-me')`). Renaming a file
+The file name **is** the key (`getEntry('blurbs', 'career')`). Renaming a file
 breaks its section; a new file does nothing until a component reads it.
+
+The short labels around a blurb are messages, not blurb fields: the section
+pills, and the marker lines in Permanent Marker ("and builder." under the hero
+heading, "What are you building?" in the panel). See **`i18n-messages`**.
 
 ## Frontmatter
 
 ```yaml
 ---
-title: My experience # the section heading (the <h1> for about-me)
-subtitle: The story behind the CV # optional; about-me has none
+title: Where I've worked # the section heading (the <h1> for hero)
 ---
 ```
 
 ## Body
 
-Plain Markdown, except `about-me.mdx` and `hero.mdx`, which are MDX because they
-show the years in product. Each imports `CareerLength` from
-`@components/content/CareerLength.astro` and writes `<CareerLength />` where the
-figure goes; it renders "16+ years" inside a `<time>`, counted from the
-`careerStart` event (see `CLAUDE.md`, "Derived, never stored"). Never type the
-number or the date. Turn a blurb into `.mdx` only when it has to compute too,
-and keep the computing in a component or `src/lib/`, not the blurb.
+Plain Markdown, except `hero.mdx`, which is MDX because it shows the years in
+product. It imports `CareerLength` from `@components/content/CareerLength.astro`
+and writes `<CareerLength />` where the figure goes; it renders "16+ years"
+inside a `<time>`, counted from the `careerStart` event (see `CLAUDE.md`,
+"Derived, never stored"). Never type the number or the date. Turn a blurb into
+`.mdx` only when it has to compute too, and keep the computing in a component or
+`src/lib/`, not the blurb. Every MDX entry draws a `MODULE_LEVEL_DIRECTIVE`
+warning from Astro itself (a Bugs item in `README.md`), another reason to keep
+to `.md`.
 
 ## Voice
 
-General writing rules are in `CLAUDE.md`. Where the hero and how-I-work copy is
-heading in the redesign is in **`design-brief`**; until those sections are
-rebuilt, the rules below describe today's blurbs. For blurbs:
+General writing rules are in `CLAUDE.md`; what each section is for is in
+**`design-brief`**. For blurbs:
 
 - First person, present tense: these describe who Matthew is now
-- **about-me**: two short paragraphs. What he does and where, then what he is
-  best at. A recruiter should get it in ten seconds
-- **experience**: three or four paragraphs telling the career as a story, newest
-  first: the current role and its products, then earlier roles more briefly.
-  Link company names inline. It complements the Career timeline, so it does not
-  repeat role bodies sentence for sentence
-- **what-do-i-do**: two short paragraphs on how he works. The three skill cards
-  below it carry the specifics
+- **hero**: one short paragraph qualifying the heading with the hireable angle:
+  data-heavy B2B SaaS, 0 to 1, AI, and happy writing the query or the spec as
+  well as the strategy
+- **how-i-work**: two sentences only, carrying the product canon without naming
+  it (`design-brief`, "Hidden structure")
+- **career**: two or three sentences on the arc, which the role bodies below
+  then record in detail; it does not repeat them
+- **contact**: three short sentences, warm and understated, never a call to
+  action
+- How I work and contact are Matthew's drafts, to be rewritten in his own voice
+  (a Features item in `README.md`); keep them as written until he does
 - Concrete over abstract: name products, numbers and kinds of problem rather
   than adjectives like "passionate" or "results-driven"

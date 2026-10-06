@@ -99,15 +99,6 @@ is merged into `develop` first and released to `main` from there.
       now also stat cards in `src/content/accomplishments/`. Decide once the
       redesign's hero renders the stat cards. A decision to make, not a
       commitment.
-- [ ] Settle the redesign blurbs' headings and the hero's wording when their
-      sections are built. Both are decisions to make, not commitments:
-    - the `title`s of `hero.mdx`, `how-i-work.md`, `career.md` and `contact.md`
-      are the headings from `design-brief`, put in because the schema requires
-      one. `hero.mdx`'s holds "I'm Matthew, a product leader", but the marker
-      line "and builder." has no home yet: a message or part of the blurb
-    - the draft "{years} years shaping…" became `<CareerLength /> shaping…`,
-      which renders "16+ years shaping…" because `calcLengthInYears` already
-      says "years". Check it reads as intended
 
 #### Tooling
 

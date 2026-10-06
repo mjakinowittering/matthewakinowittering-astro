@@ -1,0 +1,47 @@
+---
+import Button from '@components/block/Button.astro';
+import Card from '@components/block/Card.astro';
+import Section from '@components/block/Section.astro';
+import SectionHead from '@components/block/SectionHead.astro';
+import { m } from '@paraglide/messages.js';
+import { getEntry, render } from 'astro:content';
+import { email, socials } from '../../../lib/socials';
+
+const blurb = await getEntry('blurbs', 'contact');
+
+if (!blurb) return Astro.redirect('/404');
+
+const { Content } = await render(blurb);
+---
+
+<Section id="contact" alt>
+    <div class="mx-auto max-w-190">
+        <SectionHead
+            pill={m.nav_contact()}
+            tone="teal"
+            title={blurb.data.title}
+        />
+        <Card panel class="mt-8 p-6 sm:p-10">
+            <p class="font-marker -rotate-2 text-2xl sm:text-[28px]">
+                {m.contact_marker()}
+            </p>
+            <div
+                class="prose text-muted prose-p:text-[17px] prose-p:leading-[1.65] prose-p:text-muted mt-4"
+            >
+                {Content ? <Content /> : <p>{m.content_not_found()}</p>}
+            </div>
+            <div class="mt-8 flex flex-wrap gap-4">
+                <Button href={`mailto:${email}`}>
+                    {m.contact_get_in_touch()}
+                </Button>
+                {
+                    socials.map((social) => (
+                        <Button href={social.href} variant="ghost" external>
+                            {social.label()}
+                        </Button>
+                    ))
+                }
+            </div>
+        </Card>
+    </div>
+</Section>
