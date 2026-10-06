@@ -1,0 +1,46 @@
+---
+import EventDescription from '@components/block/EventDescription.svelte';
+import ExternalTextLink from '@components/block/ExternalTextLink.astro';
+import { m } from '@paraglide/messages.js';
+import type { CollectionEntry } from 'astro:content';
+import { render } from 'astro:content';
+import { formatDateRange } from '../../../lib/utils';
+
+interface Props {
+    event: CollectionEntry<'events'>;
+    organisation: CollectionEntry<'organisations'>;
+}
+
+const { event, organisation } = Astro.props;
+
+const { Content } = await render(event);
+
+const { title, dateFrom, dateTo } = event.data;
+
+const ongoing = !dateTo;
+
+const eventDates = { dateFrom, dateTo };
+---
+
+<p class="text-muted text-sm font-semibold">
+    {formatDateRange(dateFrom, dateTo)}{' '}
+    <span aria-hidden="true">·</span>{' '}
+    {
+        ongoing ? (
+            <EventDescription client:only="svelte" {...eventDates} />
+        ) : (
+            <EventDescription {...eventDates} />
+        )
+    }
+</p>
+<h3 class="mt-1.5 text-[20px] leading-snug font-extrabold">
+    {title}{' '}{m.career_at()}{' '}
+    <ExternalTextLink href={organisation.data.uri}>
+        {organisation.data.name}
+    </ExternalTextLink>
+</h3>
+<div
+    class="prose text-muted prose-p:text-[15px] prose-p:leading-[1.65] prose-p:text-muted mt-3"
+>
+    {Content ? <Content /> : <p>{m.content_not_found()}</p>}
+</div>

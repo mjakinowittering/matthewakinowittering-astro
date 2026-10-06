@@ -1,0 +1,47 @@
+---
+import Section from '@components/block/Section.astro';
+import SectionHead from '@components/block/SectionHead.astro';
+import { m } from '@paraglide/messages.js';
+import { getCollection, getEntry, render } from 'astro:content';
+import { getOrganisation } from '../../../lib/organisations';
+import Role from './Role.astro';
+
+const blurb = await getEntry('blurbs', 'career');
+
+if (!blurb) return Astro.redirect('/404');
+
+const { Content } = await render(blurb);
+
+const roles = await Promise.all(
+    (await getCollection('events', ({ data }) => data.type === 'employment'))
+        .sort((a, b) => b.data.dateFrom.getTime() - a.data.dateFrom.getTime())
+        .map(async (event) => ({
+            event,
+            organisation: await getOrganisation(event)
+        }))
+);
+---
+
+<Section id="career" alt>
+    <div class="mx-auto max-w-190">
+        <SectionHead
+            pill={m.nav_career()}
+            tone="green"
+            title={blurb.data.title}
+        />
+        <div
+            class="prose text-muted prose-p:text-[17px] prose-p:leading-[1.65] prose-p:text-muted mt-5"
+        >
+            {Content ? <Content /> : <p>{m.content_not_found()}</p>}
+        </div>
+        <ol class="divide-rule mt-6 divide-y-[1.5px]">
+            {
+                roles.map(({ event, organisation }) => (
+                    <li class="py-7.5">
+                        <Role event={event} organisation={organisation} />
+                    </li>
+                ))
+            }
+        </ol>
+    </div>
+</Section>
