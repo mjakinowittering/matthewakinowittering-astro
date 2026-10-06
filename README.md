@@ -71,11 +71,10 @@ is merged into `develop` first and released to `main` from there.
       preserved when bundling". The page renders the same as before; it is
       noise. Find out whether Astro fixes it upstream before filtering it, and
       never by silencing other warnings with it.
-- [ ] Clear the five high `npm audit` findings: all are `braces`, reached
-      through `micromatch`, `fast-glob` and `astro-eslint-parser` from
-      `eslint-plugin-astro@1.7.0`, a devDependency used only by `npm run lint`,
-      so nothing ships to the site. The only fix is `eslint-plugin-astro` 3.x, a
-      major bump; check `eslint.config` still works with it.
+- [ ] Clear the two moderate `npm audit` findings: `postcss-selector-parser`,
+      reached through `@tailwindcss/typography`, which only runs at build time.
+      npm's only offer is a downgrade to 0.5.4, which is not a fix; recheck when
+      `@tailwindcss/typography` releases an update.
 
 ### Features
 
