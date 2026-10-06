@@ -36,24 +36,3 @@ export function calcLengthInYears(dateFrom: Date, dateTo: Date) {
 
     return m.duration_years_plus({ years: Math.floor(diffInMonths / 12) });
 }
-
-// "2 years 3 months", "2 years" or "5 months", never "0 years 5 months"
-export function calcLengthInYearsAndMonths(dateFrom: Date, dateTo: Date) {
-    const diffInMonths = monthsInclusive(dateFrom, dateTo);
-
-    const years = Math.floor(diffInMonths / 12);
-    const months = diffInMonths % 12;
-
-    if (years === 0) {
-        return m.duration_months({ months });
-    }
-
-    if (months === 0) {
-        return m.duration_years({ years });
-    }
-
-    return m.duration_years_months({
-        years: m.duration_years({ years }),
-        months: m.duration_months({ months })
-    });
-}

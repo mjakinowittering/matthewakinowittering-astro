@@ -1,56 +1,114 @@
 ---
 import { Icon } from '@components/ui';
-import { Cancel01Icon, Menu01Icon } from '@hugeicons/core-free-icons';
+import {
+    Cancel01Icon,
+    Mail01Icon,
+    Menu01Icon
+} from '@hugeicons/core-free-icons';
 import { sections } from '@lib/sections';
+import { email, socials } from '@lib/socials';
 import { m } from '@paraglide/messages.js';
+
+interface Props {
+    // The reading-progress bar along the top; the 404 page goes without
+    progress?: boolean;
+}
+
+const { progress = true } = Astro.props;
 
 const navLinks = sections.filter((section) => section.inNav);
 
 const linkClass =
-    'text-ink decoration-accent decoration-[2.5px] underline-offset-4 no-underline hover:underline';
+    'text-ink no-underline decoration-2 underline-offset-[6px] hover:underline';
+
+// The header's square buttons: the socials, email and the menu button
+const square =
+    'border-ink bg-card text-ink shadow-offset-sm rounded-button hover:shadow-offset-press inline-flex size-11 items-center justify-center border-[1.5px] motion-safe:transition-transform motion-safe:hover:translate-y-0.5';
 ---
 
-<header
-    class="group border-ink bg-card h-header sticky top-0 z-20 border-b-[1.5px]"
->
-    <nav
-        class="mx-auto flex h-full max-w-280 items-center justify-between px-4 sm:px-8"
+<header class="group border-ink bg-base sticky top-0 z-20 border-b-[1.5px]">
+    {
+        progress && (
+            <div aria-hidden="true" class="bg-rule h-1">
+                <div class="scroll-progress bg-accent h-1" />
+            </div>
+        )
+    }
+    <div
+        class="max-w-page mx-auto flex flex-wrap items-center justify-between gap-x-6 gap-y-3 px-6 py-3.5"
     >
-        <a href="/" class="text-ink text-[16px] font-extrabold no-underline">
+        <a
+            href="/"
+            class="text-ink text-[19px] font-extrabold tracking-[-0.02em] no-underline"
+        >
             {m.site_name()}
         </a>
-        <ul
-            class="nav:flex hidden items-center gap-7 text-[15px] font-semibold"
-        >
+        <nav aria-label={m.nav_sections()} class="nav:block hidden">
+            <ul
+                class="flex flex-wrap gap-x-5.5 gap-y-1.5 text-[15px] font-semibold"
+            >
+                {
+                    navLinks.map((link) => (
+                        <li>
+                            <a href={link.href} class={linkClass}>
+                                {link.label()}
+                            </a>
+                        </li>
+                    ))
+                }
+            </ul>
+        </nav>
+        <ul class="hidden gap-2.5 sm:flex">
             {
-                navLinks.map((link) => (
-                    <li>
-                        <a href={link.href} class={linkClass}>
-                            {link.label()}
+                socials.map((social) => (
+                    <li class="flex">
+                        <a
+                            href={social.href}
+                            target="_blank"
+                            rel="noopener"
+                            aria-label={`${social.label()} ${m.external_new_tab()}`}
+                            class={square}
+                        >
+                            <Icon icon={social.icon} class="size-5" />
                         </a>
                     </li>
                 ))
             }
+            <li class="flex">
+                <a
+                    href={`mailto:${email}`}
+                    aria-label={m.social_email()}
+                    class={square}
+                >
+                    <Icon icon={Mail01Icon} class="size-5" />
+                </a>
+            </li>
         </ul>
         <button
             type="button"
             popovertarget="nav-menu"
-            class="border-ink bg-card text-ink shadow-offset-sm rounded-button nav:hidden inline-flex items-center gap-1.5 border-[1.5px] px-3 py-1.5 text-sm font-bold"
+            aria-label={m.nav_menu()}
+            class:list={[square, 'nav:hidden cursor-pointer']}
         >
             <Icon
                 icon={Menu01Icon}
-                class="size-4 group-has-[:popover-open]:hidden"
+                class="size-5.5 group-has-[:popover-open]:hidden"
             />
             <Icon
                 icon={Cancel01Icon}
-                class="hidden size-4 group-has-[:popover-open]:inline"
+                class="hidden size-5.5 group-has-[:popover-open]:inline"
             />
-            {m.nav_menu()}
         </button>
-        <div
+        <nav
             id="nav-menu"
             popover
-            class="border-ink bg-card top-header nav:hidden inset-x-0 bottom-auto m-0 w-full max-w-none border-b-[1.5px] px-4 py-2 text-[16px] font-semibold"
+            aria-label={m.nav_sections()}
+            class:list={[
+                'border-ink bg-base nav:hidden inset-x-0 bottom-auto m-0 w-full max-w-none border-b-[1.5px] px-6 py-2 text-[16px] font-semibold',
+                progress
+                    ? 'top-header'
+                    : 'top-[calc(var(--spacing-header)-4px)]'
+            ]}
         >
             <ul class="flex flex-col">
                 {
@@ -65,13 +123,27 @@ const linkClass =
                         </li>
                     ))
                 }
+                {
+                    // Below 640px the header has no room for its social
+                    // buttons, so the menu carries them
+                    socials.map((social) => (
+                        <li class="sm:hidden">
+                            <a
+                                href={social.href}
+                                target="_blank"
+                                rel="noopener"
+                                class:list={[linkClass, 'block py-3']}
+                            >
+                                {social.label()}
+                                <span class="sr-only">
+                                    {m.external_new_tab()}
+                                </span>
+                            </a>
+                        </li>
+                    ))
+                }
             </ul>
-        </div>
-    </nav>
-    <div
-        aria-hidden="true"
-        class="scroll-progress bg-accent absolute inset-x-0 bottom-[-1.5px] h-1"
-    >
+        </nav>
     </div>
 </header>
 

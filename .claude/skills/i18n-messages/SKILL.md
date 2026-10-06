@@ -43,18 +43,19 @@ Keys are `snake_case`: `<domain>_<element>`. The domain is the section or
 primitive that shows the string. **Reuse an existing domain**; grep for the
 prefix before adding a key:
 
-| prefix                  | covers                                                                    |
-| ----------------------- | ------------------------------------------------------------------------- |
-| `site_`                 | the name, `<title>` pattern and meta description                          |
-| `nav_`                  | the section names: header links, section pills, 404 links (`sections.ts`) |
-| `social_`, `footer_`    | the social links, the footer                                              |
-| `hero_`                 | the hero's marker line, buttons, photo `alt` and sticker                  |
-| `projects_`, `career_`  | the Projects and Career sections                                          |
-| `learning_`, `contact_` | the Learning section and the contact panel                                |
-| `content_`              | fallbacks shared by every section                                         |
-| `external_`             | the new-tab text inside `Button` and `ExternalTextLink`                   |
-| `date_`, `duration_`    | date ranges and lengths, used through `src/lib/utils.ts`                  |
-| `not_found_`            | the 404 page                                                              |
+| prefix                  | covers                                                                     |
+| ----------------------- | -------------------------------------------------------------------------- |
+| `site_`                 | the name, `<title>` pattern and meta description                           |
+| `og_`                   | the sharing card's `alt` text                                              |
+| `nav_`                  | the section names (`sections.ts`), the nav's label and the menu button     |
+| `social_`, `footer_`    | the social and email buttons' labels, the footer                           |
+| `hero_`                 | the hero's marker line, buttons, photo `alt` and sticker (two lines, `\n`) |
+| `projects_`, `career_`  | the Projects and Career sections                                           |
+| `learning_`, `contact_` | the Learning section and the contact panel                                 |
+| `content_`              | fallbacks shared by every section                                          |
+| `external_`             | the new-tab text inside `Button` and `ExternalTextLink`                    |
+| `date_`, `duration_`    | date ranges and lengths, used through `src/lib/utils.ts`                   |
+| `not_found_`            | the 404 page                                                               |
 
 The **suffix** declares the string's family, and the family sets its length.
 

@@ -3,21 +3,24 @@
     "site_name": "Matthew Akino-Wittering",
     "site_title": "{title} - {site}",
     "site_description": "I am a Product Manager with {experience} of experience, primarily in internal platforms and B2B SaaS applications.",
+    "og_image_alt": "{name}: product leader and builder.",
     "nav_skip_to_content": "Skip to content",
     "nav_projects": "Projects",
     "nav_how_i_work": "How I work",
     "nav_career": "Career",
     "nav_learning": "Learning",
     "nav_contact": "Say hello",
+    "nav_sections": "Sections",
     "nav_menu": "Menu",
     "social_linkedin": "LinkedIn",
     "social_github": "GitHub",
+    "social_email": "Email",
     "footer_copyright": "© {year} {name}",
     "hero_marker": "and builder.",
     "hero_see_projects": "See what I've built",
     "hero_get_in_touch": "Get in touch",
     "hero_photo_alt": "Black and white photo of {name}",
-    "hero_sticker": "{years} in product",
+    "hero_sticker": "{years}\nin product",
     "content_not_found": "Content not found",
     "external_new_tab": "(opens in a new tab)",
     "career_at": "at",
@@ -31,24 +34,25 @@
     "learning_view_course": "View course",
     "learning_certificate": "Certificate",
     "learning_certificate_for": "Certificate for {course}",
+    "learning_courses": [
+        {
+            "declarations": [
+                "input count",
+                "local countPlural = count: plural"
+            ],
+            "selectors": ["countPlural"],
+            "match": {
+                "countPlural=one": "{count} course",
+                "countPlural=*": "{count} courses"
+            }
+        }
+    ],
+    "learning_provider_summary": "{courses} · latest {date}",
     "contact_marker": "What are you building?",
     "contact_get_in_touch": "Get in touch",
     "date_present": "Present",
     "date_range": "{from} – {to}",
     "duration_years_plus": "{years}+ years",
-    "duration_years": [
-        {
-            "declarations": [
-                "input years",
-                "local yearsPlural = years: plural"
-            ],
-            "selectors": ["yearsPlural"],
-            "match": {
-                "yearsPlural=one": "{years} year",
-                "yearsPlural=*": "{years} years"
-            }
-        }
-    ],
     "duration_months": [
         {
             "declarations": [
@@ -62,7 +66,6 @@
             }
         }
     ],
-    "duration_years_months": "{years} {months}",
     "duration_since": "I've worked in Product Management roles since {date}",
     "not_found_title": "Page not found",
     "not_found_description": "Sorry, the page you're looking for doesn't exist or has moved.",

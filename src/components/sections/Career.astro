@@ -22,24 +22,27 @@ const roles = await Promise.all(
 );
 ---
 
-<Section id="career" alt>
-    <Doodle icon={Briefcase01Icon} position="top-left" />
-    <Doodle icon={Rocket01Icon} position="bottom-right" />
-    <div class="mx-auto max-w-190">
-        <SectionHead
-            pill={m.nav_career()}
-            tone="green"
-            title={blurb.data.title}
-        />
-        <div
-            class="prose text-muted prose-p:text-[17px] prose-p:leading-[1.65] prose-p:text-muted mt-5"
-        >
+<Section id="career" class="gap-16">
+    <Doodle
+        icon={Briefcase01Icon}
+        position="top-left"
+        class="size-[46px] -rotate-14"
+    />
+    <Doodle
+        icon={Rocket01Icon}
+        position="bottom-right"
+        class="size-11 rotate-12"
+    />
+    <SectionHead pill={m.nav_career()} tone="green" title={blurb.data.title}>
+        <div class="text-muted max-w-[56ch] text-left">
             {Content ? <Content /> : <p>{m.content_not_found()}</p>}
         </div>
-        <ol class="divide-rule mt-6 divide-y-[1.5px]">
+    </SectionHead>
+    <div class="flex justify-center">
+        <ol class="flex min-w-0 flex-[0_1_760px] flex-col">
             {
                 roles.map(({ event, organisation }) => (
-                    <li class="py-7.5">
+                    <li class="border-ink flex flex-wrap gap-x-7 gap-y-1.5 py-7.5 not-first:border-t-[1.5px] first:pt-0 last:pb-0">
                         <Role event={event} organisation={organisation} />
                     </li>
                 ))

@@ -1,7 +1,5 @@
 @import 'tailwindcss';
 
-@plugin '@tailwindcss/typography';
-
 @theme {
     /* Stock Tailwind colours off, so only the tokens below can be used */
     --color-*: initial;
@@ -16,7 +14,8 @@
     --color-card: #fdfbf7; /* every raised surface: cards, header, contact panel */
     --color-ink: #17151f; /* headings, outlines, offset shadows, button text, focus ring */
     --color-muted: #46434f; /* body copy, dates, captions */
-    --color-rule: #e7e3dc; /* hairline dividers in lists and the timeline; decorative only */
+    --color-rule: #e7e3dc; /* the progress bar's track, the 404 footer's top edge; decorative only */
+    --color-hairline: #d9d6e0; /* dividers between course rows in Learning; decorative only */
     --color-accent: #f07a2e; /* tangerine: primary button fill, link underlines, progress bar; never text */
     --color-ic-yellow: #fbeaa5; /* Projects pill */
     --color-ic-blue: #dce6f2; /* How I work pill */
@@ -25,14 +24,18 @@
     --color-ic-teal: #d7ebe7; /* Say hello pill */
     --color-ic-apricot: #fce3d0; /* the hero sticker */
 
-    --radius-card: 1rem; /* 16px: cards, contact panel */
+    --radius-card: 1rem; /* 16px: project cards, the degree card, the course list */
+    --radius-tile: 0.875rem; /* 14px: stat cards, the degree's badge */
+    --radius-panel: 1.25rem; /* 20px: the contact panel */
     --radius-button: 0.625rem; /* 10px: buttons, screenshots */
     --shadow-offset: 0 4px 0 var(--color-ink); /* buttons */
-    --shadow-offset-sm: 0 3px 0 var(--color-ink); /* small buttons, and any button pressed */
-    --shadow-panel: 8px 8px 0 var(--color-ink); /* the contact panel */
+    --shadow-offset-sm: 0 3px 0 var(--color-ink); /* the header's square buttons */
+    --shadow-offset-press: 0 2px 0 var(--color-ink); /* any button hovered or pressed */
+    --shadow-panel: 8px 8px 0 var(--color-ink); /* the hero photo, the degree card */
 
     --breakpoint-nav: 56.25rem; /* 900px: header links inline from here, menu button below */
-    --spacing-header: 4rem; /* header height; the menu's top and scroll-padding-top read it */
+    --container-page: 73rem; /* 1168px: the 1120px content column plus its 24px gutters */
+    --spacing-header: 4.84375rem; /* 77.5px: header height, with its progress bar; the menu's top and scroll-padding-top read it */
 }
 
 /* Anchor targets land below the sticky header, not under it */
@@ -85,12 +88,8 @@ main:focus {
     outline: none;
 }
 
-/* Links in content bodies */
-.prose a {
+/* A link written in a markdown body has no class of its own; give it the
+   content link style */
+a:not([class]) {
     @apply link font-semibold;
-}
-
-/* A derived figure (CareerLength) whose title says what it counts from */
-.prose time {
-    @apply decoration-accent cursor-help underline decoration-dashed underline-offset-4;
 }

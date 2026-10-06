@@ -1,29 +1,49 @@
 ---
 import { m } from '@paraglide/messages.js';
+import Icon from './Icon.astro';
 
 interface Props {
     href: string;
     variant?: 'primary' | 'ghost';
+    size?: 'md' | 'lg';
     external?: boolean;
+    icon?: Parameters<typeof Icon>[0]['icon'];
+    // The icon after the label (an arrow) rather than before it
+    iconAfter?: boolean;
 }
 
-const { href, variant = 'primary', external = false } = Astro.props;
+const {
+    href,
+    variant = 'primary',
+    size = 'md',
+    external = false,
+    icon,
+    iconAfter = false
+} = Astro.props;
 
-// An outlined card on a hard ink edge; pressing it sinks it onto a smaller one
+// An outlined card on a hard ink edge; hovering presses it onto a smaller one
 const base =
-    'border-ink text-ink shadow-offset rounded-button active:shadow-offset-sm inline-flex items-center gap-2 border-[1.5px] px-5 py-3 text-[15px] font-bold no-underline active:translate-y-px motion-safe:transition-transform motion-safe:hover:-translate-y-px';
+    'border-ink text-ink shadow-offset rounded-button hover:shadow-offset-press active:shadow-offset-press inline-flex items-center gap-2 border-[1.5px] no-underline motion-safe:transition-transform motion-safe:hover:translate-y-0.5 motion-safe:active:translate-y-0.5';
 
 const variants = {
     primary: 'bg-accent',
     ghost: 'bg-card'
 };
+
+// lg is the 404 page's one button
+const sizes = {
+    md: 'min-h-11 px-4.5 text-[15px] font-semibold',
+    lg: 'min-h-[50px] px-5.5 text-[16px] font-bold'
+};
 ---
 
 <a
     href={href}
-    class:list={[base, variants[variant]]}
+    class:list={[base, variants[variant], sizes[size]]}
     {...external ? { target: '_blank', rel: 'noopener' } : {}}
 >
+    {icon && !iconAfter && <Icon icon={icon} class="size-4.5 flex-none" />}
     <slot />
+    {icon && iconAfter && <Icon icon={icon} class="size-4.5 flex-none" />}
     {external && <span class="sr-only">{m.external_new_tab()}</span>}
 </a>

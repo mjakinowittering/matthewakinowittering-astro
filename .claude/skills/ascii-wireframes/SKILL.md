@@ -18,7 +18,18 @@ rebuilding.
 
 **Load `design-brief` before drawing.** A visible change follows the brief as
 well as this skill (`CLAUDE.md`, Planning), so check each drawing against it
-before showing it.
+before showing it. Where the reference pack in `docs/design/reference/` already
+draws the element, the wireframe follows the reference.
+
+**After building, measure.** `npm run compare` screenshots the built page at
+390, 1024 and 1280px and writes each section beside its reference board, with a
+pixelmatch diff, into `.compare/`. A visible change is done when the only
+differences left in the sections it touches are those the reference's
+`README.md` lists as intended (or new copy, whose layout still matches). Read
+`vsHtml` in its table rather than `percent`: it compares against the reference
+`.html` rendered on the same machine, so it is free of the exported PNGs'
+antialiasing. A change the reference doesn't cover yet is approved as a
+wireframe first, and the reference is then updated with Matthew.
 
 They are often read in the VS Code chat panel, where only plain ASCII is
 reliably one column wide: box-drawing characters render narrower than letters,
@@ -29,18 +40,18 @@ drifts out of line. **Draw with printable ASCII only.**
 
 - **Every state the content can be in, not just the full one.** The content
   files decide what renders, so the gaps are where the surprise hides:
-    - a role that is ongoing (no `dateTo`, filled timeline dot, live duration)
-      and one that has ended
-    - a training row with a certificate (tick, "View certificate") and one
-      without, closed and opened
+    - a role that is ongoing (no `dateTo`, "Present") and one that has ended
+    - a course row with a Certificate link and one without, and a provider
+      closed and opened
     - a project with a screenshot and one on the striped placeholder; with and
       without `sourceUri`
     - an organisation with one event and one with several
     - copy longer than the sample: a long course title, a three-line subtitle
 - **Phone first, then wider.** Base styles are for a phone (`CLAUDE.md`,
-  Styling). Below `sm` the nav links move into a menu, and two-column grids
-  stack below `md`. Draw the width where the change is hardest to fit, and each
-  width where the layout differs.
+  Styling). Below 900px the nav links move into a menu, below `sm` the header's
+  social buttons go and the doodles hide, and two-column rows wrap. Draw the
+  width where the change is hardest to fit, and each width where the layout
+  differs.
 - **Before and after** for a change to something that exists. Label them
   `BEFORE` / `AFTER`.
 - **The neighbours.** Draw enough of the section above and below to show where
@@ -67,7 +78,6 @@ wide or less (about 40 for a phone), one region per drawing.
 | icon                   | `[compass]`, `[x]` (Hugeicons name in notes)         |
 | text link              | `_View certificate_ [external]`                      |
 | tag pill               | `{ No backend }`                                     |
-| timeline dot           | `o` open, `*` filled                                 |
 | `alt` band             | a full-width row of `.` above and below the section  |
 | copy too long to fit   | cut it with `...` inside the box                     |
 

@@ -11,15 +11,24 @@ if (!blurb) return Astro.redirect('/404');
 const { Content } = await render(blurb);
 ---
 
-<Section id="how-i-work">
-    <Doodle icon={BinocularsIcon} position="top-left" />
-    <Doodle icon={Navigation05Icon} position="bottom-right" />
-    <div class="md:text-center">
-        <h2><Pill tone="blue">{blurb.data.title}</Pill></h2>
-        <div
-            class="prose text-ink prose-p:text-[20px] prose-p:leading-normal prose-p:font-medium prose-p:text-ink sm:prose-p:text-[26px] mx-auto mt-6 max-w-[52ch]"
-        >
-            {Content ? <Content /> : <p>{m.content_not_found()}</p>}
-        </div>
+<Section id="how-i-work" alt class="items-center gap-6 text-center">
+    <Doodle
+        icon={BinocularsIcon}
+        position="top-left"
+        class="size-[42px] -rotate-10"
+    />
+    <Doodle
+        icon={Navigation05Icon}
+        position="bottom-right"
+        class="size-10 rotate-10"
+    />
+    <h2 class="flex"><Pill tone="blue">{blurb.data.title}</Pill></h2>
+    {
+        // The first paragraph is the statement; the second qualifies it
+    }
+    <div
+        class="[&>p:last-child]:text-muted flex flex-col items-center gap-6 [&>p:first-child]:max-w-[30ch] [&>p:first-child]:text-[26px] [&>p:first-child]:leading-[1.3] [&>p:first-child]:font-bold [&>p:first-child]:tracking-tight sm:[&>p:first-child]:text-[36px] [&>p:last-child]:max-w-[52ch] [&>p:last-child]:text-[19px]"
+    >
+        {Content ? <Content /> : <p>{m.content_not_found()}</p>}
     </div>
 </Section>

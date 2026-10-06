@@ -1,14 +1,27 @@
 ---
 import { m } from '@paraglide/messages.js';
 
+interface Props {
+    // The 404 page's footer sits under a hairline; the homepage's follows the
+    // contact panel with none
+    ruled?: boolean;
+}
+
+const { ruled = false } = Astro.props;
+
 const copyright = m.footer_copyright({
     year: new Date().getFullYear(),
     name: m.site_name()
 });
 ---
 
-<footer>
-    <p class="text-muted mx-auto max-w-280 px-4 py-10 text-[13px] sm:px-8">
-        {copyright}
-    </p>
+<footer
+    class:list={[
+        'max-w-page text-muted mx-auto px-6 text-[14px]',
+        ruled
+            ? 'border-rule border-t-[1.5px] pt-7 pb-9'
+            : 'pt-14 pb-16 sm:pb-14'
+    ]}
+>
+    <p>{copyright}</p>
 </footer>

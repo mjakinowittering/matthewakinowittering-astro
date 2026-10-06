@@ -1,5 +1,6 @@
 ---
 import { Button, Card } from '@components/ui';
+import { ArrowUpRight01Icon, SourceCodeIcon } from '@hugeicons/core-free-icons';
 import { m } from '@paraglide/messages.js';
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
@@ -16,43 +17,50 @@ const { img, alt, title, description, tags, uri, sourceUri } = project.data;
 const src = img?.format ? { ...img, format: img.format } : undefined;
 
 const screenshot =
-    'border-ink rounded-button aspect-[1200/630] w-full border-[1.5px] object-cover';
+    'border-ink rounded-button block aspect-[1200/630] w-full border-[1.5px] object-cover object-top';
 ---
 
-<Card class="flex w-full flex-col p-5 sm:p-6">
-    {
-        src ? (
-            <Image src={src} alt={alt ?? title} class={screenshot} />
-        ) : (
-            <div
-                class:list={[
-                    screenshot,
-                    'text-muted flex items-center justify-center bg-[repeating-linear-gradient(135deg,var(--color-rule)_0,var(--color-rule)_2px,transparent_2px,transparent_14px)] p-5 text-center text-[13px] font-semibold'
-                ]}
-            >
-                {m.projects_screenshot_placeholder()}
-            </div>
-        )
-    }
-    <h3 class="mt-6 text-[24px] leading-tight font-extrabold">{title}</h3>
-    <p class="text-muted mt-3 text-[15px] leading-[1.65]">{description}</p>
-    <div class="mt-auto pt-6">
-        <ul class="flex flex-wrap gap-2">
+<Card as="li" class="flex flex-col overflow-hidden">
+    <div class="px-5.5 pt-5.5">
+        {
+            src ? (
+                <Image src={src} alt={alt ?? title} class={screenshot} />
+            ) : (
+                <div
+                    class:list={[
+                        screenshot,
+                        'text-muted flex items-center justify-center bg-[repeating-linear-gradient(135deg,var(--color-rule)_0,var(--color-rule)_2px,transparent_2px,transparent_14px)] p-5 text-center text-[13px] font-semibold'
+                    ]}
+                >
+                    {m.projects_screenshot_placeholder()}
+                </div>
+            )
+        }
+    </div>
+    <div class="flex flex-1 flex-col gap-3.5 p-6">
+        <h3 class="text-[24px] font-extrabold tracking-[-0.02em]">{title}</h3>
+        <p class="text-muted">{description}</p>
+        <ul class="mt-auto flex flex-wrap gap-2">
             {
                 tags.map((tag) => (
-                    <li class="border-ink bg-base rounded-full border-[1.5px] px-3 py-0.5 text-[13px] font-semibold">
+                    <li class="border-ink bg-base rounded-full border-[1.5px] px-2.5 py-[3px] text-[12.5px] font-semibold">
                         {tag}
                     </li>
                 ))
             }
         </ul>
-        <div class="mt-6 flex flex-wrap gap-4">
-            <Button href={uri} external>
+        <div class="flex flex-wrap gap-3 pt-2">
+            <Button href={uri} external icon={ArrowUpRight01Icon} iconAfter>
                 {m.projects_try_live()}
             </Button>
             {
                 sourceUri && (
-                    <Button href={sourceUri} variant="ghost" external>
+                    <Button
+                        href={sourceUri}
+                        variant="ghost"
+                        external
+                        icon={SourceCodeIcon}
+                    >
                         {m.projects_view_source()}
                     </Button>
                 )

@@ -5,8 +5,8 @@ page presents who he is, how he works, what he has built, where he has worked
 and what he has studied, so potential employers can learn more than a LinkedIn
 page shows.
 
-Built with [Astro](https://astro.build), [Svelte](https://svelte.dev) islands,
-[Tailwind CSS](https://tailwindcss.com) v4, Markdown content collections and
+Built with [Astro](https://astro.build), [Tailwind CSS](https://tailwindcss.com)
+v4, Markdown content collections and
 [Paraglide](https://inlang.com/m/gerre34r/library-inlang-paraglideJs) for UI
 copy. It is a static site deployed to GitHub Pages.
 
@@ -64,10 +64,10 @@ is merged into `develop` first and released to `main` from there.
       file holds, so nothing in this repo causes it; the page renders correctly.
       Wait for an Astro fix rather than filtering it, and never silence other
       warnings with it.
-- [ ] Clear the two moderate `npm audit` findings: `postcss-selector-parser`,
-      reached through `@tailwindcss/typography`, which only runs at build time.
-      npm's only offer is a downgrade to 0.5.4, which is not a fix; recheck when
-      `@tailwindcss/typography` releases an update.
+- [ ] Clear the moderate `npm audit` finding: `postcss-selector-parser` 7.1.4,
+      pinned by `postcss-nested` under `eslint-plugin-tailwindcss`, which only
+      runs when linting. `npm audit fix` does not clear it; recheck when
+      `eslint-plugin-tailwindcss` releases an update.
 
 ### Features
 
@@ -80,10 +80,10 @@ is merged into `develop` first and released to `main` from there.
 
 #### Sharing
 
-- [ ] Add a 1200 by 630 sharing card for Open Graph: `Layout.astro` points
-      `og:image` at the hero photo, a 447 by 558 portrait that LinkedIn crops,
-      with `twitter:card` set to `summary` to match. A designed card would let
-      both use the large format. A decision to make, not a commitment.
+- [ ] Redraw `public/og.png` when the years in product reach 17, in January
+      2027: the sharing card bakes "16+ years in product" into the image, so it
+      cannot derive the figure from `careerStart` as the page does. Its source
+      is `docs/design/reference/og-image.html`.
 
 #### Redesign
 
@@ -98,8 +98,7 @@ is merged into `develop` first and released to `main` from there.
       places it under the Career intro, and `robots.txt` already reserves
       `/resume`. Nothing renders it until there is a file to point at.
 - [ ] Replace the hero photo when Matthew supplies a new one: the hero still
-      uses `src/assets/MatthewAkinoWittering-BW-Alpha.png`, which is also the
-      Open Graph image.
+      uses `src/assets/MatthewAkinoWittering-BW-Alpha.png`.
 
 #### Tooling
 

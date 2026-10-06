@@ -13,7 +13,10 @@ export default defineConfig([
             'dist/**',
             '.astro/**',
             'src/paraglide/**',
-            'project.inlang/cache/**'
+            'project.inlang/cache/**',
+            // Exported mock-ups, never reformatted or linted
+            'docs/design/reference/**',
+            '.compare/**'
         ]
     },
     {
@@ -21,6 +24,11 @@ export default defineConfig([
         plugins: { js },
         extends: ['js/recommended'],
         languageOptions: { globals: globals.browser }
+    },
+    // Build scripts run in Node, not the browser
+    {
+        files: ['scripts/**'],
+        languageOptions: { globals: globals.node }
     },
     tseslint.configs.recommended,
     // Parse .astro files so their templates are lintable.

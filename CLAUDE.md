@@ -49,23 +49,23 @@ workflows live in a **project skill** under `.claude/skills/`. **Load the
 matching skill before doing substantive work in its domain** — the General Rules
 below are the invariants, the skill is the _how_.
 
-| Skill                     | Load when working on…                                                                                                                                              |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `design-brief`            | why the page looks and reads as it does: any visible change, the section order, or hero, how-I-work, projects, learning or contact copy                            |
-| `project-structure`       | locating a file, deciding where a new file belongs, the page's section order and anchors                                                                           |
-| `content-blurbs`          | the section copy in `src/content/blurbs/`: hero, How I work, Career intro, contact                                                                                 |
-| `content-organisations`   | adding or editing an employer, trainer or university in `src/content/organisations/`                                                                               |
-| `content-accomplishments` | the hero's stat figures in `src/content/accomplishments/`, their values, captions and order                                                                        |
-| `content-events`          | adding or editing a role, course or degree in `src/content/events/`, its dates, link and body copy                                                                 |
-| `rewrite-course`          | turning pasted course material into the house style for one training event (`/rewrite-course <path>`)                                                              |
-| `content-projects`        | the project cards in `src/content/projects/`, their screenshots, tags and links                                                                                    |
-| `components-block`        | the shared primitives in `src/components/ui/` (Section, SectionHead, Pill, Card, Button, ExternalTextLink, Icon, Doodle), `site/` (Nav, SiteFooter) and `islands/` |
-| `components-sections`     | the page sections in `src/components/sections/` and their `entries/`, joining events to organisations, `Layout.astro`, `pages/`, adding a section                  |
-| `styling`                 | colour tokens, typography, prose styling, Tailwind v4 in `src/styles/global.css` and class strings                                                                 |
-| `i18n-messages`           | adding or editing a UI string or message key in `messages/en.json`                                                                                                 |
-| `ascii-wireframes`        | any visible change: draw it and get it approved before building                                                                                                    |
-| `todo-review`             | the `## Todo` list in `README.md`, and every time plan mode is entered (`/todo-review`)                                                                            |
-| `branch-and-commit`       | cutting a branch off `develop`, writing a commit message, pushing, opening a PR                                                                                    |
+| Skill                     | Load when working on…                                                                                                                               |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `design-brief`            | why the page looks and reads as it does: any visible change, the section order, or hero, how-I-work, projects, learning or contact copy             |
+| `project-structure`       | locating a file, deciding where a new file belongs, the page's section order and anchors                                                            |
+| `content-blurbs`          | the section copy in `src/content/blurbs/`: hero, How I work, Career intro, contact                                                                  |
+| `content-organisations`   | adding or editing an employer, trainer or university in `src/content/organisations/`                                                                |
+| `content-accomplishments` | the hero's stat figures in `src/content/accomplishments/`, their values, captions and order                                                         |
+| `content-events`          | adding or editing a role, course or degree in `src/content/events/`, its dates, link and body copy                                                  |
+| `rewrite-course`          | turning pasted course material into the house style for one training event (`/rewrite-course <path>`)                                               |
+| `content-projects`        | the project cards in `src/content/projects/`, their screenshots, tags and links                                                                     |
+| `components-block`        | the shared primitives in `src/components/ui/` (Section, SectionHead, Pill, Card, Button, ExternalTextLink, Icon, Doodle), `site/` (Nav, SiteFooter) |
+| `components-sections`     | the page sections in `src/components/sections/` and their `entries/`, joining events to organisations, `Layout.astro`, `pages/`, adding a section   |
+| `styling`                 | colour tokens, typography, content body styling, Tailwind v4 in `src/styles/global.css` and class strings                                           |
+| `i18n-messages`           | adding or editing a UI string or message key in `messages/en.json`                                                                                  |
+| `ascii-wireframes`        | any visible change: draw it and get it approved before building                                                                                     |
+| `todo-review`             | the `## Todo` list in `README.md`, and every time plan mode is entered (`/todo-review`)                                                             |
+| `branch-and-commit`       | cutting a branch off `develop`, writing a commit message, pushing, opening a PR                                                                     |
 
 > When a domain skill contradicts a stale line here, the skill is the more
 > detailed source — but the General Rules always hold regardless of which skill
@@ -79,21 +79,21 @@ below are the invariants, the skill is the _how_.
 
 ## Tech Stack
 
-| Concern         | Choice                                                             |
-| --------------- | ------------------------------------------------------------------ |
-| Framework       | Astro 7, static output                                             |
-| Islands         | Svelte 5 (runes), only where a value must be live                  |
-| Language        | TypeScript                                                         |
-| Content         | Markdown in Astro content collections, validated with Zod          |
-| UI copy         | Paraglide JS, English only, in `messages/en.json`                  |
-| Styling         | Tailwind CSS v4 via `@tailwindcss/vite`, `@tailwindcss/typography` |
-| Type            | Figtree, and Permanent Marker for the marker rule (Google Fonts)   |
-| Icons           | Hugeicons Free (`@hugeicons/core-free-icons`), as static SVG       |
-| Dates           | date-fns                                                           |
-| Formatting      | Prettier (Astro, import-sort and Tailwind plugins)                 |
-| Linting         | ESLint 10 (TypeScript, Astro, Tailwind)                            |
-| Package manager | npm                                                                |
-| Hosting         | GitHub Pages, `matthew.akinowittering.com`                         |
+| Concern         | Choice                                                           |
+| --------------- | ---------------------------------------------------------------- |
+| Framework       | Astro 7, static output                                           |
+| Language        | TypeScript                                                       |
+| Content         | Markdown in Astro content collections, validated with Zod        |
+| UI copy         | Paraglide JS, English only, in `messages/en.json`                |
+| Styling         | Tailwind CSS v4 via `@tailwindcss/vite`                          |
+| Type            | Figtree, and Permanent Marker for the marker rule (Google Fonts) |
+| Icons           | Hugeicons Free (`@hugeicons/core-free-icons`), as static SVG     |
+| Dates           | date-fns                                                         |
+| Formatting      | Prettier (Astro, import-sort and Tailwind plugins)               |
+| Linting         | ESLint 10 (TypeScript, Astro, Tailwind)                          |
+| Visual checks   | Playwright and pixelmatch, through `npm run compare`             |
+| Package manager | npm                                                              |
+| Hosting         | GitHub Pages, `matthew.akinowittering.com`                       |
 
 There is no test suite. `npm run build` is the test: every content file is
 parsed against its schema, so a bad date, a missing field or a malformed URL
@@ -101,14 +101,15 @@ fails the build.
 
 ## Commands
 
-| Command               | Action                               |
-| :-------------------- | :----------------------------------- |
-| `npm run dev`         | Local dev server at `localhost:4321` |
-| `npm run build`       | Production build to `./dist/`        |
-| `npm run preview`     | Preview the build locally            |
-| `npm run lint`        | `prettier --check .` then `eslint .` |
-| `npm run format`      | Format everything with Prettier      |
-| `npm run astro check` | Type check                           |
+| Command               | Action                                |
+| :-------------------- | :------------------------------------ |
+| `npm run dev`         | Local dev server at `localhost:4321`  |
+| `npm run build`       | Production build to `./dist/`         |
+| `npm run preview`     | Preview the build locally             |
+| `npm run lint`        | `prettier --check .` then `eslint .`  |
+| `npm run format`      | Format everything with Prettier       |
+| `npm run astro check` | Type check                            |
+| `npm run compare`     | Build, then diff against the mock-ups |
 
 ## Deployment
 
@@ -160,8 +161,8 @@ fails the build: the sections resolve each event through `getOrganisation()` in
 ### Derived, never stored
 
 These are computed at render time and must never be written into a content file:
-an organisation's date span and event count, a role's duration, and the "N+
-years of experience" figure.
+a provider's course count and latest course date, and the "N+ years of
+experience" figure.
 
 Every "years in product" figure counts from the one event marked
 `careerStart: true`, read through `getCareerStart()` in `src/lib/career.ts`. A
@@ -213,14 +214,9 @@ blurb shows the figure with `<CareerLength />`.
 
 - **Static only.** No SSR adapter, no API endpoints, no client-side `fetch`.
   What the page shows is decided at build time
-- Components are `.astro`. A `.svelte` island is used **only** where a value
-  must stay live after the build — today that is `EventDescription.svelte`, so
-  an ongoing role's duration keeps counting without a redeploy
-- Astro client directives (`client:only`, `client:load`…) are compile-time: they
-  cannot be spread or applied conditionally. Branch on the directive, and still
-  spread the shared props (`Role.astro` shows the pattern)
-- Svelte is **runes only** (`$props`, `$state`, `$derived`) — never `export let`
-  or `$:`
+- Components are `.astro`, and the page ships no UI framework. A value that must
+  stay live after the build would need an island and a framework: raise it
+  before adding one
 - **Destructure once, spread once.** Pull shared values out of `entry.data` once
   in the frontmatter and reuse them; pass a shared props object with
   `{...props}` rather than retyping the same props
@@ -229,10 +225,7 @@ blurb shows the figure with `<CareerLength />`.
   components by name; a new component is added to its folder's barrel
 - Import components by name from their folder's barrel
   (`import { Button, Section } from '@components/ui'`), but relatively
-  (`./Icon.astro`) from inside the same folder, so a barrel never imports
-  itself. Islands are the exception: import `.svelte` files directly by path
-  (`@components/islands/EventDescription.svelte`) and keep them out of barrels,
-  so hydration points at the island alone
+  (`./Icon.astro`) from inside the same folder, so a barrel never imports itself
 - Import `src/lib/`, `src/layouts/` and `src/assets/` through `@lib/*`,
   `@layouts/*` and `@assets/*`, and messages through `@paraglide/messages.js`;
   never a `../` chain. `src/paraglide/` is compiled by the Vite plugin and
@@ -298,13 +291,13 @@ these rules and the code is a Bugs item in `README.md`'s Todo list.
 - **Motion.** No autoplaying animation; honour `prefers-reduced-motion`
 - **Zoom.** The viewport tag is `width=device-width, initial-scale=1` and never
   blocks zoom; layouts hold at 200% zoom and 320px wide
-- **Live values stay quiet.** The ticking duration island must not be an
-  `aria-live` region; screen readers read it once, not every update
 
 ### Planning, branching and committing
 
 - A visible change is drawn as a wireframe and approved before it is built
-  (**`ascii-wireframes`**), following **`design-brief`**
+  (**`ascii-wireframes`**), following **`design-brief`**, and checked with
+  `npm run compare` against the reference in `docs/design/reference/`, the
+  visual source of truth
 - Planned work runs on its own branch off `develop` and reaches it by PR; never
   commit or push to `main` directly. The how is in **`branch-and-commit`**
 - Before committing: `npm run format`, then `npm run lint`, then

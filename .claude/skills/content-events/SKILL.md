@@ -69,26 +69,25 @@ alone.
 
 ### Dates, per type
 
-| Type         | `dateFrom`              | `dateTo`                     | Shows as                                |
-| ------------ | ----------------------- | ---------------------------- | --------------------------------------- |
-| `employment` | first day in the role   | last day; omit while current | `Aug 2019 – Present · 7 years 3 months` |
-| `training`   | the completion date     | omit                         | `Mar 2026`                              |
-| `education`  | first day of the course | the end of the course        | `2005 – 2009 · 3 years 11 months`       |
+| Type         | `dateFrom`              | `dateTo`                     | Shows as             |
+| ------------ | ----------------------- | ---------------------------- | -------------------- |
+| `employment` | first day in the role   | last day; omit while current | `Aug 2019 – Present` |
+| `training`   | the completion date     | omit                         | `Mar 2026`           |
+| `education`  | first day of the course | the end of the course        | `2005 – 2009`        |
 
-Durations count **both the start and the end month**, matching LinkedIn: Aug
-2019 to Oct 2026 is 7 years 3 months. This is deliberate; don't "fix" it (the
-comment on `monthsInclusive` in `src/lib/utils.ts` says the same). Under a year
-shows the months alone ("5 months"), and a whole number of years the years alone
-("2 years").
+The page shows each role's and the degree's date range only, never a duration.
+The one length it shows is the years in product, counted from the `careerStart`
+event; that count includes **both the start and the end month**, matching
+LinkedIn. This is deliberate; don't "fix" it (the comment on `monthsInclusive`
+in `src/lib/utils.ts` says the same).
 
 Use midnight UTC (`T00:00:00+00:00`) unless the existing siblings use an
-end-of-day time. An ongoing role's duration is computed in the browser, so it
-keeps counting without a redeploy.
+end-of-day time.
 
 **A promotion is a new event**, not an edit: give the old role its `dateTo` and
 add the new role with the next day's `dateFrom` (The Exchange Lab's two roles
-show this). **Leaving a role** is adding its `dateTo`. The organisation's span
-and the timeline's active dot follow on their own.
+show this). **Leaving a role** is adding its `dateTo`; its date range follows on
+its own.
 
 ## Body copy, per type
 

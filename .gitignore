@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # paraglide compiled messages
 src/paraglide/
+
+# visual comparison output (npm run compare)
+.compare/

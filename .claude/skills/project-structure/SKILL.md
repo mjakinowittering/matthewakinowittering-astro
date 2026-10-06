@@ -15,13 +15,16 @@ description:
 ├── CLAUDE.md                      always-on rules
 ├── .claude/skills/                project skills, one folder each
 ├── .github/workflows/astro.yml    build + deploy to GitHub Pages on push to main
-├── astro.config.mjs               integrations (mdx, svelte), Tailwind and Paraglide Vite plugins, site
+├── astro.config.mjs               the mdx integration, Tailwind and Paraglide Vite plugins, site
+├── docs/design/reference/         the approved mock-ups: the visual source of truth
 ├── messages/en.json               every UI string, read as m.<key>()
-├── project.inlang/                Paraglide settings (English only)
+├── project.inlang/                Paraglide settings (English only), plugin loaded from node_modules
 ├── public/
 │   ├── CNAME                      the domain's one home
 │   ├── favicon.svg
+│   ├── og.png                     the 1200 by 630 sharing card
 │   └── robots.txt
+├── scripts/compare.mjs           npm run compare: the build against the reference
 └── src/
     ├── assets/                    images imported by components (the hero photo)
     ├── content.config.ts          the five collection schemas
@@ -39,7 +42,6 @@ description:
     ├── components/
     │   ├── ui/                    shared primitives, no content knowledge
     │   ├── site/                  page chrome: Nav, SiteFooter
-    │   ├── islands/               Svelte islands (EventDescription), no barrel
     │   ├── content/               components content files import (CareerLength)
     │   ├── sections/              one file per page section: Hero, Projects,
     │   │                          HowIWork, Career, Learning, Contact
@@ -52,12 +54,12 @@ description:
     │   ├── organisations.ts       an event's organisation, or a build failure
     │   ├── sections.ts            the linkable sections: label, href, pill tone
     │   ├── socials.ts             the email address, LinkedIn and GitHub links
-    │   └── utils.ts               date formatting and duration helpers
+    │   └── utils.ts               date formatting and the years-in-product figure
     ├── paraglide/                 compiled messages; generated, git-ignored
     ├── pages/
     │   ├── index.astro            composes the sections in order
     │   └── 404.astro
-    └── styles/global.css          Tailwind import, @theme tokens, link, progress bar, .prose overrides
+    └── styles/global.css          Tailwind import, @theme tokens, link, progress bar
 ```
 
 ## Where a new file goes
@@ -72,7 +74,6 @@ description:
 | a primitive used by two or more sections | `src/components/ui/`                                               |
 | a page section                           | `src/components/sections/`                                         |
 | a component rendering one content entry  | `src/components/entries/`                                          |
-| a Svelte island                          | `src/components/islands/`, imported by path, not barrelled         |
 | a hero stat                              | `src/content/accomplishments/` (see **`content-accomplishments`**) |
 | a component a content file imports       | `src/components/content/`                                          |
 | any new `.astro` component               | also a line in its folder's `index.ts` barrel                      |
@@ -90,12 +91,14 @@ organisation's `id` (`andalucia.com/` holds `organisationId: andalucia`). The
 
 | #   | Section    | Component           | `id`         | In nav | Band | Pill   |
 | --- | ---------- | ------------------- | ------------ | ------ | ---- | ------ |
-| 1   | Hero       | `sections/Hero`     | none         | no     | base | none   |
-| 2   | Projects   | `sections/Projects` | `projects`   | yes    | sand | yellow |
-| 3   | How I work | `sections/HowIWork` | `how-i-work` | yes    | base | blue   |
-| 4   | Career     | `sections/Career`   | `career`     | yes    | sand | green  |
-| 5   | Learning   | `sections/Learning` | `learning`   | yes    | base | pink   |
-| 6   | Contact    | `sections/Contact`  | `contact`    | no     | sand | teal   |
+| 1   | Hero       | `sections/Hero`     | `top`        | no     | sand | none   |
+| 2   | Projects   | `sections/Projects` | `projects`   | yes    | base | yellow |
+| 3   | How I work | `sections/HowIWork` | `how-i-work` | yes    | sand | blue   |
+| 4   | Career     | `sections/Career`   | `career`     | yes    | base | green  |
+| 5   | Learning   | `sections/Learning` | `learning`   | yes    | sand | pink   |
+| 6   | Contact    | `sections/Contact`  | `contact`    | no     | base | teal   |
+
+A 1.5px ink rule separates each section from the one above it.
 
 Two couplings to keep in step when reordering or adding:
 
