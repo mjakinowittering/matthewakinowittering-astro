@@ -25,14 +25,6 @@
     --color-ic-teal: #d7ebe7; /* Say hello pill */
     --color-ic-apricot: #fce3d0; /* the hero sticker */
 
-    /* Today's palette, removed once the redesign no longer uses it */
-    --color-bg: #f7f3ea;
-    --color-panel: #eee6d4;
-    --color-border: #ded2b6;
-    --color-accent-strong: #2c5138;
-    --color-accent-soft: #e2ecdf;
-    --color-accent-contrast: #f4f8f1;
-
     --radius-card: 1rem; /* 16px: cards, contact panel */
     --radius-button: 0.625rem; /* 10px: buttons, screenshots */
     --shadow-offset: 0 4px 0 var(--color-ink); /* buttons */

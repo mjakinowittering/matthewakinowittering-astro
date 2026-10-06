@@ -87,12 +87,6 @@ is merged into `develop` first and released to `main` from there.
 
 #### Redesign
 
-- [ ] Check contrast when the redesign tokens land. Today `text-muted` on
-      `bg-panel` is 4.18:1, under the 4.5:1 body text needs (the body colour of
-      the My experience, Career and Education sections), and the `border` token
-      is 1.35:1 on `bg-bg`, under 3:1, as the only edge of the ghost `Button`
-      and the About section's social pills. The redesign's new tokens replace
-      both pairings; measure them then rather than retuning today's.
 - [ ] Rewrite the How I work and contact copy in Matthew's own voice:
       `blurbs/how-i-work.md` and `blurbs/contact.md` hold draft copy for the
       redesign, kept as written until he rewrites it.
