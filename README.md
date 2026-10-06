@@ -54,15 +54,6 @@ is merged into `develop` first and released to `main` from there.
 
 ### Bugs
 
-#### Accessibility
-
-- [ ] Stop the sticky header covering anchor targets: following a nav link
-      scrolls the section's top to the very top of the viewport, under the
-      header (`h-14` in `Nav.astro`), so its heading sits hidden behind the bar
-      (`#career` lands at 0px). WCAG 2.2's Focus Not Obscured (2.4.11) asks for
-      better. A `scroll-padding-top` on `html` in `global.css`, kept equal to
-      the header's `h-14`, is the likely fix.
-
 #### Tooling
 
 - [ ] Quiet the build's two `MODULE_LEVEL_DIRECTIVE` warnings: since
