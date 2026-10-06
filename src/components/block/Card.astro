@@ -1,0 +1,21 @@
+---
+interface Props {
+    // `li` when the cards are a list, as the hero's stats are
+    as?: 'div' | 'li';
+    // The contact panel's larger offset shadow
+    panel?: boolean;
+    class?: string;
+}
+
+const { as: Tag = 'div', panel = false, class: className } = Astro.props;
+---
+
+<Tag
+    class:list={[
+        'border-ink bg-card rounded-card border-[1.5px]',
+        panel && 'shadow-panel',
+        className
+    ]}
+>
+    <slot />
+</Tag>

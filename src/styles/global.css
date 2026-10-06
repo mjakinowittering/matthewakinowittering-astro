@@ -17,6 +17,7 @@
     --color-ink: #17151f; /* headings, outlines, offset shadows, button text, focus ring */
     --color-muted: #46434f; /* body copy, dates, captions */
     --color-rule: #e7e3dc; /* hairline dividers in lists and the timeline; decorative only */
+    --color-accent: #f07a2e; /* tangerine: primary button fill, link underlines, progress bar; never text */
     --color-ic-yellow: #fbeaa5; /* Projects pill */
     --color-ic-blue: #dce6f2; /* How I work pill */
     --color-ic-green: #d8ecd5; /* Career pill */
@@ -28,11 +29,9 @@
     --color-bg: #f7f3ea;
     --color-panel: #eee6d4;
     --color-border: #ded2b6;
-    --color-accent: #3e6b4c;
     --color-accent-strong: #2c5138;
     --color-accent-soft: #e2ecdf;
     --color-accent-contrast: #f4f8f1;
-    --color-focus: #28231d;
 
     --radius-card: 1rem; /* 16px: cards, contact panel */
     --radius-button: 0.625rem; /* 10px: buttons, screenshots */
@@ -50,11 +49,17 @@ html {
 }
 
 /* One focus ring for every link, button and summary. The offset puts it on the
-   surrounding surface, never on a filled button, so it only meets bg, panel or
-   accent-soft. */
+   surrounding surface, never on a filled button, so ink always meets a light
+   surface (15.9:1 or more on base, sand and card). */
 :focus-visible {
-    outline: 2px solid var(--color-focus);
+    outline: 2px solid var(--color-ink);
     outline-offset: 2px;
+}
+
+/* A content link: ink text on a tangerine underline that thickens on hover and
+   focus. The underline, not its colour, is what marks it as a link. */
+@utility link {
+    @apply text-ink decoration-accent underline decoration-[2.5px] underline-offset-4 hover:decoration-4 focus-visible:decoration-4;
 }
 
 /* The skip link's target: focus lands here but it isn't a control, so no ring */
@@ -62,11 +67,12 @@ main:focus {
     outline: none;
 }
 
-/* MDX-rendered prose (role/course/education bodies) uses the green accent */
+/* Links in content bodies */
 .prose a {
-    @apply text-accent font-semibold no-underline antialiased hover:underline;
+    @apply link font-semibold;
 }
 
+/* A derived figure (CareerLength) whose title says what it counts from */
 .prose time {
-    @apply text-accent cursor-pointer underline decoration-dashed underline-offset-2;
+    @apply decoration-accent cursor-help underline decoration-dashed underline-offset-4;
 }
