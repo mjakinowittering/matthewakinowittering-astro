@@ -2,10 +2,9 @@
 import Nav from '@components/block/Nav.astro';
 import SiteFooter from '@components/block/SiteFooter.astro';
 import Career from '@components/home/career/index.astro';
-import Education from '@components/home/experience/topics/education/index.astro';
-import Training from '@components/home/experience/topics/training/index.astro';
 import Hero from '@components/home/hero/index.astro';
 import HowIWork from '@components/home/how-i-work/index.astro';
+import Learning from '@components/home/learning/index.astro';
 import Projects from '@components/home/projects/index.astro';
 import { m } from '@paraglide/messages.js';
 import Layout from '../layouts/Layout.astro';
@@ -31,7 +30,6 @@ const metaData = {
     <Projects />
     <HowIWork />
     <Career />
-    <Education />
-    <Training />
+    <Learning />
     <SiteFooter slot="footer" />
 </Layout>

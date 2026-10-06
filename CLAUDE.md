@@ -128,13 +128,13 @@ Everything on the page is driven by five content collections, defined with their
 Zod schemas in [`src/content.config.ts`](src/content.config.ts) — the schema's
 one home. Field-by-field detail lives in each collection's skill.
 
-| Collection        | Holds                                                        | Rendered by                                  |
-| ----------------- | ------------------------------------------------------------ | -------------------------------------------- |
-| `accomplishments` | the hero's stat cards, one figure each                       | `home/hero`                                  |
-| `blurbs`          | intro and long copy for each section, keyed by file name     | hero, how-i-work; career and contact not yet |
-| `organisations`   | employers, trainers and universities                         | the Career, Education, Training timelines    |
-| `events`          | roles, courses and degrees, each pointing at an organisation | `Role`, `Course`, `Education`                |
-| `projects`        | things built and shipped                                     | `projects/Project.astro`                     |
+| Collection        | Holds                                                        | Rendered by                                                 |
+| ----------------- | ------------------------------------------------------------ | ----------------------------------------------------------- |
+| `accomplishments` | the hero's stat cards, one figure each                       | `home/hero`                                                 |
+| `blurbs`          | intro and long copy for each section, keyed by file name     | hero, how-i-work, career; contact not yet                   |
+| `organisations`   | employers, trainers and universities                         | named on Career rows and on Learning's degree and providers |
+| `events`          | roles, courses and degrees, each pointing at an organisation | `career/Role`, `learning/Degree`, `learning/Provider`       |
+| `projects`        | things built and shipped                                     | `projects/Project.astro`                                    |
 
 ### How events meet organisations
 
@@ -146,16 +146,16 @@ type: employer                            type: employment
 ---                                       ---
 ```
 
-| Event `type` | Organisation `type` | Section   | Event file lives in                  |
-| ------------ | ------------------- | --------- | ------------------------------------ |
-| `employment` | `employer`          | Career    | `events/employment/<yyyy-mm>/<org>/` |
-| `training`   | `trainer`           | Training  | `events/courses/<yyyy-mm>/<org>/`    |
-| `education`  | `university`        | Education | `events/courses/<yyyy-mm>/<org>/`    |
+| Event `type` | Organisation `type` | Section  | Event file lives in                  |
+| ------------ | ------------------- | -------- | ------------------------------------ |
+| `employment` | `employer`          | Career   | `events/employment/<yyyy-mm>/<org>/` |
+| `training`   | `trainer`           | Learning | `events/courses/<yyyy-mm>/<org>/`    |
+| `education`  | `university`        | Learning | `events/courses/<yyyy-mm>/<org>/`    |
 
 The join is on the organisation's **frontmatter `id`**, not its file path: the
 `organisations` loader keys each entry by that `id`. A mistyped `organisationId`
-logs an "Invalid content reference" error, but the build still completes and the
-event just vanishes from the page. The section components do the join; see
+fails the build: the sections resolve each event through `getOrganisation()` in
+`src/lib/organisations.ts`, which throws on a missing one. See
 **`components-sections`**.
 
 ### Derived, never stored
@@ -195,7 +195,7 @@ blurb shows the figure with `<CareerLength />`.
   `'2019-08-05T00:00:00+00:00'`. An ongoing role or course has **no `dateTo`** —
   never a far-future date
 - After adding or renaming an event or organisation, **build and look for it on
-  the page**. The build cannot catch a broken `organisationId`
+  the page**
 - Order comes from data: `index` for projects, dates for the timelines. Never
   reorder by moving markup around
 

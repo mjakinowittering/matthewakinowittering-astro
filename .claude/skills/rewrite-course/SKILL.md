@@ -12,6 +12,10 @@ Rewrites the body of a completed-course `.md` file into the site's house style,
 so raw pasted-in source material (curriculum text, learning objectives,
 marketing copy) reads like the other entries in `src/content/events/courses/`.
 
+The page lists courses by name, date and certificate only, so a training body is
+not shown today; it stays as the record of what the course covered, and a
+degree's body is shown on its card.
+
 The target is a short, to-the-point paragraph that quickly conveys **what the
 course was** and **why it matters**. It should read as a factual summary, not as
 marketing material for the course.

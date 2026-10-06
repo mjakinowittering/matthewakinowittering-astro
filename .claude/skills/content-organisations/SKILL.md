@@ -52,20 +52,19 @@ always renders through `ExternalTextLink`, so it opens in a new tab.
 
 ## How each type is shown
 
-| Type         | Section   | Hidden when it has no events | Sorted by                           |
-| ------------ | --------- | ---------------------------- | ----------------------------------- |
-| `employer`   | Career    | yes                          | its **earliest** role, newest first |
-| `trainer`    | Training  | yes                          | its **latest** course, newest first |
-| `university` | Education | no                           | collection order                    |
+| Type         | Section  | Shown as                                                    |
+| ------------ | -------- | ----------------------------------------------------------- |
+| `employer`   | Career   | "role at **name**" on each of its roles; roles sort by date |
+| `trainer`    | Learning | a heading over its courses; providers sort by latest course |
+| `university` | Learning | the name on the degree card                                 |
 
-An employer with a role that has no `dateTo` gets a filled timeline dot, marking
-it as current. The logic lives in the section components; see
-**`components-sections`**.
+An organisation with no events does not appear. The logic lives in the section
+components; see **`components-sections`**.
 
 ## Checklist
 
 1. `id` is new, kebab-case and matches the file name
 2. File is under the folder for its `type`
 3. `uri` resolves and is the homepage or the LinkedIn fallback
-4. At least one event points at it, or it will not appear (except universities)
+4. At least one event points at it, or it will not appear
 5. `npm run build`, then check the heading and its link on the page

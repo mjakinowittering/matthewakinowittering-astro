@@ -1,5 +1,5 @@
 ---
-title: Computing and Management BSc Hons 2:1
+title: Computing and Management, BSc (Hons) 2:1
 uri: https://www.lboro.ac.uk/study/undergraduate/courses/a-z/computing-and-management-bsc/
 organisationId: loughborough-university
 type: education

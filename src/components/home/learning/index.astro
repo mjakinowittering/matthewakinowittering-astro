@@ -1,0 +1,74 @@
+---
+import Section from '@components/block/Section.astro';
+import SectionHead from '@components/block/SectionHead.astro';
+import { m } from '@paraglide/messages.js';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import { getOrganisation } from '../../../lib/organisations';
+import Degree from './Degree.astro';
+import Provider from './Provider.astro';
+
+function newestFirst(
+    a: CollectionEntry<'events'>,
+    b: CollectionEntry<'events'>
+) {
+    return b.data.dateFrom.getTime() - a.data.dateFrom.getTime();
+}
+
+const degrees = await Promise.all(
+    (await getCollection('events', ({ data }) => data.type === 'education'))
+        .sort(newestFirst)
+        .map(async (event) => ({
+            event,
+            organisation: await getOrganisation(event)
+        }))
+);
+
+// Walking the courses newest first meets each provider at its most recent
+// course, so the providers come out in the same order
+const providers = new Map<
+    string,
+    {
+        organisation: CollectionEntry<'organisations'>;
+        courses: CollectionEntry<'events'>[];
+    }
+>();
+
+for (const course of (
+    await getCollection('events', ({ data }) => data.type === 'training')
+).sort(newestFirst)) {
+    const organisation = await getOrganisation(course);
+    const provider = providers.get(organisation.id) ?? {
+        organisation,
+        courses: []
+    };
+    provider.courses.push(course);
+    providers.set(organisation.id, provider);
+}
+---
+
+<Section id="learning">
+    <div class="mx-auto max-w-190">
+        <SectionHead
+            pill={m.nav_learning()}
+            tone="pink"
+            title={m.learning_title()}
+        />
+        <div class="mt-10 flex flex-col gap-6">
+            {
+                degrees.map(({ event, organisation }) => (
+                    <Degree event={event} organisation={organisation} />
+                ))
+            }
+        </div>
+        <p class="font-marker mt-14 -rotate-2 text-2xl">
+            {m.learning_marker()}
+        </p>
+        <div class="mt-6 grid gap-10">
+            {
+                [...providers.values()].map(({ organisation, courses }) => (
+                    <Provider organisation={organisation} courses={courses} />
+                ))
+            }
+        </div>
+    </div>
+</Section>

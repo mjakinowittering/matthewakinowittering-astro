@@ -2,40 +2,23 @@
 import Pill from '@components/block/Pill.astro';
 
 interface Props {
-    title: string;
     // The section's pill label and its index-card colour
-    pill?: string;
-    tone?: 'yellow' | 'blue' | 'green' | 'pink' | 'teal';
-    // Today's sections, until each is rebuilt with a pill
-    subtitle?: string;
+    pill: string;
+    tone: 'yellow' | 'blue' | 'green' | 'pink' | 'teal';
+    title: string;
 }
 
-const { title, pill, tone = 'yellow', subtitle } = Astro.props;
+const { pill, tone, title } = Astro.props;
 ---
 
-<div class="flex items-start justify-between gap-6">
-    <div>
-        {pill && <Pill tone={tone}>{pill}</Pill>}
-        <div
-            class:list={[
-                'flex flex-wrap items-center gap-x-5 gap-y-2',
-                pill && 'mt-4'
-            ]}
+<div>
+    <Pill tone={tone}>{pill}</Pill>
+    <div class="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2">
+        <h2
+            class="text-[32px] leading-[1.1] font-extrabold tracking-[-0.01em] sm:text-[42px]"
         >
-            <h2
-                class="text-[32px] leading-[1.1] font-extrabold tracking-[-0.01em] sm:text-[42px]"
-            >
-                {title}
-            </h2>
-            <slot />
-        </div>
-        {
-            subtitle && (
-                <p class="text-ink text-[15px] leading-[1.65] font-semibold">
-                    {subtitle}
-                </p>
-            )
-        }
+            {title}
+        </h2>
+        <slot />
     </div>
-    <slot name="badge" />
 </div>
