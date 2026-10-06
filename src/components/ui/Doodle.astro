@@ -3,23 +3,28 @@ import Icon from './Icon.astro';
 
 interface Props {
     icon: Parameters<typeof Icon>[0]['icon'];
-    // Doodles go diagonally: at most one top left and one bottom right
-    position: 'top-left' | 'bottom-right';
+    // Section doodles go diagonally, one top left and one bottom right; the
+    // contact panel's sits in its top right corner
+    position: 'top-left' | 'bottom-right' | 'top-right';
+    // Its size and tilt, as the reference draws each one
+    class: string;
 }
 
-const { icon, position } = Astro.props;
+const { icon, position, class: className } = Astro.props;
 
 // In the section's padding, clear of its content
 const positions = {
-    'top-left': '-top-16 left-4 -rotate-12 sm:left-8',
-    'bottom-right': 'right-4 -bottom-16 rotate-6 sm:right-8'
+    'top-left': 'top-18 left-[4%]',
+    'bottom-right': 'right-[4%] bottom-18',
+    'top-right': 'top-6 right-7'
 };
 ---
 
 <Icon
     icon={icon}
     class:list={[
-        'text-muted pointer-events-none absolute hidden size-11 md:block',
-        positions[position]
+        'text-ink pointer-events-none absolute hidden sm:block',
+        positions[position],
+        className
     ]}
 />

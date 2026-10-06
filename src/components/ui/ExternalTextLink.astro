@@ -5,29 +5,26 @@ import Icon from './Icon.astro';
 
 interface Props {
     href: string;
-    size?: 'sm' | 'md';
-    // Replaces the default content link style, for links styled as pills or nav
+    // A trailing arrow, as on the Certificate links; organisation names and
+    // View course go without
+    arrow?: boolean;
+    // Replaces the default content link style
     class?: string;
 }
 
-const { href, size = 'md', class: className } = Astro.props;
-
-const iconSizes = {
-    sm: 'size-3.5',
-    md: 'size-4'
-};
+const { href, arrow = false, class: className } = Astro.props;
 ---
 
 <a
-    class:list={['inline-flex items-center gap-1', className ?? 'link']}
+    class:list={[
+        arrow && 'inline-flex items-center gap-[3px]',
+        className ?? 'link'
+    ]}
     href={href}
     target="_blank"
     rel="noopener"
 >
-    <span><slot /></span>
+    <slot />
     <span class="sr-only">{m.external_new_tab()}</span>
-    <Icon
-        icon={ArrowUpRight01Icon}
-        class:list={['inline flex-none', iconSizes[size]]}
-    />
+    {arrow && <Icon icon={ArrowUpRight01Icon} class="size-3.5 flex-none" />}
 </a>

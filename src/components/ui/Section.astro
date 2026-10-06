@@ -2,13 +2,36 @@
 interface Props {
     id?: string;
     alt?: boolean;
+    // The vertical padding: most sections share one; the hero and the contact
+    // section (whose bottom edge is the footer's) have their own
+    pad?: 'section' | 'hero' | 'contact';
+    // Layout of the content column, usually its gap
+    class?: string;
 }
 
-const { id, alt = false } = Astro.props;
+const { id, alt = false, pad = 'section', class: className } = Astro.props;
+
+const pads = {
+    section: 'py-16 sm:py-24',
+    hero: 'pt-12 pb-14 sm:pt-20 sm:pb-18',
+    contact: 'pt-16 sm:pt-24'
+};
 ---
 
-<section id={id} class:list={['relative py-16 sm:py-20', alt && 'bg-sand']}>
-    <div class="relative mx-auto max-w-280 px-4 sm:px-8">
+<section
+    id={id}
+    class:list={[
+        'border-ink relative overflow-hidden not-first:border-t-[1.5px]',
+        alt && 'bg-sand'
+    ]}
+>
+    <div
+        class:list={[
+            'max-w-page relative mx-auto flex flex-col px-6',
+            pads[pad],
+            className
+        ]}
+    >
         <slot />
     </div>
 </section>

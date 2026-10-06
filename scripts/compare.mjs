@@ -116,11 +116,11 @@ function crop(png, top, bottom) {
     return part;
 }
 
-// Writes the side-by-side and diff images for one pair; returns its row
-async function compare(label, ref, build) {
+// Pads a pair to the same size with magenta, so a size difference shows as a
+// diff, and counts the pixels that differ
+function match(ref, build) {
     const w = Math.max(ref.width, build.width);
     const h = Math.max(ref.height, build.height);
-    // Pad with magenta, so a size difference shows as a diff
     const magenta = [255, 0, 255, 255];
     const a = pad(ref, w, h, magenta);
     const b = pad(build, w, h, magenta);
@@ -128,6 +128,16 @@ async function compare(label, ref, build) {
     const mismatched = pixelmatch(a.data, b.data, diff.data, w, h, {
         threshold: 0.1
     });
+    return { a, b, diff, w, h, mismatched };
+}
+
+// Writes the side-by-side and diff images for one pair; returns its row.
+// `html` is the reference .html rendered here: the exported .png carries the
+// exporting machine's text antialiasing, a floor of about 1% on every line of
+// text, so `vsHtml` is the cleaner measure of what is really different.
+async function compare(label, ref, build, html) {
+    const { a, b, diff, w, h, mismatched } = match(ref, build);
+    const vsHtml = match(html, build).mismatched;
     await writeFile(`${out}/${label}-diff.png`, PNG.sync.write(diff));
     await writeFile(
         `${out}/${label}-side.png`,
@@ -138,7 +148,8 @@ async function compare(label, ref, build) {
         reference: `${ref.width}×${ref.height}`,
         build: `${build.width}×${build.height}`,
         mismatched,
-        percent: ((100 * mismatched) / (w * h)).toFixed(2)
+        percent: ((100 * mismatched) / (w * h)).toFixed(2),
+        vsHtml: ((100 * vsHtml) / (w * h)).toFixed(2)
     };
 }
 
@@ -208,7 +219,7 @@ try {
             const refPng = PNG.sync.read(
                 await readFile(`${reference}/${label}.png`)
             );
-            rows.push(await compare(label, refPng, build.png));
+            rows.push(await compare(label, refPng, build.png, ref.png));
             for (const [i, section] of names.entries()) {
                 const r = ref.boxes[i];
                 const b = build.boxes[i];
@@ -216,7 +227,8 @@ try {
                     await compare(
                         `${label}-${section}`,
                         crop(refPng, r.top, r.bottom),
-                        crop(build.png, b.top, b.bottom)
+                        crop(build.png, b.top, b.bottom),
+                        crop(ref.png, r.top, r.bottom)
                     )
                 );
             }

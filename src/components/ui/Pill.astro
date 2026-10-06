@@ -16,14 +16,20 @@ const tones = {
     teal: 'bg-ic-teal'
 };
 
+// A label above a section heading is small capitals; a link reads as words
+const kinds = {
+    label: 'px-3 py-1 text-[12px] tracking-[0.06em] uppercase',
+    link: 'min-h-9 px-3.5 text-[14px] no-underline underline-offset-4 hover:underline'
+};
+
 const Tag = href ? 'a' : 'span';
 ---
 
 <Tag
     href={href}
     class:list={[
-        'border-ink text-ink inline-flex items-center rounded-full border-[1.5px] px-3.5 py-1 text-[13px] leading-normal font-bold',
-        href && 'no-underline hover:underline',
+        'border-ink text-ink inline-flex items-center self-center rounded-full border-[1.5px] font-bold',
+        kinds[href ? 'link' : 'label'],
         tones[tone]
     ]}
 >
