@@ -1,6 +1,7 @@
 ---
 import Avatar from '@assets/MatthewAkinoWittering-BW-Alpha.png';
 import { Button, Card, Section } from '@components/ui';
+import { ArrowDown01Icon, Mail01Icon } from '@hugeicons/core-free-icons';
 import { formatAccomplishment, getAccomplishments } from '@lib/accomplishments';
 import { getCareerStart } from '@lib/career';
 import { calcLengthInYears } from '@lib/utils';
@@ -20,77 +21,94 @@ const sticker = m.hero_sticker({
     years: calcLengthInYears(await getCareerStart(), new Date())
 });
 
-// The sticker's outline: a 20-point starburst in a 100 by 100 box
-const starburst = Array.from({ length: 40 }, (_, i) => {
-    const radius = i % 2 ? 43 : 49;
-    const angle = (Math.PI * i) / 20;
-    return `${50 + radius * Math.sin(angle)},${50 - radius * Math.cos(angle)}`;
-}).join(' ');
+// The sticker's outline, a 14-point starburst in a 118 by 118 box, as drawn
+// in the reference
+const starburst =
+    '59,2 69.5,13.2 83.7,7.6 88.3,22.3 103.6,23.5 101.3,38.6 114.6,46.3 106,59 114.6,71.7 101.3,79.4 103.6,94.5 88.3,95.7 83.7,110.4 69.5,104.8 59,116 48.5,104.8 34.3,110.4 29.7,95.7 14.4,94.5 16.7,79.4 3.4,71.7 12,59 3.4,46.3 16.7,38.6 14.4,23.5 29.7,22.3 34.3,7.6 48.5,13.2';
 ---
 
-<Section id="top">
-    <div class="grid items-center gap-12 md:grid-cols-[1.3fr_.7fr]">
-        <div>
+<Section id="top" alt pad="hero" class="gap-10 sm:gap-14">
+    <div class="flex flex-wrap-reverse items-center gap-12">
+        <div class="flex min-w-0 flex-[999_1_520px] flex-col gap-5.5">
             <h1
-                class="text-[40px] leading-[1.05] font-extrabold tracking-[-0.02em] sm:text-[58px]"
+                class="text-[40px] leading-[1.08] font-extrabold tracking-[-0.035em] sm:text-[58px]"
             >
-                {blurb.data.title}
-                <span
-                    class="font-marker mt-2 block font-normal tracking-normal"
-                >
-                    {m.hero_marker()}
+                {blurb.data.title}{' '}
+                <span class="relative inline-block whitespace-nowrap">
+                    <span
+                        class="font-marker text-[0.92em] font-normal tracking-normal"
+                    >
+                        {m.hero_marker()}
+                    </span>
+                    <svg
+                        aria-hidden="true"
+                        viewBox="0 0 240 16"
+                        preserveAspectRatio="none"
+                        fill="none"
+                        class="absolute -bottom-2.5 left-0 h-4 w-full"
+                    >
+                        <path
+                            d="M4 10c46-7 120-9 232-3"
+                            class="stroke-accent"
+                            stroke-width="5"
+                            stroke-linecap="round"></path>
+                    </svg>
                 </span>
             </h1>
-            <div
-                class="prose text-muted prose-p:text-[17px] prose-p:leading-[1.65] prose-p:text-muted sm:prose-p:text-[19px] mt-6 max-w-[56ch]"
-            >
+            <div class="text-muted max-w-[56ch] text-[18.5px]">
                 {Content ? <Content /> : <p>{m.content_not_found()}</p>}
             </div>
-            <div class="mt-8 flex flex-wrap gap-4">
-                <Button href="#projects">{m.hero_see_projects()}</Button>
-                <Button href="#contact" variant="ghost">
+            <div class="flex flex-wrap gap-3.5 pt-1.5">
+                <Button href="#projects" icon={ArrowDown01Icon} iconAfter>
+                    {m.hero_see_projects()}
+                </Button>
+                <Button href="#contact" variant="ghost" icon={Mail01Icon}>
                     {m.hero_get_in_touch()}
                 </Button>
             </div>
         </div>
-        <div
-            class="relative mx-auto w-64 pt-8 sm:w-80 md:mx-0 md:justify-self-end"
-        >
-            <Card class="overflow-hidden">
-                <Image
-                    src={Avatar}
-                    alt={m.hero_photo_alt({ name: m.site_name() })}
-                    loading="eager"
-                    class="w-full"
-                />
-            </Card>
-            <p
-                class="text-ink absolute -top-2 -right-4 flex size-32 -rotate-12 items-center justify-center text-center text-[15px] leading-tight font-extrabold sm:-right-8"
-            >
-                <svg
-                    aria-hidden="true"
-                    viewBox="0 0 100 100"
-                    class="fill-ic-apricot stroke-ink absolute inset-0 size-full"
+        <div class="flex flex-[1_1_260px] justify-center">
+            <div class="relative size-70">
+                <div
+                    class="border-ink bg-card shadow-panel size-70 overflow-hidden rounded-full border-[1.5px]"
                 >
-                    <polygon
-                        points={starburst}
-                        stroke-width="1.5"
-                        vector-effect="non-scaling-stroke"></polygon>
-                </svg>
-                <span class="relative max-w-[11ch]">{sticker}</span>
-            </p>
+                    <Image
+                        src={Avatar}
+                        alt={m.hero_photo_alt({ name: m.site_name() })}
+                        loading="eager"
+                        class="size-full object-cover object-top"
+                    />
+                </div>
+                <p
+                    class="absolute -top-4.5 -left-8.5 flex size-[118px] -rotate-12 items-center justify-center text-center text-[12.5px] leading-[1.15] font-extrabold tracking-[0.04em] whitespace-pre-line uppercase"
+                >
+                    <svg
+                        aria-hidden="true"
+                        viewBox="0 0 118 118"
+                        class="fill-ic-apricot stroke-ink absolute inset-0 size-full"
+                    >
+                        <polygon
+                            points={starburst}
+                            stroke-width="1.5"
+                            stroke-linejoin="round"></polygon>
+                    </svg>
+                    <span class="relative">{sticker}</span>
+                </p>
+            </div>
         </div>
     </div>
-    <ul class="mt-14 grid gap-4 sm:grid-cols-3">
+    <ul class="flex flex-wrap gap-4">
         {
             accomplishments.map(({ data }) => (
-                <Card as="li" class="p-6">
-                    <p class="text-muted text-[15px] leading-normal">
-                        <span class="font-marker text-ink block text-[40px] leading-tight">
-                            {formatAccomplishment(data.value, data.suffix)}
-                        </span>
-                        {data.caption}
-                    </p>
+                <Card
+                    as="li"
+                    shape="tile"
+                    class="flex flex-[1_1_220px] flex-col gap-1.5 px-5.5 py-5"
+                >
+                    <span class="font-marker text-[44px] leading-[1.1]">
+                        {formatAccomplishment(data.value, data.suffix)}
+                    </span>
+                    <span class="text-muted text-[14px]">{data.caption}</span>
                 </Card>
             ))
         }
