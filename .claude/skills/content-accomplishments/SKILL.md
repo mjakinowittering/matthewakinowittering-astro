@@ -1,16 +1,16 @@
 ---
 name: content-accomplishments
 description:
-    The stat figures in src/content/accomplishments/ that the redesigned hero
-    shows as cards (1,200+, 250+, 150+). Use whenever the user wants to add,
-    update or remove a headline number, a stat, a metric or an achievement
-    figure, or asks how the stat cards are ordered or formatted.
+    The stat figures in src/content/accomplishments/ that the hero shows as
+    cards (1,200+, 250+, 150+). Use whenever the user wants to add, update or
+    remove a headline number, a stat, a metric or an achievement figure, or asks
+    how the stat cards are ordered or formatted.
 ---
 
 # Accomplishments
 
-Each file is one stat card in the redesigned hero: a big number, then a caption.
-Nothing renders them yet; the hero will (see **`design-brief`**). Read them
+Each file is one stat card in the hero (`home/hero/index.astro`): the number in
+marker, then the caption in sans. A card shows no organisation. Read them
 through `getAccomplishments()` in `src/lib/accomplishments.ts`, never
 `getCollection` directly, so every reader gets the same order.
 
@@ -22,7 +22,6 @@ value: 1200 # a plain number, no separators or quotes
 suffix: '+' # optional, shown straight after the number
 caption: people across 15+ agencies use Ignite for eCommerce and Retail Media
     analytics # the text after the number
-organisationId: acorn-i # optional, the organisation's frontmatter `id`
 ---
 ```
 
@@ -41,13 +40,6 @@ of the number.
 Lower-case start, no full stop: it reads on from the number ("1,200+ people
 across…"). One line of plain text, no markdown.
 
-### `organisationId`
-
-Written as `events` does it: copy the organisation's frontmatter `id`, which is
-not always its file name (see **`content-organisations`**). Like an event's, it
-adds to the build's "Invalid content reference" noise (a Bugs item in
-`README.md`) without failing the build.
-
 ## Order
 
 Largest `value` first, derived by `getAccomplishments()`. There is no `index`:
@@ -64,6 +56,5 @@ change that too until it has one home.
 
 1. `value` is a plain whole number Matthew gave, `suffix` only if he uses one
 2. `caption` reads on from the number, lower-case start, no full stop
-3. `organisationId` (if set) copied from the organisation's `id`
-4. Body empty
-5. `npm run build`
+3. Body empty
+4. `npm run build`, then check the card in the hero

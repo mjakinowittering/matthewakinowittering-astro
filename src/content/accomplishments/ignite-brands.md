@@ -4,5 +4,4 @@ suffix: '+'
 caption:
     brands use Ignite, our SaaS platform for eCommerce and Retail Media
     professionals
-organisationId: acorn-i
 ---

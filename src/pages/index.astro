@@ -1,11 +1,11 @@
 ---
 import Nav from '@components/block/Nav.astro';
 import SiteFooter from '@components/block/SiteFooter.astro';
-import AboutMe from '@components/home/about-me/index.astro';
 import Experience from '@components/home/experience/index.astro';
 import Education from '@components/home/experience/topics/education/index.astro';
 import Employment from '@components/home/experience/topics/employment/index.astro';
 import Training from '@components/home/experience/topics/training/index.astro';
+import Hero from '@components/home/hero/index.astro';
 import Projects from '@components/home/projects/index.astro';
 import WhatIdo from '@components/home/what-do-i-do/index.astro';
 import { m } from '@paraglide/messages.js';
@@ -28,7 +28,7 @@ const metaData = {
 
 <Layout metaData={metaData}>
     <Nav slot="header" />
-    <AboutMe />
+    <Hero />
     <Experience />
     <WhatIdo />
     <Employment />

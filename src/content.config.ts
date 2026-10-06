@@ -22,8 +22,7 @@ const accomplishments = defineCollection({
     schema: z.object({
         value: z.number().int().positive(),
         suffix: z.string().optional(),
-        caption: z.string(),
-        organisationId: reference('organisations').optional()
+        caption: z.string()
     })
 });
 

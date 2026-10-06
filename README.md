@@ -56,12 +56,13 @@ is merged into `develop` first and released to `main` from there.
 
 #### Tooling
 
-- [ ] Quiet the build's two `MODULE_LEVEL_DIRECTIVE` warnings: since
-      `blurbs/about-me.mdx` and `blurbs/hero.mdx` import `CareerLength.astro`,
+- [ ] Quiet the build's `MODULE_LEVEL_DIRECTIVE` warning for `blurbs/hero.mdx`:
       Vite warns that the `"use astro:head-inject"` directive "may not be
-      preserved when bundling". The page renders the same as before; it is
-      noise. Find out whether Astro fixes it upstream before filtering it, and
-      never by silencing other warnings with it.
+      preserved when bundling". The directive is added by Astro itself
+      (`vite-plugin-content-assets.js`) to every MDX content entry, whatever the
+      file holds, so nothing in this repo causes it; the page renders correctly.
+      Wait for an Astro fix rather than filtering it, and never silence other
+      warnings with it.
 - [ ] Clear the two moderate `npm audit` findings: `postcss-selector-parser`,
       reached through `@tailwindcss/typography`, which only runs at build time.
       npm's only offer is a downgrade to 0.5.4, which is not a fix; recheck when
@@ -115,10 +116,6 @@ is merged into `develop` first and released to `main` from there.
     - the draft "{years} years shaping…" became `<CareerLength /> shaping…`,
       which renders "16+ years shaping…" because `calcLengthInYears` already
       says "years". Check it reads as intended
-- [ ] Decide whether the stat cards show their organisation: each accomplishment
-      carries `organisationId: acorn-i`, but nothing reads it, and the hero
-      design has no place for it. Either show it on the cards or drop the field.
-      A decision to make, not a commitment.
 
 #### Tooling
 
