@@ -9,7 +9,7 @@ description:
 
 # Accomplishments
 
-Each file is one stat card in the hero (`home/hero/index.astro`): the number in
+Each file is one stat card in the hero (`sections/Hero.astro`): the number in
 marker, then the caption in sans. A card shows no organisation. Read them
 through `getAccomplishments()` in `src/lib/accomplishments.ts`, never
 `getCollection` directly, so every reader gets the same order.

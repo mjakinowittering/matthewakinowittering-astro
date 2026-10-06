@@ -1,12 +1,13 @@
 ---
 name: components-block
 description: >-
-    The shared primitives in src/components/block/ (Section, SectionHead, Pill,
-    Card, Button, ExternalTextLink, Icon, Doodle, EventDescription, Nav,
-    SiteFooter): their props, when to use each, and when a new primitive is
-    justified. Use whenever building or editing any section or card, adding a
-    button, link, pill or icon, changing the nav or footer, or tempted to write
-    a section wrapper, heading or link by hand.
+    The shared primitives in src/components/ui/ (Section, SectionHead, Pill,
+    Card, Button, ExternalTextLink, Icon, Doodle), the page chrome in site/
+    (Nav, SiteFooter) and the island in islands/ (EventDescription): their
+    props, when to use each, and when a new primitive is justified. Use whenever
+    building or editing any section or card, adding a button, link, pill or
+    icon, changing the nav or footer, or tempted to write a section wrapper,
+    heading or link by hand.
 ---
 
 # Block components
@@ -135,8 +136,9 @@ The duration of an event ("7 years 3 months"), from
 when the event is ongoing**, so the duration counts on in the browser; a
 finished event renders it at build time with no JavaScript. Because directives
 cannot be spread or made conditional, callers branch on the directive and spread
-`eventDates` into each branch (`career/Role.astro` shows it). It renders plain
-text, not an `aria-live` region, so a screen reader reads it once.
+`eventDates` into each branch (`entries/Role.astro` shows it). It lives in
+`src/components/islands/` and is imported by path, never through a barrel. It
+renders plain text, not an `aria-live` region, so a screen reader reads it once.
 
 ### `Nav` and `SiteFooter`
 
@@ -160,7 +162,8 @@ from `src/lib/socials.ts`.
 
 Only when the same markup is needed in **two** places (YAGNI). Then:
 
-- It goes in `src/components/block/`, named for what it is, PascalCase
+- It goes in `src/components/ui/`, named for what it is, PascalCase, with a line
+  in `ui/index.ts`; import it as `{ Name } from '@components/ui'`
 - `interface Props` with defaults set in the destructure:
   `const { size = 'md' } = Astro.props;`
 - Variants are a lookup object fed into `class:list`, as `Button`, `Pill` and

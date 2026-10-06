@@ -1,11 +1,9 @@
 ---
-import Section from '@components/block/Section.astro';
-import SectionHead from '@components/block/SectionHead.astro';
+import { Degree, Provider } from '@components/entries';
+import { Section, SectionHead } from '@components/ui';
+import { getOrganisation } from '@lib/organisations';
 import { m } from '@paraglide/messages.js';
 import { getCollection, type CollectionEntry } from 'astro:content';
-import { getOrganisation } from '../../../lib/organisations';
-import Degree from './Degree.astro';
-import Provider from './Provider.astro';
 
 function newestFirst(
     a: CollectionEntry<'events'>,

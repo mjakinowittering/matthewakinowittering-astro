@@ -1,8 +1,8 @@
 ---
-import Icon from '@components/block/Icon.astro';
+import { Icon } from '@components/ui';
 import { Cancel01Icon, Menu01Icon } from '@hugeicons/core-free-icons';
+import { sections } from '@lib/sections';
 import { m } from '@paraglide/messages.js';
-import { sections } from '../../lib/sections';
 
 const navLinks = sections.filter((section) => section.inNav);
 

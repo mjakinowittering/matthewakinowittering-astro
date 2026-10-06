@@ -37,15 +37,14 @@ description:
     │   │   └── courses/<yyyy-mm>/<org>/     one .md per course or degree
     │   └── projects/              one .md per project + img/
     ├── components/
-    │   ├── block/                 shared primitives, no content knowledge
+    │   ├── ui/                    shared primitives, no content knowledge
+    │   ├── site/                  page chrome: Nav, SiteFooter
+    │   ├── islands/               Svelte islands (EventDescription), no barrel
     │   ├── content/               components content files import (CareerLength)
-    │   └── home/                  one folder per page section
-    │       ├── hero/
-    │       ├── projects/          section + Project card
-    │       ├── how-i-work/
-    │       ├── career/            section + Role row
-    │       ├── learning/          section + Degree card + Provider list
-    │       └── contact/
+    │   ├── sections/              one file per page section: Hero, Projects,
+    │   │                          HowIWork, Career, Learning, Contact
+    │   └── entries/               one content entry each: Project, Role,
+    │                              Degree, Provider
     ├── layouts/Layout.astro       <head>, sharing tags, fonts, body shell
     ├── lib/
     │   ├── accomplishments.ts     stats sorted largest first, and their formatting
@@ -70,10 +69,13 @@ description:
 | an employer, trainer or university       | `src/content/organisations/<type>/<id>.md`                         |
 | a UI string                              | `messages/en.json` (see **`i18n-messages`**)                       |
 | a project or its screenshot              | `src/content/projects/`, image in `projects/img/`                  |
-| a primitive used by two or more sections | `src/components/block/`                                            |
-| a part used by one section only          | that section's folder under `components/home/`                     |
+| a primitive used by two or more sections | `src/components/ui/`                                               |
+| a page section                           | `src/components/sections/`                                         |
+| a component rendering one content entry  | `src/components/entries/`                                          |
+| a Svelte island                          | `src/components/islands/`, imported by path, not barrelled         |
 | a hero stat                              | `src/content/accomplishments/` (see **`content-accomplishments`**) |
 | a component a content file imports       | `src/components/content/`                                          |
+| any new `.astro` component               | also a line in its folder's `index.ts` barrel                      |
 | a helper (no DOM; may read a collection) | `src/lib/`                                                         |
 | an image a component imports             | `src/assets/`                                                      |
 | a file served at a fixed URL             | `public/`                                                          |
@@ -86,14 +88,14 @@ organisation's `id` (`andalucia.com/` holds `organisationId: andalucia`). The
 
 `src/pages/index.astro` is the only place the order is set:
 
-| #   | Section    | Component         | `id`         | In nav | Band | Pill   |
-| --- | ---------- | ----------------- | ------------ | ------ | ---- | ------ |
-| 1   | Hero       | `home/hero`       | none         | no     | base | none   |
-| 2   | Projects   | `home/projects`   | `projects`   | yes    | sand | yellow |
-| 3   | How I work | `home/how-i-work` | `how-i-work` | yes    | base | blue   |
-| 4   | Career     | `home/career`     | `career`     | yes    | sand | green  |
-| 5   | Learning   | `home/learning`   | `learning`   | yes    | base | pink   |
-| 6   | Contact    | `home/contact`    | `contact`    | no     | sand | teal   |
+| #   | Section    | Component           | `id`         | In nav | Band | Pill   |
+| --- | ---------- | ------------------- | ------------ | ------ | ---- | ------ |
+| 1   | Hero       | `sections/Hero`     | none         | no     | base | none   |
+| 2   | Projects   | `sections/Projects` | `projects`   | yes    | sand | yellow |
+| 3   | How I work | `sections/HowIWork` | `how-i-work` | yes    | base | blue   |
+| 4   | Career     | `sections/Career`   | `career`     | yes    | sand | green  |
+| 5   | Learning   | `sections/Learning` | `learning`   | yes    | base | pink   |
+| 6   | Contact    | `sections/Contact`  | `contact`    | no     | sand | teal   |
 
 Two couplings to keep in step when reordering or adding:
 

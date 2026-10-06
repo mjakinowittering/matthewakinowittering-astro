@@ -1,8 +1,8 @@
 ---
-import ExternalTextLink from '@components/block/ExternalTextLink.astro';
+import { ExternalTextLink } from '@components/ui';
+import { formatMonthYear } from '@lib/utils';
 import { m } from '@paraglide/messages.js';
 import type { CollectionEntry } from 'astro:content';
-import { formatMonthYear } from '../../../lib/utils';
 
 interface Props {
     organisation: CollectionEntry<'organisations'>;

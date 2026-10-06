@@ -1,10 +1,10 @@
 ---
-import EventDescription from '@components/block/EventDescription.svelte';
-import ExternalTextLink from '@components/block/ExternalTextLink.astro';
+import EventDescription from '@components/islands/EventDescription.svelte';
+import { ExternalTextLink } from '@components/ui';
+import { formatDateRange } from '@lib/utils';
 import { m } from '@paraglide/messages.js';
 import type { CollectionEntry } from 'astro:content';
 import { render } from 'astro:content';
-import { formatDateRange } from '../../../lib/utils';
 
 interface Props {
     event: CollectionEntry<'events'>;

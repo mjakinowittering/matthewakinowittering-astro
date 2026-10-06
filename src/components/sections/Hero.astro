@@ -1,17 +1,12 @@
 ---
-import Button from '@components/block/Button.astro';
-import Card from '@components/block/Card.astro';
-import Section from '@components/block/Section.astro';
+import Avatar from '@assets/MatthewAkinoWittering-BW-Alpha.png';
+import { Button, Card, Section } from '@components/ui';
+import { formatAccomplishment, getAccomplishments } from '@lib/accomplishments';
+import { getCareerStart } from '@lib/career';
+import { calcLengthInYears } from '@lib/utils';
 import { m } from '@paraglide/messages.js';
 import { Image } from 'astro:assets';
 import { getEntry, render } from 'astro:content';
-import Avatar from '../../../assets/MatthewAkinoWittering-BW-Alpha.png';
-import {
-    formatAccomplishment,
-    getAccomplishments
-} from '../../../lib/accomplishments';
-import { getCareerStart } from '../../../lib/career';
-import { calcLengthInYears } from '../../../lib/utils';
 
 const blurb = await getEntry('blurbs', 'hero');
 

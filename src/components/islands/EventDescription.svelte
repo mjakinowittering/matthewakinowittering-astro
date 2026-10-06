@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { calcLengthInYearsAndMonths } from '../../lib/utils.ts';
+    import { calcLengthInYearsAndMonths } from '@lib/utils.ts';
 
     interface Props {
         dateFrom: Date;
