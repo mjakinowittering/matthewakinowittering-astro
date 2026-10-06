@@ -1,5 +1,7 @@
 ---
 import { m } from '@paraglide/messages.js';
+import { getImage } from 'astro:assets';
+import Avatar from '../assets/MatthewAkinoWittering-BW-Alpha.png';
 import '../styles/global.css';
 
 interface metaTag {
@@ -11,6 +13,8 @@ interface metaData {
     title?: string;
     description?: string;
     additionalMetaTags?: Array<metaTag>;
+    // Keeps the page out of search results and gives it no canonical URL
+    noindex?: boolean;
 }
 
 interface Props {
@@ -24,6 +28,16 @@ function titleText(title: string | undefined) {
 const { metaData } = Astro.props;
 
 const site = m.site_name();
+
+const title = titleText(metaData.title);
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+
+// The photo stands in for a proper 1200x630 sharing card until there is one
+const ogImage = new URL(
+    (await getImage({ src: Avatar, format: 'png' })).src,
+    Astro.site
+).href;
 ---
 
 <!doctype html>
@@ -32,8 +46,27 @@ const site = m.site_name();
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="generator" content={Astro.generator} />
-        <title>{titleText(metaData.title)}</title>
+        <title>{title}</title>
         <meta name="description" content={metaData.description} />
+        {
+            metaData.noindex ? (
+                <meta name="robots" content="noindex" />
+            ) : (
+                <link rel="canonical" href={canonical} />
+            )
+        }
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content={site} />
+        <meta property="og:locale" content="en_GB" />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={metaData.description} />
+        {!metaData.noindex && <meta property="og:url" content={canonical} />}
+        <meta property="og:image" content={ogImage} />
+        <meta
+            property="og:image:alt"
+            content={m.hero_photo_alt({ name: site })}
+        />
+        <meta name="twitter:card" content="summary" />
         {
             metaData.additionalMetaTags?.map((tag) => (
                 <meta name={tag.name} content={tag.content} />

@@ -80,8 +80,10 @@ is merged into `develop` first and released to `main` from there.
 
 #### Sharing
 
-- [ ] Add Open Graph and canonical tags in `Layout.astro`, once for the page
-      rather than per page, so a link shared on LinkedIn shows a proper card.
+- [ ] Add a 1200 by 630 sharing card for Open Graph: `Layout.astro` points
+      `og:image` at the hero photo, a 447 by 558 portrait that LinkedIn crops,
+      with `twitter:card` set to `summary` to match. A designed card would let
+      both use the large format. A decision to make, not a commitment.
 
 #### Redesign
 
