@@ -1,6 +1,6 @@
 ---
 import { Doodle, Pill, Section } from '@components/ui';
-import { BinocularsIcon, CompassIcon } from '@hugeicons/core-free-icons';
+import { BinocularsIcon, Navigation05Icon } from '@hugeicons/core-free-icons';
 import { m } from '@paraglide/messages.js';
 import { getEntry, render } from 'astro:content';
 
@@ -13,7 +13,7 @@ const { Content } = await render(blurb);
 
 <Section id="how-i-work">
     <Doodle icon={BinocularsIcon} position="top-left" />
-    <Doodle icon={CompassIcon} position="bottom-right" />
+    <Doodle icon={Navigation05Icon} position="bottom-right" />
     <div class="md:text-center">
         <h2><Pill tone="blue">{blurb.data.title}</Pill></h2>
         <div
