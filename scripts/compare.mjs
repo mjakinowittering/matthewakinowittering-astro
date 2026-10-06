@@ -52,9 +52,19 @@ const pages = [
 const freeze = `.scroll-progress { animation: none !important; transform: scaleX(0.35) !important; }`;
 
 async function startServer() {
+    // Astro's own binary, not npx, so killing it stops the server; and past
+    // the lock, so it never hands off to a preview server already running
     const server = spawn(
-        'npx',
-        ['astro', 'preview', '--port', String(port), '--host', '127.0.0.1'],
+        process.execPath,
+        [
+            'node_modules/astro/bin/astro.mjs',
+            'preview',
+            '--port',
+            String(port),
+            '--host',
+            '127.0.0.1',
+            '--ignore-lock'
+        ],
         { stdio: 'ignore' }
     );
     for (let tries = 0; tries < 100; tries++) {
@@ -90,10 +100,16 @@ async function screenshot(browser, url, width, selectors) {
     const png = PNG.sync.read(await page.screenshot({ fullPage: true }));
     const boxes = await page.evaluate((selectors) => {
         const tops = selectors.map((selector) => {
-            const box = document
-                .querySelector(selector)
-                .getBoundingClientRect();
-            return { top: box.top + scrollY, bottom: box.bottom + scrollY };
+            const element = document.querySelector(selector);
+            const box = element.getBoundingClientRect();
+            // Below any top border: the build draws the rule between two
+            // sections as the lower one's top border, the reference as the
+            // upper one's bottom border, which lands on the same pixels
+            const border = parseFloat(getComputedStyle(element).borderTopWidth);
+            return {
+                top: box.top + scrollY + border,
+                bottom: box.bottom + scrollY
+            };
         });
         return tops.map(({ top, bottom }, i) => ({
             top: Math.round(top),
