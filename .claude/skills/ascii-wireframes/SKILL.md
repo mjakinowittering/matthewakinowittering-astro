@@ -48,8 +48,8 @@ drifts out of line. **Draw with printable ASCII only.**
 - **Real copy and real icons.** Use the actual strings from `messages/en.json`
   and the content files ("Where I've worked and what I've built", "View
   certificate"), never lorem ipsum. Name an icon with a short ASCII word in
-  brackets (`[building]`, `[external]`), and name the **Lucide** icon in a note
-  underneath. Say in the notes whether each icon is decorative or carries
+  brackets (`[building]`, `[external]`), and name the **Hugeicons** icon in a
+  note underneath. Say in the notes whether each icon is decorative or carries
   meaning; how each is labelled is in `CLAUDE.md`, Accessibility.
 
 ## How to draw
@@ -64,7 +64,7 @@ wide or less (about 40 for a phone), one region per drawing.
 | box border             | `+` corners and junctions, `-` across, `\|` down     |
 | separator inside a box | `\|  ------  \|`, inset so it isn't read as a border |
 | button                 | `[ Label ]` primary, `( Label )` ghost               |
-| icon                   | `[compass]`, `[x]` (Lucide name in the notes)        |
+| icon                   | `[compass]`, `[x]` (Hugeicons name in notes)         |
 | text link              | `_View certificate_ [external]`                      |
 | tag pill               | `{ No backend }`                                     |
 | timeline dot           | `o` open, `*` filled                                 |

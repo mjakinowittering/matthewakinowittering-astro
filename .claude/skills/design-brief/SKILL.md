@@ -1,21 +1,21 @@
 ---
 name: design-brief
 description: >-
-    The agreed redesign of Matthew's site: who it is for, how it positions him,
+    The design of Matthew's site and why: who it is for, how it positions him,
     the friendly stationery look, the colour, type, icon and doodle rules, and
-    the section-by-section layout of the new page. Load before any visible
-    change, any redesign or restyling work, reordering sections, drawing a
-    wireframe, or writing hero, projects, how-I-work, career, learning or
-    contact copy, so the change serves the brief rather than drifting from it.
+    the section-by-section layout of the page. Load before any visible change,
+    any restyling work, reordering sections, drawing a wireframe, or writing
+    hero, projects, how-I-work, career, learning or contact copy, so the change
+    serves the brief rather than drifting from it.
 ---
 
-# Design brief: the redesign
+# Design brief
 
 Agreed with Matthew over a long design conversation and a canvas mock-up at
-phone (390px), tablet (1024px) and desktop (1280px) widths. This is the
-**target**: until a section is rebuilt, its domain skill describes the code as
-it is (see "Target versus current" in `CLAUDE.md`). When a section is rebuilt,
-its domain skill is updated to match, and this brief stays the record of why.
+phone (390px), tablet (1024px) and desktop (1280px) widths, and built in the
+redesign PR (`feature/redesign`). This brief is the record of what the page is
+and why; the domain skills describe how the code does it (see "Why versus how"
+in `CLAUDE.md`). A visible change follows both and updates the domain skill.
 
 Every rule in `CLAUDE.md` still holds, in particular Accessibility, one light
 theme, mobile first, facts in `src/content/` and UI copy in `messages/en.json`.
@@ -95,25 +95,25 @@ Two levels only:
 
 ### Colour tokens
 
-The values below move into `src/styles/global.css` `@theme` when the redesign is
-built, each with a comment saying what it is for. From then on that file is
-their one home and this table is history.
+The values live in `src/styles/global.css` `@theme`, each with a comment saying
+what it is for: that file is their one home, and **`styling`** lists the
+measured contrast. The roles:
 
-| Token        | Value     | Used for                                         |
-| ------------ | --------- | ------------------------------------------------ |
-| `base`       | `#f8f5ef` | the page                                         |
-| `sand`       | `#f7f0e3` | alternate section bands                          |
-| `card`       | `#fdfbf7` | every raised surface                             |
-| `ink`        | `#17151f` | headings, outlines, offset shadows, button text  |
-| `muted`      | `#46434f` | body copy, dates, captions                       |
-| `rule`       | `#e7e3dc` | hairline dividers in lists and timelines         |
-| `accent`     | `#f07a2e` | tangerine: primary buttons, link underlines, bar |
-| `ic-yellow`  | `#fbeaa5` | Projects pill                                    |
-| `ic-blue`    | `#dce6f2` | How I work pill                                  |
-| `ic-green`   | `#d8ecd5` | Career pill                                      |
-| `ic-pink`    | `#f7d8e0` | Learning pill                                    |
-| `ic-teal`    | `#d7ebe7` | Say hello pill                                   |
-| `ic-apricot` | `#fce3d0` | the hero sticker                                 |
+| Token        | Used for                                         |
+| ------------ | ------------------------------------------------ |
+| `base`       | the page                                         |
+| `sand`       | alternate section bands                          |
+| `card`       | every raised surface                             |
+| `ink`        | headings, outlines, offset shadows, button text  |
+| `muted`      | body copy, dates, captions                       |
+| `rule`       | hairline dividers in lists and timelines         |
+| `accent`     | tangerine: primary buttons, link underlines, bar |
+| `ic-yellow`  | Projects pill                                    |
+| `ic-blue`    | How I work pill                                  |
+| `ic-green`   | Career pill                                      |
+| `ic-pink`    | Learning pill                                    |
+| `ic-teal`    | Say hello pill                                   |
+| `ic-apricot` | the hero sticker                                 |
 
 - **Tangerine is the one accent.** Text on a tangerine fill is ink, not white.
   Tangerine is never used for body text; check every use against the Contrast
@@ -157,7 +157,8 @@ appears in exactly these places:
 1. **Hero**: "and builder." on its own line under "I'm Matthew, a product
    leader".
 2. **Stats**: the big numbers on the stat cards (1,200+, 250+, 150+).
-3. **Projects**: "built after hours" beside the heading, with a small bat.
+3. **Projects**: "built after hours" beside the heading, with a small crescent
+   moon (Hugeicons has no bat).
 4. **Learning**: "and still learning…" introducing the courses under the degree.
 5. **Contact**: "What are you building?" inside the contact panel.
 
@@ -168,8 +169,8 @@ strongest builder proof.
 
 ### Icons
 
-- **Hugeicons Free** (`@hugeicons/core-free-icons`, Stroke Rounded), replacing
-  Lucide entirely in the same PR. One icon set across the site; never mix.
+- **Hugeicons Free** (`@hugeicons/core-free-icons`, Stroke Rounded), which
+  replaced Lucide in the redesign. One icon set across the site; never mix.
 - Render statically: a small Astro wrapper outputs the icon data as inline SVG,
   so icons ship no JavaScript. Use `@hugeicons/svelte` only inside an island
   that already exists for another reason.
@@ -182,7 +183,7 @@ strongest builder proof.
   so the line matches: lightbulb (Projects), binoculars and a navigation compass
   (How I work), briefcase and rocket (Career), a chat bubble (contact).
 - **At most two per section**, placed diagonally: one top left, one bottom
-  right. Marker accents (the bat) sit with their text and do not count.
+  right. Marker accents (the moon) sit with their text and do not count.
 - **Never sparkles**: they read as an AI cliché. No squiggles.
 - Doodles decorate and never carry information: `aria-hidden="true"`, and hidden
   at phone width.
@@ -228,20 +229,23 @@ tablet differences are noted per section.
 - Two buttons: "See what I've built" (primary, to Projects) and "Get in touch"
   (ghost, to contact).
 - A photo of Matthew, outlined, with the apricot starburst sticker overlapping a
-  corner. Until a new photo exists, a dashed placeholder.
+  corner. The current photo stays until Matthew supplies a new one; never a
+  dashed placeholder.
 - **Stat cards** below the intro: three outlined cards, number in marker,
   caption in sans, **sorted largest first**. Today: 1,200+ (people across 15+
   agencies use Ignite), 250+ (brands use Ignite), 150+ (people use Texana). They
-  come from the new `accomplishments` collection, not markup.
+  come from the `accomplishments` collection, not markup, and name no
+  organisation.
 - Phone: stacks to one column; stat cards stack.
 
 ### 2. Projects
 
 - Pill "Projects" (yellow), heading "Things I've built and shipped myself",
-  marker "built after hours" with the bat. Lightbulb doodle.
+  marker "built after hours" with a crescent moon. Lightbulb doodle.
 - Two cards side by side (one column on phone), on card white: a rounded,
-  outlined screenshot, title, description, then **tag pills and buttons aligned
-  to the bottom** of the card so the two cards line up.
+  outlined screenshot, a plain title (no ruled line), description, then **tag
+  pills and buttons aligned to the bottom** of the card so the two cards line
+  up.
 - Buttons: "Try it live" (primary) and "View source" (ghost) **only when the
   project has a `sourceUri`**.
 - DyslexicWriter's screenshot is its 1200×630 Open Graph image, saved as
@@ -259,7 +263,8 @@ tablet differences are noted per section.
 
 - Pill "Career" (green), heading "Where I've worked", a short intro paragraph
   (the arc from Ask.com through a WPP company to Acorn-i, and two acquisitions).
-- A "Download CV" button: **placeholder until the CV is decided**.
+- A "Download CV" button goes under the intro **once a CV exists**; until then
+  nothing renders (a Features item in `README.md`).
 - A centred 760px timeline with no rule above or below it, rows 30px apart: date
   range, then "role at organisation", then the role body. Every role stays.
   Briefcase and rocket doodles.
@@ -268,14 +273,16 @@ tablet differences are noted per section.
 
 - Pill "Learning" (pink), heading "Trained as a builder". One merged section
   replacing today's Education and Training.
+- The section sits in the same centred 760px column as Career.
 - **The degree first**, as a featured card: Computing and Management, BSc (Hons)
-  2:1, Loughborough University, 2005 to 2009, with the line about the final-year
-  project and a "View course" link.
+  2:1, Loughborough University, 2005 to 2009, its full body (including the
+  final-year project) and a "View course" link.
 - Then marker "and still learning…", then courses **grouped by provider**,
   providers sorted by their most recent course (newest first), courses newest
   first within each. A numbered or hairline-divided list, not cards.
 - Each course row: name, date, and "Certificate ↗" **only when it has a `uri`**.
-  On phone a row wraps to two lines.
+  On phone a row wraps to two lines. A course's body is not shown; it stays in
+  its file as the record.
 - **Lose nothing**: every course stays.
 
 ### 6. Contact
@@ -283,7 +290,8 @@ tablet differences are noted per section.
 - Pill "Say hello" (teal) and heading "Fancy a chat about product?" above an
   outlined card-white panel with the large offset shadow.
 - Inside: "What are you building?" in marker, then three short sentences, then
-  "Get in touch" (email, primary) and LinkedIn (ghost). Chat bubble doodle.
+  "Get in touch" (email, primary) and each social link, LinkedIn and GitHub
+  (ghost). Chat bubble doodle. The column is the same 760px as Career.
 - The current sentences are a draft for Matthew to put in his own voice: they
   are about talking product, turning vision into strategy and strategy into
   features, and how AI is changing the role.
@@ -292,28 +300,54 @@ tablet differences are noted per section.
 
 Copyright line only. The socials live in the contact panel.
 
+### 404 page
+
+The classic pattern on the same tokens: the shared header and footer, then
+centred a large "404" (decorative, `aria-hidden`), the `<h1>` "Page not found",
+one line ("Sorry, the page you're looking for doesn't exist or has moved."), a
+primary "Back to the homepage" button, then "Or try one of these:" and the five
+sections as pill links in their index-card colours (Projects, How I work,
+Career, Learning, Say hello). No illustration and no marker font.
+
 ## Content and copy
 
 - Short labels (pills, button text, headings, `alt` text) are Paraglide
-  messages. Anything longer than a sentence or two (the hero lead, How I work,
-  the Career intro, the contact copy) is markdown in `src/content/`, so Matthew
-  can edit it directly.
-- **New `accomplishments` collection** for the stat cards: one markdown file per
-  stat with `value` (a plain number), `suffix` (`+`), `caption`, and an optional
-  reference to the organisation. The hero sorts by `value` descending and
-  formats it with `en-GB` thousands separators. Defined in its own step, with
-  its own skill.
+  messages, and so are the marker lines. Anything longer than a sentence or two
+  (the hero lead, How I work, the Career intro, the contact copy) is markdown in
+  `src/content/`, so Matthew can edit it directly.
+- The **`accomplishments` collection** holds the stat cards: one markdown file
+  per stat with `value` (a plain number), `suffix` (`+`) and `caption`. The hero
+  sorts by `value` descending and formats it with `en-GB` thousands separators
+  (see **`content-accomplishments`**).
 - Never invent a number or outcome; every figure is Matthew's.
+
+## Decisions made
+
+Settled when the redesign was built; reopen only with Matthew.
+
+- **Hero sticker**: the apricot starburst, not the post-it.
+- **Project titles**: plain, with no ruled line.
+- **Photo**: the current photo stays until there is a new one, never a
+  placeholder.
+- **CV**: no "Download CV" button until a CV exists.
+- **Provider order**: by most recent course, newest first (Pendo, then
+  Anthropic, then ScrumAlliance today).
+- **Course rows**: name, date and certificate only; bodies are not shown.
+- **Stat cards**: no organisation on the card.
+- **Marker lines**: messages, not blurb fields.
+- **The bat**: a crescent moon, as Hugeicons Free has no bat.
+- **What I do, About me and My experience**: replaced by How I work.
 
 ## Open decisions
 
 Raise these before building the part they touch:
 
-- **Hero sticker**: the starburst, or a post-it note. Both mocked.
-- **Project titles**: plain, or with a soft pink ruled line beneath, like an
-  index card. Both mocked.
-- **Photo**: a new photo of Matthew is needed; the placeholder stays until then.
-- **CV**: whether to offer a download. `/resume` is reserved in `robots.txt`.
-- **Copy in his voice**: How I work and the contact panel.
-- **Provider order**: sorting by most recent course currently puts Pendo ahead
-  of Anthropic. The rule stands unless Matthew says otherwise.
+- **Copy in his voice**: How I work and the contact panel are drafts.
+- **The Ignite figures**: they are both in the Acorn-i role body and on the stat
+  cards; whether the role body keeps them.
+- **A new photo**: when Matthew supplies one, it replaces the hero photo and the
+  Open Graph image.
+- **A sharing card**: whether to design a 1200 by 630 Open Graph image instead
+  of the photo.
+- **The CV**: when one exists, the button and where the file lives (`/resume` is
+  reserved in `robots.txt`).

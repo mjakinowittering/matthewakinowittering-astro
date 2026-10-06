@@ -7,14 +7,8 @@ interface Props {
 const { id, alt = false } = Astro.props;
 ---
 
-<section
-    id={id}
-    class:list={[
-        'grow py-20',
-        alt && 'border-border bg-panel border-t border-b'
-    ]}
->
-    <div class="mx-auto max-w-295 px-8">
+<section id={id} class:list={['relative py-16 sm:py-20', alt && 'bg-sand']}>
+    <div class="relative mx-auto max-w-280 px-4 sm:px-8">
         <slot />
     </div>
 </section>

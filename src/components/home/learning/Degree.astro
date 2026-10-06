@@ -1,0 +1,62 @@
+---
+import Card from '@components/block/Card.astro';
+import EventDescription from '@components/block/EventDescription.svelte';
+import ExternalTextLink from '@components/block/ExternalTextLink.astro';
+import { m } from '@paraglide/messages.js';
+import type { CollectionEntry } from 'astro:content';
+import { render } from 'astro:content';
+
+interface Props {
+    event: CollectionEntry<'events'>;
+    organisation: CollectionEntry<'organisations'>;
+}
+
+const { event, organisation } = Astro.props;
+
+const { Content } = await render(event);
+
+const { title, uri, dateFrom, dateTo } = event.data;
+
+const ongoing = !dateTo;
+
+const eventDates = { dateFrom, dateTo };
+
+const range = m.date_range({
+    from: String(dateFrom.getUTCFullYear()),
+    to: dateTo ? String(dateTo.getUTCFullYear()) : m.date_present()
+});
+---
+
+<Card class="p-6 sm:p-8">
+    <h3 class="text-[22px] leading-snug font-extrabold sm:text-[24px]">
+        {title}
+    </h3>
+    <p class="text-ink mt-1 text-[17px] font-semibold">
+        {organisation.data.name}
+    </p>
+    <p class="text-muted mt-1 text-sm font-semibold">
+        {range}{' '}
+        <span aria-hidden="true">·</span>{' '}
+        {
+            ongoing ? (
+                <EventDescription client:only="svelte" {...eventDates} />
+            ) : (
+                <EventDescription {...eventDates} />
+            )
+        }
+    </p>
+    <div
+        class="prose text-muted prose-p:text-[15px] prose-p:leading-[1.65] prose-p:text-muted mt-4"
+    >
+        {Content ? <Content /> : <p>{m.content_not_found()}</p>}
+    </div>
+    {
+        uri && (
+            <p class="mt-4 text-[15px] font-semibold">
+                <ExternalTextLink href={uri}>
+                    {m.learning_view_course()}
+                </ExternalTextLink>
+            </p>
+        )
+    }
+</Card>

@@ -1,0 +1,48 @@
+---
+import ExternalTextLink from '@components/block/ExternalTextLink.astro';
+import { m } from '@paraglide/messages.js';
+import type { CollectionEntry } from 'astro:content';
+import { formatMonthYear } from '../../../lib/utils';
+
+interface Props {
+    organisation: CollectionEntry<'organisations'>;
+    // Newest first
+    courses: CollectionEntry<'events'>[];
+}
+
+const { organisation, courses } = Astro.props;
+---
+
+<div>
+    <h3 class="text-[20px] font-extrabold">
+        <ExternalTextLink href={organisation.data.uri}>
+            {organisation.data.name}
+        </ExternalTextLink>
+    </h3>
+    <ol class="divide-rule mt-2 divide-y-[1.5px]">
+        {
+            courses.map(({ data }) => (
+                <li class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 py-3.5">
+                    <span class="text-ink text-[15px] font-semibold">
+                        {data.title}
+                    </span>
+                    <span class="text-muted flex flex-none items-baseline gap-5 text-sm">
+                        {formatMonthYear(data.dateFrom)}
+                        {data.uri && (
+                            <ExternalTextLink href={data.uri}>
+                                <span aria-hidden="true">
+                                    {m.learning_certificate()}
+                                </span>
+                                <span class="sr-only">
+                                    {m.learning_certificate_for({
+                                        course: data.title
+                                    })}
+                                </span>
+                            </ExternalTextLink>
+                        )}
+                    </span>
+                </li>
+            ))
+        }
+    </ol>
+</div>

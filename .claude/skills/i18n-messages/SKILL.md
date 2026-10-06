@@ -22,7 +22,7 @@ components.
 | ----------------------------------------------------- | ------------------ |
 | prose about Matthew's work: a role, a course, a blurb | `src/content/`     |
 | a label a component puts around that content          | `messages/en.json` |
-| a section title, subtitle, badge, nav or button label | `messages/en.json` |
+| a section title or pill, a nav or button label        | `messages/en.json` |
 | `alt` text for an image a component imports           | `messages/en.json` |
 | `alt` text for an image a content file references     | that file's `alt`  |
 | an `aria-label` for an icon, or an icon-only link     | `messages/en.json` |
@@ -32,8 +32,10 @@ Which images and icons need text, and of which kind, is in `CLAUDE.md`,
 Accessibility.
 
 A section heading that comes from a blurb's `title` stays in the blurb; only
-sections without a blurb (Career, Projects, Education, Training) take their
-title from a message.
+sections without a blurb (Projects, Learning) take their title from a message. A
+section's pill is its `nav_` name. The marker lines (`hero_marker`,
+`projects_marker`, `learning_marker`, `contact_marker`) are messages too, even
+beside a blurb, so every sharpie accent has one home.
 
 ## Key naming
 
@@ -41,18 +43,18 @@ Keys are `snake_case`: `<domain>_<element>`. The domain is the section or
 primitive that shows the string. **Reuse an existing domain**; grep for the
 prefix before adding a key:
 
-| prefix                                            | covers                                                   |
-| ------------------------------------------------- | -------------------------------------------------------- |
-| `site_`                                           | the name, `<title>` pattern and meta description         |
-| `nav_`, `social_`, `footer_`                      | the top bar, the social links, the footer                |
-| `about_`                                          | the About section's buttons                              |
-| `experience_`, `what_i_do_`                       | the two blurb-led sections                               |
-| `career_`, `projects_`, `education_`, `training_` | the four list sections                                   |
-| `course_`                                         | one training row inside the Training timeline            |
-| `content_`                                        | fallbacks shared by every section                        |
-| `external_`                                       | the new-tab text inside `Button` and `ExternalTextLink`  |
-| `date_`, `duration_`                              | date ranges and lengths, used through `src/lib/utils.ts` |
-| `not_found_`                                      | the 404 page                                             |
+| prefix                  | covers                                                                    |
+| ----------------------- | ------------------------------------------------------------------------- |
+| `site_`                 | the name, `<title>` pattern and meta description                          |
+| `nav_`                  | the section names: header links, section pills, 404 links (`sections.ts`) |
+| `social_`, `footer_`    | the social links, the footer                                              |
+| `hero_`                 | the hero's marker line, buttons, photo `alt` and sticker                  |
+| `projects_`, `career_`  | the Projects and Career sections                                          |
+| `learning_`, `contact_` | the Learning section and the contact panel                                |
+| `content_`              | fallbacks shared by every section                                         |
+| `external_`             | the new-tab text inside `Button` and `ExternalTextLink`                   |
+| `date_`, `duration_`    | date ranges and lengths, used through `src/lib/utils.ts`                  |
+| `not_found_`            | the 404 page                                                              |
 
 The **suffix** declares the string's family, and the family sets its length.
 
@@ -61,20 +63,18 @@ The **suffix** declares the string's family, and the family sets its length.
 Before writing a value, find its siblings, the keys sharing its suffix, and
 match their length and tone. Measured off the current `en.json`:
 
-| family                                           | register                                      | example                                   |
-| ------------------------------------------------ | --------------------------------------------- | ----------------------------------------- |
-| `_title`                                         | one or two words, the section's name          | `"Career"`                                |
-| `_subtitle`                                      | one short line, first person, no stop         | `"Where I've worked and what I've built"` |
-| `_badge`                                         | one word under the section icon               | `"Employer"`                              |
-| `nav_*`                                          | one word, the section's title                 | `"Projects"`                              |
-| action (`_view_*`, `_try_live`, `_get_in_touch`) | two or three words, verb first, sentence case | `"View certificate"`                      |
-| `_alt`                                           | what the image shows                          | `"Alien with Spock hand"`                 |
-| `_description`                                   | one sentence, ends with a stop                | the 404 and meta descriptions             |
+| family                                          | register                                     | example                             |
+| ----------------------------------------------- | -------------------------------------------- | ----------------------------------- |
+| `_title`                                        | a short heading, first person where it fits  | `"Trained as a builder"`            |
+| `nav_*`                                         | one to three words, the section's name       | `"How I work"`                      |
+| `_marker`                                       | a few words, lower case unless a question    | `"built after hours"`               |
+| action (`_see_*`, `_try_live`, `_get_in_touch`) | two to four words, verb first, sentence case | `"Try it live"`                     |
+| `_alt`                                          | what the image shows                         | `"Black and white photo of {name}"` |
+| `_description`                                  | one sentence, ends with a stop               | the 404 and meta descriptions       |
 
-Stay within roughly half again of the siblings' length. A badge that runs to two
-words, or a subtitle that becomes a sentence with a stop, breaks the layout the
-component was built around. The writing rules in `CLAUDE.md` (British English,
-no em dashes in copy) apply here too; the en dash in `date_range` is correct.
+Stay within roughly half again of the siblings' length. A pill that runs to a
+phrase, or a marker line that becomes a sentence, breaks the layout the
+component was built around.
 
 ## Parameters and plurals
 
@@ -98,7 +98,7 @@ rather than writing `"{n} year(s)"`.
    length.
 3. Use it as `m.<key>()`, imported from `@paraglide/messages.js`. In a list of
    links, store the function (`label: m.nav_career`) and call it where it is
-   rendered, as `Nav.astro` does.
+   rendered, as `src/lib/sections.ts` and `Nav.astro` do.
 4. `npm run dev` and `npm run build` recompile `src/paraglide/` through the Vite
    plugin. For `npm run astro check` on a fresh checkout, compile first:
    `npx paraglide-js compile --project ./project.inlang --outdir ./src/paraglide`

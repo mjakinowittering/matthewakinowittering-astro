@@ -1,34 +1,55 @@
 ---
 import Button from '@components/block/Button.astro';
+import Nav from '@components/block/Nav.astro';
+import Pill from '@components/block/Pill.astro';
+import SiteFooter from '@components/block/SiteFooter.astro';
 import { m } from '@paraglide/messages.js';
-import { Image } from 'astro:assets';
-import Alien from '../assets/alien.svg';
 import Layout from '../layouts/Layout.astro';
+import { sections } from '../lib/sections';
 
 const metaData = {
     title: m.not_found_title(),
-    description: m.not_found_description()
+    description: m.not_found_description(),
+    noindex: true
 };
 ---
 
 <Layout metaData={metaData}>
-    <div class="flex min-h-screen items-center justify-center text-center">
-        <div class="m-5 flex flex-col items-center">
-            <Image
-                src={Alien}
-                alt={m.not_found_image_alt()}
-                class="size-48"
-                loading="eager"
-            />
-            <div class="flex w-full flex-col gap-3">
-                <h1 class="text-3xl font-extrabold">{metaData.title}</h1>
-                <p class="text-muted text-lg">
-                    {metaData.description}
-                </p>
-            </div>
-            <div class="w-full py-5">
-                <Button href="/">{m.not_found_run_away()}</Button>
-            </div>
+    <Nav slot="header" />
+    <div
+        class="mx-auto flex max-w-280 grow flex-col items-center justify-center px-4 py-16 text-center sm:px-8"
+    >
+        <p
+            aria-hidden="true"
+            class="text-[96px] leading-none font-extrabold tracking-[-0.03em] sm:text-[140px]"
+        >
+            404
+        </p>
+        <h1
+            class="mt-4 text-[32px] leading-tight font-extrabold sm:text-[42px]"
+        >
+            {m.not_found_title()}
+        </h1>
+        <p class="text-muted mt-3 max-w-[46ch] text-[17px] leading-[1.65]">
+            {m.not_found_description()}
+        </p>
+        <div class="mt-8">
+            <Button href="/">{m.not_found_home()}</Button>
         </div>
+        <p class="text-muted mt-12 text-[15px] font-semibold">
+            {m.not_found_suggestions()}
+        </p>
+        <ul class="mt-4 flex flex-wrap justify-center gap-3">
+            {
+                sections.map((section) => (
+                    <li>
+                        <Pill tone={section.tone} href={section.href}>
+                            {section.label()}
+                        </Pill>
+                    </li>
+                ))
+            }
+        </ul>
     </div>
+    <SiteFooter slot="footer" />
 </Layout>

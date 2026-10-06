@@ -22,8 +22,7 @@ const accomplishments = defineCollection({
     schema: z.object({
         value: z.number().int().positive(),
         suffix: z.string().optional(),
-        caption: z.string(),
-        organisationId: reference('organisations').optional()
+        caption: z.string()
     })
 });
 
@@ -48,34 +47,17 @@ const events = defineCollection({
 const organisations = defineCollection({
     loader: glob({
         base: './src/content/organisations',
-        pattern: '**/*.{md,mdx}'
+        pattern: '**/*.{md,mdx}',
+        // Key each entry by its frontmatter `id`, not its file path, so every
+        // `reference('organisations')` resolves against the value events use
+        generateId: ({ data }) => String(data.id)
     }),
     schema: z.object({
         id: z.string(),
         name: z.string(),
         type: z.enum(['employer', 'trainer', 'university']),
-        uri: z.string(),
-        dateFrom: z.iso
-            .datetime({ offset: true })
-            .transform((str) => new Date(str))
-            .nullish(),
-        dateTo: z.iso
-            .datetime({ offset: true })
-            .transform((str) => new Date(str))
-            .nullish(),
-        events: z.number().nullish()
+        uri: z.string()
     })
-});
-
-const skills = defineCollection({
-    loader: glob({ base: './src/content/skills', pattern: '**/*.{md,mdx}' }),
-    schema: ({ image }) =>
-        z.object({
-            title: z.string(),
-            img: image(),
-            alt: z.string(),
-            index: z.number()
-        })
 });
 
 const projects = defineCollection({
@@ -99,6 +81,5 @@ export const collections = {
     blurbs,
     events,
     organisations,
-    projects,
-    skills
+    projects
 };

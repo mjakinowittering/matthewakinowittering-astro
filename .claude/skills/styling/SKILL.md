@@ -12,61 +12,80 @@ description:
 Tailwind CSS v4, loaded through the `@tailwindcss/vite` plugin in
 `astro.config.mjs` (not an Astro integration), with `@tailwindcss/typography`
 for content bodies. There is no `tailwind.config.*`: theme values are declared
-in CSS.
+in CSS. Why the site looks as it does is in **`design-brief`**; this skill is
+how the code does it.
 
 ## Tokens
 
-`src/styles/global.css` holds every colour in its `@theme` block, with a comment
-on each saying what it is for. That file is the one home for the values; do not
-copy hex codes into this skill or into components.
+`src/styles/global.css` holds every design value in its `@theme` block, with a
+comment on each saying what it is for. That file is the one home for the values;
+do not copy hex codes into this skill or into components.
 
-| Token family      | Utility examples                             | Used for                                        |
-| ----------------- | -------------------------------------------- | ----------------------------------------------- |
-| `bg`              | `bg-bg`                                      | the cream page and card surfaces                |
-| `panel`           | `bg-panel`                                   | `alt` section bands, avatar ring                |
-| `border`          | `border-border`, `bg-border`                 | every border and the timeline line              |
-| `ink`             | `text-ink`                                   | headings and emphasised text                    |
-| `muted`           | `text-muted`                                 | body copy, dates, labels                        |
-| `accent`          | `bg-accent`, `text-accent`                   | primary buttons, prose links                    |
-| `accent-strong`   | `text-accent-strong`, `border-accent-strong` | section titles, hovers, icons, the timeline dot |
-| `accent-soft`     | `bg-accent-soft`                             | tag pills                                       |
-| `accent-contrast` | `text-accent-contrast`                       | text on a filled accent button                  |
+| Token family                     | Utility examples                 | Used for                                                         |
+| -------------------------------- | -------------------------------- | ---------------------------------------------------------------- |
+| `base`, `sand`                   | `bg-base`, `bg-sand`             | the page, and the alternate section bands (`Section alt`)        |
+| `card`                           | `bg-card`                        | every raised surface: cards, header, contact panel               |
+| `ink`                            | `text-ink`, `border-ink`         | headings, outlines, button text, offset shadows, the focus ring  |
+| `muted`                          | `text-muted`                     | body copy, dates, captions, doodles                              |
+| `rule`                           | `divide-rule`                    | hairlines between Career and Learning rows; decorative only      |
+| `accent`                         | `bg-accent`, `decoration-accent` | tangerine: primary buttons, link underlines, the progress bar    |
+| `ic-*`                           | `bg-ic-yellow` … `bg-ic-teal`    | one per section's pill, through `Pill`'s `tone`; never elsewhere |
+| `ic-apricot`                     | `fill-ic-apricot`                | the hero sticker only                                            |
+| `radius-card`, `-button`         | `rounded-card`, `rounded-button` | cards and the panel; buttons and screenshots                     |
+| `shadow-offset`, `-sm`, `-panel` | `shadow-offset`, `shadow-panel`  | the hard ink edge under buttons; the contact panel's larger one  |
+| `breakpoint-nav`                 | `nav:flex`, `nav:hidden`         | 900px, where the header's links replace the menu button          |
+| `spacing-header`                 | `h-header`, `top-header`         | the header's height, also read by `scroll-padding-top` on `html` |
 
-The palette is warm cream and sand with one green accent. Rules:
+Rules:
 
-- No hex value or stock palette class in a component (`CLAUDE.md`, Styling), and
-  that includes `rgb()`, `white` and `black`. If no token fits, add one to
+- **Stock Tailwind colours are switched off** (`--color-*: initial`), so
+  `gray-300`, `white` and `black` don't compile. If no token fits, add one to
   `@theme` with a comment arguing for it, then use it
 - A token is referenced in arbitrary CSS as `var(--color-<name>)`, as the
   project placeholder's stripe gradient does
+- **Tangerine is never text** and never an edge on its own: a primary button has
+  an ink outline, and a link is marked by its underline, not its colour. Text on
+  a tangerine fill is ink
+- `text-base` would be ambiguous now that `base` is a colour, and ESLint flags
+  it; write a font size as `text-[16px]`
 - There is no dark mode, and that is decided (`CLAUDE.md`, Styling): no `dark:`
   variants, no second palette
-- A new token, or a new pairing of existing ones, meets the contrast ratios in
-  `CLAUDE.md`, Accessibility. `text-muted` on `bg-panel` falls short today; the
-  redesign's tokens replace it, and a Features item in `README.md` says to check
-  them
+
+### Contrast
+
+Every pairing in use meets `CLAUDE.md`, Accessibility. Measured:
+
+| Foreground | On                             | Ratio          |
+| ---------- | ------------------------------ | -------------- |
+| `ink`      | `base`, `sand`, `card`         | 15.9 to 17.5:1 |
+| `ink`      | each `ic-*` tint, `ic-apricot` | 13.6 to 15.0:1 |
+| `ink`      | `accent` (primary button text) | 6.5:1          |
+| `muted`    | `base`, `sand`, `card`         | 8.5 to 9.3:1   |
+
+`accent` on the page is 2.5 to 2.7:1, which is why it is never text or a lone
+edge; `rule` on `card` is 1.24:1, which is why it only ever divides. A new token
+or pairing is measured and added here.
 
 ## Type
 
-One family: `font-sans`, which is Public Sans (loaded in `Layout.astro`) with a
-system fallback. Sizes follow the existing scale; reuse a step rather than
-adding one:
+`font-sans` is Figtree and `font-marker` is Permanent Marker, both loaded in
+`Layout.astro` from Google Fonts. The marker is only for the five places the
+marker rule in **`design-brief`** names, always real text, never body copy.
+Sizes in use; reuse a step rather than adding one:
 
-| Role                     | Classes                                                                           |
-| ------------------------ | --------------------------------------------------------------------------------- |
-| page `<h1>`              | `text-5xl font-extrabold leading-[1.06] tracking-[-0.01em]`                       |
-| section title (`<h2>`)   | `text-[32px] font-extrabold leading-[1.15] tracking-[-0.01em] text-accent-strong` |
-| section subtitle         | `text-[15px] font-semibold leading-[1.65] text-ink`                               |
-| card / timeline `<h3>`   | `text-lg font-bold` (project cards `text-2xl`)                                    |
-| lead body                | 17px, `leading-[1.65]`                                                            |
-| standard body            | 15px, `leading-[1.65]`                                                            |
-| compact body             | 13.5px to 14px (`text-sm`), `leading-[1.6]`                                       |
-| meta line (dates, roles) | `text-[13px] font-bold text-muted`                                                |
-| tiny labels              | 10 to 11px, `uppercase font-bold`, wide tracking                                  |
+| Role                           | Classes                                                                       |
+| ------------------------------ | ----------------------------------------------------------------------------- |
+| hero `<h1>`                    | `text-[40px] sm:text-[58px] font-extrabold leading-[1.05] tracking-[-0.02em]` |
+| section `<h2>` (`SectionHead`) | `text-[32px] sm:text-[42px] font-extrabold leading-[1.1] tracking-[-0.01em]`  |
+| card / row `<h3>`              | `text-[20px]` to `text-[24px] font-extrabold`                                 |
+| lead body                      | `text-[17px]`, `sm:text-[19px]` in the hero, `leading-[1.65]`                 |
+| body                           | `text-[15px] leading-[1.65]`                                                  |
+| meta (dates, durations)        | `text-sm font-semibold text-muted`                                            |
+| pill                           | `text-[13px] font-bold`                                                       |
+| marker accent                  | `font-marker`, `text-xl` to `text-2xl`, a slight rotate                       |
 
-Arbitrary values (`text-[13px]`, `gap-4.5`, `max-w-295`) are normal in this
-codebase and fine; matching an existing value matters more than avoiding
-brackets.
+Arbitrary values (`text-[15px]`, `max-w-190`) are normal in this codebase and
+fine; matching an existing value matters more than avoiding brackets.
 
 ## Prose (content bodies)
 
@@ -74,7 +93,7 @@ Every rendered content body sits in a wrapper like:
 
 ```astro
 <div
-    class="prose text-muted prose-p:text-sm prose-p:leading-[1.6] prose-p:text-muted mt-2 max-w-[64ch]"
+    class="prose text-muted prose-p:text-[15px] prose-p:leading-[1.65] prose-p:text-muted mt-3"
 >
     <Content />
 </div>
@@ -82,20 +101,22 @@ Every rendered content body sits in a wrapper like:
 
 - `prose-p:*` modifiers set paragraph size and colour per context; copy them
   from the nearest sibling component
-- Cap the measure with `max-w-[56ch]` to `max-w-[70ch]` for readability
-- Site-wide prose overrides live in `global.css`: links are `text-accent` and
-  semibold, underlined on hover; `<time>` gets a dashed accent underline. Change
-  those there, not per component
+- Site-wide prose overrides live in `global.css`: links use the `link` utility
+  (ink text, tangerine underline that thickens on hover and focus), and `<time>`
+  (the `CareerLength` figure) gets a dashed tangerine underline. Change those
+  there, not per component
 
 ## Class strings
 
 - Prettier sorts classes (`prettier-plugin-tailwindcss`); run `npm run format`.
   ESLint's `tailwindcss` rules check the rest, with ordering left to Prettier
 - Conditional classes use `class:list={[base, cond && 'x', variants[variant]]}`
-- Interactive elements get a visible hover state (`hover:text-ink`,
-  `hover:border-accent-strong`), and links that look like buttons get
-  `no-underline`. Focus needs nothing per component: one `:focus-visible` rule
-  in `global.css` draws the `focus` token ring on every link, button and
-  summary. Never set `outline-none` on a control
+- A text link outside prose takes the `link` utility (`ExternalTextLink` does by
+  default). Buttons use `Button`, pills `Pill`, outlined surfaces `Card`
+- Focus needs nothing per component: one `:focus-visible` rule in `global.css`
+  draws a 2px ink ring, offset onto the surrounding surface. Never set
+  `outline-none` on a control
+- Motion is opt-in: a hover or press movement goes behind `motion-safe:`. The
+  progress bar is tied to scrolling, not played, so it needs no guard
 - Mobile first, checked at phone, tablet and desktop widths (`CLAUDE.md`,
   Styling)

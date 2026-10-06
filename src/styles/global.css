@@ -3,26 +3,81 @@
 @plugin '@tailwindcss/typography';
 
 @theme {
-    --font-sans: 'Public Sans', system-ui, sans-serif;
+    /* Stock Tailwind colours off, so only the tokens below can be used */
+    --color-*: initial;
 
-    --color-bg: #f7f3ea; /* page background (cream)  -> bg-bg */
-    --color-panel: #eee6d4; /* alt-section (sand)       -> bg-panel */
-    --color-border: #ded2b6; /* borders                  -> border-border */
-    --color-ink: #28231d; /* body text                -> text-ink */
-    --color-muted: #786b59; /* muted text               -> text-muted */
-    --color-accent: #3e6b4c; /* green accent             -> bg-accent / text-accent */
-    --color-accent-strong: #2c5138; /* hover/active             -> *-accent-strong */
-    --color-accent-soft: #e2ecdf; /* pill/tag backgrounds     -> bg-accent-soft */
-    --color-accent-contrast: #f4f8f1; /* text on accent buttons   -> text-accent-contrast */
-    --color-focus: #28231d; /* focus ring, 12:1+ on bg, panel, accent-soft -> outline-focus */
+    /* Everything */
+    --font-sans: 'Figtree', ui-sans-serif, system-ui, sans-serif;
+    /* The sharpie: the marker rule in design-brief only */
+    --font-marker: 'Permanent Marker', cursive;
+
+    --color-base: #f8f5ef; /* the page */
+    --color-sand: #f7f0e3; /* alternate section bands */
+    --color-card: #fdfbf7; /* every raised surface: cards, header, contact panel */
+    --color-ink: #17151f; /* headings, outlines, offset shadows, button text, focus ring */
+    --color-muted: #46434f; /* body copy, dates, captions */
+    --color-rule: #e7e3dc; /* hairline dividers in lists and the timeline; decorative only */
+    --color-accent: #f07a2e; /* tangerine: primary button fill, link underlines, progress bar; never text */
+    --color-ic-yellow: #fbeaa5; /* Projects pill */
+    --color-ic-blue: #dce6f2; /* How I work pill */
+    --color-ic-green: #d8ecd5; /* Career pill */
+    --color-ic-pink: #f7d8e0; /* Learning pill */
+    --color-ic-teal: #d7ebe7; /* Say hello pill */
+    --color-ic-apricot: #fce3d0; /* the hero sticker */
+
+    --radius-card: 1rem; /* 16px: cards, contact panel */
+    --radius-button: 0.625rem; /* 10px: buttons, screenshots */
+    --shadow-offset: 0 4px 0 var(--color-ink); /* buttons */
+    --shadow-offset-sm: 0 3px 0 var(--color-ink); /* small buttons, and any button pressed */
+    --shadow-panel: 8px 8px 0 var(--color-ink); /* the contact panel */
+
+    --breakpoint-nav: 56.25rem; /* 900px: header links inline from here, menu button below */
+    --spacing-header: 4rem; /* header height; the menu's top and scroll-padding-top read it */
+}
+
+/* Anchor targets land below the sticky header, not under it */
+html {
+    scroll-padding-top: var(--spacing-header);
+}
+
+/* The header's reading-progress bar (Nav): grows with the page's scroll, with
+   no JavaScript. Where scroll-driven animations aren't supported it stays at
+   zero width, so it simply doesn't show. */
+@utility scroll-progress {
+    transform: scaleX(0);
+    transform-origin: left;
+
+    @supports (animation-timeline: scroll()) {
+        animation: scroll-progress linear both;
+    }
+}
+
+/* Its own rule, so the minifier can't fold the timeline into the `animation`
+   shorthand, which browsers then reject */
+@supports (animation-timeline: scroll()) {
+    html .scroll-progress {
+        animation-timeline: scroll(root);
+    }
+}
+
+@keyframes scroll-progress {
+    to {
+        transform: scaleX(1);
+    }
 }
 
 /* One focus ring for every link, button and summary. The offset puts it on the
-   surrounding surface, never on a filled button, so it only meets bg, panel or
-   accent-soft. */
+   surrounding surface, never on a filled button, so ink always meets a light
+   surface (15.9:1 or more on base, sand and card). */
 :focus-visible {
-    outline: 2px solid var(--color-focus);
+    outline: 2px solid var(--color-ink);
     outline-offset: 2px;
+}
+
+/* A content link: ink text on a tangerine underline that thickens on hover and
+   focus. The underline, not its colour, is what marks it as a link. */
+@utility link {
+    @apply text-ink decoration-accent underline decoration-[2.5px] underline-offset-4 hover:decoration-4 focus-visible:decoration-4;
 }
 
 /* The skip link's target: focus lands here but it isn't a control, so no ring */
@@ -30,11 +85,12 @@ main:focus {
     outline: none;
 }
 
-/* MDX-rendered prose (role/course/education bodies) uses the green accent */
+/* Links in content bodies */
 .prose a {
-    @apply text-accent font-semibold no-underline antialiased hover:underline;
+    @apply link font-semibold;
 }
 
+/* A derived figure (CareerLength) whose title says what it counts from */
 .prose time {
-    @apply text-accent cursor-pointer underline decoration-dashed underline-offset-2;
+    @apply decoration-accent cursor-help underline decoration-dashed underline-offset-4;
 }

@@ -43,12 +43,13 @@ previous plan's branch is still checked out or unmerged, switch back to
 `develop` anyway. If the new plan needs that unmerged work, stop and ask: its PR
 should merge into `develop` first.
 
-- **Prefix**: `bug/` for something already built that doesn't behave as
-  intended; `feature/` for work not yet built, plus the decisions and chores
-  that go with it. Content changes (a new role, a rewritten blurb) are
-  `content/`. Guidance-only changes (`CLAUDE.md`, skills, README) are `docs/`.
-  From a README Todo item the **list decides**: `### Bugs` → `bug/`,
-  `### Features` → `feature/`; a selection spanning both takes `feature/`.
+- **Prefix**: `bug/` (or `fix/`, either is fine) for something already built
+  that doesn't behave as intended; `feature/` for work not yet built, plus the
+  decisions and chores that go with it. Content changes (a new role, a rewritten
+  blurb) are `content/`. Guidance-only changes (`CLAUDE.md`, skills, README) are
+  `docs/`. From a README Todo item the **list decides**: `### Bugs` → `bug/` or
+  `fix/`, `### Features` → `feature/`; a selection spanning both takes
+  `feature/`.
 - **Description**: kebab-case, 3 to 8 words, area + change. No item numbers or
   ticket refs. One branch per plan.
 - **Check `git status` first.** Unrelated uncommitted work is the user's call;

@@ -49,34 +49,31 @@ workflows live in a **project skill** under `.claude/skills/`. **Load the
 matching skill before doing substantive work in its domain** — the General Rules
 below are the invariants, the skill is the _how_.
 
-| Skill                     | Load when working on…                                                                                                     |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `design-brief`            | the redesign, any visible change, the page's section order, or hero, how-I-work, projects, learning or contact copy       |
-| `project-structure`       | locating a file, deciding where a new file belongs, the page's section order and anchors                                  |
-| `content-blurbs`          | the section copy in `src/content/blurbs/`, today's and the redesign's (hero, How I work, Career, contact)                 |
-| `content-organisations`   | adding or editing an employer, trainer or university in `src/content/organisations/`                                      |
-| `content-accomplishments` | the hero's stat figures in `src/content/accomplishments/`, their values, captions and order                               |
-| `content-events`          | adding or editing a role, course or degree in `src/content/events/`, its dates, link and body copy                        |
-| `rewrite-course`          | turning pasted course material into the house style for one training event (`/rewrite-course <path>`)                     |
-| `content-skills`          | the three "What I do" cards in `src/content/skills/`                                                                      |
-| `content-projects`        | the project cards in `src/content/projects/`, their screenshots, tags and links                                           |
-| `components-block`        | the shared primitives in `src/components/block/` — Section, SectionHead, Badge, Button, ExternalTextLink, Nav, SiteFooter |
-| `components-sections`     | the page sections in `src/components/home/`, the timeline join, `Layout.astro`, `pages/`, adding a section                |
-| `styling`                 | colour tokens, typography, prose styling, Tailwind v4 in `src/styles/global.css` and class strings                        |
-| `i18n-messages`           | adding or editing a UI string or message key in `messages/en.json`                                                        |
-| `ascii-wireframes`        | any visible change: draw it and get it approved before building                                                           |
-| `todo-review`             | the `## Todo` list in `README.md`, and every time plan mode is entered (`/todo-review`)                                   |
-| `branch-and-commit`       | cutting a branch off `develop`, writing a commit message, pushing, opening a PR                                           |
+| Skill                     | Load when working on…                                                                                                                       |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `design-brief`            | why the page looks and reads as it does: any visible change, the section order, or hero, how-I-work, projects, learning or contact copy     |
+| `project-structure`       | locating a file, deciding where a new file belongs, the page's section order and anchors                                                    |
+| `content-blurbs`          | the section copy in `src/content/blurbs/`: hero, How I work, Career intro, contact                                                          |
+| `content-organisations`   | adding or editing an employer, trainer or university in `src/content/organisations/`                                                        |
+| `content-accomplishments` | the hero's stat figures in `src/content/accomplishments/`, their values, captions and order                                                 |
+| `content-events`          | adding or editing a role, course or degree in `src/content/events/`, its dates, link and body copy                                          |
+| `rewrite-course`          | turning pasted course material into the house style for one training event (`/rewrite-course <path>`)                                       |
+| `content-projects`        | the project cards in `src/content/projects/`, their screenshots, tags and links                                                             |
+| `components-block`        | the shared primitives in `src/components/block/`: Section, SectionHead, Pill, Card, Button, ExternalTextLink, Icon, Doodle, Nav, SiteFooter |
+| `components-sections`     | the page sections in `src/components/home/`, joining events to organisations, `Layout.astro`, `pages/`, adding a section                    |
+| `styling`                 | colour tokens, typography, prose styling, Tailwind v4 in `src/styles/global.css` and class strings                                          |
+| `i18n-messages`           | adding or editing a UI string or message key in `messages/en.json`                                                                          |
+| `ascii-wireframes`        | any visible change: draw it and get it approved before building                                                                             |
+| `todo-review`             | the `## Todo` list in `README.md`, and every time plan mode is entered (`/todo-review`)                                                     |
+| `branch-and-commit`       | cutting a branch off `develop`, writing a commit message, pushing, opening a PR                                                             |
 
 > When a domain skill contradicts a stale line here, the skill is the more
 > detailed source — but the General Rules always hold regardless of which skill
 > is loaded.
 
-> **Target versus current.** `design-brief` describes the design the site is
-> moving to. The domain skills describe the code as it is today. Until a section
-> has been rebuilt, follow its domain skill for how the code works and
-> `design-brief` for where it is heading; when a section is rebuilt, update its
-> domain skill in the same PR.
+> **Why versus how.** `design-brief` is the record of the design and why it is
+> so; the domain skills describe how the code does it today. A visible change
+> follows both, and updates the domain skill in the same PR.
 
 ---
 
@@ -84,16 +81,17 @@ below are the invariants, the skill is the _how_.
 
 | Concern         | Choice                                                             |
 | --------------- | ------------------------------------------------------------------ |
-| Framework       | Astro 6, static output                                             |
+| Framework       | Astro 7, static output                                             |
 | Islands         | Svelte 5 (runes), only where a value must be live                  |
 | Language        | TypeScript                                                         |
 | Content         | Markdown in Astro content collections, validated with Zod          |
 | UI copy         | Paraglide JS, English only, in `messages/en.json`                  |
 | Styling         | Tailwind CSS v4 via `@tailwindcss/vite`, `@tailwindcss/typography` |
-| Icons           | Lucide (`@lucide/astro`, `@lucide/svelte`)                         |
+| Type            | Figtree, and Permanent Marker for the marker rule (Google Fonts)   |
+| Icons           | Hugeicons Free (`@hugeicons/core-free-icons`), as static SVG       |
 | Dates           | date-fns                                                           |
 | Formatting      | Prettier (Astro, import-sort and Tailwind plugins)                 |
-| Linting         | ESLint (TypeScript, Astro, Tailwind)                               |
+| Linting         | ESLint 10 (TypeScript, Astro, Tailwind)                            |
 | Package manager | npm                                                                |
 | Hosting         | GitHub Pages, `matthew.akinowittering.com`                         |
 
@@ -125,18 +123,17 @@ must agree with it.
 
 ## Data Model
 
-Everything on the page is driven by six content collections, defined with their
+Everything on the page is driven by five content collections, defined with their
 Zod schemas in [`src/content.config.ts`](src/content.config.ts) — the schema's
 one home. Field-by-field detail lives in each collection's skill.
 
-| Collection        | Holds                                                        | Rendered by                                                     |
-| ----------------- | ------------------------------------------------------------ | --------------------------------------------------------------- |
-| `accomplishments` | the hero's stat cards, one figure each                       | nothing yet; the redesign's hero                                |
-| `blurbs`          | intro and long copy for each section, keyed by file name     | about-me, experience, what-do-i-do; the redesign's four not yet |
-| `organisations`   | employers, trainers and universities                         | the Career, Education, Training timelines                       |
-| `events`          | roles, courses and degrees, each pointing at an organisation | `Role`, `Course`, `Education`                                   |
-| `skills`          | the three "What I do" cards                                  | `what-do-i-do/Skill.astro`                                      |
-| `projects`        | things built and shipped                                     | `projects/Project.astro`                                        |
+| Collection        | Holds                                                        | Rendered by                                                 |
+| ----------------- | ------------------------------------------------------------ | ----------------------------------------------------------- |
+| `accomplishments` | the hero's stat cards, one figure each                       | `home/hero`                                                 |
+| `blurbs`          | intro and long copy for each section, keyed by file name     | hero, how-i-work, career, contact                           |
+| `organisations`   | employers, trainers and universities                         | named on Career rows and on Learning's degree and providers |
+| `events`          | roles, courses and degrees, each pointing at an organisation | `career/Role`, `learning/Degree`, `learning/Provider`       |
+| `projects`        | things built and shipped                                     | `projects/Project.astro`                                    |
 
 ### How events meet organisations
 
@@ -148,16 +145,16 @@ type: employer                            type: employment
 ---                                       ---
 ```
 
-| Event `type` | Organisation `type` | Section   | Event file lives in                  |
-| ------------ | ------------------- | --------- | ------------------------------------ |
-| `employment` | `employer`          | Career    | `events/employment/<yyyy-mm>/<org>/` |
-| `training`   | `trainer`           | Training  | `events/courses/<yyyy-mm>/<org>/`    |
-| `education`  | `university`        | Education | `events/courses/<yyyy-mm>/<org>/`    |
+| Event `type` | Organisation `type` | Section  | Event file lives in                  |
+| ------------ | ------------------- | -------- | ------------------------------------ |
+| `employment` | `employer`          | Career   | `events/employment/<yyyy-mm>/<org>/` |
+| `training`   | `trainer`           | Learning | `events/courses/<yyyy-mm>/<org>/`    |
+| `education`  | `university`        | Learning | `events/courses/<yyyy-mm>/<org>/`    |
 
-The join is on the organisation's **frontmatter `id`**, not its file path.
-Astro's `reference('organisations')` does not resolve that value against a real
-entry, so a mistyped `organisationId` does **not** fail the build — the event
-just vanishes from the page. The section components do the join; see
+The join is on the organisation's **frontmatter `id`**, not its file path: the
+`organisations` loader keys each entry by that `id`. A mistyped `organisationId`
+fails the build: the sections resolve each event through `getOrganisation()` in
+`src/lib/organisations.ts`, which throws on a missing one. See
 **`components-sections`**.
 
 ### Derived, never stored
@@ -189,7 +186,7 @@ blurb shows the figure with `<CareerLength />`.
   `site_name` message, and the social links are `src/lib/socials.ts`. A fact
   still retyped in two places is a Todo item in `README.md`
 - Content files are `.md`. Use `.mdx` only when the body must import or compute
-  something (`about-me.mdx` derives the years of experience)
+  something (`hero.mdx` derives the years in product)
 - A new frontmatter field is added to its schema in `content.config.ts` **in the
   same commit** as the first file that uses it, and rendered by the component in
   that commit too. A field nothing renders is dead weight, not "for later"
@@ -197,9 +194,9 @@ blurb shows the figure with `<CareerLength />`.
   `'2019-08-05T00:00:00+00:00'`. An ongoing role or course has **no `dateTo`** —
   never a far-future date
 - After adding or renaming an event or organisation, **build and look for it on
-  the page**. The build cannot catch a broken `organisationId`
-- Order comes from data: `index` for skills and projects, dates for the
-  timelines. Never reorder by moving markup around
+  the page**
+- Order comes from data: `index` for projects, dates for the timelines. Never
+  reorder by moving markup around
 
 ### Writing
 
@@ -239,8 +236,11 @@ blurb shows the figure with `<CareerLength />`.
 ### Styling and assets
 
 - **Colours are tokens in `src/styles/global.css`**, never a hex value or a
-  stock Tailwind palette colour (`gray-300`) in a component. A new colour gets a
-  token there with a comment saying what it is for. Details in **`styling`**
+  stock Tailwind palette colour (`gray-300`) in a component; stock colours are
+  switched off, so they don't compile. A new colour gets a token there with a
+  comment saying what it is for. Details in **`styling`**
+- **Type is Figtree.** Permanent Marker is for the marker rule in
+  **`design-brief`** only: short accents, always real text, never body copy
 - Class order is Prettier's job. Run `npm run format`; never hand-sort classes
 - Images go through `astro:assets` `<Image>` with meaningful `alt` text. A
   collection's images sit in an `img/` folder beside its content files and are
@@ -248,8 +248,9 @@ blurb shows the figure with `<CareerLength />`.
 - Every external link opens in a new tab with `rel="noopener"` — use
   `ExternalTextLink` or `Button external` rather than writing the attributes by
   hand
-- Icons come from Lucide today; the redesign moves them to Hugeicons (see
-  **`design-brief`**). How icons are labelled is under Accessibility below
+- Icons come from Hugeicons Free, rendered as static inline SVG through
+  `block/Icon.astro`; never mix in another set. How icons are labelled is under
+  Accessibility below
 - **One theme, light.** The site has no dark mode: no theme toggle, no `dark:`
   variants, no `prefers-color-scheme` styles
 - **Mobile first.** Base styles are for a phone (320px to 390px wide), and `sm:`

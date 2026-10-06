@@ -1,31 +1,42 @@
 ---
 name: components-sections
 description:
-    The page sections in src/components/home/, the Career/Training/Education
-    timeline that joins events to organisations, the Svelte duration island,
-    Layout.astro and the pages. Use whenever changing how a section renders,
-    debugging an event or organisation missing from the page, changing sort
-    order or the timeline, adding a new section, editing <head> metadata, or
-    touching the 404 page.
+    The page sections in src/components/home/, how Career and Learning join
+    events to organisations, Layout.astro and the pages. Use whenever changing
+    how a section renders, debugging an event or organisation missing from the
+    page, changing sort order, adding a new section, editing <head> metadata or
+    sharing tags, or touching the 404 page.
 ---
 
 # Sections, layout and pages
 
-## How a section is built
+## The sections
 
-Every section component follows one shape:
+`pages/index.astro` composes them in this order (anchors and bands are in
+**`project-structure`**):
+
+| Section    | Component         | Reads                                                        |
+| ---------- | ----------------- | ------------------------------------------------------------ |
+| Hero       | `home/hero`       | `blurbs/hero.mdx`, `accomplishments`, the career start       |
+| Projects   | `home/projects`   | `projects`, sorted by `index`                                |
+| How I work | `home/how-i-work` | `blurbs/how-i-work.md`                                       |
+| Career     | `home/career`     | `blurbs/career.md`, `employment` events, their organisations |
+| Learning   | `home/learning`   | `education` and `training` events, their organisations       |
+| Contact    | `home/contact`    | `blurbs/contact.md`, `src/lib/socials.ts`                    |
+
+## How a section is built
 
 1. Fetch its data in the frontmatter (`getEntry` for a blurb, `getCollection`
    for a list), sorting by `index` or date
 2. `render()` any content body into `<Content />`, falling back to
    `m.content_not_found()`
-3. Return `<Section>` → `<SectionHead>` (with a `Badge`) → its body. Titles,
-   subtitles and badge labels not taken from a blurb are messages (see
-   **`i18n-messages`**)
+3. Return `<Section>` → `<SectionHead>` (pill, tone, title) → its body, with at
+   most two `Doodle`s. Short labels are messages (see **`i18n-messages`**);
+   longer copy is a blurb (see **`content-blurbs`**)
 
 A rendered content body sits in a `prose` wrapper with the section's size
 overrides, for example
-`class="prose text-muted prose-p:text-[15px] prose-p:leading-[1.65] prose-p:text-muted mt-5 max-w-[70ch]"`.
+`class="prose text-muted prose-p:text-[15px] prose-p:leading-[1.65] prose-p:text-muted mt-3"`.
 Copy the nearest sibling's wrapper rather than inventing new sizes (see
 **`styling`**).
 
@@ -33,103 +44,83 @@ Blurb-driven sections guard a missing entry with
 `if (!blurb) return Astro.redirect('/404');`. Keep the pattern for any new
 `getEntry`.
 
-## The timeline
+## Events and organisations
 
-Career, Training and Education share one structure:
+Career and Learning both turn events into rows, and both resolve each event's
+organisation through `getOrganisation(event)` in `src/lib/organisations.ts`. It
+reads the event's `organisationId` reference (organisation entries are keyed by
+their frontmatter `id`, see `content.config.ts`) and **throws when the
+organisation doesn't exist**, so a mistyped `organisationId` fails the build.
 
-```
-topics/<employment|training|education>/index.astro    the section
-  └── organisation/index.astro                        one timeline entry per organisation
-        └── event/Role | Course | Education.astro    one per event, chosen by organisation type
-```
+- **Career** (`career/index.astro`) takes every `employment` event, newest
+  first, as one flat list. `career/Role.astro` renders a row: date range and
+  duration, "role at organisation" as the `<h3>` with the organisation linked,
+  then the body. Rows are an `<ol>` divided by `rule` hairlines
+- **Learning** (`learning/index.astro`) renders each `education` event as a
+  featured `learning/Degree.astro` card (title, university, years and duration,
+  body, View course), then groups `training` events by provider:
+  `learning/Provider.astro` is the provider's linked `<h3>` and an `<ol>` of its
+  courses. Walking the courses newest first meets each provider at its latest
+  course, so providers come out ordered by their most recent course with no
+  extra sort. A course row shows its name, date and, only with a `uri`, a
+  Certificate link whose accessible name includes the course. Course bodies are
+  not rendered
 
-### The join, step by step
-
-`topics/employment` and `topics/training`:
-
-1. `getCollection('events')` filtered to their event `type`
-2. `getCollection('organisations')` filtered to the matching organisation `type`
-3. For each organisation, keep events where
-   `event.data.organisationId.id === organisation.data.id`; drop organisations
-   with none
-4. Derive a `dateFrom` for sorting: the **earliest** role for employers, the
-   **latest** course for trainers. This is deliberate: an employer sits where
-   the relationship began, a trainer where Matthew last learned there
-5. Sort newest first and render an `Organisation` for each, passing `isLast` so
-   the final entry draws no connecting line
-
-`topics/education` skips steps 1, 3 and 4: it renders every university in
-collection order.
-
-`organisation/index.astro` then **re-queries** events for its organisation,
-sorts them newest first, and picks the event component from the organisation's
-`type`. It fills the timeline dot when an employer has an event with no
-`dateTo`.
+The durations come from `EventDescription.svelte` (see **`components-block`**):
+live in the browser for an ongoing event, static otherwise.
 
 ### When something is missing from the page
 
-In order of likelihood:
+1. The build fails naming the event: its `organisationId` matches no
+   organisation `id`
+2. The event's `type` is wrong: `training` and `education` both land in
+   Learning, but as a row and a card respectively, and `employment` only in
+   Career
+3. The event file is outside `src/content/events/`, so the glob never loads it
 
-1. `organisationId` does not equal the organisation's frontmatter `id`
-   (`reference()` does not check it, so the build passes)
-2. The event's `type` does not match the organisation's (`training` under an
-   `employer` is filtered out at step 1 or 2)
-3. The organisation file is under the wrong `type`
-4. The event file is outside `src/content/events/`, so the glob never loads it
-
-Prefer fixing the content over loosening the join.
-
-### Event components
-
-| Component         | Shows                                                                                 |
-| ----------------- | ------------------------------------------------------------------------------------- |
-| `Role.astro`      | title · date range · duration, then the body                                          |
-| `Course.astro`    | a `<details>` row: tick if `uri`, title, month; body and certificate link when opened |
-| `Education.astro` | title · year range · duration, the body, a course link                                |
-
-`EventDescription.svelte` renders the duration with
-`calcLengthInYearsAndMonths`. `Role` and `Education` mount it `client:only`
-**only when the event is ongoing**, so the duration counts on in the browser; a
-finished event renders it at build time with no JavaScript. Because directives
-cannot be spread or made conditional, both branch on the directive and spread
-`eventDates` into each branch. The island renders plain text, not an `aria-live`
-region, so a screen reader reads it once (`CLAUDE.md`, Accessibility).
+Prefer fixing the content over loosening the code.
 
 ## Adding a section
 
 1. Check scope: a new kind of content should be raised before it is built
 2. If it needs content, add a collection to `content.config.ts` and a content
    skill for it in the same change
-3. Draw it first (**`ascii-wireframes`**), following **`design-brief`**, and add
-   its title, subtitle and badge to `messages/en.json` under a new section
-   prefix
+3. Draw it first (**`ascii-wireframes`**), following **`design-brief`**; give it
+   an index-card tone, which means a new `ic-` token, so raise it first
 4. Create `src/components/home/<section>/index.astro` in the shape above
 5. Add it to `pages/index.astro` in position, setting `alt` so bands alternate
-6. Give it an `id` and a `navLinks` entry (with an `nav_` message) only if it
-   belongs in the nav
+6. Add it to `src/lib/sections.ts` (label, href, tone, `inNav`) so the header
+   and the 404 page link to it, with a `nav_` message for its name
 7. Add a row to the page order table in **`project-structure`** and to the
    Skills Index in `CLAUDE.md` if you added a skill
 
 ## `Layout.astro`
 
-Takes `metaData: { title?, description?, additionalMetaTags? }`. The `<title>`
-is the `site_title` message (`"<title> - <site_name>"`), or just `site_name`
-when `title` is absent. `pages/index.astro` builds the description from the
-`site_description` message and the years of experience, and passes the Google
-site-verification tag through `additionalMetaTags`. Public Sans loads from
-Google Fonts here. Open Graph and canonical tags belong here too, once, rather
-than per page.
+Takes `metaData: { title?, description?, additionalMetaTags?, noindex? }`.
+
+- The `<title>` is the `site_title` message (`"<title> - <site_name>"`), or just
+  `site_name` when `title` is absent. `pages/index.astro` builds the description
+  from the `site_description` message and the years in product, and passes the
+  Google site-verification tag through `additionalMetaTags`
+- Sharing tags are set here once, for every page: a canonical link built from
+  `Astro.url` and `site`, Open Graph (`og:type`, site name, `en_GB` locale,
+  title, description, url, and the hero photo as a PNG `og:image` with its
+  `alt`) and `twitter:card` `summary`. `noindex: true` swaps the canonical and
+  `og:url` for `<meta name="robots" content="noindex">`
+- Figtree and Permanent Marker load from Google Fonts here
 
 It is also the page shell `CLAUDE.md`'s Accessibility section sets out:
 `<html lang="en-GB">`, the viewport tag, and the "Skip to content" link as the
 first focusable element, jumping to `<main id="main">`. The default slot lands
-in `main`; the `header` and `footer` named slots sit either side of it, so
-`pages/index.astro` passes `<Nav slot="header" />` and
-`<SiteFooter slot="footer" />`. `Nav` renders the `header` landmark itself and
-`SiteFooter` the `footer`.
+in `main`; the `header` and `footer` named slots sit either side of it, so each
+page passes `<Nav slot="header" />` and `<SiteFooter slot="footer" />`. `Nav`
+renders the `header` landmark itself and `SiteFooter` the `footer`.
 
 ## Pages
 
 - `index.astro` composes the sections and sets the page metadata. It holds no
   markup of its own beyond the section list
-- `404.astro` is standalone, with its copy in the `not_found_` messages
+- `404.astro` uses the shared header and footer around a centred block: a large
+  decorative "404" (`aria-hidden`), the `<h1>`, one line, a "Back to the
+  homepage" button and every section in `sections.ts` as a `Pill` link. It
+  passes `noindex`. Its copy is the `not_found_` messages

@@ -24,7 +24,7 @@ export default defineConfig([
     },
     tseslint.configs.recommended,
     // Parse .astro files so their templates are lintable.
-    eslintPluginAstro.configs['flat/recommended'],
+    eslintPluginAstro.configs.recommended,
     // Run the Tailwind rules against the class attributes in .astro files.
     // The plugin ships `@typescript-eslint/utils` types that don't structurally
     // match eslint's own `Plugin`/`Config` types even though the runtime shapes

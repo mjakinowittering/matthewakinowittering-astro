@@ -140,10 +140,10 @@ House style, matching the existing entries:
 
 - opens with an imperative — "Fix…", "Add…", "Hide…", "Move…", "Drop…",
   "Decide…"
-- states **what exists** and **what's missing** ("the schema requires them, but
-  `Skill.astro` shows a Lucide icon and renders neither")
-- cites files and symbols in backticks (`event/Education.astro:35`,
-  `Skill.astro`)
+- states **what exists** and **what's missing** ("the schema infers `format` as
+  optional, though Astro's own `ImageFunction` declares it required")
+- cites files and symbols in backticks (`projects/Project.astro:17`,
+  `monthsInclusive`)
 - names the fix when known, and fences the scope if it could read bigger than it
   is ("a dark theme is out of scope")
 - uses sub-bullets only for genuinely separate parts; plain tone — a note to a

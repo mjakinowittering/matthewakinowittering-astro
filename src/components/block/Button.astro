@@ -9,12 +9,13 @@ interface Props {
 
 const { href, variant = 'primary', external = false } = Astro.props;
 
+// An outlined card on a hard ink edge; pressing it sinks it onto a smaller one
 const base =
-    'inline-flex items-center gap-2 rounded-lg px-5 py-3 text-sm font-bold no-underline';
+    'border-ink text-ink shadow-offset rounded-button active:shadow-offset-sm inline-flex items-center gap-2 border-[1.5px] px-5 py-3 text-[15px] font-bold no-underline active:translate-y-px motion-safe:transition-transform motion-safe:hover:-translate-y-px';
 
 const variants = {
-    primary: 'bg-accent text-accent-contrast hover:bg-accent-strong',
-    ghost: 'border border-border text-ink hover:border-accent-strong'
+    primary: 'bg-accent',
+    ghost: 'bg-card'
 };
 ---
 

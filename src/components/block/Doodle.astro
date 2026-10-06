@@ -1,0 +1,25 @@
+---
+import Icon from '@components/block/Icon.astro';
+
+interface Props {
+    icon: Parameters<typeof Icon>[0]['icon'];
+    // Doodles go diagonally: at most one top left and one bottom right
+    position: 'top-left' | 'bottom-right';
+}
+
+const { icon, position } = Astro.props;
+
+// In the section's padding, clear of its content
+const positions = {
+    'top-left': '-top-16 left-4 -rotate-12 sm:left-8',
+    'bottom-right': 'right-4 -bottom-16 rotate-6 sm:right-8'
+};
+---
+
+<Icon
+    icon={icon}
+    class:list={[
+        'text-muted pointer-events-none absolute hidden size-11 md:block',
+        positions[position]
+    ]}
+/>

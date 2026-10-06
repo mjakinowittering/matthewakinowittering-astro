@@ -1,8 +1,9 @@
 # Matthew's Astro Site
 
-Personal site for Matthew Akino-Wittering, a Product Manager. It presents
-employment history, training, education, and a short profile so potential
-employers can learn more than a LinkedIn page shows.
+Personal site for Matthew Akino-Wittering, a product leader and builder. One
+page presents who he is, how he works, what he has built, where he has worked
+and what he has studied, so potential employers can learn more than a LinkedIn
+page shows.
 
 Built with [Astro](https://astro.build), [Svelte](https://svelte.dev) islands,
 [Tailwind CSS](https://tailwindcss.com) v4, Markdown content collections and
@@ -31,10 +32,10 @@ All commands are run from the root of the project, from a terminal:
 Site content is data-driven through Astro content collections defined in
 `src/content.config.ts`:
 
-- **blurbs:** intro copy for page sections
+- **accomplishments:** the hero's stat cards
+- **blurbs:** the longer copy for the hero, How I work, Career and contact
 - **organisations:** employers, trainers, and universities
 - **events:** individual roles and courses, each referencing an organisation
-- **skills:** the "what I do" cards
 - **projects:** things built and shipped
 
 UI labels (section titles, buttons, page metadata) live in `messages/en.json`.
@@ -54,100 +55,51 @@ is merged into `develop` first and released to `main` from there.
 
 ### Bugs
 
-#### Accessibility
-
-- [ ] Stop the sticky header covering anchor targets: following a nav link
-      scrolls the section's top to the very top of the viewport, under the
-      header (`h-14` in `Nav.astro`), so its heading sits hidden behind the bar
-      (`#career` lands at 0px). WCAG 2.2's Focus Not Obscured (2.4.11) asks for
-      better. A `scroll-padding-top` on `html` in `global.css`, kept equal to
-      the header's `h-14`, is the likely fix.
-
-#### Timeline
-
-- [ ] Count durations in UTC: `monthsInclusive` in `src/lib/utils.ts` reads
-      `getMonth()` and `getFullYear()`, which use the machine's time zone, but
-      every date is stored in UTC. The degree's `dateTo`
-      (`'2009-08-31T23:59:59+00:00'`) becomes 1 September in UK summer time, so
-      a local build prints "4 years" where CI, in UTC, prints "3 years 11
-      months". An ongoing role's duration runs in the visitor's browser, so west
-      of UTC its start month (midnight UTC on the 1st) slips back a month. Use
-      `getUTCMonth()` and `getUTCFullYear()`.
-
 #### Tooling
 
-- [ ] Fix the build's 27 "Invalid content reference" errors: Astro 7 checks
-      every event's and accomplishment's `organisationId` against organisation
-      entry ids (file paths), not the frontmatter `id` the timeline joins on.
-      The build still completes and every event renders, but real errors hide in
-      the noise.
-- [ ] Quiet the build's two `MODULE_LEVEL_DIRECTIVE` warnings: since
-      `blurbs/about-me.mdx` and `blurbs/hero.mdx` import `CareerLength.astro`,
+- [ ] Quiet the build's `MODULE_LEVEL_DIRECTIVE` warning for `blurbs/hero.mdx`:
       Vite warns that the `"use astro:head-inject"` directive "may not be
-      preserved when bundling". The page renders the same as before; it is
-      noise. Find out whether Astro fixes it upstream before filtering it, and
-      never by silencing other warnings with it.
-- [ ] Clear the five high `npm audit` findings: all are `braces`, reached
-      through `micromatch`, `fast-glob` and `astro-eslint-parser` from
-      `eslint-plugin-astro@1.7.0`, a devDependency used only by `npm run lint`,
-      so nothing ships to the site. The only fix is `eslint-plugin-astro` 3.x, a
-      major bump; check `eslint.config` still works with it.
+      preserved when bundling". The directive is added by Astro itself
+      (`vite-plugin-content-assets.js`) to every MDX content entry, whatever the
+      file holds, so nothing in this repo causes it; the page renders correctly.
+      Wait for an Astro fix rather than filtering it, and never silence other
+      warnings with it.
+- [ ] Clear the two moderate `npm audit` findings: `postcss-selector-parser`,
+      reached through `@tailwindcss/typography`, which only runs at build time.
+      npm's only offer is a downgrade to 0.5.4, which is not a fix; recheck when
+      `@tailwindcss/typography` releases an update.
 
 ### Features
 
-#### Content model
-
-- [ ] Decide what the skill cards' `img` and `alt` are for: the schema requires
-      them, but `Skill.astro` shows a Lucide icon and renders neither, and two
-      of the five SVGs in `skills/img/` aren't referenced at all. Either drop
-      the fields, the files and the folder in one commit, or bring the images
-      back into the card. A decision to make, not a commitment.
-- [ ] Drop `dateFrom`, `dateTo` and `events` from the organisation schema: they
-      are derived from events at render time and nothing reads them. Only
-      `loughborough-university.md` still carries stale dates.
-
 #### Projects
 
-- [ ] Finish checking the DyslexicWriter card: it shipped in PR #6 with the
-      keyboard and screen reader pass `CLAUDE.md` asks for still owed, and
-      without a look at phone, tablet and desktop widths (headless screenshots
-      came out blank). Its markup matches the YouDemo card's, so its layout
-      should too; confirm it, and that the `alt` text reads well aloud.
+- [ ] Finish checking the DyslexicWriter card: the screen reader pass
+      `CLAUDE.md` asks for is still owed. Its layout has been checked at phone,
+      tablet and desktop widths in the redesign; confirm with VoiceOver or NVDA
+      that the card reads in order and that its `alt` text reads well aloud.
 
 #### Sharing
 
-- [ ] Add Open Graph and canonical tags in `Layout.astro`, once for the page
-      rather than per page, so a link shared on LinkedIn shows a proper card.
+- [ ] Add a 1200 by 630 sharing card for Open Graph: `Layout.astro` points
+      `og:image` at the hero photo, a 447 by 558 portrait that LinkedIn crops,
+      with `twitter:card` set to `summary` to match. A designed card would let
+      both use the large format. A decision to make, not a commitment.
 
 #### Redesign
 
-- [ ] Check contrast when the redesign tokens land. Today `text-muted` on
-      `bg-panel` is 4.18:1, under the 4.5:1 body text needs (the body colour of
-      the My experience, Career and Education sections), and the `border` token
-      is 1.35:1 on `bg-bg`, under 3:1, as the only edge of the ghost `Button`
-      and the About section's social pills. The redesign's new tokens replace
-      both pairings; measure them then rather than retuning today's.
 - [ ] Rewrite the How I work and contact copy in Matthew's own voice:
       `blurbs/how-i-work.md` and `blurbs/contact.md` hold draft copy for the
       redesign, kept as written until he rewrites it.
 - [ ] Decide whether the Acorn-i role body keeps the Ignite figures: they are
-      typed out in `events/employment/2019-08/acorn-i/product-lead.md` and are
-      now also stat cards in `src/content/accomplishments/`. Decide once the
-      redesign's hero renders the stat cards. A decision to make, not a
-      commitment.
-- [ ] Settle the redesign blurbs' headings and the hero's wording when their
-      sections are built. Both are decisions to make, not commitments:
-    - the `title`s of `hero.mdx`, `how-i-work.md`, `career.md` and `contact.md`
-      are the headings from `design-brief`, put in because the schema requires
-      one. `hero.mdx`'s holds "I'm Matthew, a product leader", but the marker
-      line "and builder." has no home yet: a message or part of the blurb
-    - the draft "{years} years shaping…" became `<CareerLength /> shaping…`,
-      which renders "16+ years shaping…" because `calcLengthInYears` already
-      says "years". Check it reads as intended
-- [ ] Decide whether the stat cards show their organisation: each accomplishment
-      carries `organisationId: acorn-i`, but nothing reads it, and the hero
-      design has no place for it. Either show it on the cards or drop the field.
-      A decision to make, not a commitment.
+      typed out in `events/employment/2019-08/acorn-i/product-lead.md` and also
+      shown as the hero's stat cards from `src/content/accomplishments/`, so a
+      changed figure has two homes. A decision to make, not a commitment.
+- [ ] Add a "Download CV" button to Career once a CV exists: `design-brief`
+      places it under the Career intro, and `robots.txt` already reserves
+      `/resume`. Nothing renders it until there is a file to point at.
+- [ ] Replace the hero photo when Matthew supplies a new one: the hero still
+      uses `src/assets/MatthewAkinoWittering-BW-Alpha.png`, which is also the
+      Open Graph image.
 
 #### Tooling
 
@@ -156,12 +108,3 @@ is merged into `develop` first and released to `main` from there.
       own `ImageFunction` declares it required, so the card copies `img` with
       `format` narrowed rather than passing it straight to `<Image>`. Retry
       after an Astro upgrade with `npm run astro check`.
-
-#### Guidance
-
-- [ ] Update the stack table in `CLAUDE.md`: it says Astro 6, but `package.json`
-      has `astro` at `^7.3.5`.
-- [ ] Decide the branch prefix for Bugs work: `branch-and-commit` says `bug/`,
-      but step 1 went out as `fix/delivery-and-accessibility` because Matthew
-      named it. Either keep `bug/` and treat that as a one-off, or allow `fix/`
-      in the skill. A decision to make, not a commitment.

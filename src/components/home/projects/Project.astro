@@ -1,5 +1,6 @@
 ---
 import Button from '@components/block/Button.astro';
+import Card from '@components/block/Card.astro';
 import { m } from '@paraglide/messages.js';
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
@@ -14,37 +15,39 @@ const { img, alt, title, description, tags, uri, sourceUri } = project.data;
 // The image() schema types `format` as optional, though Astro always sets it
 // and <Image> requires it; narrowing here keeps the type honest without a cast
 const src = img?.format ? { ...img, format: img.format } : undefined;
+
+const screenshot =
+    'border-ink rounded-button aspect-[1200/630] w-full border-[1.5px] object-cover';
 ---
 
-<div
-    class="border-border bg-bg grid overflow-hidden rounded-lg border md:grid-cols-2"
->
+<Card class="flex w-full flex-col p-5 sm:p-6">
     {
         src ? (
-            <Image
-                src={src}
-                alt={alt ?? title}
-                class="size-full object-cover"
-            />
+            <Image src={src} alt={alt ?? title} class={screenshot} />
         ) : (
-            <div class="text-muted flex min-h-65 items-center justify-center bg-[repeating-linear-gradient(135deg,var(--color-border)_0,var(--color-border)_2px,transparent_2px,transparent_14px)] p-5 text-center font-mono text-[11px] tracking-[0.06em] uppercase">
+            <div
+                class:list={[
+                    screenshot,
+                    'text-muted flex items-center justify-center bg-[repeating-linear-gradient(135deg,var(--color-rule)_0,var(--color-rule)_2px,transparent_2px,transparent_14px)] p-5 text-center text-[13px] font-semibold'
+                ]}
+            >
                 {m.projects_screenshot_placeholder()}
             </div>
         )
     }
-    <div class="flex flex-col gap-3.5 p-8">
-        <h3 class="text-2xl font-bold">{title}</h3>
-        <p class="text-muted text-[15px] leading-[1.6]">{description}</p>
-        <div class="flex flex-wrap gap-2">
+    <h3 class="mt-6 text-[24px] leading-tight font-extrabold">{title}</h3>
+    <p class="text-muted mt-3 text-[15px] leading-[1.65]">{description}</p>
+    <div class="mt-auto pt-6">
+        <ul class="flex flex-wrap gap-2">
             {
                 tags.map((tag) => (
-                    <span class="bg-accent-soft text-accent-strong rounded-full px-2.5 py-1.25 text-[10.5px] font-bold tracking-[0.04em] uppercase">
+                    <li class="border-ink bg-base rounded-full border-[1.5px] px-3 py-0.5 text-[13px] font-semibold">
                         {tag}
-                    </span>
+                    </li>
                 ))
             }
-        </div>
-        <div class="mt-1.5 flex flex-wrap gap-3">
+        </ul>
+        <div class="mt-6 flex flex-wrap gap-4">
             <Button href={uri} external>
                 {m.projects_try_live()}
             </Button>
@@ -57,4 +60,4 @@ const src = img?.format ? { ...img, format: img.format } : undefined;
             }
         </div>
     </div>
-</div>
+</Card>

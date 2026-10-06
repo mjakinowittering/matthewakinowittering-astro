@@ -13,11 +13,11 @@ description:
 An event is one thing Matthew did at one organisation. Its `type` decides which
 section shows it and which component renders it.
 
-| `type`       | Section   | Rendered by       | Lives in                             |
-| ------------ | --------- | ----------------- | ------------------------------------ |
-| `employment` | Career    | `Role.astro`      | `events/employment/<yyyy-mm>/<org>/` |
-| `training`   | Training  | `Course.astro`    | `events/courses/<yyyy-mm>/<org>/`    |
-| `education`  | Education | `Education.astro` | `events/courses/<yyyy-mm>/<org>/`    |
+| `type`       | Section  | Rendered by                               | Lives in                             |
+| ------------ | -------- | ----------------------------------------- | ------------------------------------ |
+| `employment` | Career   | `career/Role.astro`, one row per role     | `events/employment/<yyyy-mm>/<org>/` |
+| `training`   | Learning | a course row in `learning/Provider.astro` | `events/courses/<yyyy-mm>/<org>/`    |
+| `education`  | Learning | `learning/Degree.astro`, a featured card  | `events/courses/<yyyy-mm>/<org>/`    |
 
 `<yyyy-mm>` is the year and month of the event's `dateFrom`, so a folder listing
 reads in date order. If `dateFrom` changes, move the file to match. The folder
@@ -45,26 +45,27 @@ Quote a `title` containing a colon:
 Must equal the `id` in an organisation file, which is **not always the file
 name**: Scrum Alliance's is `scrumalliance`. Open the organisation file and copy
 its `id`. If the organisation does not exist yet, create it first (see
-**`content-organisations`**). A wrong value does not fail the build; the event
-just disappears, so always check the page afterwards.
+**`content-organisations`**). A wrong value fails the build: `getOrganisation()`
+in `src/lib/organisations.ts` throws, naming the event.
 
 ### `careerStart`
 
 Set on **exactly one** event: the first product role, Junior Product Manager at
 Ask Jeeves. Its `dateFrom` is where every "years in product" figure counts from
-(the meta description, the About me and hero blurbs), read through
+(the meta description, the hero blurb and the hero sticker), read through
 `getCareerStart()` in `src/lib/career.ts`. The build fails if no event sets it
 or more than one does. Leave it off every other event; never write `false`.
 
 ### `uri`, per type
 
-| Type         | What it points at            | What renders                                   |
-| ------------ | ---------------------------- | ---------------------------------------------- |
-| `training`   | the certificate or badge URL | a tick before the title and "View certificate" |
-| `education`  | the course page              | "View course"                                  |
-| `employment` | nothing; leave it out        | not rendered                                   |
+| Type         | What it points at            | What renders                      |
+| ------------ | ---------------------------- | --------------------------------- |
+| `training`   | the certificate or badge URL | "Certificate" at the end of a row |
+| `education`  | the course page              | "View course" on the degree card  |
+| `employment` | nothing; leave it out        | not rendered                      |
 
-A training event without a certificate omits `uri`, and loses the tick.
+A training event without a certificate omits `uri`, and its row shows the date
+alone.
 
 ### Dates, per type
 
@@ -102,13 +103,15 @@ General writing rules are in `CLAUDE.md`, Writing. On top of those:
   portfolio. I ran…"_
 - Lead with outcomes and scale, using Matthew's real figures (users, brands,
   uplift, time saved). Name the products he owned
-- The "My experience" blurb tells the career as a story; a role body is the
-  specific record. Do not copy sentences between them
+- The Career intro (`blurbs/career.md`) tells the arc in two sentences; a role
+  body is the specific record. Do not copy sentences between them
 
 ### `training`
 
-The body's voice and length are set by **`rewrite-course`**; load it and follow
-its style rules. When adding a new course from pasted material, write the
+The page does not show a course's body: Learning lists each course as its name,
+date and certificate link only. The body stays as the record of what the course
+covered. Its voice and length are set by **`rewrite-course`**; load it and
+follow its style rules. When adding a new course from pasted material, write the
 frontmatter here, then apply `rewrite-course` to the body.
 
 ### `education`
