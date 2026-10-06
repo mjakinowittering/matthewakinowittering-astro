@@ -154,10 +154,10 @@ type: employer                            type: employment
 | `training`   | `trainer`           | Training  | `events/courses/<yyyy-mm>/<org>/`    |
 | `education`  | `university`        | Education | `events/courses/<yyyy-mm>/<org>/`    |
 
-The join is on the organisation's **frontmatter `id`**, not its file path.
-Astro's `reference('organisations')` does not resolve that value against a real
-entry, so a mistyped `organisationId` does **not** fail the build — the event
-just vanishes from the page. The section components do the join; see
+The join is on the organisation's **frontmatter `id`**, not its file path: the
+`organisations` loader keys each entry by that `id`. A mistyped `organisationId`
+logs an "Invalid content reference" error, but the build still completes and the
+event just vanishes from the page. The section components do the join; see
 **`components-sections`**.
 
 ### Derived, never stored

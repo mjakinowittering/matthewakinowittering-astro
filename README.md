@@ -76,11 +76,6 @@ is merged into `develop` first and released to `main` from there.
 
 #### Tooling
 
-- [ ] Fix the build's 27 "Invalid content reference" errors: Astro 7 checks
-      every event's and accomplishment's `organisationId` against organisation
-      entry ids (file paths), not the frontmatter `id` the timeline joins on.
-      The build still completes and every event renders, but real errors hide in
-      the noise.
 - [ ] Quiet the build's two `MODULE_LEVEL_DIRECTIVE` warnings: since
       `blurbs/about-me.mdx` and `blurbs/hero.mdx` import `CareerLength.astro`,
       Vite warns that the `"use astro:head-inject"` directive "may not be
@@ -102,9 +97,6 @@ is merged into `develop` first and released to `main` from there.
       of the five SVGs in `skills/img/` aren't referenced at all. Either drop
       the fields, the files and the folder in one commit, or bring the images
       back into the card. A decision to make, not a commitment.
-- [ ] Drop `dateFrom`, `dateTo` and `events` from the organisation schema: they
-      are derived from events at render time and nothing reads them. Only
-      `loughborough-university.md` still carries stale dates.
 
 #### Projects
 

@@ -48,22 +48,16 @@ const events = defineCollection({
 const organisations = defineCollection({
     loader: glob({
         base: './src/content/organisations',
-        pattern: '**/*.{md,mdx}'
+        pattern: '**/*.{md,mdx}',
+        // Key each entry by its frontmatter `id`, not its file path, so every
+        // `reference('organisations')` resolves against the value events use
+        generateId: ({ data }) => String(data.id)
     }),
     schema: z.object({
         id: z.string(),
         name: z.string(),
         type: z.enum(['employer', 'trainer', 'university']),
-        uri: z.string(),
-        dateFrom: z.iso
-            .datetime({ offset: true })
-            .transform((str) => new Date(str))
-            .nullish(),
-        dateTo: z.iso
-            .datetime({ offset: true })
-            .transform((str) => new Date(str))
-            .nullish(),
-        events: z.number().nullish()
+        uri: z.string()
     })
 });
 

@@ -70,8 +70,8 @@ sorts them newest first, and picks the event component from the organisation's
 
 In order of likelihood:
 
-1. `organisationId` does not equal the organisation's frontmatter `id`
-   (`reference()` does not check it, so the build passes)
+1. `organisationId` does not equal the organisation's frontmatter `id` (the
+   build logs an "Invalid content reference" error but still completes)
 2. The event's `type` does not match the organisation's (`training` under an
    `employer` is filtered out at step 1 or 2)
 3. The organisation file is under the wrong `type`

@@ -29,8 +29,10 @@ The file has no body. It goes in `src/content/organisations/<type>/<id>.md`.
 ### `id`
 
 - Kebab-case, and the same as the file name for anything new
-- It is what every event's `organisationId` must match. The file path plays no
-  part in the join
+- It is what every event's `organisationId` must match. The loader keys each
+  entry by this `id` (`generateId` in `content.config.ts`), so the file path
+  plays no part in the join, and a reference to an `id` that doesn't exist logs
+  an "Invalid content reference" error in the build
 - **Never change an existing `id`** without updating every event that uses it in
   the same commit. Search first:
   `grep -r "organisationId: <old-id>" src/content/events`. `scrumalliance` does
@@ -47,14 +49,6 @@ The organisation's own styling of its name (`Acorn-i`, `Andalucia.com`,
 The organisation's homepage. When the company no longer exists or has no useful
 site, link its LinkedIn company page instead (The Exchange Lab does this). It
 always renders through `ExternalTextLink`, so it opens in a new tab.
-
-### Fields to leave out
-
-The schema also accepts `dateFrom`, `dateTo` and `events`. Do not set them: an
-organisation's span and event count are derived from its events at render time
-(see `CLAUDE.md`, "Derived, never stored"). Loughborough's file still carries
-old values that nothing reads; dropping the fields is a Todo item in
-`README.md`.
 
 ## How each type is shown
 
