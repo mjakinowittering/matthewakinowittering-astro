@@ -79,7 +79,9 @@ const ogImageAlt = m.og_image_alt({ name: site });
             rel="stylesheet"
         />
     </head>
-    <body class="bg-base text-ink font-sans text-[16px] leading-[1.6]">
+    <body
+        class="bg-base text-ink flex min-h-dvh flex-col font-sans text-[16px] leading-[1.6]"
+    >
         <a
             href="#main"
             class="bg-accent text-ink border-ink rounded-button sr-only border-[1.5px] text-sm font-bold no-underline focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-30 focus:px-5 focus:py-3"
@@ -87,7 +89,7 @@ const ogImageAlt = m.og_image_alt({ name: site });
             {m.nav_skip_to_content()}
         </a>
         <slot name="header" />
-        <main id="main" tabindex="-1">
+        <main id="main" tabindex="-1" class="flex-1">
             <slot />
         </main>
         <slot name="footer" />
