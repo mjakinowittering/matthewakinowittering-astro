@@ -1,6 +1,8 @@
 dist
 .astro
 src/paraglide
-project.inlang/cache
+# written by the inlang SDK on each build; only settings.json is ours
+project.inlang/*
+!project.inlang/settings.json
 docs/design/reference
 .compare
