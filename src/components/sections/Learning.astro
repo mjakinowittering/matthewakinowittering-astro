@@ -1,6 +1,6 @@
 ---
 import { Degree, Provider } from '@components/entries';
-import { Section, SectionHead } from '@components/ui';
+import { Card, Section, SectionHead } from '@components/ui';
 import { getOrganisation } from '@lib/organisations';
 import { m } from '@paraglide/messages.js';
 import { getCollection, type CollectionEntry } from 'astro:content';
@@ -44,29 +44,59 @@ for (const course of (
 }
 ---
 
-<Section id="learning">
-    <div class="mx-auto max-w-190">
-        <SectionHead
-            pill={m.nav_learning()}
-            tone="pink"
-            title={m.learning_title()}
-        />
-        <div class="mt-10 flex flex-col gap-6">
-            {
-                degrees.map(({ event, organisation }) => (
-                    <Degree event={event} organisation={organisation} />
-                ))
-            }
-        </div>
-        <p class="font-marker mt-14 -rotate-2 text-2xl">
+<Section id="learning" alt class="gap-8">
+    <SectionHead
+        pill={m.nav_learning()}
+        tone="pink"
+        title={m.learning_title()}
+    />
+    {
+        degrees.map(({ event, organisation }) => (
+            <Degree event={event} organisation={organisation} />
+        ))
+    }
+    <p class="mt-2 flex items-end gap-2.5 pl-2">
+        {
+            // A drawn mark, like the hero's swish: an arrow down to the list
+        }
+        <svg
+            aria-hidden="true"
+            width="70"
+            height="56"
+            viewBox="0 0 70 56"
+            fill="none"
+            class="stroke-ink flex-none"
+        >
+            <path
+                d="M6 6c6 26 24 40 54 42"
+                stroke-width="2.2"
+                stroke-linecap="round"></path>
+            <path
+                d="M50 38l11 10-14 5"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+        </svg>
+        <span class="font-marker -rotate-2 pb-3.5 text-[30px]">
             {m.learning_marker()}
-        </p>
-        <div class="mt-6 grid gap-10">
+        </span>
+    </p>
+    <Card class="overflow-hidden">
+        <ol>
             {
-                [...providers.values()].map(({ organisation, courses }) => (
-                    <Provider organisation={organisation} courses={courses} />
-                ))
+                [...providers.values()].map(
+                    ({ organisation, courses }, index) => (
+                        <li class="border-ink not-first:border-t-[1.5px]">
+                            <Provider
+                                organisation={organisation}
+                                courses={courses}
+                                number={index + 1}
+                                open={index === 0}
+                            />
+                        </li>
+                    )
+                )
             }
-        </div>
-    </div>
+        </ol>
+    </Card>
 </Section>

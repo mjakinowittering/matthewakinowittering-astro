@@ -33,6 +33,20 @@
     "learning_view_course": "View course",
     "learning_certificate": "Certificate",
     "learning_certificate_for": "Certificate for {course}",
+    "learning_courses": [
+        {
+            "declarations": [
+                "input count",
+                "local countPlural = count: plural"
+            ],
+            "selectors": ["countPlural"],
+            "match": {
+                "countPlural=one": "{count} course",
+                "countPlural=*": "{count} courses"
+            }
+        }
+    ],
+    "learning_provider_summary": "{courses} · latest {date}",
     "contact_marker": "What are you building?",
     "contact_get_in_touch": "Get in touch",
     "date_present": "Present",
