@@ -9,9 +9,10 @@ description:
 
 # Projects
 
-Each file is one card in the Projects section: screenshot on one side, title,
-description, tags and two buttons on the other. Where the Projects section and
-its copy are heading in the redesign is in **`design-brief`**.
+Each file is one card in the Projects section, two to a row from tablet width
+and stacked on a phone: an outlined screenshot, the title, the description, then
+the tags and buttons aligned to the bottom of the card so neighbours line up.
+Why the section looks as it does is in **`design-brief`**.
 
 ## Frontmatter
 
@@ -56,8 +57,10 @@ character (constraints, approach), not a list of every library used.
 ### `img` and `alt`
 
 A screenshot of the real interface in `projects/img/`, referenced relatively.
-`<Image>` optimises it at build time, so a large PNG is fine. `alt` describes
-what the screenshot shows, not what the project is for.
+The card crops it to 1200 by 630, the Open Graph shape, so a project's OG image
+fits as is (DyslexicWriter's is). `<Image>` optimises it at build time, so a
+large PNG is fine. `alt` describes what the screenshot shows, not what the
+project is for.
 
 Without `img`, `Project.astro` shows a striped placeholder with the
 `projects_screenshot_placeholder` message. It is a stopgap; add the real

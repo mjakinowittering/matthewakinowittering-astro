@@ -1,9 +1,8 @@
 ---
-import Badge from '@components/block/Badge.astro';
 import Icon from '@components/block/Icon.astro';
 import Section from '@components/block/Section.astro';
 import SectionHead from '@components/block/SectionHead.astro';
-import { Folder01Icon } from '@hugeicons/core-free-icons';
+import { Moon02Icon } from '@hugeicons/core-free-icons';
 import { m } from '@paraglide/messages.js';
 import { getCollection } from 'astro:content';
 import Project from './Project.astro';
@@ -13,13 +12,24 @@ const projects = (await getCollection('projects')).sort(function (a, b) {
 });
 ---
 
-<Section id="projects">
-    <SectionHead title={m.projects_title()} subtitle={m.projects_subtitle()}>
-        <Badge slot="badge" label={m.projects_badge()}>
-            <Icon icon={Folder01Icon} class="size-6.5" />
-        </Badge>
+<Section id="projects" alt>
+    <SectionHead
+        pill={m.nav_projects()}
+        tone="yellow"
+        title={m.projects_title()}
+    >
+        <p class="font-marker inline-flex -rotate-3 items-center gap-2 text-xl">
+            {m.projects_marker()}
+            <Icon icon={Moon02Icon} class="size-6" />
+        </p>
     </SectionHead>
-    <div class="mt-9 flex flex-col gap-6">
-        {projects.map((project) => <Project project={project} />)}
-    </div>
+    <ul class="mt-10 grid gap-6 md:grid-cols-2">
+        {
+            projects.map((project) => (
+                <li class="flex">
+                    <Project project={project} />
+                </li>
+            ))
+        }
+    </ul>
 </Section>
