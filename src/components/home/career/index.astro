@@ -1,6 +1,8 @@
 ---
+import Doodle from '@components/block/Doodle.astro';
 import Section from '@components/block/Section.astro';
 import SectionHead from '@components/block/SectionHead.astro';
+import { Briefcase01Icon, Rocket01Icon } from '@hugeicons/core-free-icons';
 import { m } from '@paraglide/messages.js';
 import { getCollection, getEntry, render } from 'astro:content';
 import { getOrganisation } from '../../../lib/organisations';
@@ -23,6 +25,8 @@ const roles = await Promise.all(
 ---
 
 <Section id="career" alt>
+    <Doodle icon={Briefcase01Icon} position="top-left" />
+    <Doodle icon={Rocket01Icon} position="bottom-right" />
     <div class="mx-auto max-w-190">
         <SectionHead
             pill={m.nav_career()}

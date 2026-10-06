@@ -29,8 +29,8 @@ function toAttributes(attributes: IconData[number][1]) {
 }
 
 const a11y = label
-    ? { role: 'img', 'aria-label': label }
-    : { 'aria-hidden': 'true' };
+    ? ({ role: 'img', 'aria-label': label } as const)
+    : ({ 'aria-hidden': 'true' } as const);
 ---
 
 <svg

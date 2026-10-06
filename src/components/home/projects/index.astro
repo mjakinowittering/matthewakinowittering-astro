@@ -1,8 +1,9 @@
 ---
+import Doodle from '@components/block/Doodle.astro';
 import Icon from '@components/block/Icon.astro';
 import Section from '@components/block/Section.astro';
 import SectionHead from '@components/block/SectionHead.astro';
-import { Moon02Icon } from '@hugeicons/core-free-icons';
+import { BulbIcon, Moon02Icon } from '@hugeicons/core-free-icons';
 import { m } from '@paraglide/messages.js';
 import { getCollection } from 'astro:content';
 import Project from './Project.astro';
@@ -13,6 +14,7 @@ const projects = (await getCollection('projects')).sort(function (a, b) {
 ---
 
 <Section id="projects" alt>
+    <Doodle icon={BulbIcon} position="top-left" />
     <SectionHead
         pill={m.nav_projects()}
         tone="yellow"

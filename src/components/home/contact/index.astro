@@ -1,8 +1,10 @@
 ---
 import Button from '@components/block/Button.astro';
 import Card from '@components/block/Card.astro';
+import Doodle from '@components/block/Doodle.astro';
 import Section from '@components/block/Section.astro';
 import SectionHead from '@components/block/SectionHead.astro';
+import { BubbleChatIcon } from '@hugeicons/core-free-icons';
 import { m } from '@paraglide/messages.js';
 import { getEntry, render } from 'astro:content';
 import { email, socials } from '../../../lib/socials';
@@ -15,6 +17,7 @@ const { Content } = await render(blurb);
 ---
 
 <Section id="contact" alt>
+    <Doodle icon={BubbleChatIcon} position="bottom-right" />
     <div class="mx-auto max-w-190">
         <SectionHead
             pill={m.nav_contact()}
