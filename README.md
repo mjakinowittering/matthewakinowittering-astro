@@ -1,8 +1,9 @@
 # Matthew's Astro Site
 
-Personal site for Matthew Akino-Wittering, a Product Manager. It presents
-employment history, training, education, and a short profile so potential
-employers can learn more than a LinkedIn page shows.
+Personal site for Matthew Akino-Wittering, a product leader and builder. One
+page presents who he is, how he works, what he has built, where he has worked
+and what he has studied, so potential employers can learn more than a LinkedIn
+page shows.
 
 Built with [Astro](https://astro.build), [Svelte](https://svelte.dev) islands,
 [Tailwind CSS](https://tailwindcss.com) v4, Markdown content collections and
@@ -31,10 +32,10 @@ All commands are run from the root of the project, from a terminal:
 Site content is data-driven through Astro content collections defined in
 `src/content.config.ts`:
 
-- **blurbs:** intro copy for page sections
+- **accomplishments:** the hero's stat cards
+- **blurbs:** the longer copy for the hero, How I work, Career and contact
 - **organisations:** employers, trainers, and universities
 - **events:** individual roles and courses, each referencing an organisation
-- **skills:** the "what I do" cards
 - **projects:** things built and shipped
 
 UI labels (section titles, buttons, page metadata) live in `messages/en.json`.
@@ -72,11 +73,10 @@ is merged into `develop` first and released to `main` from there.
 
 #### Projects
 
-- [ ] Finish checking the DyslexicWriter card: it shipped in PR #6 with the
-      keyboard and screen reader pass `CLAUDE.md` asks for still owed, and
-      without a look at phone, tablet and desktop widths (headless screenshots
-      came out blank). Its markup matches the YouDemo card's, so its layout
-      should too; confirm it, and that the `alt` text reads well aloud.
+- [ ] Finish checking the DyslexicWriter card: the screen reader pass
+      `CLAUDE.md` asks for is still owed. Its layout has been checked at phone,
+      tablet and desktop widths in the redesign; confirm with VoiceOver or NVDA
+      that the card reads in order and that its `alt` text reads well aloud.
 
 #### Sharing
 
@@ -91,10 +91,15 @@ is merged into `develop` first and released to `main` from there.
       `blurbs/how-i-work.md` and `blurbs/contact.md` hold draft copy for the
       redesign, kept as written until he rewrites it.
 - [ ] Decide whether the Acorn-i role body keeps the Ignite figures: they are
-      typed out in `events/employment/2019-08/acorn-i/product-lead.md` and are
-      now also stat cards in `src/content/accomplishments/`. Decide once the
-      redesign's hero renders the stat cards. A decision to make, not a
-      commitment.
+      typed out in `events/employment/2019-08/acorn-i/product-lead.md` and also
+      shown as the hero's stat cards from `src/content/accomplishments/`, so a
+      changed figure has two homes. A decision to make, not a commitment.
+- [ ] Add a "Download CV" button to Career once a CV exists: `design-brief`
+      places it under the Career intro, and `robots.txt` already reserves
+      `/resume`. Nothing renders it until there is a file to point at.
+- [ ] Replace the hero photo when Matthew supplies a new one: the hero still
+      uses `src/assets/MatthewAkinoWittering-BW-Alpha.png`, which is also the
+      Open Graph image.
 
 #### Tooling
 
@@ -103,12 +108,3 @@ is merged into `develop` first and released to `main` from there.
       own `ImageFunction` declares it required, so the card copies `img` with
       `format` narrowed rather than passing it straight to `<Image>`. Retry
       after an Astro upgrade with `npm run astro check`.
-
-#### Guidance
-
-- [ ] Update the stack table in `CLAUDE.md`: it says Astro 6, but `package.json`
-      has `astro` at `^7.3.5`.
-- [ ] Decide the branch prefix for Bugs work: `branch-and-commit` says `bug/`,
-      but step 1 went out as `fix/delivery-and-accessibility` because Matthew
-      named it. Either keep `bug/` and treat that as a one-off, or allow `fix/`
-      in the skill. A decision to make, not a commitment.

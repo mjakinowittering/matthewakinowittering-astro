@@ -23,8 +23,8 @@ description:
 │   ├── favicon.svg
 │   └── robots.txt
 └── src/
-    ├── assets/                    images imported by components (avatar, 404 alien)
-    ├── content.config.ts          the six collection schemas
+    ├── assets/                    images imported by components (the hero photo)
+    ├── content.config.ts          the five collection schemas
     ├── content/
     │   ├── accomplishments/       one .md per hero stat
     │   ├── blurbs/                one file per section's copy, keyed by name
@@ -35,31 +35,30 @@ description:
     │   ├── events/
     │   │   ├── employment/<yyyy-mm>/<org>/  one .md per role
     │   │   └── courses/<yyyy-mm>/<org>/     one .md per course or degree
-    │   ├── skills/                three cards + img/
     │   └── projects/              one .md per project + img/
     ├── components/
     │   ├── block/                 shared primitives, no content knowledge
     │   ├── content/               components content files import (CareerLength)
     │   └── home/                  one folder per page section
-    │       ├── about-me/
-    │       ├── experience/
-    │       │   ├── index.astro    the "My experience" blurb section
-    │       │   ├── topics/        employment/, training/, education/ sections
-    │       │   ├── organisation/  one timeline entry: dot, name, its events
-    │       │   └── event/         Role, Course, Education, EventDescription.svelte
-    │       ├── what-do-i-do/      section + Skill card
-    │       └── projects/          section + Project card
-    ├── layouts/Layout.astro       <head>, fonts, body shell
+    │       ├── hero/
+    │       ├── projects/          section + Project card
+    │       ├── how-i-work/
+    │       ├── career/            section + Role row
+    │       ├── learning/          section + Degree card + Provider list
+    │       └── contact/
+    ├── layouts/Layout.astro       <head>, sharing tags, fonts, body shell
     ├── lib/
     │   ├── accomplishments.ts     stats sorted largest first, and their formatting
     │   ├── career.ts              the career start date, from the careerStart event
-    │   ├── socials.ts             the LinkedIn and GitHub links
+    │   ├── organisations.ts       an event's organisation, or a build failure
+    │   ├── sections.ts            the linkable sections: label, href, pill tone
+    │   ├── socials.ts             the email address, LinkedIn and GitHub links
     │   └── utils.ts               date formatting and duration helpers
     ├── paraglide/                 compiled messages; generated, git-ignored
     ├── pages/
     │   ├── index.astro            composes the sections in order
     │   └── 404.astro
-    └── styles/global.css          Tailwind import, @theme tokens, .prose overrides
+    └── styles/global.css          Tailwind import, @theme tokens, link, progress bar, .prose overrides
 ```
 
 ## Where a new file goes
@@ -85,23 +84,21 @@ organisation's `id` (`andalucia.com/` holds `organisationId: andalucia`). The
 
 ## Page order and anchors
 
-`src/pages/index.astro` is the only place the order is set. This table is
-today's order; the redesign's target order is in **`design-brief`**.
+`src/pages/index.astro` is the only place the order is set:
 
-| #   | Section       | Component                           | `id`        | In Nav | `alt` band |
-| --- | ------------- | ----------------------------------- | ----------- | ------ | ---------- |
-| 1   | About         | `home/about-me`                     | `about`     | yes    | no         |
-| 2   | My experience | `home/experience`                   | none        | no     | yes        |
-| 3   | What I do     | `home/what-do-i-do`                 | none        | no     | no         |
-| 4   | Career        | `home/experience/topics/employment` | `career`    | yes    | yes        |
-| 5   | Projects      | `home/projects`                     | `projects`  | yes    | no         |
-| 6   | Education     | `home/experience/topics/education`  | `education` | yes    | yes        |
-| 7   | Training      | `home/experience/topics/training`   | none        | no     | no         |
+| #   | Section    | Component         | `id`         | In nav | Band | Pill   |
+| --- | ---------- | ----------------- | ------------ | ------ | ---- | ------ |
+| 1   | Hero       | `home/hero`       | none         | no     | base | none   |
+| 2   | Projects   | `home/projects`   | `projects`   | yes    | sand | yellow |
+| 3   | How I work | `home/how-i-work` | `how-i-work` | yes    | base | blue   |
+| 4   | Career     | `home/career`     | `career`     | yes    | sand | green  |
+| 5   | Learning   | `home/learning`   | `learning`   | yes    | base | pink   |
+| 6   | Contact    | `home/contact`    | `contact`    | no     | sand | teal   |
 
 Two couplings to keep in step when reordering or adding:
 
-- An `href="#x"` in `Nav.astro`'s `navLinks`, or on a `Button` such as "View
-  projects", needs a section with `id="x"`. Removing or renaming an id breaks
-  the link silently
-- Sections alternate plain and `alt` bands. Moving one usually means flipping
-  `alt` on its neighbours so two sand bands never touch
+- An `href="/#x"` in `src/lib/sections.ts`, or on a `Button` such as the hero's
+  "See what I've built" (`#projects`) and "Get in touch" (`#contact`), needs a
+  section with `id="x"`. Removing or renaming an id breaks the link silently
+- Sections alternate base and sand (`Section alt`) bands. Moving one usually
+  means flipping `alt` on its neighbours so two sand bands never touch

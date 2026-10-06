@@ -1,11 +1,10 @@
 ---
 name: content-blurbs
-description:
+description: >-
     The section copy in src/content/blurbs/: the hero's heading and lead, How I
     work, the Career intro and the contact panel. Use whenever the user wants to
-    change their headline, introduction, bio, profile summary, career story,
-    "how I work" copy or contact copy, or asks how the years-in-product figure
-    is shown.
+    change their headline, introduction, bio, profile summary, career story, how
+    I work or contact copy, or asks how the years-in-product figure is shown.
 ---
 
 # Blurbs: section copy
