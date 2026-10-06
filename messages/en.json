@@ -3,6 +3,7 @@
     "site_name": "Matthew Akino-Wittering",
     "site_title": "{title} - {site}",
     "site_description": "I am a Product Manager with {experience} of experience, primarily in internal platforms and B2B SaaS applications.",
+    "og_image_alt": "{name}: product leader and builder.",
     "nav_skip_to_content": "Skip to content",
     "nav_projects": "Projects",
     "nav_how_i_work": "How I work",
@@ -39,9 +40,7 @@
                 "input count",
                 "local countPlural = count: plural"
             ],
-            "selectors": [
-                "countPlural"
-            ],
+            "selectors": ["countPlural"],
             "match": {
                 "countPlural=one": "{count} course",
                 "countPlural=*": "{count} courses"
@@ -60,9 +59,7 @@
                 "input months",
                 "local monthsPlural = months: plural"
             ],
-            "selectors": [
-                "monthsPlural"
-            ],
+            "selectors": ["monthsPlural"],
             "match": {
                 "monthsPlural=one": "{months} month",
                 "monthsPlural=*": "{months} months"

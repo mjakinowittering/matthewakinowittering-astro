@@ -80,10 +80,10 @@ is merged into `develop` first and released to `main` from there.
 
 #### Sharing
 
-- [ ] Add a 1200 by 630 sharing card for Open Graph: `Layout.astro` points
-      `og:image` at the hero photo, a 447 by 558 portrait that LinkedIn crops,
-      with `twitter:card` set to `summary` to match. A designed card would let
-      both use the large format. A decision to make, not a commitment.
+- [ ] Redraw `public/og.png` when the years in product reach 17, in January
+      2027: the sharing card bakes "16+ years in product" into the image, so it
+      cannot derive the figure from `careerStart` as the page does. Its source
+      is `docs/design/reference/og-image.html`.
 
 #### Redesign
 
@@ -98,8 +98,7 @@ is merged into `develop` first and released to `main` from there.
       places it under the Career intro, and `robots.txt` already reserves
       `/resume`. Nothing renders it until there is a file to point at.
 - [ ] Replace the hero photo when Matthew supplies a new one: the hero still
-      uses `src/assets/MatthewAkinoWittering-BW-Alpha.png`, which is also the
-      Open Graph image.
+      uses `src/assets/MatthewAkinoWittering-BW-Alpha.png`.
 
 #### Tooling
 
