@@ -10,7 +10,7 @@ tags:
     - Browser-only
     - No backend
     - Static hosting
-index: 1
+index: 2
 img: ./img/youdemo.png
 alt:
     YouDemo recorder interface with a No screen selected prompt and a Start

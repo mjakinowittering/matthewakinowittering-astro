@@ -9,7 +9,7 @@ tags:
     - Accessibility
     - Read-aloud
     - Local-first
-index: 2
+index: 1
 img: ./img/dyslexicwriter.png
 alt:
     DyslexicWriter home screen headed Write comfortably. Hear it read back.
