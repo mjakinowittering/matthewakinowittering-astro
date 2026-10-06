@@ -2,3 +2,5 @@ dist
 .astro
 src/paraglide
 project.inlang/cache
+docs/design/reference
+.compare

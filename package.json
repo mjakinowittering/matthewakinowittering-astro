@@ -8,7 +8,8 @@
         "dev": "astro dev",
         "format": "prettier --write .",
         "lint": "prettier --check . && eslint .",
-        "preview": "astro preview"
+        "preview": "astro preview",
+        "compare": "astro build && node scripts/compare.mjs"
     },
     "dependencies": {
         "@astrojs/mdx": "^8.0.2",
@@ -27,11 +28,15 @@
         "@astrojs/check": "^0.9.10",
         "@eslint/js": "^10.0.1",
         "@inlang/paraglide-js": "^2.25.4",
+        "@types/pngjs": "^6.0.5",
         "eslint": "^10.12.0",
         "eslint-plugin-astro": "^3.2.1",
         "eslint-plugin-tailwindcss": "^4.0.6",
         "globals": "^17.4.0",
         "jiti": "^2.6.1",
+        "pixelmatch": "^8.0.0",
+        "playwright": "1.63",
+        "pngjs": "^7.0.0",
         "prettier": "^3.8.1",
         "prettier-plugin-astro": "^0.14.0",
         "prettier-plugin-tailwindcss": "^0.6.11",

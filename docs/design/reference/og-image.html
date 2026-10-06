@@ -1,0 +1,84 @@
+<!DOCTYPE html><html lang="en"><head><style>
+    .sc-placeholder{background:color-mix(in srgb,currentColor 8%,transparent);
+      border:1px solid color-mix(in srgb,currentColor 50%,transparent);
+      border-radius:2px;box-sizing:border-box;overflow:hidden}
+    @keyframes sc-shine{0%{background-position:100% 50%}100%{background-position:0% 50%}}
+    html.sc-dc-streaming .sc-placeholder,
+    html.sc-dc-streaming .sc-interp.sc-missing{position:relative;
+      background:color-mix(in srgb,currentColor 5%,transparent);
+      border-color:transparent}
+    html.sc-dc-streaming .sc-placeholder::before,
+    html.sc-dc-streaming .sc-interp.sc-missing::before{content:'';
+      position:absolute;inset:0;pointer-events:none;
+      background:linear-gradient(90deg,rgba(217,119,87,0) 25%,rgba(247,225,211,.95) 37%,rgba(217,119,87,0) 63%);
+      background-size:400% 100%;animation:sc-shine 1.4s ease infinite}
+    html.sc-dc-streaming .sc-placeholder:nth-child(n+9 of .sc-placeholder)::before,
+    html.sc-dc-streaming .sc-interp.sc-missing:nth-child(n+9 of .sc-interp.sc-missing)::before{animation:none;
+      background:color-mix(in srgb,currentColor 8%,transparent)}
+    .sc-placeholder-error{padding:4px 8px;font:11px/1.4 ui-monospace,monospace;
+      color:color-mix(in srgb,currentColor 70%,transparent);word-break:break-word}
+    .sc-interp.sc-missing{display:inline-block;width:2em;height:1em;overflow:hidden;
+      vertical-align:text-bottom;background:rgba(255,255,255,.3);border:1px solid rgba(0,0,0,.5);
+      border-radius:2px;box-sizing:border-box;color:transparent;
+      user-select:none}
+    .sc-interp.sc-unresolved{font-family:ui-monospace,monospace;font-size:.85em;
+      color:color-mix(in srgb,currentColor 50%,transparent);
+      background:color-mix(in srgb,currentColor 10%,transparent);border-radius:3px;
+      padding:0 3px}
+    .sc-host.sc-has-error{position:relative}
+    .sc-logic-error{position:absolute;top:8px;left:8px;z-index:2147483647;max-width:60ch;
+      padding:6px 10px;background:#b00020;color:#fff;font:12px/1.4 ui-monospace,monospace;
+      border-radius:4px;white-space:pre-wrap;pointer-events:none}
+    /* Mirrors PRINT_BASELINE_CSS in apps/web deck-stage-export.ts — keep both
+       in sync until dc-runtime regains a build step. */
+    @media print {
+      @page { margin: 0.5cm; }
+      figure, table { break-inside: avoid; }
+      #dc-root, #dc-root > .sc-host { height: auto; }
+      *, *::before, *::after {
+        print-color-adjust: exact; -webkit-print-color-adjust: exact;
+        backdrop-filter: none !important; -webkit-backdrop-filter: none !important;
+        animation-delay: -99s !important; animation-duration: .001s !important;
+        animation-iteration-count: 1 !important; animation-fill-mode: both !important;
+        animation-play-state: running !important; transition-duration: 0s !important;
+      }
+    }
+  </style>
+<meta charset="utf-8">
+<title>Open Graph image</title>
+<style>x-dc{display:none!important}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com" data-dc-tpl="1"><link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&amp;family=Permanent+Marker&amp;display=swap" rel="stylesheet" data-dc-tpl="2"><style data-dc-tpl="3">
+body{margin:0}
+a{color:inherit}
+a.ul{text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2.5px; text-underline-offset: 4px}
+a.ul:hover{text-decoration-thickness: 4px}
+a.ul:focus-visible{text-decoration-thickness: 4px; outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 2px}
+.nav a{text-decoration:none}
+.nav a:hover{text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 2px}
+.press:hover{transform: translateY(2px); box-shadow: 0 2px 0 #17151f !important}
+summary{list-style:none;cursor:pointer}
+summary::-webkit-details-marker{display:none}
+details[open] .chev{transform: rotate(180deg)}
+.menu-btn{display:none !important}
+@media (max-width: 900px){.nav{display:none !important}.menu-btn{display:inline-flex !important}}
+@media (max-width: 640px){
+.socials{display:none !important}
+.h1{font-size:40px !important}
+.h2{font-size:30px !important}
+.stmt{font-size:26px !important}
+.sec{padding-top:64px !important;padding-bottom:64px !important}
+.hero-wrap{padding-top:48px !important;padding-bottom:56px !important;gap:40px !important}
+.doodle{display:none !important}
+.sum{padding:18px 20px !important;gap:14px !important}
+.courses{padding:0 20px 18px 62px !important}
+.card-pad{padding:24px !important}
+.contact-card{padding:36px 20px !important}
+.course-row{flex-direction:column !important;align-items:flex-start !important;gap:4px !important}
+}
+</style></head>
+<body>
+<div id="dc-root"><div class="sc-host" data-sc-name="OpenGraph"><div data-dc-tpl="4" style="--ink: #17151f; --muted: #46434f; --base: #f8f5ef; --card: #fdfbf7; --accent: #f07a2e; width: 1200px; height: 630px; box-sizing: border-box; padding: 44px 56px 60px 44px; background: var(--base); color: var(--ink); font-family: Figtree, ui-sans-serif, system-ui, sans-serif; overflow: hidden;"><div data-dc-tpl="5" style="position: relative; height: 100%; box-sizing: border-box; background: var(--card); border: 2.5px solid var(--ink); border-radius: 28px; box-shadow: 12px 12px 0 var(--ink); overflow: hidden;"><div data-dc-tpl="6" style="position: absolute; inset: 64px 64px 56px; display: flex; flex-direction: column; justify-content: space-between;"><div data-dc-tpl="7" style="font-size: 30px; font-weight: 800; letter-spacing: -0.01em;">Matthew Akino-Wittering</div><div data-dc-tpl="8"><div data-dc-tpl="9" style="font-size: 92px; line-height: 0.98; font-weight: 800; letter-spacing: -0.035em;">Product leader</div><div data-dc-tpl="10" style="font-family: &quot;Permanent Marker&quot;, &quot;Comic Sans MS&quot;, cursive; font-size: 88px; line-height: 1.1; transform: rotate(-2deg); transform-origin: left center; margin-top: 6px;"><span data-dc-tpl="11" style="position: relative; display: inline-block; white-space: nowrap;">and builder.<svg data-dc-tpl="12" aria-hidden="true" width="100%" height="24" viewBox="0 0 240 16" preserveAspectRatio="none" fill="none" style="position: absolute; left: 0px; bottom: -14px;"><path data-dc-tpl="13" d="M4 10c46-7 120-9 232-3" stroke="var(--accent)" stroke-width="5" stroke-linecap="round" vector-effect="non-scaling-stroke" style="stroke-width: 8px;"></path></svg></span></div></div><div data-dc-tpl="14" style="display: flex; align-items: center; justify-content: space-between;"><div data-dc-tpl="15" style="display: flex; gap: 14px;"><span data-dc-tpl="16" style="display: inline-flex; align-items: center; height: 46px; padding: 0px 22px; border: 2.5px solid var(--ink); border-radius: 999px; background: rgb(251, 234, 165); font-size: 22px; font-weight: 700;">0→1</span><span data-dc-tpl="17" style="display: inline-flex; align-items: center; height: 46px; padding: 0px 22px; border: 2.5px solid var(--ink); border-radius: 999px; background: rgb(220, 230, 242); font-size: 22px; font-weight: 700;">Data</span><span data-dc-tpl="18" style="display: inline-flex; align-items: center; height: 46px; padding: 0px 22px; border: 2.5px solid var(--ink); border-radius: 999px; background: rgb(216, 236, 213); font-size: 22px; font-weight: 700;">AI</span></div><div data-dc-tpl="19" style="font-size: 24px; font-weight: 600; color: var(--muted);">matthew.akinowittering.com</div></div></div><svg data-dc-tpl="20" aria-hidden="true" viewBox="-130 -130 260 260" width="210" height="210" style="position: absolute; right: 44px; top: 40px; transform: rotate(8deg);"><polygon data-dc-tpl="21" points="0.0,-118.0 17.0,-96.5 40.4,-110.9 49.0,-84.9 75.8,-90.4 75.1,-63.0 102.2,-59.0 92.1,-33.5 116.2,-20.5 98.0,0.0 116.2,20.5 92.1,33.5 102.2,59.0 75.1,63.0 75.8,90.4 49.0,84.9 40.4,110.9 17.0,96.5 0.0,118.0 -17.0,96.5 -40.4,110.9 -49.0,84.9 -75.8,90.4 -75.1,63.0 -102.2,59.0 -92.1,33.5 -116.2,20.5 -98.0,0.0 -116.2,-20.5 -92.1,-33.5 -102.2,-59.0 -75.1,-63.0 -75.8,-90.4 -49.0,-84.9 -40.4,-110.9 -17.0,-96.5" fill="#fce3d0" stroke="#17151f" stroke-width="2.5" stroke-linejoin="round"></polygon><text data-dc-tpl="22" x="0" y="-14" text-anchor="middle" font-family="'Permanent Marker',cursive" font-size="64" fill="#17151f">16+</text><text data-dc-tpl="23" x="0" y="22" text-anchor="middle" font-family="Figtree,sans-serif" font-weight="800" font-size="22" fill="#17151f">years in</text><text data-dc-tpl="24" x="0" y="48" text-anchor="middle" font-family="Figtree,sans-serif" font-weight="800" font-size="22" fill="#17151f">product</text></svg></div></div></div></div>
+
+
+
+</body></html>

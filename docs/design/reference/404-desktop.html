@@ -1,0 +1,86 @@
+<!DOCTYPE html><html lang="en"><head><style>
+    .sc-placeholder{background:color-mix(in srgb,currentColor 8%,transparent);
+      border:1px solid color-mix(in srgb,currentColor 50%,transparent);
+      border-radius:2px;box-sizing:border-box;overflow:hidden}
+    @keyframes sc-shine{0%{background-position:100% 50%}100%{background-position:0% 50%}}
+    html.sc-dc-streaming .sc-placeholder,
+    html.sc-dc-streaming .sc-interp.sc-missing{position:relative;
+      background:color-mix(in srgb,currentColor 5%,transparent);
+      border-color:transparent}
+    html.sc-dc-streaming .sc-placeholder::before,
+    html.sc-dc-streaming .sc-interp.sc-missing::before{content:'';
+      position:absolute;inset:0;pointer-events:none;
+      background:linear-gradient(90deg,rgba(217,119,87,0) 25%,rgba(247,225,211,.95) 37%,rgba(217,119,87,0) 63%);
+      background-size:400% 100%;animation:sc-shine 1.4s ease infinite}
+    html.sc-dc-streaming .sc-placeholder:nth-child(n+9 of .sc-placeholder)::before,
+    html.sc-dc-streaming .sc-interp.sc-missing:nth-child(n+9 of .sc-interp.sc-missing)::before{animation:none;
+      background:color-mix(in srgb,currentColor 8%,transparent)}
+    .sc-placeholder-error{padding:4px 8px;font:11px/1.4 ui-monospace,monospace;
+      color:color-mix(in srgb,currentColor 70%,transparent);word-break:break-word}
+    .sc-interp.sc-missing{display:inline-block;width:2em;height:1em;overflow:hidden;
+      vertical-align:text-bottom;background:rgba(255,255,255,.3);border:1px solid rgba(0,0,0,.5);
+      border-radius:2px;box-sizing:border-box;color:transparent;
+      user-select:none}
+    .sc-interp.sc-unresolved{font-family:ui-monospace,monospace;font-size:.85em;
+      color:color-mix(in srgb,currentColor 50%,transparent);
+      background:color-mix(in srgb,currentColor 10%,transparent);border-radius:3px;
+      padding:0 3px}
+    .sc-host.sc-has-error{position:relative}
+    .sc-logic-error{position:absolute;top:8px;left:8px;z-index:2147483647;max-width:60ch;
+      padding:6px 10px;background:#b00020;color:#fff;font:12px/1.4 ui-monospace,monospace;
+      border-radius:4px;white-space:pre-wrap;pointer-events:none}
+    /* Mirrors PRINT_BASELINE_CSS in apps/web deck-stage-export.ts — keep both
+       in sync until dc-runtime regains a build step. */
+    @media print {
+      @page { margin: 0.5cm; }
+      figure, table { break-inside: avoid; }
+      #dc-root, #dc-root > .sc-host { height: auto; }
+      *, *::before, *::after {
+        print-color-adjust: exact; -webkit-print-color-adjust: exact;
+        backdrop-filter: none !important; -webkit-backdrop-filter: none !important;
+        animation-delay: -99s !important; animation-duration: .001s !important;
+        animation-iteration-count: 1 !important; animation-fill-mode: both !important;
+        animation-play-state: running !important; transition-duration: 0s !important;
+      }
+    }
+  </style>
+<meta charset="utf-8">
+<title>404 page</title>
+<style>x-dc{display:none!important}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com" data-dc-tpl="1"><link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&amp;family=Permanent+Marker&amp;display=swap" rel="stylesheet" data-dc-tpl="2"><style data-dc-tpl="3">
+body{margin:0}
+a{color:inherit}
+a.ul{text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2.5px; text-underline-offset: 4px}
+a.ul:hover{text-decoration-thickness: 4px}
+a.ul:focus-visible{text-decoration-thickness: 4px; outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 2px}
+.nav a{text-decoration:none}
+.nav a:hover{text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 2px}
+.press:hover{transform: translateY(2px); box-shadow: 0 2px 0 #17151f !important}
+summary{list-style:none;cursor:pointer}
+summary::-webkit-details-marker{display:none}
+details[open] .chev{transform: rotate(180deg)}
+.menu-btn{display:none !important}
+@media (max-width: 900px){.nav{display:none !important}.menu-btn{display:inline-flex !important}}
+@media (max-width: 640px){
+.socials{display:none !important}
+.h1{font-size:40px !important}
+.h2{font-size:30px !important}
+.stmt{font-size:26px !important}
+.sec{padding-top:64px !important;padding-bottom:64px !important}
+.hero-wrap{padding-top:48px !important;padding-bottom:56px !important;gap:40px !important}
+.doodle{display:none !important}
+.sum{padding:18px 20px !important;gap:14px !important}
+.courses{padding:0 20px 18px 62px !important}
+.card-pad{padding:24px !important}
+.contact-card{padding:36px 20px !important}
+.course-row{flex-direction:column !important;align-items:flex-start !important;gap:4px !important}
+}
+.tag:hover{text-decoration: underline !important; text-underline-offset: 4px}
+@media (max-width: 640px){.nf-wrap2{padding:72px 20px 88px !important}.nf-num{font-size:112px !important}.nf-h1{font-size:32px !important}}
+</style></head>
+<body>
+<div id="dc-root"><div class="sc-host" data-sc-name="NotFound-Desktop"><div data-dc-tpl="4" style="--ink: #17151f; --muted: #46434f; --base: #f8f5ef; --card: #fdfbf7; --rule: #e7e3dc; --accent: #f07a2e; background: var(--base); color: var(--ink); font-family: Figtree, ui-sans-serif, system-ui, sans-serif; font-size: 16px; line-height: 1.6; min-height: 100%;"><header data-dc-tpl="5" style="position: sticky; top: 0px; z-index: 50; background: var(--base); border-bottom: 1.5px solid var(--ink);"><div data-dc-tpl="6" style="max-width: 1120px; margin: 0px auto; padding: 14px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px;"><a data-dc-tpl="7" href="/" style="font-weight: 800; font-size: 19px; letter-spacing: -0.02em; text-decoration: none;">Matthew Akino-Wittering</a><nav data-dc-tpl="8" class="nav" aria-label="Sections" style="display: flex; flex-wrap: wrap; gap: 6px 22px; font-size: 15px; font-weight: 600;"><a data-dc-tpl="9" href="/#projects">Projects</a><a data-dc-tpl="10" href="/#how">How I work</a><a data-dc-tpl="11" href="/#career">Career</a><a data-dc-tpl="12" href="/#learning">Learning</a></nav><div data-dc-tpl="13" class="socials" style="display: flex; gap: 10px;"><a data-dc-tpl="14" class="press" href="https://www.linkedin.com/in/matthewwittering/" aria-label="LinkedIn" style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 1.5px solid var(--ink); border-radius: 10px; box-shadow: 0 3px 0 var(--ink); background: var(--card); color: var(--ink); box-sizing: border-box;"><svg data-dc-tpl="15" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path data-dc-tpl="16" d="M7 10V17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path><path data-dc-tpl="17" d="M11 13V17M11 13C11 11.3431 12.3431 10 14 10C15.6569 10 17 11.3431 17 13V17M11 13V10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path><path data-dc-tpl="18" d="M7.125 6.75H7M7.25 6.75C7.25 6.88807 7.13807 7 7 7C6.86193 7 6.75 6.88807 6.75 6.75C6.75 6.61193 6.86193 6.5 7 6.5C7.13807 6.5 7.25 6.61193 7.25 6.75Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path><path data-dc-tpl="19" d="M3 12C3 7.75736 3 5.63604 4.31802 4.31802C5.63604 3 7.75736 3 12 3C16.2426 3 18.364 3 19.682 4.31802C21 5.63604 21 7.75736 21 12C21 16.2426 21 18.364 19.682 19.682C18.364 21 16.2426 21 12 21C7.75736 21 5.63604 21 4.31802 19.682C3 18.364 3 16.2426 3 12Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg></a><a data-dc-tpl="20" class="press" href="https://github.com/mjakinowittering" aria-label="GitHub" style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 1.5px solid var(--ink); border-radius: 10px; box-shadow: 0 3px 0 var(--ink); background: var(--card); color: var(--ink); box-sizing: border-box;"><svg data-dc-tpl="21" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path data-dc-tpl="22" d="M6.51734 17.1132C6.91177 17.6905 8.10883 18.9228 9.74168 19.2333M9.86428 22C8.83582 21.8306 2 19.6057 2 12.0926C2 5.06329 8.0019 2 12.0008 2C15.9996 2 22 5.06329 22 12.0926C22 19.6057 15.1642 21.8306 14.1357 22C14.1357 22 13.9267 18.5826 14.0487 17.9969C14.1706 17.4113 13.7552 16.4688 13.7552 16.4688C14.7262 16.1055 16.2043 15.5847 16.7001 14.1874C17.0848 13.1032 17.3268 11.5288 16.2508 10.0489C16.2508 10.0489 16.5318 7.65809 15.9996 7.56548C15.4675 7.47287 13.8998 8.51192 13.8998 8.51192C13.4432 8.38248 12.4243 8.13476 12.0018 8.17939C11.5792 8.13476 10.5568 8.38248 10.1002 8.51192C10.1002 8.51192 8.53249 7.47287 8.00036 7.56548C7.46823 7.65809 7.74917 10.0489 7.74917 10.0489C6.67316 11.5288 6.91516 13.1032 7.2999 14.1874C7.79575 15.5847 9.27384 16.1055 10.2448 16.4688C10.2448 16.4688 9.82944 17.4113 9.95135 17.9969C10.0733 18.5826 9.86428 22 9.86428 22Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg></a><a data-dc-tpl="23" class="press" href="mailto:matthew.akinowittering@gmail.com" aria-label="Email" style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 1.5px solid var(--ink); border-radius: 10px; box-shadow: 0 3px 0 var(--ink); background: var(--card); color: var(--ink); box-sizing: border-box;"><svg data-dc-tpl="24" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path data-dc-tpl="25" d="M2 6L8.91302 9.91697C11.4616 11.361 12.5384 11.361 15.087 9.91697L22 6" stroke="currentColor" stroke-linejoin="round" stroke-width="1.5"></path><path data-dc-tpl="26" d="M2.01577 13.4756C2.08114 16.5412 2.11383 18.0739 3.24496 19.2094C4.37608 20.3448 5.95033 20.3843 9.09883 20.4634C11.0393 20.5122 12.9607 20.5122 14.9012 20.4634C18.0497 20.3843 19.6239 20.3448 20.7551 19.2094C21.8862 18.0739 21.9189 16.5412 21.9842 13.4756C22.0053 12.4899 22.0053 11.5101 21.9842 10.5244C21.9189 7.45886 21.8862 5.92609 20.7551 4.79066C19.6239 3.65523 18.0497 3.61568 14.9012 3.53657C12.9607 3.48781 11.0393 3.48781 9.09882 3.53656C5.95033 3.61566 4.37608 3.65521 3.24495 4.79065C2.11382 5.92608 2.08114 7.45885 2.01576 10.5244C1.99474 11.5101 1.99475 12.4899 2.01577 13.4756Z" stroke="currentColor" stroke-linejoin="round" stroke-width="1.5"></path></svg></a></div><button data-dc-tpl="27" class="menu-btn press" type="button" aria-label="Open menu" aria-expanded="false" style="align-items: center; justify-content: center; width: 44px; height: 44px; border: 1.5px solid var(--ink); border-radius: 10px; box-shadow: 0 3px 0 var(--ink); background: var(--card); color: var(--ink); cursor: pointer;"><svg data-dc-tpl="28" width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path data-dc-tpl="29" d="M4 5L20 5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path><path data-dc-tpl="30" d="M4 12L20 12" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path><path data-dc-tpl="31" d="M4 19L20 19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg></button></div></header><main data-dc-tpl="32"><div data-dc-tpl="33" class="nf-wrap2" style="max-width: 640px; margin: 0px auto; padding: 112px 24px 128px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 20px;"><p data-dc-tpl="34" aria-hidden="true" class="nf-num" style="margin: 0px; font-size: 160px; line-height: 0.9; font-weight: 800; letter-spacing: -0.05em; color: var(--ink);">404</p><h1 data-dc-tpl="35" class="nf-h1" style="margin: 8px 0px 0px; font-size: 40px; line-height: 1.1; font-weight: 800; letter-spacing: -0.02em;">Page not found</h1><p data-dc-tpl="36" style="margin: 0px; font-size: 19px; color: var(--muted); max-width: 40ch;">Sorry, the page you're looking for doesn't exist or has moved.</p><a data-dc-tpl="37" class="press" href="/" style="display: inline-flex; align-items: center; min-height: 50px; padding: 0px 22px; margin-top: 8px; border: 1.5px solid var(--ink); border-radius: 10px; box-shadow: 0 4px 0 var(--ink); background: var(--accent); color: var(--ink); font-size: 16px; font-weight: 700; text-decoration: none; box-sizing: border-box;">Back to the homepage</a><nav data-dc-tpl="38" aria-label="Sections" style="display: flex; flex-direction: column; align-items: center; gap: 12px; padding-top: 24px;"><span data-dc-tpl="39" style="font-size: 14px; font-weight: 700; color: var(--muted);">Or try one of these:</span><div data-dc-tpl="40" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;"><a data-dc-tpl="41" href="/#projects" class="tag" style="display: inline-flex; align-items: center; min-height: 36px; padding: 0px 14px; border: 1.5px solid var(--ink); border-radius: 999px; background: rgb(251, 234, 165); font-size: 14px; font-weight: 700; text-decoration: none;">Projects</a><a data-dc-tpl="42" href="/#how" class="tag" style="display: inline-flex; align-items: center; min-height: 36px; padding: 0px 14px; border: 1.5px solid var(--ink); border-radius: 999px; background: rgb(220, 230, 242); font-size: 14px; font-weight: 700; text-decoration: none;">How I work</a><a data-dc-tpl="43" href="/#career" class="tag" style="display: inline-flex; align-items: center; min-height: 36px; padding: 0px 14px; border: 1.5px solid var(--ink); border-radius: 999px; background: rgb(216, 236, 213); font-size: 14px; font-weight: 700; text-decoration: none;">Career</a><a data-dc-tpl="44" href="/#learning" class="tag" style="display: inline-flex; align-items: center; min-height: 36px; padding: 0px 14px; border: 1.5px solid var(--ink); border-radius: 999px; background: rgb(247, 216, 224); font-size: 14px; font-weight: 700; text-decoration: none;">Learning</a><a data-dc-tpl="45" href="/#contact" class="tag" style="display: inline-flex; align-items: center; min-height: 36px; padding: 0px 14px; border: 1.5px solid var(--ink); border-radius: 999px; background: rgb(215, 235, 231); font-size: 14px; font-weight: 700; text-decoration: none;">Say hello</a></div></nav></div></main><footer data-dc-tpl="46" style="max-width: 1120px; margin: 0px auto; padding: 28px 24px 36px; border-top: 1.5px solid var(--rule); font-size: 14px; color: var(--muted);"><span data-dc-tpl="47">© 2026 Matthew Akino-Wittering</span></footer></div></div></div>
+
+
+
+</body></html>
