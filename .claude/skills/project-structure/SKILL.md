@@ -41,7 +41,7 @@ description:
     │   └── projects/              one .md per project + img/
     ├── components/
     │   ├── ui/                    shared primitives, no content knowledge
-    │   ├── site/                  page chrome: Nav, SiteFooter
+    │   ├── site/                  page chrome: Nav, SiteFooter, BackToTop
     │   ├── content/               components content files import (CareerLength)
     │   ├── sections/              one file per page section: Hero, Projects,
     │   │                          HowIWork, Career, Learning, Contact

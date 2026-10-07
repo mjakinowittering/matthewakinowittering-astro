@@ -47,7 +47,7 @@ prefix before adding a key:
 | ----------------------- | -------------------------------------------------------------------------- |
 | `site_`                 | the name, `<title>` pattern and meta description                           |
 | `og_`                   | the sharing card's `alt` text                                              |
-| `nav_`                  | the section names (`sections.ts`), the nav's label and the menu button     |
+| `nav_`                  | the section names (`sections.ts`), the nav's label, menu and back to top   |
 | `social_`, `footer_`    | the social and email buttons' labels, the footer                           |
 | `hero_`                 | the hero's marker line, buttons, photo `alt` and sticker (two lines, `\n`) |
 | `projects_`, `career_`  | the Projects and Career sections                                           |

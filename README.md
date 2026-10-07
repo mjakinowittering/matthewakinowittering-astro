@@ -90,10 +90,6 @@ is merged into `develop` first and released to `main` from there.
 - [ ] Rewrite the How I work and contact copy in Matthew's own voice:
       `blurbs/how-i-work.md` and `blurbs/contact.md` hold draft copy for the
       redesign, kept as written until he rewrites it.
-- [ ] Decide whether the Acorn-i role body keeps the Ignite figures: they are
-      typed out in `events/employment/2019-08/acorn-i/product-lead.md` and also
-      shown as the hero's stat cards from `src/content/accomplishments/`, so a
-      changed figure has two homes. A decision to make, not a commitment.
 - [ ] Add a "Download CV" button to Career once a CV exists: `design-brief`
       places it under the Career intro, and `robots.txt` already reserves
       `/resume`. Nothing renders it until there is a file to point at.

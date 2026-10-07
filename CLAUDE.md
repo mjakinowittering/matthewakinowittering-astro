@@ -49,23 +49,23 @@ workflows live in a **project skill** under `.claude/skills/`. **Load the
 matching skill before doing substantive work in its domain** — the General Rules
 below are the invariants; the skill is the _how_.
 
-| Skill                     | Load when working on…                                                                                                                               |
-| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `design-brief`            | why the page looks and reads as it does: any visible change, the section order, or hero, how-I-work, projects, learning or contact copy             |
-| `project-structure`       | locating a file, deciding where a new file belongs, the page's section order and anchors                                                            |
-| `content-blurbs`          | the section copy in `src/content/blurbs/`: hero, How I work, Career intro, contact                                                                  |
-| `content-organisations`   | adding or editing an employer, trainer or university in `src/content/organisations/`                                                                |
-| `content-accomplishments` | the hero's stat figures in `src/content/accomplishments/`, their values, captions and order                                                         |
-| `content-events`          | adding or editing a role, course or degree in `src/content/events/`, its dates, link and body copy                                                  |
-| `rewrite-course`          | turning pasted course material into the house style for one training event (`/rewrite-course <path>`)                                               |
-| `content-projects`        | the project cards in `src/content/projects/`, their screenshots, tags and links                                                                     |
-| `components-block`        | the shared primitives in `src/components/ui/` (Section, SectionHead, Pill, Card, Button, ExternalTextLink, Icon, Doodle), `site/` (Nav, SiteFooter) |
-| `components-sections`     | the page sections in `src/components/sections/` and their `entries/`, joining events to organisations, `Layout.astro`, `pages/`, adding a section   |
-| `styling`                 | colour tokens, typography, content body styling, Tailwind v4 in `src/styles/global.css` and class strings                                           |
-| `i18n-messages`           | adding or editing a UI string or message key in `messages/en.json`                                                                                  |
-| `ascii-wireframes`        | any visible change: draw it and get it approved before building                                                                                     |
-| `todo-review`             | the `## Todo` list in `README.md`, and every time plan mode is entered (`/todo-review`)                                                             |
-| `branch-and-commit`       | cutting a branch off `develop`, writing a commit message, pushing, opening a PR                                                                     |
+| Skill                     | Load when working on…                                                                                                                                          |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `design-brief`            | why the page looks and reads as it does: any visible change, the section order, or hero, how-I-work, projects, learning or contact copy                        |
+| `project-structure`       | locating a file, deciding where a new file belongs, the page's section order and anchors                                                                       |
+| `content-blurbs`          | the section copy in `src/content/blurbs/`: hero, How I work, Career intro, contact                                                                             |
+| `content-organisations`   | adding or editing an employer, trainer or university in `src/content/organisations/`                                                                           |
+| `content-accomplishments` | the hero's stat figures in `src/content/accomplishments/`, their values, captions and order                                                                    |
+| `content-events`          | adding or editing a role, course or degree in `src/content/events/`, its dates, link and body copy                                                             |
+| `rewrite-course`          | turning pasted course material into the house style for one training event (`/rewrite-course <path>`)                                                          |
+| `content-projects`        | the project cards in `src/content/projects/`, their screenshots, tags and links                                                                                |
+| `components-block`        | the shared primitives in `src/components/ui/` (Section, SectionHead, Pill, Card, Button, ExternalTextLink, Icon, Doodle), `site/` (Nav, SiteFooter, BackToTop) |
+| `components-sections`     | the page sections in `src/components/sections/` and their `entries/`, joining events to organisations, `Layout.astro`, `pages/`, adding a section              |
+| `styling`                 | colour tokens, typography, content body styling, Tailwind v4 in `src/styles/global.css` and class strings                                                      |
+| `i18n-messages`           | adding or editing a UI string or message key in `messages/en.json`                                                                                             |
+| `ascii-wireframes`        | any visible change: draw it and get it approved before building                                                                                                |
+| `todo-review`             | the `## Todo` list in `README.md`, and every time plan mode is entered (`/todo-review`)                                                                        |
+| `branch-and-commit`       | cutting a branch off `develop`, writing a commit message, pushing, opening a PR                                                                                |
 
 > When a domain skill contradicts a stale line here, the skill is the more
 > detailed source — but the General Rules always hold regardless of which skill

@@ -12,6 +12,11 @@ disagree, these files win.
 | `404-phone.png` / `.html`    | 390px  | 404 page, phone                  |
 | `404-desktop.png` / `.html`  | 1280px | 404 page, desktop                |
 | `og-image.png` / `.html`     | 1200px | Open Graph image, 1200×630       |
+| `mobile-scroll.png`          | 390px  | Header and back to top on scroll |
+
+`mobile-scroll.png` is a behaviour board: four phone frames of the header as
+you scroll, with the rules beneath them. It has no `.html` and
+`npm run compare` does not check it.
 
 The `.png` files are full-page screenshots. The `.html` files are the rendered
 mark-up of the same boards, with every style inline: read them for exact

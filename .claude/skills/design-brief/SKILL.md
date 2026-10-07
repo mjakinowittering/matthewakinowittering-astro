@@ -270,6 +270,24 @@ tablet differences are noted per section.
   by keyboard and announces its state. **Below 640px** the social buttons go
   too, and the menu carries LinkedIn and GitHub. Navigation must work on a
   phone.
+- **Below 900px the header collapses as you read**, as
+  `docs/design/reference/mobile-scroll.png` draws it: scrolling down slides it
+  up out of view, leaving only the progress bar pinned to the top; any upward
+  scroll slides it back. It ignores movement under about 10px, always shows near
+  the top, never hides while the menu is open, and slides back whenever
+  something in it takes focus. On a small screen the header costs a lot of the
+  page; at 900px and wider, where the links sit inline, it stays as it is,
+  always visible. Without JavaScript it simply stays sticky.
+- **Back to top**, below 900px only: a round 52px card-white button with an ink
+  outline and the header buttons' `0 3px 0` edge, an up caret inside, 20px from
+  the right and 24px from the bottom (plus the safe area). It fades in once the
+  page is more than a screen down and out within half a screen of the top. It
+  returns to the very top and puts focus on the page's start, so a keyboard or
+  screen reader user begins again from there. Without JavaScript it never shows.
+- **In-page links glide** to their section at every width, and land just below
+  whatever is showing at the top: the header, or on a phone the bar alone when
+  the jump goes down. With reduced motion, jumps are instant and nothing slides
+  or fades.
 
 ### 1. Hero
 
