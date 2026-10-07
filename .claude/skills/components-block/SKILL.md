@@ -3,10 +3,10 @@ name: components-block
 description: >-
     The shared primitives in src/components/ui/ (Section, SectionHead, Pill,
     Card, Button, ExternalTextLink, Icon, Doodle), the page chrome in site/
-    (Nav, SiteFooter): their props, when to use each, and when a new primitive
-    is justified. Use whenever building or editing any section or card, adding a
-    button, link, pill or icon, changing the nav or footer, or tempted to write
-    a section wrapper, heading or link by hand.
+    (Nav, SiteFooter, BackToTop): their props, when to use each, and when a new
+    primitive is justified. Use whenever building or editing any section or
+    card, adding a button, link, pill or icon, changing the nav or footer, or
+    tempted to write a section wrapper, heading or link by hand.
 ---
 
 # Block components
@@ -149,7 +149,7 @@ section's padding) or `top-right` (inside the contact panel). `class` is
 required: each doodle's size and tilt are copied from the reference. Placement
 rules are in **`design-brief`**, Doodles and stickers.
 
-### `Nav` and `SiteFooter`
+### `Nav`, `SiteFooter` and `BackToTop`
 
 The sticky header (the `header` landmark) and the footer. The header is on the
 page base with an ink bottom edge. `Nav` shows the name, linking home; the
@@ -169,6 +169,34 @@ tangerine fill grown by a CSS scroll-driven animation (`scroll-progress` in
 leaves it out, as the 404 page does. The header's height, bar included, is the
 `spacing-header` token, which the menu's `top-header` and `html`'s
 `scroll-padding-top` also read.
+
+Below 900px the header collapses as the reader scrolls (the why is in
+**`design-brief`**, Header). The `<header>` is the sticky element and is
+transparent; inside it, the bar (`#site-progress`, `relative z-10`, opaque) sits
+above the inner part (`#site-header-inner`), which holds everything else. Nav's
+script sets `data-hidden` on the `<header>`, and the classes
+`max-nav:group-data-hidden:-translate-y-full` slide the inner part up behind the
+bar while `max-nav:data-hidden:pointer-events-none` lets taps through the empty
+box. So the attribute does nothing at 900px and wider. The script:
+
+- reads the scroll once per animation frame from a passive listener, clamped to
+  the page so rubber-banding doesn't count
+- hides after 10px down and shows after 10px up, measured from where it last
+  changed or held; it always shows within the header's height of the top, and
+  never hides while the menu is open
+- shows the header on `focusin`; `global.css` moves the header's scroll area
+  down (`scroll-margin`) so focusing one of its controls never makes the browser
+  scroll the page to clear the padding
+- on a phone, sets `scroll-padding-top` per in-page link click: the bar's height
+  when the jump goes down (the header will hide), bar plus header when it goes
+  up
+
+`BackToTop` is a link to `#main`, the skip link's target, rendered at the end of
+the homepage and hidden from 900px (`nav:hidden`). The browser's own fragment
+navigation scrolls to the top and moves focus to `main`, so the link needs no
+script to work; a small script only sets `data-shown` past one screen down and
+removes it within half a screen of the top. Until then it is `invisible`, out of
+the tab order, so without JavaScript it never shows.
 
 `SiteFooter` is the copyright line only; its year is `new Date().getFullYear()`,
 so it is right at each build. On the homepage it follows the contact panel with

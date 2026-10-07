@@ -81,7 +81,10 @@ async function startServer() {
 
 async function screenshot(browser, url, width, selectors) {
     const page = await browser.newPage({
-        viewport: { width, height: viewportHeight }
+        viewport: { width, height: viewportHeight },
+        // No smooth scrolling or sliding header, so the scroll down and back
+        // below settles at once
+        reducedMotion: 'reduce'
     });
     await page.goto(url, { waitUntil: 'networkidle' });
     await page.addStyleTag({ content: freeze });
@@ -95,6 +98,10 @@ async function screenshot(browser, url, width, selectors) {
         scrollTo(0, 0);
         await Promise.all(
             [...document.images].map((img) => img.decode().catch(() => {}))
+        );
+        // Two frames, so the header's scroll handler has shown it again
+        await new Promise((resolve) =>
+            requestAnimationFrame(() => requestAnimationFrame(resolve))
         );
     });
     const png = PNG.sync.read(await page.screenshot({ fullPage: true }));

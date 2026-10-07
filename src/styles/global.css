@@ -38,9 +38,26 @@
     --spacing-header: 4.84375rem; /* 77.5px: header height, with its progress bar; the menu's top and scroll-padding-top read it */
 }
 
-/* Anchor targets land below the sticky header, not under it */
+/* Anchor targets land below the sticky header, not under it. Below 900px the
+   header hides on the way down, so Nav's script sets the padding per jump */
 html {
     scroll-padding-top: var(--spacing-header);
+}
+
+/* The header's own controls are always in view when focused (it is sticky, and
+   slides back in on focus), but that padding makes the browser think they sit
+   under it and scroll the page up as one takes focus. Their scroll area moves
+   down by twice the header's height, past the padding even while it is hidden. */
+header * {
+    scroll-margin-top: calc(-2 * var(--spacing-header));
+    scroll-margin-bottom: calc(2 * var(--spacing-header));
+}
+
+/* In-page links glide to their section, unless the reader asks for less motion */
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
 }
 
 /* The header's reading-progress bar (Nav): grows with the page's scroll, with
