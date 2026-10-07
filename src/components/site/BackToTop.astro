@@ -1,0 +1,47 @@
+---
+import { Icon } from '@components/ui';
+import { ArrowUp01Icon } from '@hugeicons/core-free-icons';
+import { m } from '@paraglide/messages.js';
+---
+
+<!--
+    Below 900px only. A link to the skip link's target, so the browser scrolls
+    to the very top and moves focus there with no script; the script only
+    decides when it shows. Without JavaScript it stays hidden.
+-->
+<a
+    id="back-to-top"
+    href="#main"
+    aria-label={m.nav_back_to_top()}
+    class="nav:hidden border-ink bg-card text-ink shadow-offset-sm hover:shadow-offset-press invisible fixed right-5 bottom-[calc(24px+env(safe-area-inset-bottom))] z-10 inline-flex size-[52px] items-center justify-center rounded-full border-[1.5px] opacity-0 data-shown:visible data-shown:opacity-100 motion-safe:transition-[opacity,visibility,translate] motion-safe:duration-200 motion-safe:hover:translate-y-0.5"
+>
+    <Icon icon={ArrowUp01Icon} class="size-6" />
+</a>
+
+<script>
+    const button = document.getElementById('back-to-top');
+    let queued = false;
+
+    // Shows past one screen down and hides within half a screen of the top;
+    // in between it keeps its state, so it never flickers at the line
+    function update() {
+        queued = false;
+        if (scrollY > innerHeight) {
+            button?.setAttribute('data-shown', '');
+        } else if (scrollY < innerHeight / 2) {
+            button?.removeAttribute('data-shown');
+        }
+    }
+
+    addEventListener(
+        'scroll',
+        () => {
+            if (!queued) {
+                queued = true;
+                requestAnimationFrame(update);
+            }
+        },
+        { passive: true }
+    );
+    update();
+</script>

@@ -36,7 +36,7 @@ do not copy hex codes into this skill or into components.
 | `shadow-offset`, `-sm`, `-press`, `-panel`  | `shadow-offset`, `shadow-panel`  | the ink edge under buttons (4px, 3px on header squares, 2px pressed); the 8px offset under the hero photo and degree card |
 | `breakpoint-nav`                            | `nav:block`, `nav:hidden`        | 900px, where the header's links replace the menu button                                                                   |
 | `container-page`                            | `max-w-page`                     | 1168px: the 1120px content column plus its 24px gutters                                                                   |
-| `spacing-header`                            | `h-header`, `top-header`         | the header's height with its bar, also read by `scroll-padding-top`                                                       |
+| `spacing-header`                            | `h-header`, `top-header`         | the header's height with its bar; `scroll-padding-top`'s default, which Nav's script overrides per jump on a phone        |
 
 The values match the reference pack in `docs/design/reference/`, which
 **`design-brief`** makes the visual source of truth: a new value is read from
@@ -121,7 +121,9 @@ the degree card does). There is no typography plugin.
 - Focus needs nothing per component: one `:focus-visible` rule in `global.css`
   draws a 2px ink ring, offset onto the surrounding surface. Never set
   `outline-none` on a control
-- Motion is opt-in: a hover or press movement goes behind `motion-safe:`. The
+- Motion is opt-in: a hover or press movement goes behind `motion-safe:`, and so
+  does its `duration-*`, since on its own a duration animates every property
+  (the default `transition-property` is `all`), reduced motion or not. The
   progress bar is tied to scrolling, not played, so it needs no guard
 - Mobile first, checked at phone, tablet and desktop widths (`CLAUDE.md`,
   Styling)

@@ -128,8 +128,8 @@ renders the `header` landmark itself and `SiteFooter` the `footer`.
 
 ## Pages
 
-- `index.astro` composes the sections and sets the page metadata. It holds no
-  markup of its own beyond the section list
+- `index.astro` composes the sections, then `BackToTop`, and sets the page
+  metadata. It holds no markup of its own beyond that list
 - `404.astro` uses the shared header (with `progress={false}`) and the `ruled`
   footer around a centred 640px block: a large decorative "404" (`aria-hidden`),
   the `<h1>`, one line, a `size="lg"` "Back to the homepage" button and a
