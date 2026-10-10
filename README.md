@@ -91,3 +91,9 @@ there.
       `format` narrowed rather than passing it straight to `<Image>`. Still
       needed on Astro 7.3.8; retry after the next upgrade with
       `npm run astro check`.
+- [ ] Unpin `eslint-plugin-tailwindcss` from exactly `4.0.6` once it understands
+      Tailwind v4 line heights: from 4.4.0 its `no-unnecessary-arbitrary-value`
+      rule suggests `leading-1.2` for `leading-[1.2]`, but v4 reads a bare
+      `leading-*` number as a multiple of `--spacing`, so its `--fix` would
+      collapse every line height. Retry with `npm run lint` on each new plugin
+      release; warnings on `leading-[…]` mean it is still wrong.
