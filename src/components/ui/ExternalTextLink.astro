@@ -25,6 +25,6 @@ const { href, arrow = false, class: className } = Astro.props;
     rel="noopener"
 >
     <slot />
-    <span class="sr-only">{m.external_new_tab()}</span>
+    <span class="sr-only"> {m.external_new_tab()}</span>
     {arrow && <Icon icon={ArrowUpRight01Icon} class="size-3.5 flex-none" />}
 </a>
