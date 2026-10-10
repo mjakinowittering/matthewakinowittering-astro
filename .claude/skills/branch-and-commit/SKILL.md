@@ -76,8 +76,9 @@ doesn't block, but name it in the handover; any other failure does.
   `git add -A` only when nothing else is uncommitted; name anything left
   unstaged.
 - **Hand the message over**: the user commits unless they ask you to. If you
-  commit, end with the `Co-Authored-By` trailer. There is no pre-commit hook:
-  `npm run lint` is the only formatting check, and it is on you to have run it.
+  commit, end with the `Co-Authored-By` trailer. There is no pre-commit hook: CI
+  runs `npm run lint` again on the PR, but only after the push, so it is on you
+  to have run it first.
 
 The message: a short imperative subject, a blank line, a bulleted body.
 
