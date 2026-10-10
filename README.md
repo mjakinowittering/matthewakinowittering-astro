@@ -48,26 +48,13 @@ an existing organisation. Add the organisation under
 ## Deployment
 
 Pushing to `main` builds and deploys to GitHub Pages via
-`.github/workflows/astro.yml`. There is no separate staging environment, so work
-is merged into `develop` first and released to `main` from there.
+`.github/workflows/build-and-deploy.yml`. There is no separate staging
+environment, so work is merged into `develop` first and released to `main` from
+there.
 
 ## Todo
 
 ### Bugs
-
-#### Tooling
-
-- [ ] Quiet the build's `MODULE_LEVEL_DIRECTIVE` warning for `blurbs/hero.mdx`:
-      Vite warns that the `"use astro:head-inject"` directive "may not be
-      preserved when bundling". The directive is added by Astro itself
-      (`vite-plugin-content-assets.js`) to every MDX content entry, whatever the
-      file holds, so nothing in this repo causes it; the page renders correctly.
-      Wait for an Astro fix rather than filtering it, and never silence other
-      warnings with it.
-- [ ] Clear the moderate `npm audit` finding: `postcss-selector-parser` 7.1.4,
-      pinned by `postcss-nested` under `eslint-plugin-tailwindcss`, which only
-      runs when linting. `npm audit fix` does not clear it; recheck when
-      `eslint-plugin-tailwindcss` releases an update.
 
 ### Features
 
@@ -98,23 +85,9 @@ is merged into `develop` first and released to `main` from there.
 
 #### Tooling
 
-- [ ] Drop the `format` narrowing in `projects/Project.astro` once Astro's types
+- [ ] Drop the `format` narrowing in `entries/Project.astro` once Astro's types
       allow: the `image()` schema infers `format` as optional, though Astro's
       own `ImageFunction` declares it required, so the card copies `img` with
-      `format` narrowed rather than passing it straight to `<Image>`. Retry
-      after an Astro upgrade with `npm run astro check`.
-- [ ] Add a pull request CI workflow and make it a required check on both `main`
-      and `develop`, as youdemo does for `master`: the only workflow,
-      `.github/workflows/astro.yml`, deploys on push to `main`, so nothing
-      checks a PR before it merges. The "Protecting main" ruleset already blocks
-      deletion and force pushes and requires a PR, but only on `main`, and it
-      lacks youdemo's required status check because there is no job to require;
-      `develop` has no protection at all. The workflow should run on every
-      `pull_request`, whatever its base, and on nothing else (see youdemo's
-      `ci.yml` for why), and cover `npm run lint`, `npm run astro check`,
-      `npm run build`, and a link check over the built `dist/`, since a broken
-      link is the kind of fault `CLAUDE.md` ranks above visual ones. `CLAUDE.md`
-      says there is no test suite: decide whether build and link checks are
-      enough or a test runner is wanted too, and update the "no test suite" line
-      to match. Once the job has run, add `refs/heads/develop` to the ruleset
-      and its name as the required check.
+      `format` narrowed rather than passing it straight to `<Image>`. Still
+      needed on Astro 7.3.8; retry after the next upgrade with
+      `npm run astro check`.

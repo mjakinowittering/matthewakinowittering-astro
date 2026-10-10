@@ -14,7 +14,7 @@ description:
 ```
 ├── CLAUDE.md                      always-on rules
 ├── .claude/skills/                project skills, one folder each
-├── .github/workflows/astro.yml    build + deploy to GitHub Pages on push to main
+├── .github/workflows/build-and-deploy.yml build + deploy to GitHub Pages on push to main
 ├── astro.config.mjs               the mdx integration, Tailwind and Paraglide Vite plugins, site
 ├── docs/design/reference/         the approved mock-ups: the visual source of truth
 ├── messages/en.json               every UI string, read as m.<key>()

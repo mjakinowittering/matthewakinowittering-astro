@@ -12,12 +12,12 @@
         "compare": "astro build && node scripts/compare.mjs"
     },
     "dependencies": {
-        "@astrojs/mdx": "^8.0.2",
+        "@astrojs/mdx": "^8.0.3",
         "@astrojs/ts-plugin": "^1.10.12",
         "@hugeicons/core-free-icons": "^4.3.5",
         "@ianvs/prettier-plugin-sort-imports": "^4.7.1",
         "@tailwindcss/vite": "^4.2.2",
-        "astro": "^7.3.5",
+        "astro": "^7.3.8",
         "date-fns": "^4.1.0",
         "tailwindcss": "^4.2.2"
     },

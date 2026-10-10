@@ -95,9 +95,10 @@ below are the invariants; the skill is the _how_.
 | Package manager | npm                                                              |
 | Hosting         | GitHub Pages, `matthew.akinowittering.com`                       |
 
-There is no test suite. `npm run build` is the test: every content file is
-parsed against its schema, so a bad date, a missing field or a malformed URL
-fails the build.
+There is no test suite. The build and a link check are the tests: every content
+file is parsed against its schema, so a bad date, a missing field or a malformed
+URL fails the build, and lychee checks every link on the built page. Both run on
+every PR in `.github/workflows/ci.yml`, with lint and the type check.
 
 ## Commands
 
@@ -113,12 +114,13 @@ fails the build.
 
 ## Deployment
 
-`.github/workflows/astro.yml` builds and deploys to GitHub Pages on every push
-to `main`. There is no staging environment: **pushing to** `main` **publishes**.
-Work lands on `develop` through PRs, and `main` only moves when `develop` is
-released into it (see `branch-and-commit`). The domain's one home is
-`public/CNAME`; `site` in `astro.config.mjs` and `Host` in `public/robots.txt`
-must agree with it.
+`.github/workflows/build-and-deploy.yml` builds and deploys to GitHub Pages on
+every push to `main`. There is no staging environment: **pushing to** `main`
+**publishes**. Work lands on `develop` through PRs, and `main` only moves when
+`develop` is released into it (see `branch-and-commit`). `ci.yml` checks every
+PR and is a required check on both `main` and `develop`. The domain's one home
+is `public/CNAME`; `site` in `astro.config.mjs` and `Host` in
+`public/robots.txt` must agree with it.
 
 ---
 
