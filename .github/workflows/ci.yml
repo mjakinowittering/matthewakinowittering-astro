@@ -1,0 +1,51 @@
+# Lint, type-check, build and link-check every pull request. Main ships
+# through build-and-deploy.yml, so it needs no CI trigger of its own here.
+#
+# PR-only (not `push`) is deliberate: this job is a *required* status check in
+# the ruleset on main and develop. If it also ran on `push`, a push to a branch
+# with an open PR would fire both `push` and `pull_request` on the same commit;
+# the concurrency cancel below would cancel one of them, and a cancelled run
+# still posts its check onto that commit, which the ruleset reads as a required
+# check that isn't passing, blocking the merge. With `pull_request` alone, rapid
+# pushes produce runs on *different* commits, so a cancelled run only ever lands
+# on a superseded SHA, never on the PR head being evaluated.
+name: CI
+
+on:
+    pull_request:
+
+concurrency:
+    group: ci-${{ github.head_ref }}
+    cancel-in-progress: true
+
+jobs:
+    check:
+        name: Lint · Check · Build · Links
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v7
+            - name: Setup Node
+              uses: actions/setup-node@v7
+              with:
+                  node-version: '22'
+                  cache: 'npm'
+            - name: Install dependencies
+              run: npm ci
+            - name: Lint
+              run: npm run lint
+            - name: Type check
+              run: npx astro check
+            - name: Build
+              run: npm run build
+            - name: Check links
+              # A broken link costs more than any visual flaw (CLAUDE.md).
+              # 999 is LinkedIn's answer to bots; 429 is a rate limit, not a
+              # dead link.
+              uses: lycheeverse/lychee-action@v2.9.0
+              with:
+                  args: >-
+                      --root-dir ${{ github.workspace }}/dist --accept
+                      '200..=299,429,999' --max-retries 2 --no-progress
+                      'dist/**/*.html'
+                  fail: true

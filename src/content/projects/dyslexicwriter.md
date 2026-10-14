@@ -12,7 +12,7 @@ tags:
 index: 1
 img: ./img/dyslexicwriter.png
 alt:
-    DyslexicWriter home screen headed Write comfortably. Hear it read back.
-    Beside an editor reading a welcome note aloud, with the current sentence and
+    DyslexicWriter home screen headed "Write comfortably. Hear it read back.",
+    beside an editor reading a welcome note aloud with the current sentence and
     word highlighted
 ---

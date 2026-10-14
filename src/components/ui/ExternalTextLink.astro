@@ -17,7 +17,7 @@ const { href, arrow = false, class: className } = Astro.props;
 
 <a
     class:list={[
-        arrow && 'inline-flex items-center gap-[3px]',
+        arrow && 'inline-flex items-center gap-0.75',
         className ?? 'link'
     ]}
     href={href}

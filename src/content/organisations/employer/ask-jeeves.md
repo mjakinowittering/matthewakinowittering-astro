@@ -2,5 +2,5 @@
 id: ask-jeeves
 name: Ask Jeeves
 type: employer
-uri: https://uk.ask.com/
+uri: https://www.ask.com/
 ---
