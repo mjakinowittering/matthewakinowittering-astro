@@ -21,12 +21,15 @@ description:
 ├── project.inlang/                Paraglide settings (English only), plugin loaded from node_modules
 ├── public/
 │   ├── CNAME                      the domain's one home
-│   ├── favicon.svg
+│   ├── favicon.svg                the 16-unit favicon, drawn for a 16px tab; also a source
+│   ├── favicon.ico, favicon-32.png, apple-touch-icon.png  generated: npm run favicons
 │   ├── og.png                     the 1200 by 630 sharing card
 │   └── robots.txt
 ├── scripts/compare.mjs           npm run compare: the build against the reference
+├── scripts/build-favicons.mjs    npm run favicons: the icon files from the two drawings
 └── src/
-    ├── assets/                    images imported by components (the hero photo)
+    ├── assets/                    images imported by components (the hero photo), and
+    │                              favicon-64.svg, the drawing for icons 48px and up
     ├── content.config.ts          the five collection schemas
     ├── content/
     │   ├── accomplishments/       one .md per hero stat
