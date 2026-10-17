@@ -9,7 +9,8 @@
         "format": "prettier --write .",
         "lint": "prettier --check . && eslint .",
         "preview": "astro preview",
-        "compare": "astro build && node scripts/compare.mjs"
+        "compare": "astro build && node scripts/compare.mjs",
+        "favicons": "node scripts/build-favicons.mjs"
     },
     "dependencies": {
         "@astrojs/mdx": "^8.0.3",
@@ -38,6 +39,7 @@
         "prettier": "^3.8.1",
         "prettier-plugin-astro": "^0.14.0",
         "prettier-plugin-tailwindcss": "^0.6.11",
+        "sharp": "^0.35.5",
         "typescript": "^5.9.3",
         "typescript-eslint": "^8.71.1"
     }
