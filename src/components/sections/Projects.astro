@@ -17,16 +17,12 @@ const projects = (await getCollection('projects')).sort(function (a, b) {
 });
 
 const gists = (await getCollection('gists')).sort(function (a, b) {
-    return a.data.index - b.data.index;
+    return b.data.index - a.data.index;
 });
 ---
 
 <Section id="projects" class="gap-10">
-    <Doodle
-        icon={Idea01Icon}
-        position="top-left"
-        class="size-[38px] -rotate-10"
-    />
+    <Doodle icon={Idea01Icon} position="top-left" class="size-9.5 -rotate-10" />
     <SectionHead
         pill={m.nav_projects()}
         tone="yellow"
