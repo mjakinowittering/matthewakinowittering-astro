@@ -4,6 +4,9 @@ import { m } from '@paraglide/messages.js';
 // Where the Get in touch buttons and the header's email button write to
 export const email = 'matthew.akinowittering@gmail.com';
 
+// The "All gists" link under Projects
+export const gistsUri = 'https://gist.github.com/mjakinowittering';
+
 // `inContact`: also a button in the contact panel, not only in the header
 export const socials = [
     {

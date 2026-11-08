@@ -49,23 +49,24 @@ workflows live in a **project skill** under `.claude/skills/`. **Load the
 matching skill before doing substantive work in its domain** — the General Rules
 below are the invariants; the skill is the _how_.
 
-| Skill                     | Load when working on…                                                                                                                                          |
-| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `design-brief`            | why the page looks and reads as it does: any visible change, the section order, or hero, how-I-work, projects, learning or contact copy                        |
-| `project-structure`       | locating a file, deciding where a new file belongs, the page's section order and anchors                                                                       |
-| `content-blurbs`          | the section copy in `src/content/blurbs/`: hero, How I work, Career intro, contact                                                                             |
-| `content-organisations`   | adding or editing an employer, trainer or university in `src/content/organisations/`                                                                           |
-| `content-accomplishments` | the hero's stat figures in `src/content/accomplishments/`, their values, captions and order                                                                    |
-| `content-events`          | adding or editing a role, course or degree in `src/content/events/`, its dates, link and body copy                                                             |
-| `rewrite-course`          | turning pasted course material into the house style for one training event (`/rewrite-course <path>`)                                                          |
-| `content-projects`        | the project cards in `src/content/projects/`, their screenshots, tags and links                                                                                |
-| `components-block`        | the shared primitives in `src/components/ui/` (Section, SectionHead, Pill, Card, Button, ExternalTextLink, Icon, Doodle), `site/` (Nav, SiteFooter, BackToTop) |
-| `components-sections`     | the page sections in `src/components/sections/` and their `entries/`, joining events to organisations, `Layout.astro`, `pages/`, adding a section              |
-| `styling`                 | colour tokens, typography, content body styling, Tailwind v4 in `src/styles/global.css` and class strings                                                      |
-| `i18n-messages`           | adding or editing a UI string or message key in `messages/en.json`                                                                                             |
-| `ascii-wireframes`        | any visible change: draw it and get it approved before building                                                                                                |
-| `todo-review`             | the `## Todo` list in `README.md`, and every time plan mode is entered (`/todo-review`)                                                                        |
-| `branch-and-commit`       | cutting a branch off `develop`, writing a commit message, pushing, opening a PR                                                                                |
+| Skill                     | Load when working on…                                                                                                                                               |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `design-brief`            | why the page looks and reads as it does: any visible change, the section order, or hero, how-I-work, projects, learning or contact copy                             |
+| `project-structure`       | locating a file, deciding where a new file belongs, the page's section order and anchors                                                                            |
+| `content-blurbs`          | the section copy in `src/content/blurbs/`: hero, How I work, Career intro, contact                                                                                  |
+| `content-organisations`   | adding or editing an employer, trainer or university in `src/content/organisations/`                                                                                |
+| `content-accomplishments` | the hero's stat figures in `src/content/accomplishments/`, their values, captions and order                                                                         |
+| `content-events`          | adding or editing a role, course or degree in `src/content/events/`, its dates, link and body copy                                                                  |
+| `rewrite-course`          | turning pasted course material into the house style for one training event (`/rewrite-course <path>`)                                                               |
+| `content-projects`        | the project cards in `src/content/projects/`, their screenshots, tags and links                                                                                     |
+| `content-gists`           | the "Notes and snippets" rows in `src/content/gists/`                                                                                                               |
+| `components-block`        | the shared primitives in `src/components/ui/` (Section, SectionHead, Pill, Card, Tag, Button, ExternalTextLink, Icon, Doodle), `site/` (Nav, SiteFooter, BackToTop) |
+| `components-sections`     | the page sections in `src/components/sections/` and their `entries/`, joining events to organisations, `Layout.astro`, `pages/`, adding a section                   |
+| `styling`                 | colour tokens, typography, content body styling, Tailwind v4 in `src/styles/global.css` and class strings                                                           |
+| `i18n-messages`           | adding or editing a UI string or message key in `messages/en.json`                                                                                                  |
+| `ascii-wireframes`        | any visible change: draw it and get it approved before building                                                                                                     |
+| `todo-review`             | the `## Todo` list in `README.md`, and every time plan mode is entered (`/todo-review`)                                                                             |
+| `branch-and-commit`       | cutting a branch off `develop`, writing a commit message, pushing, opening a PR                                                                                     |
 
 > When a domain skill contradicts a stale line here, the skill is the more
 > detailed source — but the General Rules always hold regardless of which skill
@@ -126,7 +127,7 @@ is `public/CNAME`; `site` in `astro.config.mjs` and `Host` in
 
 ## Data Model
 
-Everything on the page is driven by five content collections, defined with their
+Everything on the page is driven by six content collections, defined with their
 Zod schemas in `src/content.config.ts` — the schema's one home. Field-by-field
 detail lives in each collection's skill.
 
@@ -135,8 +136,9 @@ detail lives in each collection's skill.
 | `accomplishments` | the hero's stat cards, one figure each                       | `sections/Hero`                                             |
 | `blurbs`          | intro and long copy for each section, keyed by file name     | hero, how-i-work, career, contact                           |
 | `organisations`   | employers, trainers and universities                         | named on Career rows and on Learning's degree and providers |
-| `events`          | roles, courses and degrees, each pointing at an organisation | `career/Role`, `learning/Degree`, `learning/Provider`       |
-| `projects`        | things built and shipped                                     | `projects/Project.astro`                                    |
+| `events`          | roles, courses and degrees, each pointing at an organisation | `entries/Role`, `entries/Degree`, `entries/Provider`        |
+| `projects`        | things built and shipped                                     | `entries/Project`                                           |
+| `gists`           | GitHub gists, one row each                                   | `entries/Gist`                                              |
 
 ### How events meet organisations
 

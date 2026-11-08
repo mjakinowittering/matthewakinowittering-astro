@@ -6,3 +6,4 @@ export { default as Icon } from './Icon.astro';
 export { default as Pill } from './Pill.astro';
 export { default as Section } from './Section.astro';
 export { default as SectionHead } from './SectionHead.astro';
+export { default as Tag } from './Tag.astro';

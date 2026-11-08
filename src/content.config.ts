@@ -75,11 +75,23 @@ const projects = defineCollection({
         })
 });
 
+const gists = defineCollection({
+    loader: glob({ base: './src/content/gists', pattern: '**/*.{md,mdx}' }),
+    schema: z.object({
+        title: z.string(),
+        filename: z.string(),
+        language: z.enum(['Markdown', 'CSS', 'Shell']),
+        uri: z.url(),
+        index: z.number()
+    })
+});
+
 // Export a single `collections` object to register your collection(s)
 export const collections = {
     accomplishments,
     blurbs,
     events,
+    gists,
     organisations,
     projects
 };

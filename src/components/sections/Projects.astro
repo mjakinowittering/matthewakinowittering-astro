@@ -1,11 +1,22 @@
 ---
-import { Project } from '@components/entries';
-import { Doodle, Section, SectionHead } from '@components/ui';
+import { Gist, Project } from '@components/entries';
+import {
+    Card,
+    Doodle,
+    ExternalTextLink,
+    Section,
+    SectionHead
+} from '@components/ui';
 import { Idea01Icon } from '@hugeicons/core-free-icons';
+import { gistsUri } from '@lib/socials';
 import { m } from '@paraglide/messages.js';
 import { getCollection } from 'astro:content';
 
 const projects = (await getCollection('projects')).sort(function (a, b) {
+    return a.data.index - b.data.index;
+});
+
+const gists = (await getCollection('gists')).sort(function (a, b) {
     return a.data.index - b.data.index;
 });
 ---
@@ -55,4 +66,31 @@ const projects = (await getCollection('projects')).sort(function (a, b) {
     <ul class="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-7">
         {projects.map((project) => <Project project={project} />)}
     </ul>
+    {
+        // The reference sets this block at a 1.5 line height, not the body's 1.6
+    }
+    <div class="flex flex-col gap-4.5 pt-4 leading-normal">
+        <div
+            class="flex flex-col items-start gap-x-6 gap-y-2 sm:flex-row sm:flex-wrap sm:items-end sm:justify-between"
+        >
+            <div class="flex flex-col gap-1.5">
+                <h3 class="text-[24px] font-extrabold tracking-[-0.02em]">
+                    {m.projects_gists_title()}
+                </h3>
+                <p class="text-muted">{m.projects_gists_description()}</p>
+            </div>
+            <ExternalTextLink
+                href={gistsUri}
+                arrow
+                class="link text-[15px] font-semibold"
+            >
+                {m.projects_gists_all()}
+            </ExternalTextLink>
+        </div>
+        <Card class="overflow-hidden">
+            <ul>
+                {gists.map((gist) => <Gist gist={gist} />)}
+            </ul>
+        </Card>
+    </div>
 </Section>
