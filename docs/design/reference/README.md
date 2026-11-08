@@ -19,9 +19,10 @@ you scroll, with the rules beneath them. It has no `.html` and
 `npm run compare` does not check it.
 
 The `.png` files are full-page screenshots. The `.html` files are the rendered
-mark-up of the same boards, with every style inline: read them for exact
-sizes, spacing, colours, borders, radii and shadows rather than measuring the
-images.
+mark-up of the same boards. The homepage boards keep the design system's
+classes (`mw-card`, `mw-tag`, `mw-link--arrow`) and tokens in a `<style>` block;
+the 404 boards have every style inline. Read them for exact sizes, spacing,
+colours, borders, radii and shadows rather than measuring the images.
 
 ## Intended differences
 

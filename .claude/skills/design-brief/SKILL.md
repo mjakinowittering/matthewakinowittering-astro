@@ -21,12 +21,12 @@ domain skills describe how the code does it (see "Why versus how" in
 ## The reference is the source of truth
 
 **`docs/design/reference/` is the visual source of truth.** It holds the
-approved boards: full-page screenshots (`.png`) and their rendered mark-up with
-every style inline (`.html`) for the homepage at 390, 1024 and 1280px, the 404
-page at 390 and 1280px, and the Open Graph image. Its `README.md` lists the only
-intended differences between the boards and the build (the real photo for the
-placeholder, the derived years figure, copy from `src/content/`, a live progress
-bar, the hidden Download CV button).
+approved boards: full-page screenshots (`.png`) and their rendered mark-up
+(`.html`, styled inline or from a `<style>` block) for the homepage at 390, 1024
+and 1280px, the 404 page at 390 and 1280px, and the Open Graph image. Its
+`README.md` lists the only intended differences between the boards and the build
+(the real photo for the placeholder, the derived years figure, copy from
+`src/content/`, a live progress bar, the hidden Download CV button).
 
 - **Where this brief and the reference disagree, the reference wins**, and the
   brief is corrected to match
@@ -129,7 +129,7 @@ measured contrast. The roles:
 | `ink`        | headings, outlines, offset shadows, button text  |
 | `muted`      | body copy, dates, captions                       |
 | `rule`       | the progress bar's track, the 404 footer's edge  |
-| `hairline`   | dividers between course rows in Learning         |
+| `hairline`   | dividers between course and gist rows            |
 | `accent`     | tangerine: primary buttons, link underlines, bar |
 | `ic-yellow`  | Projects pill                                    |
 | `ic-blue`    | How I work pill                                  |
@@ -321,6 +321,13 @@ tablet differences are noted per section.
   leading code icon) **only when the project has a `sourceUri`**.
 - DyslexicWriter's screenshot is its 1200×630 Open Graph image, saved as
   `src/content/projects/img/dyslexicwriter.png`.
+- **Notes and snippets** closes the section, under the cards: more builder
+  evidence, kept quieter than the projects. A heading the size of a project
+  title and a muted one-line intro, with an "All gists" arrow link to the right
+  (under the intro below 640px), then one outlined card with no shadow listing
+  the gists. Each row is the title over its file name, then the language tag and
+  a "View gist" arrow link on the right, rows divided by hairlines; below 640px
+  the tag and link wrap under the title.
 
 ### 3. How I work
 

@@ -15,7 +15,7 @@
     --color-ink: #17151f; /* headings, outlines, offset shadows, button text, focus ring */
     --color-muted: #46434f; /* body copy, dates, captions */
     --color-rule: #e7e3dc; /* the progress bar's track, the 404 footer's top edge; decorative only */
-    --color-hairline: #d9d6e0; /* dividers between course rows in Learning; decorative only */
+    --color-hairline: #d9d6e0; /* dividers between course rows in Learning and gist rows in Projects; decorative only */
     --color-accent: #f07a2e; /* tangerine: primary button fill, link underlines, progress bar; never text */
     --color-ic-yellow: #fbeaa5; /* Projects pill */
     --color-ic-blue: #dce6f2; /* How I work pill */

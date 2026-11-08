@@ -30,7 +30,7 @@ description:
 └── src/
     ├── assets/                    images imported by components (the hero photo), and
     │                              favicon-64.svg, the drawing for icons 48px and up
-    ├── content.config.ts          the five collection schemas
+    ├── content.config.ts          the six collection schemas
     ├── content/
     │   ├── accomplishments/       one .md per hero stat
     │   ├── blurbs/                one file per section's copy, keyed by name
@@ -41,6 +41,7 @@ description:
     │   ├── events/
     │   │   ├── employment/<yyyy-mm>/<org>/  one .md per role
     │   │   └── courses/<yyyy-mm>/<org>/     one .md per course or degree
+    │   ├── gists/                 one .md per gist
     │   └── projects/              one .md per project + img/
     ├── components/
     │   ├── ui/                    shared primitives, no content knowledge
@@ -48,8 +49,8 @@ description:
     │   ├── content/               components content files import (CareerLength)
     │   ├── sections/              one file per page section: Hero, Projects,
     │   │                          HowIWork, Career, Learning, Contact
-    │   └── entries/               one content entry each: Project, Role,
-    │                              Degree, Provider
+    │   └── entries/               one content entry each: Project, Gist,
+    │                              Role, Degree, Provider
     ├── layouts/Layout.astro       <head>, sharing tags, fonts, body shell
     ├── lib/
     │   ├── accomplishments.ts     stats sorted largest first, and their formatting
@@ -74,6 +75,7 @@ description:
 | an employer, trainer or university       | `src/content/organisations/<type>/<id>.md`                         |
 | a UI string                              | `messages/en.json` (see **`i18n-messages`**)                       |
 | a project or its screenshot              | `src/content/projects/`, image in `projects/img/`                  |
+| a gist                                   | `src/content/gists/` (see **`content-gists`**)                     |
 | a primitive used by two or more sections | `src/components/ui/`                                               |
 | a page section                           | `src/components/sections/`                                         |
 | a component rendering one content entry  | `src/components/entries/`                                          |

@@ -68,6 +68,17 @@ with wide tracking; with `href` it is a sentence-case 14px link pill, as on the
 404 page. The tones belong to their sections (`src/lib/sections.ts`); never pick
 one for decoration.
 
+### `Tag`
+
+```astro
+<Tag as="li">{tag}</Tag>
+<Tag>{language}</Tag>
+```
+
+A small outlined label on the page base: a project's tags, a gist's language.
+Sentence case, unlike `Pill`, and it belongs to no section. `as` is `span` (the
+default) or `li`.
+
 ### `Card`
 
 ```astro

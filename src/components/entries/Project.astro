@@ -1,5 +1,5 @@
 ---
-import { Button, Card } from '@components/ui';
+import { Button, Card, Tag } from '@components/ui';
 import { ArrowUpRight01Icon, SourceCodeIcon } from '@hugeicons/core-free-icons';
 import { m } from '@paraglide/messages.js';
 import { Image } from 'astro:assets';
@@ -41,13 +41,7 @@ const screenshot =
         <h3 class="text-[24px] font-extrabold tracking-[-0.02em]">{title}</h3>
         <p class="text-muted">{description}</p>
         <ul class="mt-auto flex flex-wrap gap-2">
-            {
-                tags.map((tag) => (
-                    <li class="border-ink bg-base rounded-full border-[1.5px] px-2.5 py-[3px] text-[12.5px] font-semibold">
-                        {tag}
-                    </li>
-                ))
-            }
+            {tags.map((tag) => <Tag as="li">{tag}</Tag>)}
         </ul>
         <div class="flex flex-wrap gap-3 pt-2">
             <Button href={uri} external icon={ArrowUpRight01Icon} iconAfter>

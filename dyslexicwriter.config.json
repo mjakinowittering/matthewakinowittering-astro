@@ -1,19 +1,19 @@
 {
-  "version": 1,
-  "onboarding": {
-    "firstSaveCelebrated": false
-  },
-  "theme": "light",
-  "font": "dyslexic",
-  "showInvisibles": false,
-  "milestones": true,
-  "tts": {
-    "voiceUri": "Google UK English Female",
-    "rate": 1
-  },
-  "prettier": {
-    "enabled": true,
-    "printWidth": 80,
-    "proseWrap": "always"
-  }
+    "version": 1,
+    "onboarding": {
+        "firstSaveCelebrated": false
+    },
+    "theme": "light",
+    "font": "dyslexic",
+    "showInvisibles": false,
+    "milestones": true,
+    "tts": {
+        "voiceUri": "Google UK English Female",
+        "rate": 1
+    },
+    "prettier": {
+        "enabled": true,
+        "printWidth": 80,
+        "proseWrap": "always"
+    }
 }
