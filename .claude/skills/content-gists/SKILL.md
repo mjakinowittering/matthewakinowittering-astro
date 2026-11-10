@@ -22,7 +22,7 @@ title: Set up Node.js with NVM
 filename: README Node Version Manager.md
 language: Markdown
 uri: https://gist.github.com/mjakinowittering/afd7eea6db10ca96609cb79e4aa7471c
-index: 1 # position, 1 first
+index: 3 # position, highest first
 ---
 ```
 
@@ -50,7 +50,9 @@ in `src/lib/socials.ts`.
 
 ### `index`
 
-Lower comes first. Renumber the others when inserting, so indexes stay 1, 2, 3…
+Higher comes first, the reverse of the projects, so the next number up puts a
+new gist at the top. Renumber the others when inserting elsewhere, so indexes
+stay 1, 2, 3…
 
 ## Checklist
 
