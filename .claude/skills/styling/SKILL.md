@@ -28,7 +28,7 @@ do not copy hex codes into this skill or into components.
 | `ink`                                       | `text-ink`, `border-ink`         | headings, outlines, the rules between sections and rows, shadows, focus                                                   |
 | `muted`                                     | `text-muted`                     | body copy, dates, captions                                                                                                |
 | `rule`                                      | `bg-rule`, `border-rule`         | the progress bar's track, the 404 footer's top edge; decorative only                                                      |
-| `hairline`                                  | `border-hairline`                | dividers between course rows in Learning; decorative only                                                                 |
+| `hairline`                                  | `border-hairline`                | dividers between course rows in Learning and gist rows in Projects; decorative only                                       |
 | `accent`                                    | `bg-accent`, `decoration-accent` | tangerine: primary buttons, link underlines, the hero swish, the bar                                                      |
 | `ic-*`                                      | `bg-ic-yellow` … `bg-ic-teal`    | one per section, its pill through `Pill`'s `tone`; pink also the degree badge                                             |
 | `ic-apricot`                                | `fill-ic-apricot`                | the hero sticker only                                                                                                     |
@@ -79,19 +79,19 @@ they only ever divide. A new token or pairing is measured and added here.
 marker rule in **`design-brief`** names, always real text, never body copy.
 Sizes in use; reuse a step rather than adding one:
 
-| Role                           | Classes                                                                             |
-| ------------------------------ | ----------------------------------------------------------------------------------- |
-| body (set on `<body>`)         | `text-[16px] leading-[1.6]`; everything inherits the 1.6 line height                |
-| hero `<h1>`                    | `text-[40px] sm:text-[58px] font-extrabold leading-[1.08] tracking-[-0.035em]`      |
-| section `<h2>` (`SectionHead`) | `text-[30px] sm:text-[40px] font-extrabold leading-[1.15] tracking-[-0.03em]`       |
-| How I work statement           | `text-[26px] sm:text-[36px] font-bold leading-[1.3] tracking-tight`                 |
-| card `<h3>`                    | `text-[24px]` (projects) or `text-[28px]` (degree) `font-extrabold`                 |
-| row `<h3>`                     | `text-[19px] font-bold` (roles), `text-[22px] font-extrabold` (providers)           |
-| lead body                      | `text-[18.5px]` in the hero, `text-[19px]` in How I work                            |
-| body                           | inherited 16px; `text-[15.5px]` in role bodies                                      |
-| meta (dates)                   | `text-[12.5px] font-bold tracking-[0.06em] uppercase text-muted`                    |
-| pill                           | `text-[12px] font-bold tracking-[0.06em] uppercase`; link pills `text-[14px]`       |
-| marker accent                  | `font-marker`, `text-[22px]` to `text-[30px]`, a slight rotate; stats `text-[44px]` |
+| Role                           | Classes                                                                                           |
+| ------------------------------ | ------------------------------------------------------------------------------------------------- |
+| body (set on `<body>`)         | `text-[16px] leading-[1.6]`; everything inherits the 1.6 line height but Notes and snippets (1.5) |
+| hero `<h1>`                    | `text-[40px] sm:text-[58px] font-extrabold leading-[1.08] tracking-[-0.035em]`                    |
+| section `<h2>` (`SectionHead`) | `text-[30px] sm:text-[40px] font-extrabold leading-[1.15] tracking-[-0.03em]`                     |
+| How I work statement           | `text-[26px] sm:text-[36px] font-bold leading-[1.3] tracking-tight`                               |
+| card `<h3>`                    | `text-[24px]` (projects, Notes and snippets) or `text-[28px]` (degree) `font-extrabold`           |
+| row `<h3>`                     | `text-[19px] font-bold` (roles), `text-[22px] font-extrabold` (providers)                         |
+| lead body                      | `text-[18.5px]` in the hero, `text-[19px]` in How I work                                          |
+| body                           | inherited 16px; `text-[15.5px]` in role bodies                                                    |
+| meta (dates)                   | `text-[12.5px] font-bold tracking-[0.06em] uppercase text-muted`                                  |
+| pill                           | `text-[12px] font-bold tracking-[0.06em] uppercase`; link pills `text-[14px]`                     |
+| marker accent                  | `font-marker`, `text-[22px]` to `text-[30px]`, a slight rotate; stats `text-[44px]`               |
 
 Arbitrary values (`text-[15.5px]`, `max-w-[56ch]`) are normal in this codebase
 and fine; matching the reference matters more than avoiding brackets.

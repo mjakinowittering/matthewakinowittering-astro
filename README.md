@@ -37,6 +37,7 @@ Site content is data-driven through Astro content collections defined in
 - **organisations:** employers, trainers, and universities
 - **events:** individual roles and courses, each referencing an organisation
 - **projects:** things built and shipped
+- **gists:** GitHub gists, listed under the projects
 
 UI labels (section titles, buttons, page metadata) live in `messages/en.json`.
 

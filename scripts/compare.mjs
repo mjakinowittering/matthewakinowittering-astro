@@ -34,7 +34,7 @@ const pages = [
             header: ['header', 'header'],
             hero: ['#top', '#top'],
             projects: ['#projects', '#projects'],
-            'how-i-work': ['#how', '#how-i-work'],
+            'how-i-work': ['#how-i-work', '#how-i-work'],
             career: ['#career', '#career'],
             learning: ['#learning', '#learning'],
             contact: ['section:last-of-type', '#contact']

@@ -18,7 +18,7 @@ description:
 | Section    | Component           | Reads                                                        |
 | ---------- | ------------------- | ------------------------------------------------------------ |
 | Hero       | `sections/Hero`     | `blurbs/hero.mdx`, `accomplishments`, the career start       |
-| Projects   | `sections/Projects` | `projects`, sorted by `index`                                |
+| Projects   | `sections/Projects` | `projects` and `gists`, each sorted by `index`               |
 | How I work | `sections/HowIWork` | `blurbs/how-i-work.md`                                       |
 | Career     | `sections/Career`   | `blurbs/career.md`, `employment` events, their organisations |
 | Learning   | `sections/Learning` | `education` and `training` events, their organisations       |
@@ -46,6 +46,16 @@ the reference `.html`, and `npm run compare` checks the result.
 Blurb-driven sections guard a missing entry with
 `if (!blurb) return Astro.redirect('/404');`. Keep the pattern for any new
 `getEntry`.
+
+## Projects
+
+`sections/Projects.astro` renders a grid of `entries/Project.astro` cards, then
+the "Notes and snippets" block: its heading, intro and "All gists" link, then
+one `Card` holding a `<ul>` of `entries/Gist.astro` rows. The block sets its own
+1.5 line height, as the reference does, rather than inheriting the body's 1.6. A
+row's "View gist" link follows the Certificate links in Learning: the visible
+words are `aria-hidden`, and sr-only text carries the title, so each link has a
+unique accessible name.
 
 ## Events and organisations
 

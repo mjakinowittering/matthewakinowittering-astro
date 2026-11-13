@@ -1,0 +1,14 @@
+---
+interface Props {
+    // `li` when the tags are a list, as on a project card
+    as?: 'span' | 'li';
+}
+
+const { as: Element = 'span' } = Astro.props;
+---
+
+<Element
+    class="border-ink bg-base rounded-full border-[1.5px] px-2.5 py-[3px] text-[12.5px] font-semibold"
+>
+    <slot />
+</Element>
